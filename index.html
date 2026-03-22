@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>7Captur — AI Decision Intelligence for Shopify Stores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0e0d;
+    --ink-2: #3a3733;
+    --ink-3: #7a776f;
+    --paper: #f5f2ec;
+    --paper-2: #edeae2;
+    --paper-3: #e3dfd5;
+    --accent: #1a6b4a;
+    --accent-light: #d4ede2;
+    --accent-mid: #2d9468;
+    --warm: #c9501e;
+    --warm-light: #faeee8;
+    --border: rgba(15,14,13,0.1);
+    --border-strong: rgba(15,14,13,0.2);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+    --r: 6px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 5vw;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-size: 13px; color: var(--ink-3); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    font-size: 13px; font-weight: 500; font-family: var(--sans);
+    padding: 8px 20px;
+    background: var(--ink); color: var(--paper);
+    border: none; border-radius: var(--r);
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .nav-cta:hover { background: var(--accent); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 120px 5vw 80px;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 60px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: 0.1em;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 5px 12px; border-radius: 20px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 17px; font-weight: 300;
+    color: var(--ink-2);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    font-family: var(--sans); font-size: 14px; font-weight: 500;
+    padding: 13px 28px;
+    background: var(--ink); color: var(--paper);
+    border: none; border-radius: var(--r);
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+
+  .btn-secondary {
+    font-family: var(--sans); font-size: 14px; font-weight: 400;
+    padding: 13px 28px;
+    background: transparent; color: var(--ink-2);
+    border: 1px solid var(--border-strong); border-radius: var(--r);
+    cursor: pointer; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--paper-3); color: var(--ink); }
+
+  .hero-proof {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex; gap: 40px;
+  }
+  .proof-stat { }
+  .proof-num {
+    font-family: var(--serif); font-size: 28px; color: var(--ink);
+    line-height: 1;
+  }
+  .proof-label { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+
+  /* REPORT MOCKUP */
+  .report-card {
+    background: white;
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(15,14,13,0.10), 0 4px 12px rgba(15,14,13,0.06);
+    animation: floatCard 5s ease-in-out infinite;
+  }
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+  .report-header {
+    padding: 16px 20px;
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .report-header-left { display: flex; flex-direction: column; gap: 2px; }
+  .report-title { font-family: var(--mono); font-size: 11px; color: rgba(245,242,236,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  .report-name { font-size: 13px; font-weight: 500; color: var(--paper); }
+  .report-badge { font-family: var(--mono); font-size: 10px; background: var(--accent); color: white; padding: 3px 8px; border-radius: 20px; letter-spacing: 0.05em; }
+  .report-body { padding: 20px; }
+  .report-week { font-family: var(--mono); font-size: 10px; color: var(--ink-3); letter-spacing: 0.06em; margin-bottom: 14px; text-transform: uppercase; }
+  .metric-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+  .metric { background: var(--paper); border-radius: 6px; padding: 10px 12px; }
+  .metric-val { font-family: var(--serif); font-size: 20px; color: var(--ink); line-height: 1; }
+  .metric-val.up { color: var(--accent); }
+  .metric-val.down { color: var(--warm); }
+  .metric-label { font-size: 10px; color: var(--ink-3); margin-top: 3px; }
+  .metric-delta { font-size: 10px; font-family: var(--mono); margin-top: 2px; }
+  .metric-delta.up { color: var(--accent); }
+  .metric-delta.down { color: var(--warm); }
+  .decisions-label { font-family: var(--mono); font-size: 10px; color: var(--ink-3); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+  .decision-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 10px 12px; border-radius: 6px;
+    background: var(--paper); margin-bottom: 6px;
+  }
+  .decision-num { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--accent); min-width: 16px; margin-top: 2px; }
+  .decision-text { font-size: 12px; color: var(--ink-2); line-height: 1.4; }
+  .decision-text strong { color: var(--ink); font-weight: 500; }
+
+  /* SECTION BASE */
+  section { padding: 100px 5vw; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 16px; display: block;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 3.5vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  h2 em { font-style: italic; color: var(--accent); }
+  .section-sub { font-size: 16px; font-weight: 300; color: var(--ink-2); max-width: 560px; line-height: 1.7; }
+
+  /* PAIN SECTION */
+  .pain-section { background: var(--paper-2); }
+  .pain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 48px; }
+  .pain-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .pain-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .pain-q { font-family: var(--serif); font-size: 18px; color: var(--ink); margin-bottom: 10px; line-height: 1.3; }
+  .pain-a { font-size: 14px; font-weight: 300; color: var(--ink-2); line-height: 1.6; }
+  .pain-tag { font-family: var(--mono); font-size: 10px; color: var(--warm); background: var(--warm-light); padding: 3px 8px; border-radius: 20px; display: inline-block; margin-bottom: 12px; letter-spacing: 0.05em; }
+
+  /* HOW IT WORKS */
+  .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 56px; position: relative; }
+  .how-grid::before {
+    content: '';
+    position: absolute; top: 28px; left: 14%; right: 14%;
+    height: 1px; background: var(--border-strong);
+    z-index: 0;
+  }
+  .how-step { padding: 0 20px; position: relative; z-index: 1; }
+  .how-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--paper);
+    border: 1px solid var(--border-strong);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 13px; font-weight: 500;
+    color: var(--ink); margin-bottom: 20px;
+  }
+  .how-step:first-child .how-num { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .how-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+  .how-desc { font-size: 13px; font-weight: 300; color: var(--ink-2); line-height: 1.6; }
+  .how-tool { font-family: var(--mono); font-size: 10px; color: var(--accent); margin-top: 10px; letter-spacing: 0.04em; }
+
+  /* PRICING */
+  .pricing-section { background: var(--paper-2); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 52px; }
+  .pricing-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 28px;
+    transition: transform 0.2s;
+  }
+  .pricing-card:hover { transform: translateY(-3px); }
+  .pricing-card.featured {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+  .pricing-tier { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; }
+  .pricing-card.featured .pricing-tier { color: rgba(245,242,236,0.5); }
+  .pricing-name { font-family: var(--serif); font-size: 24px; color: var(--ink); margin-bottom: 8px; }
+  .pricing-card.featured .pricing-name { color: var(--paper); }
+  .pricing-desc { font-size: 13px; font-weight: 300; color: var(--ink-2); line-height: 1.5; margin-bottom: 24px; }
+  .pricing-card.featured .pricing-desc { color: rgba(245,242,236,0.65); }
+  .pricing-price { margin-bottom: 24px; }
+  .pricing-setup { font-size: 22px; font-weight: 500; color: var(--ink); }
+  .pricing-card.featured .pricing-setup { color: var(--paper); }
+  .pricing-mo { font-size: 13px; color: var(--ink-3); margin-top: 4px; }
+  .pricing-card.featured .pricing-mo { color: rgba(245,242,236,0.5); }
+  .pricing-divider { height: 1px; background: var(--border); margin: 20px 0; }
+  .pricing-card.featured .pricing-divider { background: rgba(245,242,236,0.1); }
+  .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .pricing-features li { font-size: 13px; font-weight: 300; color: var(--ink-2); display: flex; gap: 10px; align-items: flex-start; line-height: 1.4; }
+  .pricing-card.featured .pricing-features li { color: rgba(245,242,236,0.75); }
+  .pricing-features li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 5px; }
+  .pricing-cta {
+    width: 100%; padding: 12px; border-radius: var(--r);
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s;
+    text-align: center; text-decoration: none; display: block;
+    border: 1px solid var(--border-strong);
+    background: transparent; color: var(--ink);
+  }
+  .pricing-cta:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .pricing-card.featured .pricing-cta { background: var(--accent); color: white; border-color: var(--accent); }
+  .pricing-card.featured .pricing-cta:hover { background: var(--accent-mid); border-color: var(--accent-mid); }
+  .featured-badge {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--accent); color: white;
+    padding: 4px 10px; border-radius: 20px;
+    display: inline-block; margin-bottom: 16px;
+  }
+  .pricing-note { text-align: center; margin-top: 24px; font-size: 13px; color: var(--ink-3); }
+
+  /* WHY US */
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 52px; }
+  .why-card {
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--paper);
+    transition: border-color 0.2s;
+  }
+  .why-card:hover { border-color: var(--accent); }
+  .why-icon { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px; }
+  .why-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+  .why-desc { font-size: 13px; font-weight: 300; color: var(--ink-2); line-height: 1.6; }
+
+  /* CONTACT */
+  .contact-section { background: var(--ink); }
+  .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+  .contact-inner h2 { color: var(--paper); }
+  .contact-inner .section-tag { color: var(--accent-mid); }
+  .contact-inner p { font-size: 16px; font-weight: 300; color: rgba(245,242,236,0.65); margin-bottom: 40px; line-height: 1.7; }
+  .contact-form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 12px; font-family: var(--mono); letter-spacing: 0.06em; color: rgba(245,242,236,0.45); text-transform: uppercase; }
+  .form-group input, .form-group textarea, .form-group select {
+    font-family: var(--sans); font-size: 14px;
+    padding: 12px 16px;
+    background: rgba(245,242,236,0.06);
+    border: 1px solid rgba(245,242,236,0.12);
+    border-radius: var(--r); color: var(--paper);
+    outline: none; transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent-mid); }
+  .form-group textarea { resize: none; height: 110px; }
+  .form-group select option { background: var(--ink-2); }
+  .form-submit {
+    font-family: var(--sans); font-size: 14px; font-weight: 500;
+    padding: 14px 32px; background: var(--accent); color: white;
+    border: none; border-radius: var(--r); cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 4px; align-self: flex-start;
+  }
+  .form-submit:hover { background: var(--accent-mid); transform: translateY(-1px); }
+  .form-note { font-size: 12px; color: rgba(245,242,236,0.3); margin-top: 8px; font-family: var(--mono); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(245,242,236,0.06);
+    padding: 32px 5vw;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo { font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--paper); }
+  .footer-logo span { color: var(--accent-mid); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 12px; color: rgba(245,242,236,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: rgba(245,242,236,0.7); }
+  .footer-copy { font-size: 12px; color: rgba(245,242,236,0.25); font-family: var(--mono); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 100px; }
+    .report-card { display: none; }
+    .pain-grid, .why-grid { grid-template-columns: 1fr; }
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .how-grid::before { display: none; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">7<span>captur</span></a>
+  <ul class="nav-links">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book a free demo</a>
+</nav>
+
+<!-- HERO -->
+<div style="max-width:1200px;margin:0 auto;padding:0 5vw;">
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow fade-up">For Shopify store owners</div>
+      <h1 class="fade-up delay-1">Stop guessing.<br>Start <em>deciding</em><br>with data.</h1>
+      <p class="hero-sub fade-up delay-2">Every Monday morning, your store's sales, inventory, and ad data — turned into 3 clear decisions. No dashboards to check. No analyst to hire. Just answers.</p>
+      <div class="hero-actions fade-up delay-3">
+        <a href="#contact" class="btn-primary">Book a free 20-min demo</a>
+        <a href="#how" class="btn-secondary">See how it works →</a>
+      </div>
+      <div class="hero-proof fade-up delay-4">
+        <div class="proof-stat">
+          <div class="proof-num">3</div>
+          <div class="proof-label">Actionable decisions<br>every week</div>
+        </div>
+        <div class="proof-stat">
+          <div class="proof-num">&lt;$20</div>
+          <div class="proof-label">Monthly cost<br>to run the system</div>
+        </div>
+        <div class="proof-stat">
+          <div class="proof-num">100%</div>
+          <div class="proof-label">Automated —<br>no manual work</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPORT MOCKUP -->
+    <div class="report-card fade-up delay-2">
+      <div class="report-header">
+        <div class="report-header-left">
+          <span class="report-title">Weekly intelligence report</span>
+          <span class="report-name">Luminary Candle Co.</span>
+        </div>
+        <span class="report-badge">Week 22</span>
+      </div>
+      <div class="report-body">
+        <div class="report-week">May 26 – Jun 1, 2025</div>
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-val up">$14.2k</div>
+            <div class="metric-label">Revenue</div>
+            <div class="metric-delta up">↑ 12% vs last wk</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val down">4.1%</div>
+            <div class="metric-label">Net margin</div>
+            <div class="metric-delta down">↓ 2.1pts</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val">218</div>
+            <div class="metric-label">Orders</div>
+            <div class="metric-delta" style="color:var(--ink-3);">→ flat</div>
+          </div>
+        </div>
+        <div class="decisions-label">This week's decisions</div>
+        <div class="decision-item">
+          <span class="decision-num">01</span>
+          <span class="decision-text"><strong>Restock Amber + Oud immediately.</strong> At current sell-through you have 6 days of stock. Lead time is 12 days.</span>
+        </div>
+        <div class="decision-item">
+          <span class="decision-num">02</span>
+          <span class="decision-text"><strong>Pause the Meta campaign #4182.</strong> ROAS dropped to 0.9x after COGS. You're losing $0.40 per order on it.</span>
+        </div>
+        <div class="decision-item">
+          <span class="decision-num">03</span>
+          <span class="decision-text"><strong>Margin drop is Shopify Payments fees.</strong> Not a pricing issue — switch to annual plan to save ~$180/mo.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAIN -->
+<section class="pain-section" id="pain">
+  <div class="section-inner">
+    <span class="section-tag">The real problem</span>
+    <h2>Your store has data.<br>You just can't <em>act on it.</em></h2>
+    <p class="section-sub">Shopify, Meta Ads, Klaviyo, Google Analytics — they all tell you something different. Nobody puts it together.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <span class="pain-tag">Inventory</span>
+        <div class="pain-q">"I keep running out of my best sellers."</div>
+        <div class="pain-a">You're restocking based on gut feel and last month's memory — not on what your sell-through rate and supplier lead time are actually telling you.</div>
+      </div>
+      <div class="pain-card">
+        <span class="pain-tag">Ad spend</span>
+        <div class="pain-q">"I have no idea which ads are actually profitable."</div>
+        <div class="pain-a">Meta shows you ROAS. But after Shopify fees, returns, COGS, and fulfilment — half your "profitable" campaigns are breaking even or worse.</div>
+      </div>
+      <div class="pain-card">
+        <span class="pain-tag">Time</span>
+        <div class="pain-q">"I have data but no time to look at it."</div>
+        <div class="pain-a">You log in to five different dashboards, spend 40 minutes, and leave more confused than when you started. The tools weren't built to think for you.</div>
+      </div>
+      <div class="pain-card">
+        <span class="pain-tag">Decisions</span>
+        <div class="pain-q">"I made a call last quarter that cost me."</div>
+        <div class="pain-a">One wrong restock order or one scaled losing campaign can wipe two weeks of profit. You need a system that flags these before they happen — not after.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-inner">
+    <span class="section-tag">How it works</span>
+    <h2>Four parts. Fully <em>automated.</em><br>Yours every Monday.</h2>
+    <p class="section-sub">We build a pipeline that connects your store data, analyses it with AI, and delivers a plain-English report — without you touching a thing.</p>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="how-num">01</div>
+        <div class="how-title">We connect your data</div>
+        <div class="how-desc">Shopify, Meta Ads, Google Ads, and Klaviyo — all pulled automatically every week. No CSV exports. No manual uploads.</div>
+        <div class="how-tool">Shopify API · n8n</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">02</div>
+        <div class="how-title">AI analyses everything</div>
+        <div class="how-desc">We pass your store's data to an AI model trained to think like a data analyst — spotting trends, anomalies, and missed opportunities.</div>
+        <div class="how-tool">Claude AI · custom prompts</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">03</div>
+        <div class="how-title">Plain-English decisions</div>
+        <div class="how-desc">Not graphs. Not numbers. Three specific, actionable decisions — with the reasoning behind each one — in language anyone can act on.</div>
+        <div class="how-tool">Your inbox · every Monday</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">04</div>
+        <div class="how-title">You get smarter over time</div>
+        <div class="how-desc">Each week's report builds on the last. We refine your decision model as we learn what matters most for your specific store.</div>
+        <div class="how-tool">Monthly strategy call</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="section-inner">
+    <span class="section-tag">Pricing</span>
+    <h2>Start seeing clearly.<br><em>Cancel anytime.</em></h2>
+    <p class="section-sub">One-time setup gets your pipeline built. Monthly retainer keeps it running, refined, and improving every week.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-name">Insight Report</div>
+        <div class="pricing-desc">For stores doing $10k–$50k/mo who want to stop making decisions in the dark.</div>
+        <div class="pricing-price">
+          <div class="pricing-setup">$497 <span style="font-size:14px;font-weight:300;color:var(--ink-3);">one-time setup</span></div>
+          <div class="pricing-mo">+ $147/mo to keep it running</div>
+        </div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Shopify + one ad platform connected</li>
+          <li>Weekly automated performance report</li>
+          <li>3 plain-English decisions per week</li>
+          <li>Delivered to your inbox every Monday</li>
+          <li>30-day support after setup</li>
+        </ul>
+        <a href="#contact" class="pricing-cta">Book a free demo</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <span class="featured-badge">Most popular</span>
+        <div class="pricing-tier">Growth</div>
+        <div class="pricing-name">Decision Engine</div>
+        <div class="pricing-desc">For stores doing $50k–$500k/mo ready to make every key decision with data behind it.</div>
+        <div class="pricing-price">
+          <div class="pricing-setup" style="color:var(--paper);">$997 <span style="font-size:14px;font-weight:300;color:rgba(245,242,236,0.45);">one-time setup</span></div>
+          <div class="pricing-mo">+ $397/mo to keep it running</div>
+        </div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>All data sources connected</li>
+          <li>Live dashboard + weekly digest</li>
+          <li>Inventory restock predictions</li>
+          <li>Ad profitability after COGS & fees</li>
+          <li>Monthly 1-hour strategy call</li>
+          <li>Anomaly alerts via email</li>
+        </ul>
+        <a href="#contact" class="pricing-cta">Book a free demo</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-tier">Scale</div>
+        <div class="pricing-name">Data Partner</div>
+        <div class="pricing-desc">For 7-figure stores that need a dedicated data intelligence partner, not just a tool.</div>
+        <div class="pricing-price">
+          <div class="pricing-setup">$1,997 <span style="font-size:14px;font-weight:300;color:var(--ink-3);">one-time setup</span></div>
+          <div class="pricing-mo">+ $797/mo to keep it running</div>
+        </div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Everything in Decision Engine</li>
+          <li>Custom KPI tracking per your goals</li>
+          <li>Customer LTV and cohort analysis</li>
+          <li>Slack alerts for critical anomalies</li>
+          <li>Weekly calls + quarterly reviews</li>
+        </ul>
+        <a href="#contact" class="pricing-cta">Book a free demo</a>
+      </div>
+    </div>
+    <p class="pricing-note">All plans include a free demo before you commit. No long-term contracts on Starter. You own everything we build.</p>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="about">
+  <div class="section-inner">
+    <span class="section-tag">Why 7Captur</span>
+    <h2>Built by a developer.<br><em>Designed</em> for store owners.</h2>
+    <p class="section-sub">We're not a generic automation agency. We're specialists in one problem: turning your e-commerce data into decisions you can act on immediately.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">01 — Outcome focus</div>
+        <div class="why-title">We sell results, not features</div>
+        <div class="why-desc">We don't hand you a dashboard and leave. Every month, you get recommendations you can act on — and we track whether they worked.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">02 — Technical depth</div>
+        <div class="why-title">Real integrations, not workarounds</div>
+        <div class="why-desc">We build directly against the Shopify, Meta, and Google APIs. Not CSV exports. Not copy-paste. Automated pipelines that run silently in the background.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">03 — You own everything</div>
+        <div class="why-title">No vendor lock-in, ever</div>
+        <div class="why-desc">Every automation, every pipeline, every integration we build is yours. If you ever leave, you take the whole system with you — no ransom, no handcuffs.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">04 — Demo first</div>
+        <div class="why-title">See it before you pay</div>
+        <div class="why-desc">We show you a real working report using your actual store data before you commit to a single dollar. If you don't see the value, you walk away — no hard feelings.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">05 — Fast to start</div>
+        <div class="why-title">Live in under a week</div>
+        <div class="why-desc">Once you're onboarded, your first report lands in your inbox within 7 days. No weeks of discovery calls. No sprawling onboarding docs.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">06 — Niche expertise</div>
+        <div class="why-title">Shopify-only, by design</div>
+        <div class="why-desc">We don't work with every type of business. We work with Shopify store owners. That focus means our prompts, pipelines, and reports are built for your exact context.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <span class="section-tag">Get started</span>
+    <h2>Book your free<br>20-minute demo.</h2>
+    <p>We'll connect to a sample dataset and show you exactly what your weekly report would look like — no commitment, no pitch, just a real preview of what your store's data can tell you.</p>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your name</label>
+          <input type="text" placeholder="Alex Johnson"/>
+        </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" placeholder="alex@yourstore.com"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Shopify store URL</label>
+          <input type="text" placeholder="yourstore.myshopify.com"/>
+        </div>
+        <div class="form-group">
+          <label>Monthly revenue (approx.)</label>
+          <select>
+            <option value="">Select a range</option>
+            <option>$5k – $20k/mo</option>
+            <option>$20k – $50k/mo</option>
+            <option>$50k – $200k/mo</option>
+            <option>$200k – $500k/mo</option>
+            <option>$500k+/mo</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Biggest data headache right now</label>
+        <textarea placeholder="e.g. I never know when to restock, or I can't tell which ads are actually profitable after returns..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Request my free demo →</button>
+      <p class="form-note">We reply within 24 hours. No spam. No sales scripts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">7<span>captur</span></span>
+  <div class="footer-links">
+    <a href="#how">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+    <a href="#">Privacy</a>
+  </div>
+  <span class="footer-copy">© 2026 7Captur</span>
+</footer>
+
+</body>
+</html>
