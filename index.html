@@ -9,28 +9,55 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap" rel="stylesheet" />
 <style>
 :root {
-  --bg:      #0c0c0a;
-  --bg2:     #131311;
-  --bg3:     #1c1c18;
-  --border:  rgba(255,255,255,0.09);
-  --border2: rgba(255,255,255,0.16);
-  --text:    #dedad2;
-  --body:    #b8b4ab;
-  --muted:   #7a7870;
+  /* ── Lighter dark mode ── */
+  --bg:      #1a1916;
+  --bg2:     #222220;
+  --bg3:     #2b2b27;
+  --border:  rgba(255,255,255,0.10);
+  --border2: rgba(255,255,255,0.18);
+  --text:    #eae6dd;
+  --body:    #c2bdb3;
+  --muted:   #8a857c;
   --accent:  #c8f560;
   --gold:    #f5c860;
   --red:     #ff6b6b;
-  --white:   #f2f0ea;
-  --card:    #161612;
+  --white:   #f5f2eb;
+  --card:    #1f1f1c;
+  --nav-bg-scroll:  rgba(26,25,22,0.97);
+  --nav-bg-top:     rgba(26,25,22,0.90);
+  --shadow: rgba(0,0,0,0.40);
 }
+
+/* ── Light mode overrides ── */
+html.light {
+  --bg:      #fdf6ee;
+  --bg2:     #f5ebe0;
+  --bg3:     #ecdfd2;
+  --border:  rgba(60,45,30,0.10);
+  --border2: rgba(60,45,30,0.18);
+  --text:    #1e1a14;
+  --body:    #4e4640;
+  --muted:   #9a9088;
+  --accent:  #5a9600;
+  --gold:    #a07800;
+  --red:     #c42828;
+  --white:   #1e1a14;
+  --card:    #f0e5d8;
+  --nav-bg-scroll:  rgba(253,246,238,0.98);
+  --nav-bg-top:     rgba(253,246,238,0.92);
+  --shadow: rgba(60,45,30,0.14);
+}
+html.light body::before { opacity: 0.015; }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
+/* Smooth theme transition on everything except animations */
+body,nav,section,div,footer,table,input,select,textarea,button,a{transition:background-color .35s ease,border-color .35s ease,color .25s ease,box-shadow .25s ease}
 body{background:var(--bg);color:var(--body);font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:9999}
 .mono{font-family:'IBM Plex Mono',monospace}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:68px;border-bottom:1px solid var(--border);background:rgba(12,12,10,0.92);backdrop-filter:blur(14px)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:68px;border-bottom:1px solid var(--border);background:var(--nav-bg-top);backdrop-filter:blur(14px)}
 .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:19px;color:var(--accent);letter-spacing:-0.02em;text-decoration:none}
 .nav-links{display:flex;gap:36px;list-style:none}
 .nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-family:'IBM Plex Mono',monospace;letter-spacing:0.07em;text-transform:uppercase;transition:color .2s}
@@ -394,6 +421,12 @@ footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify
   .platforms-grid{justify-content:flex-start}
   .sunday-tabs{overflow-x:auto}
 }
+/* ── THEME TOGGLE ── */
+.theme-toggle{display:flex;align-items:center;gap:0;background:var(--bg2);border:1px solid var(--border2);border-radius:0;padding:0;cursor:pointer;flex-shrink:0;overflow:hidden;height:36px}
+.theme-toggle-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:0 13px;height:100%;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);border:none;background:transparent;cursor:pointer;transition:background .2s,color .2s;white-space:nowrap}
+.theme-toggle-btn.active{background:var(--accent);color:#1a1916}
+.theme-toggle-btn svg{width:13px;height:13px;flex-shrink:0}
+html.light .theme-toggle-btn.active{color:#1a1916}
 </style>
 </head>
 <body>
@@ -409,7 +442,19 @@ footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#platforms">Platforms</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Book free demo →</a>
+  <div style="display:flex;align-items:center;gap:14px">
+    <div class="theme-toggle" id="theme-toggle" title="Toggle light / dark mode">
+      <button class="theme-toggle-btn active" id="btn-dark" aria-label="Dark mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        Dark
+      </button>
+      <button class="theme-toggle-btn" id="btn-light" aria-label="Light mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        Light
+      </button>
+    </div>
+    <a href="#contact" class="nav-cta">Book free demo →</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -1285,9 +1330,41 @@ document.querySelectorAll('.s-tab').forEach(tab => {
 
 /* ── NAV SCROLL TINT ── */
 const navEl = document.querySelector('nav');
-window.addEventListener('scroll', () => {
-  navEl.style.background = window.scrollY > 40 ? 'rgba(12,12,10,0.97)' : 'rgba(12,12,10,0.92)';
-}, { passive: true });
+function updateNavBg() {
+  const bg = window.scrollY > 40
+    ? getComputedStyle(document.documentElement).getPropertyValue('--nav-bg-scroll').trim()
+    : getComputedStyle(document.documentElement).getPropertyValue('--nav-bg-top').trim();
+  navEl.style.background = bg;
+}
+window.addEventListener('scroll', updateNavBg, { passive: true });
+
+/* ── THEME TOGGLE ── */
+const btnDark  = document.getElementById('btn-dark');
+const btnLight = document.getElementById('btn-light');
+const htmlEl   = document.documentElement;
+
+function applyTheme(theme) {
+  if (theme === 'light') {
+    htmlEl.classList.add('light');
+    btnLight.classList.add('active');
+    btnDark.classList.remove('active');
+  } else {
+    htmlEl.classList.remove('light');
+    btnDark.classList.add('active');
+    btnLight.classList.remove('active');
+  }
+  localStorage.setItem('7captur-theme', theme);
+  // Let CSS variable settle then update nav bg
+  requestAnimationFrame(updateNavBg);
+}
+
+btnDark.addEventListener('click',  () => applyTheme('dark'));
+btnLight.addEventListener('click', () => applyTheme('light'));
+
+// Restore saved preference on load
+const savedTheme = localStorage.getItem('7captur-theme');
+if (savedTheme === 'light') applyTheme('light');
+else applyTheme('dark');
 
 /* ── PRIVACY MODAL ── */
 const privacyOverlay = document.getElementById('privacy-overlay');
