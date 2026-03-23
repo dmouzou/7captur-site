@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>7Captur — Know Exactly Which Ads Are Losing You Money</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg:      #0c0c0a;
+  --bg2:     #131311;
+  --bg3:     #1c1c18;
+  --border:  rgba(255,255,255,0.09);
+  --border2: rgba(255,255,255,0.16);
+  --text:    #dedad2;
+  --body:    #b8b4ab;
+  --muted:   #7a7870;
+  --accent:  #c8f560;
+  --gold:    #f5c860;
+  --red:     #ff6b6b;
+  --white:   #f2f0ea;
+  --card:    #161612;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--body);font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:9999}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:68px;border-bottom:1px solid var(--border);background:rgba(12,12,10,0.92);backdrop-filter:blur(14px)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:19px;color:var(--accent);letter-spacing:-0.02em;text-decoration:none}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-family:'IBM Plex Mono',monospace;letter-spacing:0.07em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#0c0c0a;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.03em;padding:11px 22px;text-decoration:none;transition:opacity .2s,transform .15s;white-space:nowrap}
+.nav-cta:hover{opacity:.87;transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:68px;position:relative;overflow:hidden}
+.hero-left{padding:80px 64px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border)}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:32px}
+.eyebrow-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.65)}}
+.eyebrow-text{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(34px,3.8vw,54px);line-height:1.06;letter-spacing:-0.03em;color:var(--white);margin-bottom:20px}
+h1 em{font-style:italic;font-family:'Fraunces',serif;color:var(--accent);font-weight:300}
+.hero-sub{font-size:1.0625rem;color:var(--body);line-height:1.75;max-width:460px;margin-bottom:36px}
+.hero-sub strong{color:var(--text);font-weight:500}
+.hero-qualifier{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:var(--bg2);border:1px solid var(--border2);padding:7px 14px;margin-bottom:36px}
+.hero-qualifier span{color:var(--accent)}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#0c0c0a;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.02em;padding:15px 30px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s,transform .2s;white-space:nowrap}
+.btn-primary:hover{opacity:.87;transform:translateY(-1px)}
+.btn-ghost{color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;font-size:14px;padding:15px 28px;text-decoration:none;border:1px solid var(--border2);display:inline-flex;align-items:center;gap:8px;transition:border-color .2s,color .2s}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.hero-stats{display:flex;margin-top:52px;border-top:1px solid var(--border);padding-top:28px;gap:0}
+.hero-stat{flex:1;padding-right:20px;border-right:1px solid var(--border);margin-right:20px}
+.hero-stat:last-child{border-right:none;margin-right:0}
+.stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:var(--accent);letter-spacing:-0.04em;display:block;line-height:1.1}
+.stat-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);line-height:1.45;margin-top:5px}
+
+/* ── REPORT CARD (hero right) ── */
+.hero-right{padding:72px 48px;display:flex;flex-direction:column;justify-content:center;background:var(--bg2);position:relative}
+.hero-right::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(200,245,96,0.04),transparent);pointer-events:none}
+.report-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.report-label::before{content:'//';color:var(--accent)}
+.report-card{background:var(--card);border:1px solid var(--border2);padding:28px;position:relative;z-index:1}
+.report-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent) 0%,transparent 70%)}
+.report-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.report-store{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--white);margin-bottom:3px}
+.report-week{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted)}
+.report-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.09em;text-transform:uppercase;padding:2px 8px;background:rgba(200,245,96,0.1);color:var(--accent);border:1px solid rgba(200,245,96,0.2);display:inline-block;margin-top:5px}
+.report-kpis{display:flex;gap:18px;flex-shrink:0}
+.kpi{text-align:right}
+.kpi-val{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:var(--white);display:block}
+.kpi-up{color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:10px}
+.kpi-down{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:10px}
+.kpi-name{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);display:block;margin-top:2px;text-transform:uppercase;letter-spacing:0.06em}
+.decisions-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.decision-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);animation:fadeSlide .5s ease forwards;opacity:0;transform:translateY(8px)}
+.decision-item:last-child{border-bottom:none}
+.decision-item:nth-child(1){animation-delay:.2s}.decision-item:nth-child(2){animation-delay:.55s}.decision-item:nth-child(3){animation-delay:.9s}
+@keyframes fadeSlide{to{opacity:1;transform:translateY(0)}}
+.d-num{font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:var(--accent);min-width:20px;padding-top:2px;flex-shrink:0}
+.d-text{font-size:13px;color:var(--text);line-height:1.55}
+.d-text strong{color:var(--white)}
+.d-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 7px;margin-left:8px;vertical-align:middle}
+.tag-action{background:rgba(200,245,96,0.12);color:var(--accent)}
+.tag-warn{background:rgba(255,107,107,0.12);color:var(--red)}
+.tag-info{background:rgba(245,200,96,0.12);color:var(--gold)}
+
+/* ── TICKER ── */
+.ticker-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);overflow:hidden;height:42px;display:flex;align-items:center}
+.ticker{display:flex;animation:ticker 40s linear infinite;white-space:nowrap}
+.ticker-item{display:flex;align-items:center;gap:12px;padding:0 34px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--border);flex-shrink:0}
+.ticker-item span{color:var(--accent)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTIONS ── */
+.section{padding:96px 64px}
+.section-inner{max-width:1120px;margin:0 auto}
+.section-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.section-eyebrow::after{content:'';flex:1;max-width:56px;height:1px;background:var(--accent);opacity:.4}
+h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(26px,3.2vw,44px);letter-spacing:-0.03em;color:var(--white);line-height:1.1;margin-bottom:18px}
+h2 em{font-style:italic;font-family:'Fraunces',serif;color:var(--accent);font-weight:300}
+.section-sub{color:var(--body);font-size:1.0625rem;line-height:1.75;max-width:580px;margin-bottom:52px}
+.alt-bg{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+
+/* ── SUNDAY NIGHT SECTION ── */
+.sunday-wrap{margin-top:52px;border:1px solid var(--border2);overflow:hidden}
+.sunday-header{background:var(--bg2);padding:18px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.sunday-dots{display:flex;gap:6px}
+.sunday-dot{width:10px;height:10px;border-radius:50%}
+.sd1{background:#ff5f57}.sd2{background:#febc2e}.sd3{background:#28c840}
+.sunday-title{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.06em;margin-left:8px}
+.sunday-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--bg3);overflow-x:auto}
+.s-tab{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:10px 20px;border-right:1px solid var(--border);color:var(--muted);white-space:nowrap;letter-spacing:0.04em;flex-shrink:0}
+.s-tab.active{color:var(--text);background:var(--bg2);border-bottom:1px solid var(--bg2);margin-bottom:-1px}
+.sunday-rows{display:flex;flex-direction:column}
+.sunday-row{display:flex;align-items:flex-start;gap:20px;padding:22px 28px;border-bottom:1px solid var(--border)}
+.sunday-row:last-child{border-bottom:none}
+.sunday-row-num{font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:var(--muted);min-width:24px;padding-top:2px}
+.sunday-row-body{flex:1}
+.sunday-row-title{font-family:'DM Sans',sans-serif;font-weight:500;font-size:15px;color:var(--text);margin-bottom:4px}
+.sunday-row-detail{font-size:14px;color:var(--muted);line-height:1.6}
+.sunday-row-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 8px;background:rgba(255,107,107,0.1);color:var(--red);border:1px solid rgba(255,107,107,0.2);margin-left:10px;vertical-align:middle}
+
+/* ── COMPARE TABLE ── */
+.compare-wrap{border:1px solid var(--border2);overflow:hidden}
+.compare-table{width:100%;border-collapse:collapse}
+.compare-table th{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;padding:18px 26px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted);background:var(--bg2)}
+.compare-table th.hl{color:var(--accent);background:rgba(200,245,96,0.05);border-left:1px solid rgba(200,245,96,.2);border-right:1px solid rgba(200,245,96,.2)}
+.compare-table td{padding:16px 26px;border-bottom:1px solid var(--border);font-size:14px;color:var(--muted);vertical-align:top;line-height:1.5}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table td.fn{color:var(--text);font-weight:500;font-size:15px}
+.compare-table td.hl{background:rgba(200,245,96,0.03);border-left:1px solid rgba(200,245,96,.1);border-right:1px solid rgba(200,245,96,.1);color:var(--text)}
+.ck{color:var(--accent);font-size:15px}.cx{color:var(--red)}.pt{color:var(--gold)}
+
+/* ── HOW IT WORKS ── */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);margin-top:52px;border:1px solid var(--border)}
+.step{padding:36px 30px;border-right:1px solid var(--border)}
+.step:last-child{border-right:none}
+.step-num{font-family:'Syne',sans-serif;font-weight:800;font-size:44px;color:var(--border2);letter-spacing:-0.04em;margin-bottom:20px;line-height:1}
+.step-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--white);margin-bottom:10px}
+.step-body{font-size:14px;color:var(--body);line-height:1.7}
+.step-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.tech-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;background:var(--bg3);color:var(--muted);padding:3px 8px;border:1px solid var(--border)}
+
+/* ── DEMO CENTREPIECE ── */
+.demo-hero{margin-top:52px;border:1px solid var(--border2);overflow:hidden;position:relative}
+.demo-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent)}
+.demo-hero-header{background:var(--bg2);padding:20px 32px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.demo-hero-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted)}
+.demo-hero-label span{color:var(--accent);margin-right:8px}
+.demo-live-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;background:rgba(200,245,96,0.12);color:var(--accent);border:1px solid rgba(200,245,96,0.25);display:flex;align-items:center;gap:6px}
+.live-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;animation:pulse 1.5s ease-in-out infinite}
+.demo-hero-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.demo-col{padding:32px}
+.demo-col:first-child{border-right:1px solid var(--border)}
+.demo-col-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.demo-metric-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.demo-metric-row:last-child{border-bottom:none}
+.demo-metric-name{font-size:13px;color:var(--body)}
+.demo-metric-val{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--white);text-align:right}
+.demo-metric-val.up{color:var(--accent)}.demo-metric-val.down{color:var(--red)}.demo-metric-val.warn{color:var(--gold)}
+.demo-metric-note{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);text-align:right;margin-top:2px}
+.demo-cta-row{background:rgba(200,245,96,0.05);border-top:1px solid rgba(200,245,96,0.15);padding:20px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.demo-cta-text{font-size:14px;color:var(--body)}
+.demo-cta-text strong{color:var(--white)}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:52px}
+.price-card{background:var(--bg);padding:40px;position:relative;transition:background .25s}
+.price-card:hover{background:var(--bg2)}
+.price-card.featured{background:var(--bg2);border-top:2px solid var(--accent)}
+.price-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;background:rgba(200,245,96,0.15);color:var(--accent);padding:4px 10px;margin-bottom:22px}
+.price-tier{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.price-name{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--white);margin-bottom:10px}
+.price-desc{font-size:14px;color:var(--body);line-height:1.65;margin-bottom:24px;min-height:50px}
+.price-main{margin-bottom:6px}
+.price-amount{font-family:'Syne',sans-serif;font-weight:800;font-size:36px;color:var(--white);letter-spacing:-0.04em}
+.price-period{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);margin-left:4px}
+.price-note-small{font-size:13px;color:var(--muted);margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border);line-height:1.5}
+.price-note-small strong{color:var(--accent)}
+.price-features{list-style:none;margin-bottom:28px}
+.price-features li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--body);padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);line-height:1.5}
+.price-features li:last-child{border-bottom:none}
+.price-features .ck{font-size:14px;flex-shrink:0;margin-top:1px}
+.price-cta{display:block;text-align:center;padding:14px 20px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-decoration:none;transition:all .2s}
+.price-cta-primary{background:var(--accent);color:#0c0c0a}
+.price-cta-primary:hover{opacity:.87}
+.price-cta-ghost{border:1px solid var(--border2);color:var(--text)}
+.price-cta-ghost:hover{border-color:var(--text)}
+.pricing-footer-note{font-size:14px;color:var(--muted);text-align:center;margin-top:22px;line-height:1.7}
+
+/* ── PLATFORMS ── */
+.platforms-grid{display:flex;flex-wrap:wrap;border:1px solid var(--border);margin-top:36px}
+.platform-card{flex:1;min-width:155px;padding:26px 18px;display:flex;flex-direction:column;align-items:center;gap:10px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background .2s}
+.platform-card:hover{background:var(--bg2)}
+.platform-icon{font-size:26px;line-height:1}
+.platform-name{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--text)}
+.platform-type{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase}
+.platform-status{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px}
+.status-live{background:rgba(200,245,96,0.12);color:var(--accent);border:1px solid rgba(200,245,96,0.2)}
+.platforms-row-label{width:100%;flex-basis:100%;padding:10px 22px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);background:var(--bg3);border-bottom:1px solid var(--border);border-top:1px solid var(--border)}
+.platforms-row-label:first-child{border-top:none}
+
+/* ── WHY ── */
+.why-grid{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:52px;border:1px solid var(--border)}
+.why-item{padding:36px 30px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.why-item:nth-child(3n){border-right:none}
+.why-item:nth-last-child(-n+3){border-bottom:none}
+.why-num{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--accent);margin-bottom:14px;display:block}
+.why-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--white);margin-bottom:10px}
+.why-body{font-size:14px;color:var(--body);line-height:1.7}
+
+/* ── WAITLIST ── */
+.waitlist-section{padding:72px 64px;border-top:1px solid var(--border);background:var(--bg2)}
+.waitlist-inner{max-width:620px;margin:0 auto;text-align:center}
+.waitlist-inner h2{margin-bottom:14px}
+.waitlist-inner p{font-size:1rem;color:var(--body);margin-bottom:32px;line-height:1.7}
+.waitlist-form{display:flex;gap:0;border:1px solid var(--border2)}
+.waitlist-form input{flex:1;background:var(--bg);border:none;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;padding:14px 18px;outline:none}
+.waitlist-form input::placeholder{color:var(--muted)}
+.waitlist-form input:focus{background:var(--bg3)}
+.waitlist-form button{background:var(--accent);color:#0c0c0a;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.03em;padding:14px 24px;border:none;cursor:pointer;transition:opacity .2s;white-space:nowrap}
+.waitlist-form button:hover{opacity:.87}
+.waitlist-note{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-top:14px;letter-spacing:0.04em}
+.waitlist-count{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);background:var(--bg3);border:1px solid var(--border);padding:6px 14px;margin-bottom:28px}
+.waitlist-count span{color:var(--accent)}
+
+/* ── DEMO / CONTACT SECTION ── */
+.contact-section{padding:96px 64px;border-top:1px solid var(--border);background:var(--bg);position:relative;overflow:hidden}
+.contact-section::after{content:'';position:absolute;bottom:-240px;right:-200px;width:520px;height:520px;background:radial-gradient(circle,rgba(200,245,96,0.05),transparent 70%);pointer-events:none}
+.contact-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:start}
+.contact-left h2{margin-bottom:16px}
+.contact-left>p{font-size:1.0625rem;color:var(--body);line-height:1.75;margin-bottom:28px}
+.demo-promise{background:rgba(200,245,96,0.06);border:1px solid rgba(200,245,96,0.18);padding:20px 24px;margin-bottom:28px}
+.demo-promise-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--accent);margin-bottom:8px}
+.demo-promise p{font-size:14px;color:var(--body);line-height:1.65;margin:0}
+.demo-steps{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);margin-bottom:24px}
+.demo-step{display:flex;gap:16px;padding:16px 20px;border-bottom:1px solid var(--border)}
+.demo-step:last-child{border-bottom:none}
+.demo-step-num{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:var(--accent);min-width:20px;flex-shrink:0;padding-top:1px}
+.demo-step-text{font-size:14px;color:var(--body);line-height:1.6}
+.demo-step-text strong{color:var(--text)}
+.contact-sub-note{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.04em}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.11em;text-transform:uppercase;color:var(--muted)}
+.field input,.field select,.field textarea{background:var(--bg2);border:1px solid var(--border2);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;padding:13px 16px;outline:none;transition:border-color .2s;width:100%;-webkit-appearance:none;border-radius:0}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted)}
+.field select option{background:var(--bg2)}
+.field textarea{resize:none;height:96px;line-height:1.6}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-submit{background:var(--accent);color:#0c0c0a;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.03em;padding:17px 32px;border:none;cursor:pointer;transition:opacity .2s,transform .15s;align-self:flex-start;width:100%}
+.form-submit:hover{opacity:.87;transform:translateY(-1px)}
+.form-foot{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.03em;line-height:1.6}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify-content:space-between;align-items:center}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;color:var(--accent);text-decoration:none}
+.footer-links{display:flex;gap:28px;list-style:none}
+.footer-links a{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+.footer-copy{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── ANIMATIONS & INTERACTIVITY ── */
+
+/* Scroll progress bar */
+#scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:9998;width:0%;transition:width .05s linear;box-shadow:0 0 8px rgba(200,245,96,0.6)}
+
+/* Hero entrance */
+.hero-left>*{opacity:0;transform:translateY(24px)}
+.hero-animate .hero-eyebrow{animation:heroIn .6s .05s cubic-bezier(.22,1,.36,1) forwards}
+.hero-animate h1{animation:heroIn .7s .15s cubic-bezier(.22,1,.36,1) forwards}
+.hero-animate .hero-qualifier{animation:heroIn .6s .25s cubic-bezier(.22,1,.36,1) forwards}
+.hero-animate .hero-sub{animation:heroIn .6s .32s cubic-bezier(.22,1,.36,1) forwards}
+.hero-animate .hero-actions{animation:heroIn .6s .42s cubic-bezier(.22,1,.36,1) forwards}
+.hero-animate .hero-stats{animation:heroIn .6s .52s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes heroIn{to{opacity:1;transform:translateY(0)}}
+
+/* Hero right entrance */
+.hero-right{opacity:0;transform:translateX(20px);transition:opacity .8s .4s ease,transform .8s .4s cubic-bezier(.22,1,.36,1)}
+.hero-animate .hero-right{opacity:1;transform:translateX(0)}
+
+/* Cursor glow on hero */
+#cursor-glow{position:fixed;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(200,245,96,0.07) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}
+
+/* Stat counters */
+.stat-num{transition:color .3s}
+
+/* Table row hover */
+.compare-table tbody tr{transition:background .2s,transform .15s}
+.compare-table tbody tr:hover{background:rgba(200,245,96,0.04)}
+.compare-table tbody tr:hover td.fn{color:var(--white)}
+
+/* Sunday tabs interactive */
+.s-tab{cursor:pointer;transition:background .2s,color .2s;user-select:none}
+.s-tab:hover{color:var(--body);background:var(--bg2)}
+.sunday-content-pane{display:none}
+.sunday-content-pane.active{display:block}
+
+/* ROAS flip card */
+.roas-flip{position:relative;display:inline-block;cursor:default}
+.roas-flip .roas-reported{display:inline;transition:opacity .3s}
+.roas-flip .roas-true{display:none;color:var(--red);font-weight:700}
+.roas-flip.revealed .roas-reported{display:none}
+.roas-flip.revealed .roas-true{display:inline}
+
+/* Card hover lift */
+.price-card,.why-item,.step,.problem-item{transition:background .25s,transform .2s,box-shadow .2s}
+.price-card:hover,.why-item:hover,.step:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.35)}
+.problem-item:hover{transform:translateY(-2px)}
+
+/* Demo metric rows animate in */
+.demo-metric-row{opacity:0;transform:translateX(-10px);transition:opacity .4s ease,transform .4s ease}
+.demo-metric-row.in-view{opacity:1;transform:translateX(0)}
+
+/* Typing cursor on hero h1 */
+.type-cursor{display:inline-block;width:3px;height:0.85em;background:var(--accent);vertical-align:middle;margin-left:3px;animation:blink .85s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* Glowing accent border on focused inputs */
+.field input:focus,.field select:focus,.field textarea:focus{box-shadow:0 0 0 2px rgba(200,245,96,0.15)}
+
+/* Platform card pulse on hover */
+.platform-card{transition:background .2s,transform .2s}
+.platform-card:hover{transform:scale(1.03)}
+
+/* Nav link underline slide */
+.nav-links a{position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--accent);transition:width .25s ease}
+.nav-links a:hover::after{width:100%}
+
+/* Animated demo live dot */
+@keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(200,245,96,.4)}70%{box-shadow:0 0 0 6px rgba(200,245,96,0)}}
+.live-dot{animation:pulse 1.5s ease-in-out infinite,livePulse 2s ease-out infinite}
+
+/* Section eyebrow line grow */
+.section-eyebrow::after{transition:max-width .6s .2s ease,opacity .4s}
+.reveal:not(.visible) .section-eyebrow::after{max-width:0;opacity:0}
+
+
+/* ── MODALS ── */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.82);backdrop-filter:blur(6px);overflow-y:auto;padding:40px 20px}
+.modal-box{max-width:680px;margin:0 auto;background:var(--bg2);border:1px solid var(--border2);position:relative}
+.modal-sticky-header{position:sticky;top:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;z-index:1}
+.modal-title{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:var(--white)}
+.modal-close-btn{background:none;border:1px solid var(--border2);color:var(--muted);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;padding:7px 14px;transition:color .2s,border-color .2s}
+.modal-close-btn:hover{color:var(--text);border-color:var(--text)}
+.modal-body{padding:32px;font-size:15px;color:var(--body);line-height:1.8}
+.modal-body h3{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--white);margin:28px 0 10px}
+.modal-body h3:first-child{margin-top:0}
+.modal-body a{color:var(--accent);text-decoration:none}
+.modal-body ul{margin-left:22px;margin-bottom:4px;list-style:disc}
+.modal-body ul li{margin-bottom:4px}
+.modal-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:28px}
+
+.success-overlay{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.88);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px}
+.success-box{max-width:460px;width:100%;background:var(--bg2);border:1px solid var(--border2);padding:52px 44px;text-align:center}
+.success-icon{width:56px;height:56px;background:rgba(200,245,96,0.12);border:1px solid rgba(200,245,96,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:22px}
+.success-title{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--white);letter-spacing:-0.02em;margin-bottom:12px}
+.success-body{font-size:15px;color:var(--body);line-height:1.7;margin-bottom:32px}
+.success-close{background:var(--accent);color:#0c0c0a;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;padding:13px 28px;border:none;cursor:pointer;transition:opacity .2s}
+.success-close:hover{opacity:.87}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr}.hero-right{display:none}
+  nav{padding:0 24px}.nav-links{display:none}
+  .section,.contact-section,.waitlist-section{padding:64px 24px}
+  .steps{grid-template-columns:1fr 1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .contact-inner{grid-template-columns:1fr;gap:52px}
+  .hero-left{padding:52px 28px}
+  footer{flex-direction:column;gap:20px;text-align:center;padding:32px 24px}
+  .form-row{grid-template-columns:1fr}
+  .demo-hero-body{grid-template-columns:1fr}
+  .demo-col:first-child{border-right:none;border-bottom:1px solid var(--border)}
+  .platforms-grid{justify-content:flex-start}
+  .sunday-tabs{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+<div id="cursor-glow"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">7Captur</a>
+  <ul class="nav-links">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#demo">Live demo</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#platforms">Platforms</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book free demo →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-dot"></div>
+      <span class="eyebrow-text mono">AI Decision Intelligence · E-Commerce</span>
+    </div>
+
+    <h1>Finally know <em>exactly</em> which ads are losing you money.</h1>
+
+    <div class="hero-qualifier mono">
+      Built for stores doing <span>$8k – $25k / mo</span>
+    </div>
+
+    <p class="hero-sub">
+      Your ad platform shows you ROAS. But after your platform fees, returns, and cost of goods — <strong>half of what looks profitable is actually breaking even or losing money.</strong>
+      <br><br>
+      Every Monday morning, we send you three plain-English decisions based on your real numbers. No new dashboards. No analysts. Just answers.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a free 20-min demo →</a>
+      <a href="#sunday" class="btn-ghost">Sound familiar? ↓</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label mono">Decisions in your inbox every Monday</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-num">&lt;7d</span>
+        <span class="stat-label mono">From sign-up to first report</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-num">0</span>
+        <span class="stat-label mono">New dashboards to log into</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="report-label">Sample weekly intelligence report</div>
+    <div class="report-card">
+      <div class="report-header">
+        <div>
+          <div class="report-store">Luminary Candle Co.</div>
+          <div class="report-week mono">Week 22 · May 26 – Jun 1, 2025</div>
+          <span class="report-badge">Shopify · Meta Ads · Klaviyo</span>
+        </div>
+        <div class="report-kpis">
+          <div class="kpi">
+            <span class="kpi-val">$14.2k</span>
+            <span class="kpi-up">↑ 12% wk/wk</span>
+            <span class="kpi-name">Revenue</span>
+          </div>
+          <div class="kpi">
+            <span class="kpi-val">4.1%</span>
+            <span class="kpi-down">↓ 2.1pts</span>
+            <span class="kpi-name">Net margin</span>
+          </div>
+        </div>
+      </div>
+      <div class="decisions-label mono">This week's decisions</div>
+      <div class="decision-item">
+        <span class="d-num">01</span>
+        <span class="d-text"><strong>Pause Meta campaign #4182 today.</strong><span class="d-tag tag-warn">Losing $0.40/order</span><br>Platform ROAS shows 1.8× — but after COGS, fees, and returns, true ROAS is 0.9×. This campaign is losing money on every order.</span>
+      </div>
+      <div class="decision-item">
+        <span class="d-num">02</span>
+        <span class="d-text"><strong>Scale campaign #4178 — it's your only genuinely profitable ad.</strong><span class="d-tag tag-action">True ROAS 2.4×</span><br>After all deductions, this campaign earns $1.40 per dollar spent. Budget it up by 30% this week.</span>
+      </div>
+      <div class="decision-item">
+        <span class="d-num">03</span>
+        <span class="d-text"><strong>Margin drop is a fee issue, not pricing.</strong><span class="d-tag tag-info">Save $180/mo</span><br>The 2.1pt dip traces to payment processing. Switching to an annual plan saves ~$180/mo — no price changes needed.</span>
+      </div>
+    </div>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:14px;letter-spacing:0.04em;">↑ Real report format. Data anonymised for illustration.</p>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item">True ROAS after COGS <span>✓</span></div>
+    <div class="ticker-item">Platform fee tracking <span>✓</span></div>
+    <div class="ticker-item">Returns factored in <span>✓</span></div>
+    <div class="ticker-item">3 decisions every Monday <span>✓</span></div>
+    <div class="ticker-item">No new dashboards <span>✓</span></div>
+    <div class="ticker-item">Shopify · WooCommerce <span>✓</span></div>
+    <div class="ticker-item">Meta · Google Ads <span>✓</span></div>
+    <div class="ticker-item">You own everything built <span>✓</span></div>
+    <div class="ticker-item">True ROAS after COGS <span>✓</span></div>
+    <div class="ticker-item">Platform fee tracking <span>✓</span></div>
+    <div class="ticker-item">Returns factored in <span>✓</span></div>
+    <div class="ticker-item">3 decisions every Monday <span>✓</span></div>
+    <div class="ticker-item">No new dashboards <span>✓</span></div>
+    <div class="ticker-item">Shopify · WooCommerce <span>✓</span></div>
+    <div class="ticker-item">Meta · Google Ads <span>✓</span></div>
+    <div class="ticker-item">You own everything built <span>✓</span></div>
+  </div>
+</div>
+
+<!-- SUNDAY NIGHT SECTION -->
+<section class="section" id="sunday">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">The Sunday Night Reality</div>
+    <h2 class="reveal">You already have the data.<br>That's the <em>problem.</em></h2>
+    <p class="section-sub reveal">If this is your Sunday night, you don't need more data. You need someone to tell you what to do with it.</p>
+
+    <div class="sunday-wrap reveal">
+      <div class="sunday-header">
+        <div class="sunday-dots">
+          <div class="sunday-dot sd1"></div>
+          <div class="sunday-dot sd2"></div>
+          <div class="sunday-dot sd3"></div>
+        </div>
+        <span class="sunday-title mono">Sunday, 9:47pm — preparing for the week</span>
+      </div>
+      <div class="sunday-tabs">
+        <div class="s-tab active mono" data-tab="meta">Meta Ads Manager</div>
+        <div class="s-tab mono" data-tab="shopify">Shopify Analytics</div>
+        <div class="s-tab mono" data-tab="klaviyo">Klaviyo Dashboard</div>
+        <div class="s-tab mono" data-tab="google">Google Ads</div>
+        <div class="s-tab mono" data-tab="sheet">Spreadsheet (COGS)</div>
+      </div>
+      <!-- Meta tab -->
+      <div class="sunday-rows sunday-content-pane active" data-pane="meta">
+        <div class="sunday-row">
+          <span class="sunday-row-num">01</span>
+          <div class="sunday-row-body">
+            <div class="sunday-row-title">You open Meta Ads Manager and see a <span class="roas-flip" id="roas1"><span class="roas-reported">2.1× ROAS</span><span class="roas-true">0.88× true ROAS</span></span>. Looks fine — hover to see the real number.</div>
+            <div class="sunday-row-detail">Platform ROAS ignores your 18% return rate, $4.20 fulfilment fee per order, and 2.5% Shopify Payments cut. The actual number is likely under 1×.<span class="sunday-row-tag">You don't know for sure</span></div>
+          </div>
+        </div>
+        <div class="sunday-row">
+          <span class="sunday-row-num">02</span>
+          <div class="sunday-row-body">
+            <div class="sunday-row-title">Three campaigns all show "profitable" ROAS. You can't tell which one is actually making money.</div>
+            <div class="sunday-row-detail">Without COGS factored in, every campaign looks roughly similar. You make a gut call on budget allocation and move on.</div>
+          </div>
+        </div>
+        <div class="sunday-row">
+          <span class="sunday-row-num">03</span>
+          <div class="sunday-row-body">
+            <div class="sunday-row-title">You decide to increase budget on the campaign with the highest reported ROAS.</div>
+            <div class="sunday-row-detail">Two weeks later you find out it had a 24% return rate and was losing $0.60 on every order. The scaling cost you an extra $780.<span class="sunday-row-tag">Every few months</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Shopify tab -->
+      <div class="sunday-rows sunday-content-pane" data-pane="shopify">
+        <div class="sunday-row">
+          <span class="sunday-row-num">01</span>
+          <div class="sunday-row-body">
+            <div class="sunday-row-title">Revenue is up 8% week-on-week. Looks like a good week.</div>
+            <div class="sunday-row-detail">But net margin is down 1.4 points. You spend 20 minutes trying to figure out why. You can't pin it down. You mark it as "investigate later."</div>
+          </div>
+        </div>
+        <div class="sunday-row">
+          <span class="sunday-row-num">02</span>
+          <div class="sunday-row-body">
+            <div class="sunday-row-title">Returns are up this week but Shopify doesn't tell you which SKU is driving it.</div>
+            <div class="sunday-row-detail">You'd need to cross-reference with fulfilment data, which is in a different tab, which you don't have time for right now.<span class="sunday-row-tag">Information dead end</span></div>
+          </div>
+        </div>
+        <div class="sunday-row">
+          <span class="sunday-row-num">03</span>
+          <div class="sunday-row-body">
+            <div class="sunday-row-title">Shopify's built-in analytics can't tell you which traffic source drove the most profitable orders — only the most orders.</div>
+            <div class="sunday-row-detail">Volume and profitability are completely different things. But Shopify doesn't know your COGS, so it can't tell you which.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Klaviyo tab -->
+      <div class="sunday-rows sunday-content-pane" data-pane="klaviyo">
+        <div class="sunday-row">
+          <span class="sunday-row-num">01</span>
+          <div class="sunday-row-body">
+            <div class="sunday-row-title">Your Klaviyo flows say they generated $3,200 this week. Your Meta campaigns say they generated $8,100. That's $11,300 total — more than your actual revenue.</div>
+            <div class="sunday-row-detail">Both platforms claim credit for the same orders. There's no deduplication. The numbers are meaningless in isolation.<span class="sunday-row-tag">Double-counting</span></div>
+          </div>
+        </div>
+        <div class="sunday-row">
+          <span class="sunday-row-num">02</span>
+          <div class="sunday-row-body">
+            <div class="sunday-row-title">Open rates are up. Click rates are flat. Revenue from email is down.</div>
+            <div class="sunday-row-detail">You can't tell if it's a deliverability issue, a product issue, or just noise. No decision comes out of 15 minutes of staring at Klaviyo charts.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Google tab -->
+      <div class="sunday-rows sunday-content-pane" data-pane="google">
+        <div class="sunday-row">
+          <span class="sunday-row-num">01</span>
+          <div class="sunday-row-body">
+            <div class="sunday-row-title">Google Ads shows a different conversion count than Google Analytics for the same period.</div>
+            <div class="sunday-row-detail">You've never fully figured out why. You use whichever number makes the results look better in your head and move on.<span class="sunday-row-tag">Happens every week</span></div>
+          </div>
+        </div>
+        <div class="sunday-row">
+          <span class="sunday-row-num">02</span>
+          <div class="sunday-row-body">
+            <div class="sunday-row-title">Google Ads ROAS looks worse than Meta. But you don't know if that's because Google customers have a higher return rate.</div>
+            <div class="sunday-row-detail">Without a unified view, comparing ad platform performance is an apples-to-oranges exercise. You're guessing at which channel is actually better.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Spreadsheet tab -->
+      <div class="sunday-rows sunday-content-pane" data-pane="sheet">
+        <div class="sunday-row">
+          <span class="sunday-row-num">01</span>
+          <div class="sunday-row-body">
+            <div class="sunday-row-title">You open the COGS spreadsheet to manually calculate true ROAS. It takes 35–45 minutes.</div>
+            <div class="sunday-row-detail">You copy this week's ad spend from Meta, last week's COGS estimate, and try to back-calculate. The formula references data that's two weeks old.<span class="sunday-row-tag">Every single week</span></div>
+          </div>
+        </div>
+        <div class="sunday-row">
+          <span class="sunday-row-num">02</span>
+          <div class="sunday-row-body">
+            <div class="sunday-row-title">You finish. The numbers don't add up the way you expected. You're not confident in the inputs.</div>
+            <div class="sunday-row-detail">You make a decision anyway because it's already 10:30pm and you need to set ad budgets before Monday morning. This is your entire data process.</div>
+          </div>
+        </div>
+        <div class="sunday-row">
+          <span class="sunday-row-num">03</span>
+          <div class="sunday-row-body">
+            <div class="sunday-row-title">Total time: 80 minutes. Decisions made: 2. Confidence level: moderate at best.</div>
+            <div class="sunday-row-detail">This happens every Sunday. Multiply by 52 weeks: that's 69 hours per year of uncertain, manual analysis that a connected system could do in seconds.<span class="sunday-row-tag">69 hrs/year</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO CENTREPIECE -->
+<section class="section alt-bg" id="demo">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">The Live Demo</div>
+    <h2 class="reveal">We show you your numbers<br>before you pay a <em>single dollar.</em></h2>
+    <p class="section-sub reveal">Connect your store, we run a real report, and you see exactly what you'd receive every Monday — including which campaigns are losing you money right now. If you don't see at least one decision you'd act on immediately, we tell you it's not the right fit and you walk away. No invoice.</p>
+
+    <div class="demo-hero reveal">
+      <div class="demo-hero-header">
+        <div class="demo-hero-label"><span>// </span>Sample report — Luminary Candle Co. · Week 22</div>
+        <div class="demo-live-badge"><div class="live-dot"></div> Real data format</div>
+      </div>
+      <div class="demo-hero-body">
+        <div class="demo-col">
+          <div class="demo-col-label mono">Ad profitability breakdown — this week</div>
+          <div class="demo-metric-row">
+            <div>
+              <div class="demo-metric-name">Campaign #4182 — "Summer Collection"</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px">Meta reported ROAS: 1.8×</div>
+            </div>
+            <div>
+              <div class="demo-metric-val down">0.9× true</div>
+              <div class="demo-metric-note">after COGS + fees + returns</div>
+            </div>
+          </div>
+          <div class="demo-metric-row">
+            <div>
+              <div class="demo-metric-name">Campaign #4178 — "Bestsellers Retarget"</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px">Meta reported ROAS: 2.6×</div>
+            </div>
+            <div>
+              <div class="demo-metric-val up">2.4× true</div>
+              <div class="demo-metric-note">scale this one</div>
+            </div>
+          </div>
+          <div class="demo-metric-row">
+            <div>
+              <div class="demo-metric-name">Campaign #4165 — "New Arrivals Broad"</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px">Meta reported ROAS: 1.4×</div>
+            </div>
+            <div>
+              <div class="demo-metric-val warn">0.96× true</div>
+              <div class="demo-metric-note">borderline — watch</div>
+            </div>
+          </div>
+          <div class="demo-metric-row">
+            <div>
+              <div class="demo-metric-name">Weekly spend on loss-making ads</div>
+            </div>
+            <div>
+              <div class="demo-metric-val down">$640</div>
+              <div class="demo-metric-note">recoverable this week</div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-col">
+          <div class="demo-col-label mono">Margin analysis — week over week</div>
+          <div class="demo-metric-row">
+            <div class="demo-metric-name">Gross revenue</div>
+            <div><div class="demo-metric-val">$14,200</div><div class="demo-metric-note">↑ 12% vs last week</div></div>
+          </div>
+          <div class="demo-metric-row">
+            <div class="demo-metric-name">Platform fees (Shopify Payments)</div>
+            <div><div class="demo-metric-val down">−$384</div><div class="demo-metric-note">fixable: switch to annual plan</div></div>
+          </div>
+          <div class="demo-metric-row">
+            <div class="demo-metric-name">Returns this week</div>
+            <div><div class="demo-metric-val warn">$1,140</div><div class="demo-metric-note">up 3.2pts — investigate SKU #18</div></div>
+          </div>
+          <div class="demo-metric-row">
+            <div class="demo-metric-name">Net margin this week</div>
+            <div><div class="demo-metric-val down">4.1%</div><div class="demo-metric-note">↓ 2.1pts vs last week</div></div>
+          </div>
+          <div class="demo-metric-row">
+            <div class="demo-metric-name">Recoverable margin this week</div>
+            <div><div class="demo-metric-val up">+$820</div><div class="demo-metric-note">if you act on all 3 decisions</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-cta-row">
+        <p class="demo-cta-text"><strong>Want to see this with your actual store's numbers?</strong> That's exactly what the free demo is.</p>
+        <a href="#contact" class="btn-primary" style="flex-shrink:0">Book the free demo →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE: VS DOING IT YOURSELF -->
+<section class="section" id="compare">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">The Alternative</div>
+    <h2 class="reveal">What you're doing right now<br>vs. what <em>Monday could look like.</em></h2>
+    <p class="section-sub reveal">No comparison to other tools. Just an honest look at the current situation — and what changes.</p>
+
+    <div class="compare-wrap reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>The task</th>
+            <th>Doing it yourself right now</th>
+            <th class="hl">With 7Captur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="fn">Knowing true ad profitability after COGS, fees &amp; returns</td>
+            <td>Manual spreadsheet. 30–45 mins. Inputs you're not fully confident in.</td>
+            <td class="hl"><span class="ck">✓</span> Calculated automatically every week, shown campaign by campaign.</td>
+          </tr>
+          <tr>
+            <td class="fn">Identifying which specific campaign to pause or scale</td>
+            <td>Gut feel, or platform ROAS — which doesn't reflect your actual margin.</td>
+            <td class="hl"><span class="ck">✓</span> Named explicitly in every report with the numbers behind the call.</td>
+          </tr>
+          <tr>
+            <td class="fn">Understanding why margin dropped this week</td>
+            <td>Switching between 4–5 tabs, usually inconclusive, often skipped.</td>
+            <td class="hl"><span class="ck">✓</span> Root cause identified — fees, returns, COGS, or ad mix — in plain English.</td>
+          </tr>
+          <tr>
+            <td class="fn">Time spent on weekly data review</td>
+            <td>45–90 minutes of Sunday night work with uncertain outputs.</td>
+            <td class="hl"><span class="ck">✓</span> 5 minutes reading three decisions on Monday morning.</td>
+          </tr>
+          <tr>
+            <td class="fn">Confidence in the decisions you're making</td>
+            <td>Moderate. You're working with incomplete, siloed data.</td>
+            <td class="hl"><span class="ck">✓</span> Every decision comes with the exact data and reasoning behind it.</td>
+          </tr>
+          <tr>
+            <td class="fn">Cost</td>
+            <td>Your time — worth far more than any retainer fee at $15–25k/mo revenue.</td>
+            <td class="hl">From <strong>$197/mo</strong> after a one-time setup.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section alt-bg" id="how">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">How It Works</div>
+    <h2 class="reveal">Four steps. Fully automated.<br>First report in <em>under a week.</em></h2>
+    <p class="section-sub reveal">We build a pipeline that connects your store, ad accounts, and email platform, runs the analysis, and delivers your report — without you touching a thing after onboarding.</p>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">We connect your stack</div>
+        <p class="step-body">Your store platform, ad accounts, and email tool are connected via API during a single onboarding session. No CSV exports, no manual uploads — ever.</p>
+        <div class="step-tags"><span class="tech-tag">Shopify / WooCommerce</span><span class="tech-tag">n8n</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">AI does the analysis</div>
+        <p class="step-body">Every week, AI calculates your true ad profitability after COGS, fees, and returns — then identifies anomalies, margin shifts, and actionable opportunities across all your data.</p>
+        <div class="step-tags"><span class="tech-tag">Claude AI</span><span class="tech-tag">Custom logic</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">3 decisions in your inbox</div>
+        <p class="step-body">Every Monday before 9am: three plain-English decisions with the data and reasoning behind each one. Not graphs. Not dashboards. Just what to do and why.</p>
+        <div class="step-tags"><span class="tech-tag">Email report</span><span class="tech-tag">Every Monday</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title">Sharpens every month</div>
+        <p class="step-body">A monthly strategy call lets us refine the model to your store's specific context. The decisions get more precise over time. Month three is measurably better than month one.</p>
+        <div class="step-tags"><span class="tech-tag">Monthly call</span><span class="tech-tag">Ongoing refinement</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Pricing</div>
+    <h2 class="reveal">Simple. No setup fee surprise.<br><em>Cancel anytime.</em></h2>
+    <p class="section-sub reveal">The setup is absorbed into your first month on Starter — because your results matter more to us right now than setup revenue. You own everything we build. If you ever leave, the whole system leaves with you. Nothing gets switched off.</p>
+
+    <div class="pricing-grid reveal">
+
+      <!-- STARTER -->
+      <div class="price-card">
+        <div class="price-tier mono">Starter</div>
+        <div class="price-name">Insight Report</div>
+        <p class="price-desc">For stores doing $8k–$25k/mo ready to stop guessing which ads are profitable.</p>
+        <div class="price-main">
+          <span class="price-amount">$197</span>
+          <span class="price-period mono">/month</span>
+        </div>
+        <div class="price-note-small">Setup included in first month. <strong>No upfront fee.</strong><br>Cancel anytime after month one.</div>
+        <ul class="price-features">
+          <li><span class="ck">✓</span> 1 store platform + 1 ad platform connected</li>
+          <li><span class="ck">✓</span> True ROAS calculated after COGS, fees &amp; returns</li>
+          <li><span class="ck">✓</span> 3 plain-English decisions every Monday</li>
+          <li><span class="ck">✓</span> Delivered to your inbox — no login required</li>
+          <li><span class="ck">✓</span> 30-day support after setup</li>
+          <li><span class="ck">✓</span> You own the entire pipeline</li>
+        </ul>
+        <a href="#contact" class="price-cta price-cta-ghost">Book a free demo</a>
+      </div>
+
+      <!-- GROWTH -->
+      <div class="price-card featured">
+        <div class="price-badge">Most popular</div>
+        <div class="price-tier mono">Growth</div>
+        <div class="price-name">Decision Engine</div>
+        <p class="price-desc">For stores doing $25k–$200k/mo making multiple ad and operations decisions weekly.</p>
+        <div class="price-main">
+          <span class="price-amount">$397</span>
+          <span class="price-period mono">/month</span>
+        </div>
+        <div class="price-note-small">One-time setup: <strong>$997</strong> — then $397/mo.<br>Includes full stack connection.</div>
+        <ul class="price-features">
+          <li><span class="ck">✓</span> All data sources connected</li>
+          <li><span class="ck">✓</span> True ad profitability across all campaigns</li>
+          <li><span class="ck">✓</span> Weekly digest + anomaly alerts by email</li>
+          <li><span class="ck">✓</span> Slack alerts for urgent issues</li>
+          <li><span class="ck">✓</span> Monthly 1-hour strategy call</li>
+          <li><span class="ck">✓</span> You own the entire pipeline</li>
+        </ul>
+        <a href="#contact" class="price-cta price-cta-primary">Book a free demo →</a>
+      </div>
+
+      <!-- SCALE -->
+      <div class="price-card">
+        <div class="price-tier mono">Scale</div>
+        <div class="price-name">Data Partner</div>
+        <p class="price-desc">For 7-figure stores that need a dedicated data intelligence partner, not a report.</p>
+        <div class="price-main">
+          <span class="price-amount">$1,500</span>
+          <span class="price-period mono">/month</span>
+        </div>
+        <div class="price-note-small">One-time setup: <strong>$1,997</strong> — then $1,500/mo.<br>Billed monthly, no contract.</div>
+        <ul class="price-features">
+          <li><span class="ck">✓</span> Everything in Decision Engine</li>
+          <li><span class="ck">✓</span> Custom KPI tracking per your goals</li>
+          <li><span class="ck">✓</span> Customer LTV &amp; cohort analysis</li>
+          <li><span class="ck">✓</span> Weekly calls + quarterly reviews</li>
+          <li><span class="ck">✓</span> Priority support &amp; custom builds</li>
+          <li><span class="ck">✓</span> You own the entire pipeline</li>
+        </ul>
+        <a href="#contact" class="price-cta price-cta-ghost">Book a free demo</a>
+      </div>
+    </div>
+
+    <p class="pricing-footer-note reveal">All plans include a free demo with your real store data before you commit.<br>You own everything we build — if you ever leave, the whole system leaves with you. Nothing gets switched off.</p>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section class="section alt-bg" id="platforms">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Platforms</div>
+    <h2 class="reveal">Works with your stack.<br><em>More added on request.</em></h2>
+    <p class="section-sub reveal">Currently live on the most common e-commerce platforms. Don't see yours? Request it — we prioritise integrations by demand.</p>
+    <div class="platforms-grid reveal">
+      <div class="platforms-row-label mono">Store platforms</div>
+      <div class="platform-card">
+        <div class="platform-icon">🛍️</div>
+        <div class="platform-name">Shopify</div>
+        <div class="platform-type mono">E-commerce</div>
+        <span class="platform-status status-live mono">Live</span>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon">🔌</div>
+        <div class="platform-name">WooCommerce</div>
+        <div class="platform-type mono">E-commerce</div>
+        <span class="platform-status status-live mono">Live</span>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon">➕</div>
+        <div class="platform-name">Your platform?</div>
+        <div class="platform-type mono">Request it</div>
+        <a href="#contact" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid rgba(200,245,96,.2);padding:2px 8px;">Request →</a>
+      </div>
+
+      <div class="platforms-row-label mono">Ad platforms</div>
+      <div class="platform-card">
+        <div class="platform-icon">📘</div>
+        <div class="platform-name">Meta Ads</div>
+        <div class="platform-type mono">Paid social</div>
+        <span class="platform-status status-live mono">Live</span>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon">🔍</div>
+        <div class="platform-name">Google Ads</div>
+        <div class="platform-type mono">Paid search</div>
+        <span class="platform-status status-live mono">Live</span>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon">➕</div>
+        <div class="platform-name">More platforms</div>
+        <div class="platform-type mono">Added on request</div>
+        <a href="#contact" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid rgba(200,245,96,.2);padding:2px 8px;">Request →</a>
+      </div>
+
+      <div class="platforms-row-label mono">Email &amp; retention</div>
+      <div class="platform-card">
+        <div class="platform-icon">📧</div>
+        <div class="platform-name">Klaviyo</div>
+        <div class="platform-type mono">Email / SMS</div>
+        <span class="platform-status status-live mono">Live</span>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon">➕</div>
+        <div class="platform-name">Other tools</div>
+        <div class="platform-type mono">Added on request</div>
+        <a href="#contact" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid rgba(200,245,96,.2);padding:2px 8px;">Request →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY 7CAPTUR -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Why 7Captur</div>
+    <h2 class="reveal">Built for one problem,<br><em>obsessively.</em></h2>
+    <div class="why-grid reveal">
+      <div class="why-item">
+        <span class="why-num mono">01 —</span>
+        <div class="why-title">Decisions, not dashboards</div>
+        <p class="why-body">Every other tool gives you better data and leaves. We give you three things to do — with the reasoning behind each one so you can trust it.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-num mono">02 —</span>
+        <div class="why-title">True profitability is the only number that matters</div>
+        <p class="why-body">COGS, platform fees, and returns are factored into every ad calculation automatically. No extra setup. No manual spreadsheet. Baked in from day one.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-num mono">03 —</span>
+        <div class="why-title">See it before you pay — guaranteed</div>
+        <p class="why-body">We run a real report on your actual store data before you commit a dollar. If you don't see value, we tell you it's not the right fit. No invoice. No hard feelings.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-num mono">04 —</span>
+        <div class="why-title">Real API integrations, not workarounds</div>
+        <p class="why-body">We connect directly to each platform's API — not CSV exports, not copy-paste. Pipelines that pull your data silently every week without you doing anything.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-num mono">05 —</span>
+        <div class="why-title">Live in under a week</div>
+        <p class="why-body">First report in your inbox within 7 days of onboarding. No months of discovery calls. No sprawling setup documentation. We move fast.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-num mono">06 —</span>
+        <div class="why-title">If you leave, the whole system leaves with you</div>
+        <p class="why-body">Every pipeline, automation, and integration we build belongs to you. If you ever cancel, you take the complete system. Nothing gets switched off. No ransom. No handcuffs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist-section" id="waitlist">
+  <div class="waitlist-inner">
+    <div class="section-eyebrow reveal" style="justify-content:center">Waitlist</div>
+    <h2 class="reveal" style="text-align:center">Not ready yet?<br>Get notified when we <em>open spots.</em></h2>
+    <p class="reveal">We're working with a small number of stores to refine the product. Join the waitlist and we'll reach out when a spot opens — or when we launch something new.</p>
+
+    <div class="waitlist-count reveal">
+      <span>⚡</span> Early access list — limited spots per month
+    </div>
+
+    <div class="waitlist-form reveal">
+      <input type="email" id="waitlist-email" placeholder="your@store.com" />
+      <button id="waitlist-submit">Join waitlist →</button>
+    </div>
+    <p class="waitlist-note mono">No spam. One email when spots open. That's it.</p>
+  </div>
+</section>
+
+<!-- CONTACT / DEMO FORM -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-eyebrow">Book Your Free Demo</div>
+      <h2>See your real<br>numbers. <em>Then decide.</em></h2>
+      <p>We connect to your store data, run a real report, and show you exactly what you'd receive every Monday morning — including which ads are losing you money right now. No pitch. No pressure. Just your actual numbers.</p>
+
+      <div class="demo-promise">
+        <div class="demo-promise-title">⚡ The demo guarantee</div>
+        <p>If you don't see at least one decision you'd act on immediately, we tell you honestly it's not the right fit. We'd rather lose a sale than waste your time.</p>
+      </div>
+
+      <div class="demo-steps">
+        <div class="demo-step">
+          <span class="demo-step-num">01</span>
+          <div class="demo-step-text"><strong>You fill in the form.</strong> We review your store and ad setup before the call.</div>
+        </div>
+        <div class="demo-step">
+          <span class="demo-step-num">02</span>
+          <div class="demo-step-text"><strong>20-minute call.</strong> We walk through a real report using your actual store data.</div>
+        </div>
+        <div class="demo-step">
+          <span class="demo-step-num">03</span>
+          <div class="demo-step-text"><strong>You decide.</strong> No hard sell. If it's a fit, we're live within 7 days.</div>
+        </div>
+      </div>
+
+      <p class="contact-sub-note mono">We reply within 24 hours · No spam · No sales scripts</p>
+    </div>
+
+    <div class="contact-right">
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="field"><label>Your name</label><input type="text" id="f-name" placeholder="Alex Chen" /></div>
+          <div class="field"><label>Email address</label><input type="email" id="f-email" placeholder="alex@yourstore.com" /></div>
+        </div>
+        <div class="field"><label>Your store URL</label><input type="text" id="f-store" placeholder="yourstore.com" /></div>
+        <div class="field">
+          <label>E-commerce platform</label>
+          <select id="f-platform">
+            <option value="" disabled selected>Select your platform</option>
+            <option>Shopify</option>
+            <option>WooCommerce</option>
+            <option>BigCommerce</option>
+            <option>Wix Commerce</option>
+            <option>Squarespace Commerce</option>
+            <option>Other (tell us below)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Monthly revenue (approx.)</label>
+          <select id="f-revenue">
+            <option value="" disabled selected>Select a range</option>
+            <option>$8k – $25k/mo</option>
+            <option>$25k – $100k/mo</option>
+            <option>$100k – $500k/mo</option>
+            <option>$500k+/mo</option>
+          </select>
+        </div>
+        <div class="field"><label>Biggest data headache right now</label><textarea id="f-headache" placeholder="e.g. I can't tell which ad campaigns are actually profitable after all my costs…"></textarea></div>
+        <button class="form-submit" id="form-submit-btn">Book my free demo →</button>
+        <p class="form-foot mono">Live in under a week. First report in your inbox within 7 days of onboarding.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">7Captur</a>
+  <ul class="footer-links">
+    <li><a href="#sunday">The problem</a></li>
+    <li><a href="#demo">Live demo</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#platforms">Platforms</a></li>
+    <li><a href="#contact">Book demo</a></li>
+    <li><a href="#" id="privacy-link">Privacy</a></li>
+  </ul>
+  <span class="footer-copy mono">© 2026 7Captur</span>
+</footer>
+
+<!-- PRIVACY MODAL -->
+<div class="modal-overlay" id="privacy-overlay">
+  <div class="modal-box">
+    <div class="modal-sticky-header">
+      <span class="modal-title">Privacy Policy</span>
+      <button class="modal-close-btn" id="privacy-close">✕ Close</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-meta mono">Last updated: March 2026</p>
+      <h3>1. Who we are</h3>
+      <p>7Captur is an AI decision intelligence service for e-commerce store owners. We are the data controller for information you provide. For any privacy questions: <a href="/cdn-cgi/l/email-protection#5525273c2334362c15623634252120277b363a38"><span class="__cf_email__" data-cfemail="f8888a918e999b81b8cf9b99888c8d8ad69b9795">[email&#160;protected]</span></a>.</p>
+      <h3>2. What data we collect</h3>
+      <p>When you submit a demo request, we collect your name, email address, store URL, platform, revenue range, and any information you share in the free-text field. When onboarded as a client, we connect to your store platform, ad accounts, and email tools via their official APIs — accessing only what's needed to produce your weekly report.</p>
+      <h3>3. How we use your data</h3>
+      <ul>
+        <li>To respond to your demo request and schedule a call</li>
+        <li>To produce your weekly AI-powered decision report</li>
+        <li>To improve the quality of our analysis over time</li>
+        <li>We do not sell, rent, or share your data with third parties for marketing purposes — ever</li>
+      </ul>
+      <h3>4. Data storage and security</h3>
+      <p>Your data is encrypted in transit and stored securely. Contact form submissions are retained for up to 12 months. Client store data is retained only while your engagement is active, and deleted within 30 days of termination upon request.</p>
+      <h3>5. Your rights</h3>
+      <p>You have the right to access, correct, or delete the personal data we hold about you, and to withdraw consent at any time. To exercise any right, email <a href="/cdn-cgi/l/email-protection#e191938897808298a1d6828091959493cf828e8c"><span class="__cf_email__" data-cfemail="601012091601031920570301101415124e030f0d">[email&#160;protected]</span></a>.</p>
+      <h3>6. Cookies</h3>
+      <p>This website uses no tracking cookies, third-party analytics scripts, or advertising pixels of any kind.</p>
+      <h3>7. Changes</h3>
+      <p>We may update this policy from time to time. The date at the top reflects the most recent revision.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="success-overlay" id="success-overlay">
+  <div class="success-box">
+    <div class="success-icon">✓</div>
+    <div class="success-title">Demo request received.</div>
+    <p class="success-body">We'll review your details and reach out within 24 hours to book your free 20-minute demo. Check your inbox — we reply fast.</p>
+    <button class="success-close" id="success-close">Back to site</button>
+  </div>
+</div>
+
+<!-- WAITLIST SUCCESS -->
+<div class="success-overlay" id="waitlist-success-overlay">
+  <div class="success-box">
+    <div class="success-icon">✓</div>
+    <div class="success-title">You're on the list.</div>
+    <p class="success-body">We'll email you as soon as a spot opens up. One email. No spam.</p>
+    <button class="success-close" id="waitlist-success-close">Back to site</button>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+/* ── SCROLL PROGRESS ── */
+const scrollBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+  scrollBar.style.width = pct + '%';
+}, { passive: true });
+
+/* ── CURSOR GLOW (hero only) ── */
+const glow = document.getElementById('cursor-glow');
+const heroEl = document.querySelector('.hero');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top  = e.clientY + 'px';
+  const rect = heroEl.getBoundingClientRect();
+  const inHero = e.clientY >= rect.top && e.clientY <= rect.bottom;
+  glow.style.opacity = inHero ? '1' : '0';
+});
+
+/* ── HERO ENTRANCE ── */
+window.addEventListener('load', () => {
+  document.querySelector('.hero').classList.add('hero-animate');
+});
+
+/* ── SCROLL REVEAL ── */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* ── COUNTER ANIMATION ── */
+function animateCounter(el, target, duration) {
+  const start = performance.now();
+  const update = now => {
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(eased * target);
+    if (p < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+const statsObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.stat-num').forEach(n => {
+        if (n.textContent === '3') animateCounter(n, 3, 900);
+        if (n.textContent === '0') animateCounter(n, 0, 600);
+      });
+      statsObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+const statsEl = document.querySelector('.hero-stats');
+if (statsEl) statsObs.observe(statsEl);
+
+/* ── DEMO METRIC ROW STAGGER ── */
+const metricObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.demo-metric-row').forEach((r, i) =>
+        setTimeout(() => r.classList.add('in-view'), i * 110));
+      metricObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.demo-hero-body').forEach(el => metricObs.observe(el));
+
+/* ── ROAS FLIP on hover ── */
+document.querySelectorAll('.roas-flip').forEach(el => {
+  el.addEventListener('mouseenter', () => el.classList.add('revealed'));
+  el.addEventListener('mouseleave', () => el.classList.remove('revealed'));
+});
+
+/* ── SUNDAY TABS ── */
+document.querySelectorAll('.s-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.tab;
+    document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelectorAll('.sunday-content-pane').forEach(p => {
+      p.classList.remove('active');
+      if (p.dataset.pane === target) {
+        p.classList.add('active');
+        p.querySelectorAll('.sunday-row').forEach((r, i) => {
+          r.style.cssText = 'opacity:0;transform:translateY(10px);transition:none';
+          setTimeout(() => {
+            r.style.cssText = 'opacity:1;transform:translateY(0);transition:opacity .3s ease,transform .3s ease';
+          }, i * 80 + 20);
+        });
+      }
+    });
+  });
+});
+
+/* ── NAV SCROLL TINT ── */
+const navEl = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  navEl.style.background = window.scrollY > 40 ? 'rgba(12,12,10,0.97)' : 'rgba(12,12,10,0.92)';
+}, { passive: true });
+
+/* ── PRIVACY MODAL ── */
+const privacyOverlay = document.getElementById('privacy-overlay');
+document.getElementById('privacy-link').addEventListener('click', e => {
+  e.preventDefault();
+  privacyOverlay.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+});
+document.getElementById('privacy-close').addEventListener('click', () => {
+  privacyOverlay.style.display = 'none';
+  document.body.style.overflow = '';
+});
+privacyOverlay.addEventListener('click', e => {
+  if (e.target === privacyOverlay) { privacyOverlay.style.display = 'none'; document.body.style.overflow = ''; }
+});
+
+/* ── SUCCESS MODALS ── */
+function openSuccess(id) { const el = document.getElementById(id); el.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+function closeSuccess(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = ''; }
+document.getElementById('success-close').addEventListener('click', () => closeSuccess('success-overlay'));
+document.getElementById('waitlist-success-close').addEventListener('click', () => closeSuccess('waitlist-success-overlay'));
+
+/* ── FORMSPREE CONFIG ──
+   Replace YOUR_DEMO_FORM_ID and YOUR_WAITLIST_FORM_ID with your IDs from formspree.io
+*/
+const FORMSPREE_DEMO     = 'https://formspree.io/f/YOUR_DEMO_FORM_ID';
+const FORMSPREE_WAITLIST = 'https://formspree.io/f/YOUR_WAITLIST_FORM_ID';
+
+/* ── DEMO FORM SUBMIT ── */
+document.getElementById('form-submit-btn').addEventListener('click', async () => {
+  const name     = document.getElementById('f-name').value.trim();
+  const email    = document.getElementById('f-email').value.trim();
+  const store    = document.getElementById('f-store').value.trim();
+  const platform = document.getElementById('f-platform').value;
+  const revenue  = document.getElementById('f-revenue').value;
+  const headache = document.getElementById('f-headache').value.trim();
+  removeFormError('demo-error');
+  if (!name || !email || !store) { showFormError('demo-error', 'Please fill in your name, email, and store URL.'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFormError('demo-error', 'Please enter a valid email address.'); return; }
+  if (!platform || !revenue) { showFormError('demo-error', 'Please select your platform and revenue range.'); return; }
+  const btn = document.getElementById('form-submit-btn');
+  btn.textContent = 'Sending…'; btn.style.opacity = '0.6'; btn.style.pointerEvents = 'none';
+  try {
+    const res = await fetch(FORMSPREE_DEMO, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ name, email, store, platform, revenue, headache, _subject: `New demo request — ${name} (${store})` })
+    });
+    if (res.ok) {
+      ['f-name','f-email','f-store','f-headache'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('f-platform').selectedIndex = 0;
+      document.getElementById('f-revenue').selectedIndex = 0;
+      openSuccess('success-overlay');
+    } else { const d = await res.json(); showFormError('demo-error', d.error || 'Something went wrong — please try again.'); }
+  } catch { showFormError('demo-error', 'Network error — please check your connection and try again.'); }
+  finally { btn.textContent = 'Book my free demo →'; btn.style.opacity = ''; btn.style.pointerEvents = ''; }
+});
+
+/* ── WAITLIST SUBMIT ── */
+document.getElementById('waitlist-submit').addEventListener('click', async () => {
+  const email = document.getElementById('waitlist-email').value.trim();
+  removeFormError('waitlist-error');
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFormError('waitlist-error', 'Please enter a valid email address.'); return; }
+  const btn = document.getElementById('waitlist-submit');
+  btn.textContent = 'Adding you…'; btn.style.opacity = '0.6'; btn.style.pointerEvents = 'none';
+  try {
+    const res = await fetch(FORMSPREE_WAITLIST, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email, _subject: `Waitlist signup — ${email}` })
+    });
+    if (res.ok) { document.getElementById('waitlist-email').value = ''; openSuccess('waitlist-success-overlay'); }
+    else { showFormError('waitlist-error', 'Something went wrong — please try again.'); }
+  } catch { showFormError('waitlist-error', 'Network error — please try again.'); }
+  finally { btn.textContent = 'Join waitlist →'; btn.style.opacity = ''; btn.style.pointerEvents = ''; }
+});
+
+function showFormError(id, msg) {
+  removeFormError(id);
+  const err = document.createElement('p');
+  err.id = id;
+  err.style.cssText = 'font-size:13px;color:#ff6b6b;padding:10px 14px;border:1px solid rgba(255,107,107,0.3);background:rgba(255,107,107,0.06);font-family:"Plus Jakarta Sans",sans-serif;margin-top:-4px';
+  err.textContent = msg;
+  const btn = id === 'demo-error' ? document.getElementById('form-submit-btn') : document.getElementById('waitlist-submit');
+  btn.insertAdjacentElement('beforebegin', err);
+}
+function removeFormError(id) { const el = document.getElementById(id); if (el) el.remove(); }
+</script>
+</body>
+</html>
