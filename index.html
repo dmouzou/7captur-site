@@ -9,51 +9,51 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap" rel="stylesheet" />
 <style>
 :root {
-  /* ── Lighter dark mode ── */
-  --bg:      #fff4f2;
-  --bg2:     #fff4f2;
-  --bg3:     #fff4f2;
-  --border:  rgba(255,255,255,0.10);
-  --border2: rgba(255,255,255,0.18);
-  --text:    #0a0908;
-  --body:    #0a0908;
-  --muted:   #0a0908;
-  --accent:  #c8f560;
-  --gold:    #f5c860;
-  --red:     #ff6b6b;
-  --white:   #f5f2eb;
-  --card:    #1f1f1c;
-  --nav-bg-scroll:  rgba(26,25,22,0.97);
-  --nav-bg-top:     rgba(26,25,22,0.90);
-  --shadow: rgba(0,0,0,0.40);
-}
-
-/* ── Light mode overrides ── */
-html.light {
-  --bg:      #fdf6ee;
-  --bg2:     #f5ebe0;
-  --bg3:     #ecdfd2;
-  --border:  rgba(60,45,30,0.10);
-  --border2: rgba(60,45,30,0.18);
-  --text:    #1e1a14;
-  --body:    #4e4640;
-  --muted:   #9a9088;
-  --accent:  #5a9600;
-  --gold:    #a07800;
-  --red:     #c42828;
-  --white:   #1e1a14;
-  --card:    #f0e5d8;
+  --bg:             #fdf6ee;
+  --bg2:            #f5ebe0;
+  --bg3:            #ecdfd2;
+  --border:         rgba(60,45,30,0.10);
+  --border2:        rgba(60,45,30,0.20);
+  --text:           #1e1a14;
+  --body:           #4e4640;
+  --muted:          #9a9088;
+  --accent:         #4a7c00;
+  --accent-fg:      #fff;
+  --gold:           #a07800;
+  --red:            #c42828;
+  --white:          #1e1a14;
+  --card:           #f0e5d8;
   --nav-bg-scroll:  rgba(253,246,238,0.98);
   --nav-bg-top:     rgba(253,246,238,0.92);
-  --shadow: rgba(60,45,30,0.14);
+  --shadow:         rgba(60,45,30,0.14);
 }
-html.light body::before { opacity: 0.015; }
+
+/* ── Dark mode palette ── */
+html.dark {
+  --bg:             #1c1e26;
+  --bg2:            #22252f;
+  --bg3:            #292c38;
+  --border:         rgba(255,255,255,0.08);
+  --border2:        rgba(255,255,255,0.15);
+  --text:           #f0ece4;
+  --body:           #b0a9a0;
+  --muted:          #6a6460;
+  --accent:         #7ec800;
+  --accent-fg:      #0f1000;
+  --gold:           #d4a017;
+  --red:            #e84040;
+  --white:          #f0ece4;
+  --card:           #272a34;
+  --nav-bg-scroll:  rgba(28,30,38,0.98);
+  --nav-bg-top:     rgba(28,30,38,0.92);
+  --shadow:         rgba(0,0,0,0.5);
+}
+
+/* ── Light mode — beige/warm palette ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
-/* Smooth theme transition on everything except animations */
-body,nav,section,div,footer,table,input,select,textarea,button,a{transition:background-color .35s ease,border-color .35s ease,color .25s ease,box-shadow .25s ease}
 body{background:var(--bg);color:var(--body);font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:9999}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.018;pointer-events:none;z-index:9999}
 .mono{font-family:'IBM Plex Mono',monospace}
 
 /* ── NAV ── */
@@ -62,7 +62,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-links{display:flex;gap:36px;list-style:none}
 .nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-family:'IBM Plex Mono',monospace;letter-spacing:0.07em;text-transform:uppercase;transition:color .2s}
 .nav-links a:hover{color:var(--text)}
-.nav-cta{background:var(--accent);color:#0c0c0a;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.03em;padding:11px 22px;text-decoration:none;transition:opacity .2s,transform .15s;white-space:nowrap}
+.nav-cta{background:var(--accent);color:var(--accent-fg);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.03em;padding:11px 22px;text-decoration:none;transition:opacity .2s,transform .15s;white-space:nowrap}
 .nav-cta:hover{opacity:.87;transform:translateY(-1px)}
 
 /* ── HERO ── */
@@ -79,7 +79,7 @@ h1 em{font-style:italic;font-family:'Fraunces',serif;color:var(--accent);font-we
 .hero-qualifier{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:var(--bg2);border:1px solid var(--border2);padding:7px 14px;margin-bottom:36px}
 .hero-qualifier span{color:var(--accent)}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
-.btn-primary{background:var(--accent);color:#0c0c0a;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.02em;padding:15px 30px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s,transform .2s;white-space:nowrap}
+.btn-primary{background:var(--accent);color:var(--accent-fg);font-family:'Syne',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.02em;padding:15px 30px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s,transform .2s;white-space:nowrap}
 .btn-primary:hover{opacity:.87;transform:translateY(-1px)}
 .btn-ghost{color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;font-size:14px;padding:15px 28px;text-decoration:none;border:1px solid var(--border2);display:inline-flex;align-items:center;gap:8px;transition:border-color .2s,color .2s}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
@@ -144,7 +144,7 @@ h2 em{font-style:italic;font-family:'Fraunces',serif;color:var(--accent);font-we
 .sd1{background:#ff5f57}.sd2{background:#febc2e}.sd3{background:#28c840}
 .sunday-title{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.06em;margin-left:8px}
 .sunday-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--bg3);overflow-x:auto}
-.s-tab{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:10px 20px;border-right:1px solid var(--border);color:var(--muted);white-space:nowrap;letter-spacing:0.04em;flex-shrink:0}
+.s-tab{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:10px 20px;border-right:1px solid var(--border);color:var(--body);white-space:nowrap;letter-spacing:0.04em;flex-shrink:0}
 .s-tab.active{color:var(--text);background:var(--bg2);border-bottom:1px solid var(--bg2);margin-bottom:-1px}
 .sunday-rows{display:flex;flex-direction:column}
 .sunday-row{display:flex;align-items:flex-start;gap:20px;padding:22px 28px;border-bottom:1px solid var(--border)}
@@ -217,7 +217,7 @@ h2 em{font-style:italic;font-family:'Fraunces',serif;color:var(--accent);font-we
 .price-features li:last-child{border-bottom:none}
 .price-features .ck{font-size:14px;flex-shrink:0;margin-top:1px}
 .price-cta{display:block;text-align:center;padding:14px 20px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-decoration:none;transition:all .2s}
-.price-cta-primary{background:var(--accent);color:#0c0c0a}
+.price-cta-primary{background:var(--accent);color:var(--accent-fg)}
 .price-cta-primary:hover{opacity:.87}
 .price-cta-ghost{border:1px solid var(--border2);color:var(--text)}
 .price-cta-ghost:hover{border-color:var(--text)}
@@ -253,7 +253,7 @@ h2 em{font-style:italic;font-family:'Fraunces',serif;color:var(--accent);font-we
 .waitlist-form input{flex:1;background:var(--bg);border:none;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;padding:14px 18px;outline:none}
 .waitlist-form input::placeholder{color:var(--muted)}
 .waitlist-form input:focus{background:var(--bg3)}
-.waitlist-form button{background:var(--accent);color:#0c0c0a;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.03em;padding:14px 24px;border:none;cursor:pointer;transition:opacity .2s;white-space:nowrap}
+.waitlist-form button{background:var(--accent);color:var(--accent-fg);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.03em;padding:14px 24px;border:none;cursor:pointer;transition:opacity .2s;white-space:nowrap}
 .waitlist-form button:hover{opacity:.87}
 .waitlist-note{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-top:14px;letter-spacing:0.04em}
 .waitlist-count{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);background:var(--bg3);border:1px solid var(--border);padding:6px 14px;margin-bottom:28px}
@@ -284,7 +284,7 @@ h2 em{font-style:italic;font-family:'Fraunces',serif;color:var(--accent);font-we
 .field select option{background:var(--bg2)}
 .field textarea{resize:none;height:96px;line-height:1.6}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.form-submit{background:var(--accent);color:#0c0c0a;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.03em;padding:17px 32px;border:none;cursor:pointer;transition:opacity .2s,transform .15s;align-self:flex-start;width:100%}
+.form-submit{background:var(--accent);color:var(--accent-fg);font-family:'Syne',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.03em;padding:17px 32px;border:none;cursor:pointer;transition:opacity .2s,transform .15s;align-self:flex-start;width:100%}
 .form-submit:hover{opacity:.87;transform:translateY(-1px)}
 .form-foot{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.03em;line-height:1.6}
 
@@ -304,7 +304,7 @@ footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify
 /* ── ANIMATIONS & INTERACTIVITY ── */
 
 /* Scroll progress bar */
-#scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:9998;width:0%;transition:width .05s linear;box-shadow:0 0 8px rgba(200,245,96,0.6)}
+#scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:9998;width:0%;transition:width .05s linear;box-shadow:0 0 6px rgba(74,124,0,0.5)}
 
 /* Hero entrance — works without JS via direct class on element */
 .hero-left>*{opacity:1;transform:none}
@@ -323,7 +323,7 @@ footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify
 .js-ready .hero-animate .hero-right{opacity:1;transform:translateX(0)}
 
 /* Cursor glow on hero */
-#cursor-glow{position:fixed;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(200,245,96,0.07) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}
+#cursor-glow{position:fixed;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(74,124,0,0.06) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}
 
 /* Stat counters */
 .stat-num{transition:color .3s}
@@ -401,10 +401,18 @@ footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify
 .success-icon{width:56px;height:56px;background:rgba(200,245,96,0.12);border:1px solid rgba(200,245,96,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:22px}
 .success-title{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--white);letter-spacing:-0.02em;margin-bottom:12px}
 .success-body{font-size:15px;color:var(--body);line-height:1.7;margin-bottom:32px}
-.success-close{background:var(--accent);color:#0c0c0a;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;padding:13px 28px;border:none;cursor:pointer;transition:opacity .2s}
+.success-close{background:var(--accent);color:var(--accent-fg);font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;padding:13px 28px;border:none;cursor:pointer;transition:opacity .2s}
 .success-close:hover{opacity:.87}
 
-/* ── RESPONSIVE ── */
+/* ── DARK MODE TOGGLE ── */
+.theme-switcher{display:flex;align-items:center;background:var(--bg3);border:1px solid var(--border2);border-radius:4px;padding:3px;gap:2px;flex-shrink:0}
+.theme-opt{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);cursor:pointer;border:none;background:transparent;transition:background .2s,color .2s;white-space:nowrap;line-height:1}
+.theme-opt:hover{color:var(--body)}
+.theme-opt.active{background:var(--bg);color:var(--text);box-shadow:0 1px 3px var(--shadow)}
+html.dark .theme-opt.active{background:var(--bg2)}
+.theme-opt-icon{font-size:12px;line-height:1}
+
+
 @media(max-width:960px){
   .hero{grid-template-columns:1fr}.hero-right{display:none}
   nav{padding:0 24px}.nav-links{display:none}
@@ -421,12 +429,6 @@ footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify
   .platforms-grid{justify-content:flex-start}
   .sunday-tabs{overflow-x:auto}
 }
-/* ── THEME TOGGLE ── */
-.theme-toggle{display:flex;align-items:center;gap:0;background:var(--bg2);border:1px solid var(--border2);border-radius:0;padding:0;cursor:pointer;flex-shrink:0;overflow:hidden;height:36px}
-.theme-toggle-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:0 13px;height:100%;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);border:none;background:transparent;cursor:pointer;transition:background .2s,color .2s;white-space:nowrap}
-.theme-toggle-btn.active{background:var(--accent);color:#1a1916}
-.theme-toggle-btn svg{width:13px;height:13px;flex-shrink:0}
-html.light .theme-toggle-btn.active{color:#1a1916}
 </style>
 </head>
 <body>
@@ -443,14 +445,12 @@ html.light .theme-toggle-btn.active{color:#1a1916}
     <li><a href="#platforms">Platforms</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:14px">
-    <div class="theme-toggle" id="theme-toggle" title="Toggle light / dark mode">
-      <button class="theme-toggle-btn active" id="btn-dark" aria-label="Dark mode">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        Dark
+    <div class="theme-switcher" role="group" aria-label="Color theme">
+      <button class="theme-opt active" id="theme-light">
+        <span class="theme-opt-icon">☀</span> Light
       </button>
-      <button class="theme-toggle-btn" id="btn-light" aria-label="Light mode">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        Light
+      <button class="theme-opt" id="theme-dark">
+        <span class="theme-opt-icon">☾</span> Dark
       </button>
     </div>
     <a href="#contact" class="nav-cta">Book free demo →</a>
@@ -1203,8 +1203,7 @@ html.light .theme-toggle-btn.active{color:#1a1916}
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-<script/>
+<script>
 /* ── SCROLL PROGRESS ── */
 const scrollBar = document.getElementById('scroll-progress');
 window.addEventListener('scroll', () => {
@@ -1329,42 +1328,36 @@ document.querySelectorAll('.s-tab').forEach(tab => {
 });
 
 /* ── NAV SCROLL TINT ── */
-const navEl = document.querySelector('nav');
+var navEl = document.querySelector('nav');
 function updateNavBg() {
-  const bg = window.scrollY > 40
-    ? getComputedStyle(document.documentElement).getPropertyValue('--nav-bg-scroll').trim()
-    : getComputedStyle(document.documentElement).getPropertyValue('--nav-bg-top').trim();
-  navEl.style.background = bg;
+  if (!navEl) return;
+  const scrolled = window.scrollY > 40;
+  const isDark = document.documentElement.classList.contains('dark');
+  if (isDark) {
+    navEl.style.background = scrolled ? 'rgba(28,30,38,0.98)' : 'rgba(28,30,38,0.92)';
+  } else {
+    navEl.style.background = scrolled ? 'rgba(253,246,238,0.98)' : 'rgba(253,246,238,0.92)';
+  }
 }
 window.addEventListener('scroll', updateNavBg, { passive: true });
 
-/* ── THEME TOGGLE ── */
-const btnDark  = document.getElementById('btn-dark');
-const btnLight = document.getElementById('btn-light');
-const htmlEl   = document.documentElement;
-
-function applyTheme(theme) {
-  if (theme === 'light') {
-    htmlEl.classList.add('light');
-    btnLight.classList.add('active');
-    btnDark.classList.remove('active');
-  } else {
-    htmlEl.classList.remove('light');
-    btnDark.classList.add('active');
-    btnLight.classList.remove('active');
-  }
-  localStorage.setItem('7captur-theme', theme);
-  // Let CSS variable settle then update nav bg
-  requestAnimationFrame(updateNavBg);
+/* ── DARK MODE TOGGLE ── */
+function setTheme(mode) {
+  const isDark = mode === 'dark';
+  document.documentElement.classList.toggle('dark', isDark);
+  document.getElementById('theme-light').classList.toggle('active', !isDark);
+  document.getElementById('theme-dark').classList.toggle('active', isDark);
+  try { localStorage.setItem('theme', mode); } catch(e) {}
+  updateNavBg();
 }
-
-btnDark.addEventListener('click',  () => applyTheme('dark'));
-btnLight.addEventListener('click', () => applyTheme('light'));
-
+document.getElementById('theme-light').addEventListener('click', function() { setTheme('light'); });
+document.getElementById('theme-dark').addEventListener('click', function() { setTheme('dark'); });
 // Restore saved preference on load
-const savedTheme = localStorage.getItem('7captur-theme');
-if (savedTheme === 'light') applyTheme('light');
-else applyTheme('dark');
+(function() {
+  let saved = 'light';
+  try { saved = localStorage.getItem('theme') || 'light'; } catch(e) {}
+  if (saved === 'dark') setTheme('dark');
+})();
 
 /* ── PRIVACY MODAL ── */
 const privacyOverlay = document.getElementById('privacy-overlay');
