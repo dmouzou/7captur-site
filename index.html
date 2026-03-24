@@ -413,6 +413,52 @@ html.dark .theme-opt.active{background:var(--bg2)}
 .theme-opt-icon{font-size:12px;line-height:1}
 
 
+
+/* ── LANGUAGE SWITCHER ── */
+.lang-switcher{display:flex;align-items:center;background:var(--bg3);border:1px solid var(--border2);border-radius:4px;padding:3px;gap:2px;flex-shrink:0}
+.lang-opt{display:flex;align-items:center;padding:5px 10px;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;border:none;background:transparent;transition:background .2s,color .2s;white-space:nowrap;line-height:1;font-weight:500}
+.lang-opt:hover{color:var(--body)}
+.lang-opt.active{background:var(--bg);color:var(--text);box-shadow:0 1px 3px var(--shadow)}
+html.dark .lang-opt.active{background:var(--bg2)}
+
+/* ── MOBILE FIXES ── */
+/* Compare table: scrollable on mobile */
+.compare-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.compare-table{min-width:560px}
+
+/* Extra small screens (<480px) */
+@media(max-width:480px){
+  .steps{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .why-item:nth-child(3n){border-right:1px solid var(--border)}
+  .why-item:nth-last-child(-n+3){border-bottom:1px solid var(--border)}
+  .why-item{border-right:none!important;border-bottom:1px solid var(--border)!important}
+  .why-item:last-child{border-bottom:none!important}
+  .hero-actions{flex-direction:column}
+  .btn-primary,.btn-ghost{width:100%;justify-content:center;text-align:center}
+  .demo-hero-header{flex-wrap:wrap;gap:8px}
+  .hero-stats{flex-direction:column;gap:0}
+  .hero-stat{border-right:none;padding-right:0;margin-right:0;border-bottom:1px solid var(--border);padding-bottom:16px;padding-top:16px}
+  .hero-stat:first-child{padding-top:0}
+  .hero-stat:last-child{border-bottom:none;padding-bottom:0}
+  .step:last-child{border-bottom:none}
+  .steps .step{border-right:none;border-bottom:1px solid var(--border)}
+  h2{font-size:clamp(24px,7vw,38px)}
+  .hero-qualifier{font-size:10px}
+  .sunday-wrap{margin-top:32px}
+}
+
+/* Nav controls: shrink on mobile */
+@media(max-width:960px){
+  .theme-label,.lang-label{display:none}
+  .theme-opt,.lang-opt{padding:6px 9px}
+  .nav-cta{font-size:11px;padding:9px 14px;letter-spacing:0.01em}
+  .theme-switcher,.lang-switcher{padding:2px;gap:1px}
+}
+@media(max-width:480px){
+  .nav-cta{display:none}
+}
+
 @media(max-width:960px){
   .hero{grid-template-columns:1fr}.hero-right{display:none}
   nav{padding:0 24px}.nav-links{display:none}
@@ -439,21 +485,25 @@ html.dark .theme-opt.active{background:var(--bg2)}
 <nav>
   <a href="#" class="logo">7Captur</a>
   <ul class="nav-links">
-    <li><a href="#how">How it works</a></li>
-    <li><a href="#demo">Live demo</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#platforms">Platforms</a></li>
+    <li><a href="#how" data-i18n="nav.how">How it works</a></li>
+    <li><a href="#demo" data-i18n="nav.demo">Live demo</a></li>
+    <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
+    <li><a href="#platforms" data-i18n="nav.platforms">Platforms</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:14px">
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="lang-switcher" role="group" aria-label="Language">
+      <button class="lang-opt active" id="lang-en">EN</button>
+      <button class="lang-opt" id="lang-fr">FR</button>
+    </div>
     <div class="theme-switcher" role="group" aria-label="Color theme">
       <button class="theme-opt active" id="theme-light">
-        <span class="theme-opt-icon">☀</span> Light
+        <span class="theme-opt-icon">☀</span><span class="theme-label" data-i18n="theme.light"> Light</span>
       </button>
       <button class="theme-opt" id="theme-dark">
-        <span class="theme-opt-icon">☾</span> Dark
+        <span class="theme-opt-icon">☾</span><span class="theme-label" data-i18n="theme.dark"> Dark</span>
       </button>
     </div>
-    <a href="#contact" class="nav-cta">Book free demo →</a>
+    <a href="#contact" class="nav-cta" data-i18n="nav.cta">Book free demo →</a>
   </div>
 </nav>
 
@@ -462,79 +512,77 @@ html.dark .theme-opt.active{background:var(--bg2)}
   <div class="hero-left">
     <div class="hero-eyebrow">
       <div class="eyebrow-dot"></div>
-      <span class="eyebrow-text mono">AI Decision Intelligence · E-Commerce</span>
+      <span class="eyebrow-text mono" data-i18n="hero.eyebrow">AI Decision Intelligence · E-Commerce</span>
     </div>
 
-    <h1>Finally know <em>exactly</em> which ads are losing you money.</h1>
+    <h1 data-i18n-html="hero.h1">Finally know <em>exactly</em> which ads are losing you money.</h1>
 
     <div class="hero-qualifier mono">
-      Built for stores doing <span>$8k – $25k / mo</span>
+      <span data-i18n-html="hero.qualifier">Built for stores doing <span>$8k – $25k / mo</span></span>
     </div>
 
     <p class="hero-sub">
-      Your ad platform shows you ROAS. But after your platform fees, returns, and cost of goods — <strong>half of what looks profitable is actually breaking even or losing money.</strong>
-      <br><br>
-      Every Monday morning, we send you three plain-English decisions based on your real numbers. No new dashboards. No analysts. Just answers.
+      <span data-i18n-html="hero.sub">Your ad platform shows you ROAS. But after your platform fees, returns, and cost of goods — <strong>half of what looks profitable is actually breaking even or losing money.</strong><br><br>Every Monday morning, we send you three plain-English decisions based on your real numbers. No new dashboards. No analysts. Just answers.</span>
     </p>
 
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Book a free 20-min demo →</a>
-      <a href="#sunday" class="btn-ghost">Sound familiar? ↓</a>
+      <a href="#contact" class="btn-primary" data-i18n="hero.cta1">Book a free 20-min demo →</a>
+      <a href="#sunday" class="btn-ghost" data-i18n="hero.cta2">Sound familiar? ↓</a>
     </div>
 
     <div class="hero-stats">
       <div class="hero-stat">
         <span class="stat-num">3</span>
-        <span class="stat-label mono">Decisions in your inbox every Monday</span>
+        <span class="stat-label mono" data-i18n="hero.stat1">Decisions in your inbox every Monday</span>
       </div>
       <div class="hero-stat">
         <span class="stat-num">&lt;7d</span>
-        <span class="stat-label mono">From sign-up to first report</span>
+        <span class="stat-label mono" data-i18n="hero.stat2">From sign-up to first report</span>
       </div>
       <div class="hero-stat">
         <span class="stat-num">0</span>
-        <span class="stat-label mono">New dashboards to log into</span>
+        <span class="stat-label mono" data-i18n="hero.stat3">New dashboards to log into</span>
       </div>
     </div>
   </div>
 
   <div class="hero-right">
-    <div class="report-label">Sample weekly intelligence report</div>
+    <div class="report-label" data-i18n="report.label">Sample weekly intelligence report</div>
     <div class="report-card">
       <div class="report-header">
         <div>
           <div class="report-store">Luminary Candle Co.</div>
-          <div class="report-week mono">Week 22 · May 26 – Jun 1, 2025</div>
+          <div class="report-week mono" data-i18n="report.week">Week 22 · May 26 – Jun 1, 2025</div>
           <span class="report-badge">Shopify · Meta Ads · Klaviyo</span>
         </div>
         <div class="report-kpis">
           <div class="kpi">
             <span class="kpi-val">$14.2k</span>
             <span class="kpi-up">↑ 12% wk/wk</span>
-            <span class="kpi-name">Revenue</span>
+            <span class="kpi-name" data-i18n="report.revenue">Revenue</span>
           </div>
           <div class="kpi">
             <span class="kpi-val">4.1%</span>
             <span class="kpi-down">↓ 2.1pts</span>
-            <span class="kpi-name">Net margin</span>
+            <span class="kpi-name" data-i18n="report.netMargin">Net margin</span>
           </div>
         </div>
       </div>
-      <div class="decisions-label mono">This week's decisions</div>
+      <div class="decisions-label mono" data-i18n="report.decisionsLabel">This week's decisions</div>
       <div class="decision-item">
         <span class="d-num">01</span>
-        <span class="d-text"><strong>Pause Meta campaign #4182 today.</strong><span class="d-tag tag-warn">Losing $0.40/order</span><br>Platform ROAS shows 1.8× — but after COGS, fees, and returns, true ROAS is 0.9×. This campaign is losing money on every order.</span>
+        <span class="d-text" data-i18n-html="report.d1"><strong>Pause Meta campaign #4182 today.</strong><span class="d-tag tag-warn">Losing $0.40/order</span><br>Platform ROAS shows 1.8× — but after COGS, fees, and returns, true ROAS is 0.9×. This campaign is losing money on every order.</span>
       </div>
       <div class="decision-item">
         <span class="d-num">02</span>
-        <span class="d-text"><strong>Scale campaign #4178 — it's your only genuinely profitable ad.</strong><span class="d-tag tag-action">True ROAS 2.4×</span><br>After all deductions, this campaign earns $1.40 per dollar spent. Budget it up by 30% this week.</span>
+        <span class="d-text" data-i18n-html="report.d2"><strong>Scale campaign #4178 — it's your only genuinely profitable ad.</strong><span class="d-tag tag-action">True ROAS 2.4×</span><br>After all deductions, this campaign earns $1.40 per dollar spent. Budget it up by 30% this week.</span>
       </div>
       <div class="decision-item">
         <span class="d-num">03</span>
-        <span class="d-text"><strong>Margin drop is a fee issue, not pricing.</strong><span class="d-tag tag-info">Save $180/mo</span><br>The 2.1pt dip traces to payment processing. Switching to an annual plan saves ~$180/mo — no price changes needed.</span>
+        <span class="d-text" data-i18n-html="report.d3"><strong>Margin drop is a fee issue, not pricing.</strong><span class="d-tag tag-info">Save $180/mo</span><br>The 2.1pt dip traces to payment processing. Switching to an annual plan saves ~$180/mo — no price changes needed.</span>
       </div>
     </div>
-    <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:14px;letter-spacing:0.04em;">↑ Real report format. Data anonymised for illustration.</p>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:14px;letter-spacing:0.04em;" data-i18n="report.footnote">↑ Real report format. Data anonymised for illustration.</p>
   </div>
 </section>
 
@@ -563,9 +611,9 @@ html.dark .theme-opt.active{background:var(--bg2)}
 <!-- SUNDAY NIGHT SECTION -->
 <section class="section" id="sunday">
   <div class="section-inner">
-    <div class="section-eyebrow reveal">The Sunday Night Reality</div>
-    <h2 class="reveal">You already have the data.<br>That's the <em>problem.</em></h2>
-    <p class="section-sub reveal">If this is your Sunday night, you don't need more data. You need someone to tell you what to do with it.</p>
+    <div class="section-eyebrow reveal" data-i18n="sunday.eyebrow">The Sunday Night Reality</div>
+    <h2 class="reveal" data-i18n-html="sunday.h2">You already have the data.<br>That's the <em>problem.</em></h2>
+    <p class="section-sub reveal" data-i18n="sunday.sub">If this is your Sunday night, you don't need more data. You need someone to tell you what to do with it.</p>
 
     <div class="sunday-wrap reveal">
       <div class="sunday-header">
@@ -574,14 +622,14 @@ html.dark .theme-opt.active{background:var(--bg2)}
           <div class="sunday-dot sd2"></div>
           <div class="sunday-dot sd3"></div>
         </div>
-        <span class="sunday-title mono">Sunday, 9:47pm — preparing for the week</span>
+        <span class="sunday-title mono" data-i18n="sunday.windowTitle">Sunday, 9:47pm — preparing for the week</span>
       </div>
       <div class="sunday-tabs">
-        <div class="s-tab active mono" data-tab="meta">Meta Ads Manager</div>
-        <div class="s-tab mono" data-tab="shopify">Shopify Analytics</div>
-        <div class="s-tab mono" data-tab="klaviyo">Klaviyo Dashboard</div>
-        <div class="s-tab mono" data-tab="google">Google Ads</div>
-        <div class="s-tab mono" data-tab="sheet">Spreadsheet (COGS)</div>
+        <div class="s-tab active mono" data-tab="meta" data-i18n="sunday.tab.meta">Meta Ads Manager</div>
+        <div class="s-tab mono" data-tab="shopify" data-i18n="sunday.tab.shopify">Shopify Analytics</div>
+        <div class="s-tab mono" data-tab="klaviyo" data-i18n="sunday.tab.klaviyo">Klaviyo Dashboard</div>
+        <div class="s-tab mono" data-tab="google" data-i18n="sunday.tab.google">Google Ads</div>
+        <div class="s-tab mono" data-tab="sheet" data-i18n="sunday.tab.sheet">Spreadsheet (COGS)</div>
       </div>
       <!-- Meta tab -->
       <div class="sunday-rows sunday-content-pane active" data-pane="meta">
@@ -696,18 +744,18 @@ html.dark .theme-opt.active{background:var(--bg2)}
 <!-- DEMO CENTREPIECE -->
 <section class="section alt-bg" id="demo">
   <div class="section-inner">
-    <div class="section-eyebrow reveal">The Live Demo</div>
-    <h2 class="reveal">We show you your numbers<br>before you pay a <em>single dollar.</em></h2>
-    <p class="section-sub reveal">Connect your store, we run a real report, and you see exactly what you'd receive every Monday — including which campaigns are losing you money right now. If you don't see at least one decision you'd act on immediately, we tell you it's not the right fit and you walk away. No invoice.</p>
+    <div class="section-eyebrow reveal" data-i18n="demo.eyebrow">The Live Demo</div>
+    <h2 class="reveal" data-i18n-html="demo.h2">We show you your numbers<br>before you pay a <em>single dollar.</em></h2>
+    <p class="section-sub reveal" data-i18n="demo.sub">Connect your store, we run a real report, and you see exactly what you'd receive every Monday — including which campaigns are losing you money right now. If you don't see at least one decision you'd act on immediately, we tell you it's not the right fit and you walk away. No invoice.</p>
 
     <div class="demo-hero reveal">
       <div class="demo-hero-header">
         <div class="demo-hero-label"><span>// </span>Sample report — Luminary Candle Co. · Week 22</div>
-        <div class="demo-live-badge"><div class="live-dot"></div> Real data format</div>
+        <div class="demo-live-badge"><div class="live-dot"></div> <span data-i18n="demo.realDataFormat">Real data format</span></div>
       </div>
       <div class="demo-hero-body">
         <div class="demo-col">
-          <div class="demo-col-label mono">Ad profitability breakdown — this week</div>
+          <div class="demo-col-label mono" data-i18n="demo.col1Label">Ad profitability breakdown — this week</div>
           <div class="demo-metric-row">
             <div>
               <div class="demo-metric-name">Campaign #4182 — "Summer Collection"</div>
@@ -749,7 +797,7 @@ html.dark .theme-opt.active{background:var(--bg2)}
           </div>
         </div>
         <div class="demo-col">
-          <div class="demo-col-label mono">Margin analysis — week over week</div>
+          <div class="demo-col-label mono" data-i18n="demo.col2Label">Margin analysis — week over week</div>
           <div class="demo-metric-row">
             <div class="demo-metric-name">Gross revenue</div>
             <div><div class="demo-metric-val">$14,200</div><div class="demo-metric-note">↑ 12% vs last week</div></div>
@@ -773,8 +821,8 @@ html.dark .theme-opt.active{background:var(--bg2)}
         </div>
       </div>
       <div class="demo-cta-row">
-        <p class="demo-cta-text"><strong>Want to see this with your actual store's numbers?</strong> That's exactly what the free demo is.</p>
-        <a href="#contact" class="btn-primary" style="flex-shrink:0">Book the free demo →</a>
+        <p class="demo-cta-text" data-i18n-html="demo.ctaText"><strong>Want to see this with your actual store's numbers?</strong> That's exactly what the free demo is.</p>
+        <a href="#contact" class="btn-primary" style="flex-shrink:0" data-i18n="demo.ctaBtn">Book the free demo →</a>
       </div>
     </div>
   </div>
@@ -783,9 +831,9 @@ html.dark .theme-opt.active{background:var(--bg2)}
 <!-- COMPARE: VS DOING IT YOURSELF -->
 <section class="section" id="compare">
   <div class="section-inner">
-    <div class="section-eyebrow reveal">The Alternative</div>
-    <h2 class="reveal">What you're doing right now<br>vs. what <em>Monday could look like.</em></h2>
-    <p class="section-sub reveal">No comparison to other tools. Just an honest look at the current situation — and what changes.</p>
+    <div class="section-eyebrow reveal" data-i18n="compare.eyebrow">The Alternative</div>
+    <h2 class="reveal" data-i18n-html="compare.h2">What you're doing right now<br>vs. what <em>Monday could look like.</em></h2>
+    <p class="section-sub reveal" data-i18n="compare.sub">No comparison to other tools. Just an honest look at the current situation — and what changes.</p>
 
     <div class="compare-wrap reveal">
       <table class="compare-table">
@@ -836,31 +884,31 @@ html.dark .theme-opt.active{background:var(--bg2)}
 <!-- HOW IT WORKS -->
 <section class="section alt-bg" id="how">
   <div class="section-inner">
-    <div class="section-eyebrow reveal">How It Works</div>
-    <h2 class="reveal">Four steps. Fully automated.<br>First report in <em>under a week.</em></h2>
-    <p class="section-sub reveal">We build a pipeline that connects your store, ad accounts, and email platform, runs the analysis, and delivers your report — without you touching a thing after onboarding.</p>
+    <div class="section-eyebrow reveal" data-i18n="how.eyebrow">How It Works</div>
+    <h2 class="reveal" data-i18n-html="how.h2">Four steps. Fully automated.<br>First report in <em>under a week.</em></h2>
+    <p class="section-sub reveal" data-i18n="how.sub">We build a pipeline that connects your store, ad accounts, and email platform, runs the analysis, and delivers your report — without you touching a thing after onboarding.</p>
     <div class="steps reveal">
       <div class="step">
         <div class="step-num">01</div>
-        <div class="step-title">We connect your stack</div>
+        <div class="step-title" data-i18n="how.step1.title">We connect your stack</div>
         <p class="step-body">Your store platform, ad accounts, and email tool are connected via API during a single onboarding session. No CSV exports, no manual uploads — ever.</p>
         <div class="step-tags"><span class="tech-tag">Shopify / WooCommerce</span><span class="tech-tag">n8n</span></div>
       </div>
       <div class="step">
         <div class="step-num">02</div>
-        <div class="step-title">AI does the analysis</div>
+        <div class="step-title" data-i18n="how.step2.title">AI does the analysis</div>
         <p class="step-body">Every week, AI calculates your true ad profitability after COGS, fees, and returns — then identifies anomalies, margin shifts, and actionable opportunities across all your data.</p>
         <div class="step-tags"><span class="tech-tag">Claude AI</span><span class="tech-tag">Custom logic</span></div>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <div class="step-title">3 decisions in your inbox</div>
+        <div class="step-title" data-i18n="how.step3.title">3 decisions in your inbox</div>
         <p class="step-body">Every Monday before 9am: three plain-English decisions with the data and reasoning behind each one. Not graphs. Not dashboards. Just what to do and why.</p>
         <div class="step-tags"><span class="tech-tag">Email report</span><span class="tech-tag">Every Monday</span></div>
       </div>
       <div class="step">
         <div class="step-num">04</div>
-        <div class="step-title">Sharpens every month</div>
+        <div class="step-title" data-i18n="how.step4.title">Sharpens every month</div>
         <p class="step-body">A monthly strategy call lets us refine the model to your store's specific context. The decisions get more precise over time. Month three is measurably better than month one.</p>
         <div class="step-tags"><span class="tech-tag">Monthly call</span><span class="tech-tag">Ongoing refinement</span></div>
       </div>
@@ -871,8 +919,8 @@ html.dark .theme-opt.active{background:var(--bg2)}
 <!-- PRICING -->
 <section class="section" id="pricing">
   <div class="section-inner">
-    <div class="section-eyebrow reveal">Pricing</div>
-    <h2 class="reveal">Simple. No setup fee surprise.<br><em>Cancel anytime.</em></h2>
+    <div class="section-eyebrow reveal" data-i18n="pricing.eyebrow">Pricing</div>
+    <h2 class="reveal" data-i18n-html="pricing.h2">Simple. No setup fee surprise.<br><em>Cancel anytime.</em></h2>
     <p class="section-sub reveal">The setup is absorbed into your first month on Starter — because your results matter more to us right now than setup revenue. You own everything we build. If you ever leave, the whole system leaves with you. Nothing gets switched off.</p>
 
     <div class="pricing-grid reveal">
@@ -881,7 +929,7 @@ html.dark .theme-opt.active{background:var(--bg2)}
       <div class="price-card">
         <div class="price-tier mono">Starter</div>
         <div class="price-name">Insight Report</div>
-        <p class="price-desc">For stores doing $8k–$25k/mo ready to stop guessing which ads are profitable.</p>
+        <p class="price-desc" data-i18n="pricing.starter.desc">For stores doing $8k–$25k/mo ready to stop guessing which ads are profitable.</p>
         <div class="price-main">
           <span class="price-amount">$247</span>
           <span class="price-period mono">/month</span>
@@ -903,12 +951,12 @@ html.dark .theme-opt.active{background:var(--bg2)}
         <div class="price-badge">Most popular</div>
         <div class="price-tier mono">Growth</div>
         <div class="price-name">Decision Engine</div>
-        <p class="price-desc">For stores doing $25k–$200k/mo making multiple ad and operations decisions weekly.</p>
+        <p class="price-desc" data-i18n="pricing.growth.desc">For stores doing $25k–$200k/mo making multiple ad and operations decisions weekly.</p>
         <div class="price-main">
           <span class="price-amount">$597</span>
           <span class="price-period mono">/month</span>
         </div>
-        <div class="price-note-small">One-time setup: <strong>$1,497</strong> — then $597/mo.<br>Includes full stack connection.</div>
+        <div class="price-note-small">One-time setup: <strong>$1497</strong> — then $597/mo.<br>Includes full stack connection.</div>
         <ul class="price-features">
           <li><span class="ck">✓</span> All data sources connected</li>
           <li><span class="ck">✓</span> True ad profitability across all campaigns</li>
@@ -924,7 +972,7 @@ html.dark .theme-opt.active{background:var(--bg2)}
       <div class="price-card">
         <div class="price-tier mono">Scale</div>
         <div class="price-name">Data Partner</div>
-        <p class="price-desc">For 7-figure stores that need a dedicated data intelligence partner, not a report.</p>
+        <p class="price-desc" data-i18n="pricing.scale.desc">For 7-figure stores that need a dedicated data intelligence partner, not a report.</p>
         <div class="price-main">
           <span class="price-amount">$1,997</span>
           <span class="price-period mono">/month</span>
@@ -942,16 +990,16 @@ html.dark .theme-opt.active{background:var(--bg2)}
       </div>
     </div>
 
-    <p class="pricing-footer-note reveal">All plans include a free demo with your real store data before you commit.<br>You own everything we build — if you ever leave, the whole system leaves with you. Nothing gets switched off.</p>
+    <p class="pricing-footer-note reveal" data-i18n-html="pricing.footerNote">All plans include a free demo with your real store data before you commit.<br>You own everything we build — if you ever leave, the whole system leaves with you. Nothing gets switched off.</p>
   </div>
 </section>
 
 <!-- PLATFORMS -->
 <section class="section alt-bg" id="platforms">
   <div class="section-inner">
-    <div class="section-eyebrow reveal">Platforms</div>
-    <h2 class="reveal">Works with your stack.<br><em>More added on request.</em></h2>
-    <p class="section-sub reveal">Currently live on the most common e-commerce platforms. Don't see yours? Request it — we prioritise integrations by demand.</p>
+    <div class="section-eyebrow reveal" data-i18n="platforms.eyebrow">Platforms</div>
+    <h2 class="reveal" data-i18n-html="platforms.h2">Works with your stack.<br><em>More added on request.</em></h2>
+    <p class="section-sub reveal" data-i18n="platforms.sub">Currently live on the most common e-commerce platforms. Don't see yours? Request it — we prioritise integrations by demand.</p>
     <div class="platforms-grid reveal">
       <div class="platforms-row-label mono">Store platforms</div>
       <div class="platform-card">
@@ -1013,8 +1061,8 @@ html.dark .theme-opt.active{background:var(--bg2)}
 <!-- WHY 7CAPTUR -->
 <section class="section">
   <div class="section-inner">
-    <div class="section-eyebrow reveal">Why 7Captur</div>
-    <h2 class="reveal">Built for one problem,<br><em>obsessively.</em></h2>
+    <div class="section-eyebrow reveal" data-i18n="why.eyebrow">Why 7Captur</div>
+    <h2 class="reveal" data-i18n-html="why.h2">Built for one problem,<br><em>obsessively.</em></h2>
     <div class="why-grid reveal">
       <div class="why-item">
         <span class="why-num mono">01 —</span>
@@ -1053,9 +1101,9 @@ html.dark .theme-opt.active{background:var(--bg2)}
 <!-- WAITLIST -->
 <section class="waitlist-section" id="waitlist">
   <div class="waitlist-inner">
-    <div class="section-eyebrow reveal" style="justify-content:center">Waitlist</div>
-    <h2 class="reveal" style="text-align:center">Not ready yet?<br>Get notified when we <em>open spots.</em></h2>
-    <p class="reveal">We're working with a small number of stores to refine the product. Join the waitlist and we'll reach out when a spot opens — or when we launch something new.</p>
+    <div class="section-eyebrow reveal" style="justify-content:center" data-i18n="waitlist.eyebrow">Waitlist</div>
+    <h2 class="reveal" style="text-align:center" data-i18n-html="waitlist.h2">Not ready yet?<br>Get notified when we <em>open spots.</em></h2>
+    <p class="reveal" data-i18n="waitlist.sub">We're working with a small number of stores to refine the product. Join the waitlist and we'll reach out when a spot opens — or when we launch something new.</p>
 
     <div class="waitlist-count reveal">
       <span>⚡</span> Early access list — limited spots per month
@@ -1063,9 +1111,9 @@ html.dark .theme-opt.active{background:var(--bg2)}
 
     <div class="waitlist-form reveal">
       <input type="email" id="waitlist-email" placeholder="your@store.com" />
-      <button id="waitlist-submit">Join waitlist →</button>
+      <button id="waitlist-submit" data-i18n="waitlist.btn">Join waitlist →</button>
     </div>
-    <p class="waitlist-note mono">No spam. One email when spots open. That's it.</p>
+    <p class="waitlist-note mono" data-i18n="waitlist.note">No spam. One email when spots open. That's it.</p>
   </div>
 </section>
 
@@ -1073,13 +1121,13 @@ html.dark .theme-opt.active{background:var(--bg2)}
 <section class="contact-section" id="contact">
   <div class="contact-inner">
     <div class="contact-left">
-      <div class="section-eyebrow">Book Your Free Demo</div>
-      <h2>See your real<br>numbers. <em>Then decide.</em></h2>
-      <p>We connect to your store data, run a real report, and show you exactly what you'd receive every Monday morning — including which ads are losing you money right now. No pitch. No pressure. Just your actual numbers.</p>
+      <div class="section-eyebrow" data-i18n="contact.eyebrow">Book Your Free Demo</div>
+      <h2 data-i18n-html="contact.h2">See your real<br>numbers. <em>Then decide.</em></h2>
+      <p data-i18n="contact.sub">We connect to your store data, run a real report, and show you exactly what you'd receive every Monday morning — including which ads are losing you money right now. No pitch. No pressure. Just your actual numbers.</p>
 
       <div class="demo-promise">
-        <div class="demo-promise-title">⚡ The demo guarantee</div>
-        <p>If you don't see at least one decision you'd act on immediately, we tell you honestly it's not the right fit. We'd rather lose a sale than waste your time.</p>
+        <div class="demo-promise-title" data-i18n="contact.guaranteeTitle">⚡ The demo guarantee</div>
+        <p data-i18n="contact.guaranteeText">If you don't see at least one decision you'd act on immediately, we tell you honestly it's not the right fit. We'd rather lose a sale than waste your time.</p>
       </div>
 
       <div class="demo-steps">
@@ -1097,20 +1145,20 @@ html.dark .theme-opt.active{background:var(--bg2)}
         </div>
       </div>
 
-      <p class="contact-sub-note mono">We reply within 24 hours · No spam · No sales scripts</p>
+      <p class="contact-sub-note mono" data-i18n="contact.replyNote">We reply within 24 hours · No spam · No sales scripts</p>
     </div>
 
     <div class="contact-right">
       <div class="contact-form">
         <div class="form-row">
-          <div class="field"><label>Your name</label><input type="text" id="f-name" placeholder="Alex Chen" /></div>
-          <div class="field"><label>Email address</label><input type="email" id="f-email" placeholder="alex@yourstore.com" /></div>
+          <div class="field"><label data-i18n="contact.form.name">Your name</label><input type="text" id="f-name" placeholder="Alex Chen" /></div>
+          <div class="field"><label data-i18n="contact.form.email">Email address</label><input type="email" id="f-email" placeholder="alex@yourstore.com" /></div>
         </div>
-        <div class="field"><label>Your store URL</label><input type="text" id="f-store" placeholder="yourstore.com" /></div>
+        <div class="field"><label data-i18n="contact.form.store">Your store URL</label><input type="text" id="f-store" placeholder="yourstore.com" /></div>
         <div class="field">
-          <label>E-commerce platform</label>
+          <label data-i18n="contact.form.platform">E-commerce platform</label>
           <select id="f-platform">
-            <option value="" disabled selected>Select your platform</option>
+            <option value="" disabled selected data-i18n="contact.form.platformPlaceholder">Select your platform</option>
             <option>Shopify</option>
             <option>WooCommerce</option>
             <option>BigCommerce</option>
@@ -1120,18 +1168,18 @@ html.dark .theme-opt.active{background:var(--bg2)}
           </select>
         </div>
         <div class="field">
-          <label>Monthly revenue (approx.)</label>
+          <label data-i18n="contact.form.revenue">Monthly revenue (approx.)</label>
           <select id="f-revenue">
-            <option value="" disabled selected>Select a range</option>
+            <option value="" disabled selected data-i18n="contact.form.revenuePlaceholder">Select a range</option>
             <option>$8k – $25k/mo</option>
             <option>$25k – $100k/mo</option>
             <option>$100k – $500k/mo</option>
             <option>$500k+/mo</option>
           </select>
         </div>
-        <div class="field"><label>Biggest data headache right now</label><textarea id="f-headache" placeholder="e.g. I can't tell which ad campaigns are actually profitable after all my costs…"></textarea></div>
-        <button class="form-submit" id="form-submit-btn">Book my free demo →</button>
-        <p class="form-foot mono">Live in under a week. First report in your inbox within 7 days of onboarding.</p>
+        <div class="field"><label data-i18n="contact.form.headache">Biggest data headache right now</label><textarea id="f-headache" placeholder="e.g. I can't tell which ad campaigns are actually profitable after all my costs…"></textarea></div>
+        <button class="form-submit" id="form-submit-btn" data-i18n="contact.form.submit">Book my free demo →</button>
+        <p class="form-foot mono" data-i18n="contact.form.foot">Live in under a week. First report in your inbox within 7 days of onboarding.</p>
       </div>
     </div>
   </div>
@@ -1141,22 +1189,22 @@ html.dark .theme-opt.active{background:var(--bg2)}
 <footer>
   <a href="#" class="footer-logo">7Captur</a>
   <ul class="footer-links">
-    <li><a href="#sunday">The problem</a></li>
-    <li><a href="#demo">Live demo</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#platforms">Platforms</a></li>
-    <li><a href="#contact">Book demo</a></li>
-    <li><a href="#" id="privacy-link">Privacy</a></li>
+    <li><a href="#sunday" data-i18n="footer.problem">The problem</a></li>
+    <li><a href="#demo" data-i18n="nav.demo">Live demo</a></li>
+    <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
+    <li><a href="#platforms" data-i18n="nav.platforms">Platforms</a></li>
+    <li><a href="#contact" data-i18n="footer.bookDemo">Book demo</a></li>
+    <li><a href="#" id="privacy-link" data-i18n="footer.privacy">Privacy</a></li>
   </ul>
-  <span class="footer-copy mono">© 2026 7Captur</span>
+  <span class="footer-copy mono" data-i18n="footer.copy">© 2026 7Captur</span>
 </footer>
 
 <!-- PRIVACY MODAL -->
 <div class="modal-overlay" id="privacy-overlay">
   <div class="modal-box">
     <div class="modal-sticky-header">
-      <span class="modal-title">Privacy Policy</span>
-      <button class="modal-close-btn" id="privacy-close">✕ Close</button>
+      <span class="modal-title" data-i18n="privacy.title">Privacy Policy</span>
+      <button class="modal-close-btn" id="privacy-close" data-i18n="modal.close">✕ Close</button>
     </div>
     <div class="modal-body">
       <p class="modal-meta mono">Last updated: March 2026</p>
@@ -1187,9 +1235,9 @@ html.dark .theme-opt.active{background:var(--bg2)}
 <div class="success-overlay" id="success-overlay">
   <div class="success-box">
     <div class="success-icon">✓</div>
-    <div class="success-title">Demo request received.</div>
-    <p class="success-body">We'll review your details and reach out within 24 hours to book your free 20-minute demo. Check your inbox — we reply fast.</p>
-    <button class="success-close" id="success-close">Back to site</button>
+    <div class="success-title" data-i18n="success.demo.title">Demo request received.</div>
+    <p class="success-body" data-i18n="success.demo.body">We'll review your details and reach out within 24 hours to book your free 20-minute demo. Check your inbox — we reply fast.</p>
+    <button class="success-close" id="success-close" data-i18n="modal.backToSite">Back to site</button>
   </div>
 </div>
 
@@ -1197,9 +1245,9 @@ html.dark .theme-opt.active{background:var(--bg2)}
 <div class="success-overlay" id="waitlist-success-overlay">
   <div class="success-box">
     <div class="success-icon">✓</div>
-    <div class="success-title">You're on the list.</div>
-    <p class="success-body">We'll email you as soon as a spot opens up. One email. No spam.</p>
-    <button class="success-close" id="waitlist-success-close">Back to site</button>
+    <div class="success-title" data-i18n="success.waitlist.title">You're on the list.</div>
+    <p class="success-body" data-i18n="success.waitlist.body">We'll email you as soon as a spot opens up. One email. No spam.</p>
+    <button class="success-close" id="waitlist-success-close" data-i18n="modal.backToSite">Back to site</button>
   </div>
 </div>
 
@@ -1383,8 +1431,8 @@ document.getElementById('waitlist-success-close').addEventListener('click', () =
 /* ── FORMSPREE CONFIG ──
    Replace YOUR_DEMO_FORM_ID and YOUR_WAITLIST_FORM_ID with your IDs from formspree.io
 */
-const FORMSPREE_DEMO     = 'https://formspree.io/f/xkoqapnn';
-const FORMSPREE_WAITLIST = 'https://formspree.io/f/mreyneln';
+const FORMSPREE_DEMO     = 'https://formspree.io/f/YOUR_DEMO_FORM_ID';
+const FORMSPREE_WAITLIST = 'https://formspree.io/f/YOUR_WAITLIST_FORM_ID';
 
 /* ── DEMO FORM SUBMIT ── */
 document.getElementById('form-submit-btn').addEventListener('click', async () => {
@@ -1443,6 +1491,216 @@ function showFormError(id, msg) {
   btn.insertAdjacentElement('beforebegin', err);
 }
 function removeFormError(id) { const el = document.getElementById(id); if (el) el.remove(); }
+
+/* ── INTERNATIONALISATION ── */
+const translations = {
+  en: {
+    'theme.light': ' Light', 'theme.dark': ' Dark',
+    'nav.how': 'How it works', 'nav.demo': 'Live demo',
+    'nav.pricing': 'Pricing', 'nav.platforms': 'Platforms',
+    'nav.cta': 'Book free demo \u2192',
+    'hero.eyebrow': 'AI Decision Intelligence \xb7 E-Commerce',
+    'hero.h1': 'Finally know <em>exactly</em> which ads are losing you money.',
+    'hero.qualifier': 'Built for stores doing <span>$8k \u2013 $25k / mo</span>',
+    'hero.sub': 'Your ad platform shows you ROAS. But after your platform fees, returns, and cost of goods \u2014 <strong>half of what looks profitable is actually breaking even or losing money.</strong><br><br>Every Monday morning, we send you three plain-English decisions based on your real numbers. No new dashboards. No analysts. Just answers.',
+    'hero.cta1': 'Book a free 20-min demo \u2192', 'hero.cta2': 'Sound familiar? \u2193',
+    'hero.stat1': 'Decisions in your inbox every Monday',
+    'hero.stat2': 'From sign-up to first report',
+    'hero.stat3': 'New dashboards to log into',
+    'report.label': 'Sample weekly intelligence report',
+    'report.week': 'Week 22 \xb7 May 26 \u2013 Jun 1, 2025',
+    'report.revenue': 'Revenue', 'report.netMargin': 'Net margin',
+    'report.decisionsLabel': "This week's decisions",
+    'report.d1': '<strong>Pause Meta campaign #4182 today.</strong><span class="d-tag tag-warn">Losing $0.40/order</span><br>Platform ROAS shows 1.8\xd7 \u2014 but after COGS, fees, and returns, true ROAS is 0.9\xd7. This campaign is losing money on every order.',
+    'report.d2': "<strong>Scale campaign #4178 \u2014 it's your only genuinely profitable ad.</strong><span class=\"d-tag tag-action\">True ROAS 2.4\xd7</span><br>After all deductions, this campaign earns $1.40 per dollar spent. Budget it up by 30% this week.",
+    'report.d3': '<strong>Margin drop is a fee issue, not pricing.</strong><span class="d-tag tag-info">Save $180/mo</span><br>The 2.1pt dip traces to payment processing. Switching to an annual plan saves ~$180/mo \u2014 no price changes needed.',
+    'report.footnote': '\u2191 Real report format. Data anonymised for illustration.',
+    'sunday.eyebrow': 'The Sunday Night Reality',
+    'sunday.h2': 'You already have the data.<br>That\'s the <em>problem.</em>',
+    'sunday.sub': "If this is your Sunday night, you don't need more data. You need someone to tell you what to do with it.",
+    'sunday.windowTitle': 'Sunday, 9:47pm \u2014 preparing for the week',
+    'sunday.tab.meta': 'Meta Ads Manager', 'sunday.tab.shopify': 'Shopify Analytics',
+    'sunday.tab.klaviyo': 'Klaviyo Dashboard', 'sunday.tab.google': 'Google Ads',
+    'sunday.tab.sheet': 'Spreadsheet (COGS)',
+    'demo.eyebrow': 'The Live Demo',
+    'demo.h2': 'We show you your numbers<br>before you pay a <em>single dollar.</em>',
+    'demo.sub': "Connect your store, we run a real report, and you see exactly what you'd receive every Monday \u2014 including which campaigns are losing you money right now. If you don't see at least one decision you'd act on immediately, we tell you it's not the right fit and you walk away. No invoice.",
+    'demo.realDataFormat': 'Real data format',
+    'demo.col1Label': 'Ad profitability breakdown \u2014 this week',
+    'demo.col2Label': 'Margin analysis \u2014 week over week',
+    'demo.ctaText': "<strong>Want to see this with your actual store's numbers?</strong> That's exactly what the free demo is.",
+    'demo.ctaBtn': 'Book the free demo \u2192',
+    'compare.eyebrow': 'The Alternative',
+    'compare.h2': "What you're doing right now<br>vs. what <em>Monday could look like.</em>",
+    'compare.sub': 'No comparison to other tools. Just an honest look at the current situation \u2014 and what changes.',
+    'how.eyebrow': 'How It Works',
+    'how.h2': 'Four steps. Fully automated.<br>First report in <em>under a week.</em>',
+    'how.sub': 'We build a pipeline that connects your store, ad accounts, and email platform, runs the analysis, and delivers your report \u2014 without you touching a thing after onboarding.',
+    'how.step1.title': 'We connect your stack', 'how.step2.title': 'AI does the analysis',
+    'how.step3.title': '3 decisions in your inbox', 'how.step4.title': 'Sharpens every month',
+    'pricing.eyebrow': 'Pricing',
+    'pricing.h2': 'Simple. No setup fee surprise.<br><em>Cancel anytime.</em>',
+    'pricing.starter.desc': 'For stores doing $8k\u2013$25k/mo ready to stop guessing which ads are profitable.',
+    'pricing.growth.desc': 'For stores doing $25k\u2013$200k/mo making multiple ad and operations decisions weekly.',
+    'pricing.scale.desc': 'For 7-figure stores that need a dedicated data intelligence partner, not a report.',
+    'pricing.footerNote': 'All plans include a free demo with your real store data before you commit.<br>You own everything we build \u2014 if you ever leave, the whole system leaves with you. Nothing gets switched off.',
+    'platforms.eyebrow': 'Platforms',
+    'platforms.h2': 'Works with your stack.<br><em>More added on request.</em>',
+    'platforms.sub': "Currently live on the most common e-commerce platforms. Don't see yours? Request it \u2014 we prioritise integrations by demand.",
+    'why.eyebrow': 'Why 7Captur',
+    'why.h2': 'Built for one problem,<br><em>obsessively.</em>',
+    'waitlist.eyebrow': 'Waitlist',
+    'waitlist.h2': 'Not ready yet?<br>Get notified when we <em>open spots.</em>',
+    'waitlist.sub': "We're working with a small number of stores to refine the product. Join the waitlist and we'll reach out when a spot opens \u2014 or when we launch something new.",
+    'waitlist.btn': 'Join waitlist \u2192',
+    'waitlist.note': "No spam. One email when spots open. That's it.",
+    'contact.eyebrow': 'Book Your Free Demo',
+    'contact.h2': 'See your real<br>numbers. <em>Then decide.</em>',
+    'contact.sub': "We connect to your store data, run a real report, and show you exactly what you'd receive every Monday morning \u2014 including which ads are losing you money right now. No pitch. No pressure. Just your actual numbers.",
+    'contact.guaranteeTitle': '\u26a1 The demo guarantee',
+    'contact.guaranteeText': "If you don't see at least one decision you'd act on immediately, we tell you honestly it's not the right fit. We'd rather lose a sale than waste your time.",
+    'contact.replyNote': 'We reply within 24 hours \xb7 No spam \xb7 No sales scripts',
+    'contact.form.name': 'Your name', 'contact.form.email': 'Email address',
+    'contact.form.store': 'Your store URL', 'contact.form.platform': 'E-commerce platform',
+    'contact.form.revenue': 'Monthly revenue (approx.)',
+    'contact.form.headache': 'Biggest data headache right now',
+    'contact.form.platformPlaceholder': 'Select your platform',
+    'contact.form.revenuePlaceholder': 'Select a range',
+    'contact.form.submit': 'Book my free demo \u2192',
+    'contact.form.foot': 'Live in under a week. First report in your inbox within 7 days of onboarding.',
+    'footer.problem': 'The problem', 'footer.bookDemo': 'Book demo',
+    'footer.privacy': 'Privacy', 'footer.copy': '\xa9 2026 7Captur',
+    'privacy.title': 'Privacy Policy', 'modal.close': '\u2715 Close',
+    'modal.backToSite': 'Back to site',
+    'success.demo.title': 'Demo request received.',
+    'success.demo.body': "We'll review your details and reach out within 24 hours to book your free 20-minute demo. Check your inbox \u2014 we reply fast.",
+    'success.waitlist.title': "You're on the list.",
+    'success.waitlist.body': "We'll email you as soon as a spot opens up. One email. No spam.",
+  },
+  fr: {
+    'theme.light': " Clair", 'theme.dark': " Sombre",
+    'nav.how': "Comment \xe7a marche", 'nav.demo': "D\xe9mo en direct",
+    'nav.pricing': "Tarifs", 'nav.platforms': "Plateformes",
+    'nav.cta': "D\xe9mo gratuite \u2192",
+    'hero.eyebrow': "Intelligence D\xe9cisionnelle IA \xb7 E-Commerce",
+    'hero.h1': "Sachez enfin <em>exactement</em> quelles publicit\xe9s vous font perdre de l\u2019argent.",
+    'hero.qualifier': "Pour les boutiques g\xe9n\xe9rant <span>8\u202fk\u20ac \u2013 25\u202fk\u20ac / mois</span>",
+    'hero.sub': "Votre plateforme pub affiche un ROAS. Mais apr\xe8s vos frais de plateforme, retours et co\xfbt des marchandises \u2014 <strong>la moiti\xe9 de ce qui semble rentable est en r\xe9alit\xe9 \xe0 l\u2019\xe9quilibre ou en perte.</strong><br><br>Chaque lundi matin, nous vous envoyons trois d\xe9cisions en langage clair bas\xe9es sur vos vrais chiffres. Pas de nouveaux tableaux de bord. Pas d\u2019analystes. Juste des r\xe9ponses.",
+    'hero.cta1': "R\xe9server ma d\xe9mo gratuite (20\u202fmin) \u2192", 'hero.cta2': "Vous vous reconnaissez\u202f? \u2193",
+    'hero.stat1': "D\xe9cisions dans votre bo\xeete mail chaque lundi",
+    'hero.stat2': "De l\u2019inscription au premier rapport",
+    'hero.stat3': "Nouveaux tableaux de bord \xe0 consulter",
+    'report.label': "Rapport d\u2019intelligence hebdomadaire \u2014 exemple",
+    'report.week': "Semaine 22 \xb7 26 mai \u2013 1er juin 2025",
+    'report.revenue': "Chiffre d\u2019affaires", 'report.netMargin': "Marge nette",
+    'report.decisionsLabel': "D\xe9cisions de la semaine",
+    'report.d1': "<strong>Mettre en pause la campagne Meta #4182 aujourd\u2019hui.</strong><span class=\"d-tag tag-warn\">Perte de 0,40\u202f\$/commande</span><br>Le ROAS affich\xe9 est de 1,8\xd7 \u2014 mais apr\xe8s COGS, frais et retours, le vrai ROAS est de 0,9\xd7. Cette campagne perd de l\u2019argent \xe0 chaque commande.",
+    'report.d2': "<strong>Augmenter la campagne #4178 \u2014 c\u2019est votre seule pub vraiment rentable.</strong><span class=\"d-tag tag-action\">Vrai ROAS 2,4\xd7</span><br>Apr\xe8s toutes les d\xe9ductions, cette campagne rapporte 1,40\u202f\$ par dollar d\xe9pens\xe9. Augmentez le budget de 30\u202f% cette semaine.",
+    'report.d3': "<strong>La chute de marge est un probl\xe8me de frais, pas de prix.</strong><span class=\"d-tag tag-info\">\xc9conomie de 180\u202f\$/mois</span><br>La baisse de 2,1 points est li\xe9e aux frais de paiement. Passer \xe0 un abonnement annuel \xe9conomise ~180\u202f\$/mois \u2014 sans changer les prix.",
+    'report.footnote': "\u2191 Format r\xe9el du rapport. Donn\xe9es anonymis\xe9es \xe0 titre d\u2019illustration.",
+    'sunday.eyebrow': "La R\xe9alit\xe9 du Dimanche Soir",
+    'sunday.h2': "Vous avez d\xe9j\xe0 les donn\xe9es.<br>C\u2019est \xe7a, le <em>probl\xe8me.</em>",
+    'sunday.sub': "Si c\u2019est votre dimanche soir, vous n\u2019avez pas besoin de plus de donn\xe9es. Vous avez besoin de quelqu\u2019un qui vous dise quoi en faire.",
+    'sunday.windowTitle': "Dimanche, 21h47 \u2014 pr\xe9paration de la semaine",
+    'sunday.tab.meta': "Meta Ads Manager", 'sunday.tab.shopify': "Shopify Analytics",
+    'sunday.tab.klaviyo': "Klaviyo Dashboard", 'sunday.tab.google': "Google Ads",
+    'sunday.tab.sheet': "Tableur (COGS)",
+    'demo.eyebrow': "La D\xe9mo en Direct",
+    'demo.h2': "On vous montre vos chiffres<br>avant que vous payiez <em>le moindre euro.</em>",
+    'demo.sub': "Connectez votre boutique, on g\xe9n\xe8re un vrai rapport, et vous voyez exactement ce que vous recevriez chaque lundi \u2014 dont quelles campagnes vous font perdre de l\u2019argent. Si vous ne voyez pas au moins une d\xe9cision \xe0 prendre imm\xe9diatement, on vous dit que ce n\u2019est pas le bon fit. Aucune facture.",
+    'demo.realDataFormat': "Format de donn\xe9es r\xe9el",
+    'demo.col1Label': "Rentabilit\xe9 publicitaire \u2014 cette semaine",
+    'demo.col2Label': "Analyse de marge \u2014 semaine sur semaine",
+    'demo.ctaText': "<strong>Vous voulez voir \xe7a avec les vrais chiffres de votre boutique\u202f?</strong> C\u2019est exactement ce qu\u2019est la d\xe9mo gratuite.",
+    'demo.ctaBtn': "R\xe9server la d\xe9mo gratuite \u2192",
+    'compare.eyebrow': "L\u2019Alternative",
+    'compare.h2': "Ce que vous faites maintenant<br>vs. ce que <em>le lundi pourrait ressembler.</em>",
+    'compare.sub': "Pas de comparaison avec d\u2019autres outils. Juste un regard honn\xeate sur la situation actuelle \u2014 et ce qui change.",
+    'how.eyebrow': "Comment \xc7a Marche",
+    'how.h2': "Quatre \xe9tapes. Enti\xe8rement automatis\xe9.<br>Premier rapport en <em>moins d\u2019une semaine.</em>",
+    'how.sub': "Nous construisons un pipeline qui connecte votre boutique, vos comptes publicitaires et votre plateforme email, effectue l\u2019analyse et livre votre rapport \u2014 sans que vous ayez \xe0 toucher quoi que ce soit apr\xe8s l\u2019int\xe9gration.",
+    'how.step1.title': "On connecte votre stack", 'how.step2.title': "L\u2019IA fait l\u2019analyse",
+    'how.step3.title': "3 d\xe9cisions dans votre bo\xeete mail", 'how.step4.title': "S\u2019affine chaque mois",
+    'pricing.eyebrow': "Tarifs",
+    'pricing.h2': "Simple. Aucune surprise de frais de setup.<br><em>Annulez \xe0 tout moment.</em>",
+    'pricing.starter.desc': "Pour les boutiques \xe0 8\u202fk\u2013\u202f25\u202fk\u20ac/mois qui veulent arr\xeater de deviner quelles pubs sont rentables.",
+    'pricing.growth.desc': "Pour les boutiques \xe0 25\u202fk\u2013200\u202fk\u20ac/mois prenant plusieurs d\xe9cisions pub et op\xe9rations chaque semaine.",
+    'pricing.scale.desc': "Pour les boutiques 7 chiffres qui ont besoin d\u2019un partenaire d\xe9di\xe9 en intelligence de donn\xe9es, pas d\u2019un rapport.",
+    'pricing.footerNote': "Tous les plans incluent une d\xe9mo gratuite avec les vraies donn\xe9es de votre boutique avant tout engagement.<br>Vous poss\xe9dez tout ce que nous construisons \u2014 si vous partez, tout le syst\xe8me part avec vous. Rien ne s\u2019arr\xeate.",
+    'platforms.eyebrow': "Plateformes",
+    'platforms.h2': "Compatible avec votre stack.<br><em>D\u2019autres ajout\xe9es sur demande.</em>",
+    'platforms.sub': "Actuellement actif sur les plateformes e-commerce les plus communes. Vous ne voyez pas la v\xf4tre\u202f? Demandez-la \u2014 nous priorisons les int\xe9grations par demande.",
+    'why.eyebrow': "Pourquoi 7Captur",
+    'why.h2': "Con\xe7u pour un seul probl\xe8me,<br><em>obsessionnellement.</em>",
+    'waitlist.eyebrow': "Liste d\u2019attente",
+    'waitlist.h2': "Pas encore pr\xeat\u202f?<br>Soyez notifi\xe9 quand on <em>ouvre des places.</em>",
+    'waitlist.sub': "Nous travaillons avec un petit nombre de boutiques pour affiner le produit. Rejoignez la liste d\u2019attente et nous vous contacterons quand une place s\u2019ouvre \u2014 ou quand nous lan\xe7ons quelque chose de nouveau.",
+    'waitlist.btn': "Rejoindre la liste \u2192",
+    'waitlist.note': "Pas de spam. Un email quand des places s\u2019ouvrent. C\u2019est tout.",
+    'contact.eyebrow': "R\xe9servez Votre D\xe9mo Gratuite",
+    'contact.h2': "Voyez vos vrais<br>chiffres. <em>Puis d\xe9cidez.</em>",
+    'contact.sub': "Nous nous connectons \xe0 vos donn\xe9es boutique, g\xe9n\xe9rons un vrai rapport, et vous montrons exactement ce que vous recevriez chaque lundi matin \u2014 dont quelles pubs vous font perdre de l\u2019argent. Pas de pitch. Pas de pression. Juste vos chiffres r\xe9els.",
+    'contact.guaranteeTitle': "\u26a1 La garantie d\xe9mo",
+    'contact.guaranteeText': "Si vous ne voyez pas au moins une d\xe9cision que vous prendriez imm\xe9diatement, nous vous disons honn\xeatement que ce n\u2019est pas le bon fit. On pr\xe9f\xe8re perdre une vente que vous faire perdre votre temps.",
+    'contact.replyNote': "On r\xe9pond sous 24h \xb7 Pas de spam \xb7 Pas de script de vente",
+    'contact.form.name': "Votre nom", 'contact.form.email': "Adresse email",
+    'contact.form.store': "URL de votre boutique", 'contact.form.platform': "Plateforme e-commerce",
+    'contact.form.revenue': "Chiffre d\u2019affaires mensuel (approx.)",
+    'contact.form.headache': "Votre principal probl\xe8me de donn\xe9es en ce moment",
+    'contact.form.platformPlaceholder': "S\xe9lectionnez votre plateforme",
+    'contact.form.revenuePlaceholder': "S\xe9lectionnez une fourchette",
+    'contact.form.submit': "R\xe9server ma d\xe9mo gratuite \u2192",
+    'contact.form.foot': "Op\xe9rationnel en moins d\u2019une semaine. Premier rapport dans votre bo\xeete mail sous 7 jours.",
+    'footer.problem': "Le probl\xe8me", 'footer.bookDemo': "R\xe9server une d\xe9mo",
+    'footer.privacy': "Confidentialit\xe9", 'footer.copy': "\xa9 2026 7Captur",
+    'privacy.title': "Politique de Confidentialit\xe9", 'modal.close': "\u2715 Fermer",
+    'modal.backToSite': "Retour au site",
+    'success.demo.title': "Demande de d\xe9mo re\xe7ue.",
+    'success.demo.body': "Nous examinerons vos informations et vous contacterons sous 24 heures pour planifier votre d\xe9mo gratuite de 20 minutes. V\xe9rifiez votre bo\xeete mail \u2014 nous r\xe9pondons vite.",
+    'success.waitlist.title': "Vous \xeates sur la liste.",
+    'success.waitlist.body': "Nous vous enverrons un email d\xe8s qu\u2019une place se lib\xe8re. Un email. Pas de spam.",
+  }
+};
+
+function applyLang(lang) {
+  document.documentElement.lang = lang;
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  document.getElementById('lang-fr').classList.toggle('active', lang === 'fr');
+  const T = translations[lang] || translations.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = T[el.dataset.i18n];
+    if (v !== undefined) el.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const v = T[el.dataset.i18nHtml];
+    if (v !== undefined) el.innerHTML = v;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const v = T[el.dataset.i18nPlaceholder];
+    if (v !== undefined) el.placeholder = v;
+  });
+  // Translate select disabled options (placeholders)
+  document.querySelectorAll('option[data-i18n]').forEach(el => {
+    const v = T[el.dataset.i18n];
+    if (v !== undefined) el.textContent = v;
+  });
+  try { localStorage.setItem('lang', lang); } catch(e) {}
+}
+
+document.getElementById('lang-en').addEventListener('click', () => applyLang('en'));
+document.getElementById('lang-fr').addEventListener('click', () => applyLang('fr'));
+
+// Auto-detect language from browser, fall back to saved preference
+(function() {
+  let lang = 'en';
+  try { lang = localStorage.getItem('lang') || lang; } catch(e) {}
+  if (!localStorage.getItem('lang')) {
+    const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    if (browserLang.startsWith('fr')) lang = 'fr';
+  }
+  if (lang !== 'en') applyLang(lang);
+})();
+
 </script>
 </body>
 </html>
