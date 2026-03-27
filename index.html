@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>7Captur — Know Exactly Which Ads Are Bleeding Money</title>
+<title>7Captur — Stop Scaling Losses</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Fraunces:ital,opsz,wght@1,9..144,300&family=DM+Sans:wght@500&display=swap" rel="stylesheet" />
@@ -23,12 +23,12 @@
   --red:            #c42828;
   --white:          #1e1a14;
   --card:           #f0e5d8;
-  --nav-bg-scroll:  rgba(253,246,238,0.98);
-  --nav-bg-top:     rgba(253,246,238,0.92);
-  --shadow:         rgba(60,45,30,0.14);
+  --nav-bg-scroll:  rgba(253,246,238,0.92);
+  --nav-bg-top:     rgba(253,246,238,0.85);
+  --shadow-sm:      0 4px 12px rgba(60,45,30,0.06);
+  --shadow-lg:      0 12px 32px rgba(60,45,30,0.12);
 }
 
-/* ── Dark mode palette ── */
 html.dark {
   --bg:             #1c1e26;
   --bg2:            #22252f;
@@ -44,366 +44,339 @@ html.dark {
   --red:            #e84040;
   --white:          #f0ece4;
   --card:           #272a34;
-  --nav-bg-scroll:  rgba(28,30,38,0.98);
-  --nav-bg-top:     rgba(28,30,38,0.92);
-  --shadow:         rgba(0,0,0,0.5);
+  --nav-bg-scroll:  rgba(28,30,38,0.95);
+  --nav-bg-top:     rgba(28,30,38,0.85);
+  --shadow-sm:      0 4px 12px rgba(0,0,0,0.2);
+  --shadow-lg:      0 12px 32px rgba(0,0,0,0.4);
 }
 
-/* ── Light mode — beige/warm palette ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
-body{background:var(--bg);color:var(--body);font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden}
+body{background:var(--bg);color:var(--body);font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden;transition:background-color 0.4s ease;}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.018;pointer-events:none;z-index:9999}
 .mono{font-family:'IBM Plex Mono',monospace}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:68px;border-bottom:1px solid var(--border);background:var(--nav-bg-top);backdrop-filter:blur(14px)}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:19px;color:var(--accent);letter-spacing:-0.02em;text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:68px;border-bottom:1px solid var(--border);background:var(--nav-bg-top);backdrop-filter:blur(14px);transition:background 0.4s ease;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:19px;color:var(--accent);letter-spacing:-0.02em;text-decoration:none;transition:transform 0.3s ease;}
+.logo:hover{transform:scale(1.02);}
 .nav-links{display:flex;gap:36px;list-style:none}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-family:'IBM Plex Mono',monospace;letter-spacing:0.07em;text-transform:uppercase;transition:color .2s}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-family:'IBM Plex Mono',monospace;letter-spacing:0.07em;text-transform:uppercase;transition:color .3s ease}
 .nav-links a:hover{color:var(--text)}
-.nav-cta{background:var(--accent);color:var(--accent-fg);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.03em;padding:11px 22px;text-decoration:none;transition:opacity .2s,transform .15s;white-space:nowrap}
-.nav-cta:hover{opacity:.87;transform:translateY(-1px)}
+.nav-cta{background:var(--accent);color:var(--accent-fg);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.03em;padding:11px 22px;text-decoration:none;transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1);white-space:nowrap;border-radius:2px;}
+.nav-cta:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 6px 16px rgba(126,200,0,0.2);}
 
-/* ── HERO ── */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:68px;position:relative;overflow:hidden}
 .hero-left{padding:80px 64px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border)}
 .hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:32px}
 .eyebrow-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.65)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.65);box-shadow:0 0 0 4px rgba(126,200,0,0);}}
 .eyebrow-text{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted)}
 h1{font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(34px,3.8vw,54px);line-height:1.1;letter-spacing:-0.015em;color:var(--white);margin-bottom:20px}
 h1 em{font-style:italic;font-family:'Fraunces',serif;color:var(--accent);font-weight:300}
 .hero-sub{font-size:1.0625rem;color:var(--body);line-height:1.75;max-width:460px;margin-bottom:36px}
-.hero-sub strong{color:var(--text);font-weight:500}
-.hero-qualifier{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:var(--bg2);border:1px solid var(--border2);padding:7px 14px;margin-bottom:36px}
+.hero-sub strong{color:var(--text);font-weight:600}
+.hero-qualifier{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:var(--bg2);border:1px solid var(--border2);padding:7px 14px;margin-bottom:36px;border-radius:2px;}
 .hero-qualifier span{color:var(--accent)}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
-.btn-primary{background:var(--accent);color:var(--accent-fg);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.02em;padding:15px 30px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s,transform .2s;white-space:nowrap}
-.btn-primary:hover{opacity:.87;transform:translateY(-1px)}
-.btn-ghost{color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;font-size:14px;padding:15px 28px;text-decoration:none;border:1px solid var(--border2);display:inline-flex;align-items:center;gap:8px;transition:border-color .2s,color .2s}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-primary{background:var(--accent);color:var(--accent-fg);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.02em;padding:15px 30px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1);white-space:nowrap;border-radius:2px;border:none;cursor:pointer;}
+.btn-primary:hover{opacity:.95;transform:translateY(-2px);box-shadow:0 8px 20px rgba(126,200,0,0.25);}
+.btn-ghost{color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:14px;padding:15px 28px;text-decoration:none;border:1px solid var(--border2);display:inline-flex;align-items:center;gap:8px;transition:all 0.3s ease;border-radius:2px;}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:rgba(126,200,0,0.03);}
 .hero-stats{display:flex;margin-top:52px;border-top:1px solid var(--border);padding-top:28px;gap:0}
 .hero-stat{flex:1;padding-right:20px;border-right:1px solid var(--border);margin-right:20px}
 .hero-stat:last-child{border-right:none;margin-right:0}
 .stat-num{font-family:'Outfit',sans-serif;font-weight:800;font-size:26px;color:var(--accent);letter-spacing:-0.02em;display:block;line-height:1.1}
 .stat-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);line-height:1.45;margin-top:5px}
 
-/* ── REPORT CARD (hero right) ── */
 .hero-right{padding:72px 48px;display:flex;flex-direction:column;justify-content:center;background:var(--bg2);position:relative}
-.hero-right::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(200,245,96,0.04),transparent);pointer-events:none}
+.hero-right::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(126,200,0,0.05),transparent);pointer-events:none}
 .report-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;display:flex;align-items:center;gap:8px}
 .report-label::before{content:'//';color:var(--accent)}
-.report-card{background:var(--card);border:1px solid var(--border2);padding:28px;position:relative;z-index:1}
-.report-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent) 0%,transparent 70%)}
+.report-card{background:var(--card);border:1px solid var(--border2);padding:28px;position:relative;z-index:1;box-shadow:var(--shadow-sm);border-radius:4px;}
+.report-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent) 0%,transparent 70%);border-top-left-radius:4px;border-top-right-radius:4px;}
 .report-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border)}
 .report-store{font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--white);margin-bottom:3px}
 .report-week{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted)}
-.report-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.09em;text-transform:uppercase;padding:2px 8px;background:rgba(200,245,96,0.1);color:var(--accent);border:1px solid rgba(200,245,96,0.2);display:inline-block;margin-top:5px}
+.report-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.09em;text-transform:uppercase;padding:2px 8px;background:rgba(126,200,0,0.1);color:var(--accent);border:1px solid rgba(126,200,0,0.2);display:inline-block;margin-top:5px;border-radius:2px;}
 .report-kpis{display:flex;gap:18px;flex-shrink:0}
 .kpi{text-align:right}
-.kpi-val{font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:var(--white);display:block}
+.kpi-val{font-family:'Outfit',sans-serif;font-weight:800;font-size:17px;color:var(--white);display:block}
 .kpi-up{color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:10px}
 .kpi-down{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:10px}
 .kpi-name{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);display:block;margin-top:2px;text-transform:uppercase;letter-spacing:0.06em}
 .decisions-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
-.decision-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);animation:fadeSlide .5s ease forwards;opacity:0;transform:translateY(8px)}
-.decision-item:last-child{border-bottom:none}
-.decision-item:nth-child(1){animation-delay:.2s}.decision-item:nth-child(2){animation-delay:.55s}.decision-item:nth-child(3){animation-delay:.9s}
+.decision-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);animation:fadeSlide 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;opacity:0;transform:translateY(12px)}
+.decision-item:last-child{border-bottom:none;padding-bottom:0;}
+.decision-item:nth-child(1){animation-delay:.2s}.decision-item:nth-child(2){animation-delay:.5s}.decision-item:nth-child(3){animation-delay:.8s}
 @keyframes fadeSlide{to{opacity:1;transform:translateY(0)}}
-.d-num{font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;color:var(--accent);min-width:20px;padding-top:2px;flex-shrink:0}
+.d-num{font-family:'Outfit',sans-serif;font-weight:800;font-size:11px;color:var(--accent);min-width:20px;padding-top:2px;flex-shrink:0}
 .d-text{font-size:13px;color:var(--text);line-height:1.55}
-.d-text strong{color:var(--white)}
-.d-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 7px;margin-left:8px;vertical-align:middle}
-.tag-action{background:rgba(200,245,96,0.12);color:var(--accent)}
+.d-text strong{color:var(--white);font-weight:600;}
+.d-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 7px;margin-left:8px;vertical-align:middle;border-radius:2px;}
+.tag-action{background:rgba(126,200,0,0.12);color:var(--accent)}
 .tag-warn{background:rgba(255,107,107,0.12);color:var(--red)}
 .tag-info{background:rgba(245,200,96,0.12);color:var(--gold)}
 
-/* ── TICKER ── */
 .ticker-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);overflow:hidden;height:42px;display:flex;align-items:center}
-.ticker{display:flex;animation:ticker 40s linear infinite;white-space:nowrap}
+.ticker{display:flex;animation:ticker 45s linear infinite;white-space:nowrap}
 .ticker-item{display:flex;align-items:center;gap:12px;padding:0 34px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--border);flex-shrink:0}
-.ticker-item span{color:var(--accent)}
+.ticker-item span{color:var(--accent);font-weight:bold;}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ── SECTIONS ── */
-.section{padding:96px 64px}
+.section{padding:96px 64px;position:relative;z-index:2;}
 .section-inner{max-width:1120px;margin:0 auto}
 .section-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.section-eyebrow::after{content:'';flex:1;max-width:56px;height:1px;background:var(--accent);opacity:.4}
+.section-eyebrow::after{content:'';flex:1;max-width:56px;height:1px;background:var(--accent);opacity:.4;transition:max-width 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;}
 h2{font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.2vw,44px);letter-spacing:-0.015em;color:var(--white);line-height:1.1;margin-bottom:18px}
 h2 em{font-style:italic;font-family:'Fraunces',serif;color:var(--accent);font-weight:300}
 .section-sub{color:var(--body);font-size:1.0625rem;line-height:1.75;max-width:580px;margin-bottom:52px}
 .alt-bg{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 
-/* ── SUNDAY NIGHT SECTION ── */
-.sunday-wrap{margin-top:52px;border:1px solid var(--border2);overflow:hidden}
+.sunday-wrap{margin-top:52px;border:1px solid var(--border2);overflow:hidden;border-radius:4px;box-shadow:var(--shadow-sm);}
 .sunday-header{background:var(--bg2);padding:18px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
 .sunday-dots{display:flex;gap:6px}
 .sunday-dot{width:10px;height:10px;border-radius:50%}
 .sd1{background:#ff5f57}.sd2{background:#febc2e}.sd3{background:#28c840}
 .sunday-title{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.06em;margin-left:8px}
 .sunday-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--bg3);overflow-x:auto}
-.s-tab{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:10px 20px;border-right:1px solid var(--border);color:var(--body);white-space:nowrap;letter-spacing:0.04em;flex-shrink:0}
-.s-tab.active{color:var(--text);background:var(--bg2);border-bottom:1px solid var(--bg2);margin-bottom:-1px}
+.s-tab{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:12px 20px;border-right:1px solid var(--border);color:var(--body);white-space:nowrap;letter-spacing:0.04em;flex-shrink:0;cursor:pointer;transition:all 0.3s ease;user-select:none;}
+.s-tab:hover{color:var(--text);background:rgba(255,255,255,0.05);}
+.s-tab.active{color:var(--text);background:var(--bg2);border-bottom:1px solid var(--bg2);margin-bottom:-1px;font-weight:500;}
 .sunday-rows{display:flex;flex-direction:column}
-.sunday-row{display:flex;align-items:flex-start;gap:20px;padding:22px 28px;border-bottom:1px solid var(--border)}
+.sunday-row{display:flex;align-items:flex-start;gap:20px;padding:26px 28px;border-bottom:1px solid var(--border);background:var(--bg);transition:background 0.3s ease;}
+.sunday-row:hover{background:var(--bg2);}
 .sunday-row:last-child{border-bottom:none}
-.sunday-row-num{font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;color:var(--muted);min-width:24px;padding-top:2px}
+.sunday-row-num{font-family:'Outfit',sans-serif;font-weight:800;font-size:11px;color:var(--muted);min-width:24px;padding-top:2px}
 .sunday-row-body{flex:1}
-.sunday-row-title{font-family:'DM Sans',sans-serif;font-weight:500;font-size:15px;color:var(--text);margin-bottom:4px}
+.sunday-row-title{font-family:'DM Sans',sans-serif;font-weight:500;font-size:15px;color:var(--text);margin-bottom:4px;line-height:1.4;}
 .sunday-row-detail{font-size:14px;color:var(--muted);line-height:1.6}
-.sunday-row-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 8px;background:rgba(255,107,107,0.1);color:var(--red);border:1px solid rgba(255,107,107,0.2);margin-left:10px;vertical-align:middle}
+.sunday-row-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 8px;background:rgba(255,107,107,0.1);color:var(--red);border:1px solid rgba(255,107,107,0.2);margin-left:10px;vertical-align:middle;border-radius:2px;}
+.sunday-content-pane{display:none}
+.sunday-content-pane.active{display:block}
 
-/* ── COMPARE TABLE ── */
-.compare-wrap{border:1px solid var(--border2);overflow:hidden}
-.compare-table{width:100%;border-collapse:collapse}
+.compare-wrap{border:1px solid var(--border2);overflow:hidden;border-radius:4px;box-shadow:var(--shadow-sm);}
+.compare-table{width:100%;border-collapse:collapse;background:var(--bg);}
 .compare-table th{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;padding:18px 26px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted);background:var(--bg2)}
-.compare-table th.hl{color:var(--accent);background:rgba(200,245,96,0.05);border-left:1px solid rgba(200,245,96,.2);border-right:1px solid rgba(200,245,96,.2)}
-.compare-table td{padding:16px 26px;border-bottom:1px solid var(--border);font-size:14px;color:var(--muted);vertical-align:top;line-height:1.5}
+.compare-table th.hl{color:var(--accent);background:rgba(126,200,0,0.05);border-left:1px solid rgba(126,200,0,0.15);border-right:1px solid rgba(126,200,0,0.15)}
+.compare-table td{padding:18px 26px;border-bottom:1px solid var(--border);font-size:14px;color:var(--muted);vertical-align:top;line-height:1.6}
 .compare-table tr:last-child td{border-bottom:none}
-.compare-table td.fn{color:var(--text);font-weight:500;font-size:15px}
-.compare-table td.hl{background:rgba(200,245,96,0.03);border-left:1px solid rgba(200,245,96,.1);border-right:1px solid rgba(200,245,96,.1);color:var(--text)}
-.ck{color:var(--accent);font-size:15px}.cx{color:var(--red)}.pt{color:var(--gold)}
+.compare-table td.fn{color:var(--text);font-weight:600;font-size:15px}
+.compare-table td.hl{background:rgba(126,200,0,0.02);border-left:1px solid rgba(126,200,0,0.1);border-right:1px solid rgba(126,200,0,0.1);color:var(--text)}
+.compare-table tbody tr{transition:background 0.3s ease;}
+.compare-table tbody tr:hover{background:var(--bg2);}
+.compare-table tbody tr:hover td.hl{background:rgba(126,200,0,0.05);}
+.ck{color:var(--accent);font-size:15px;font-weight:bold;}.cx{color:var(--red)}.pt{color:var(--gold)}
 
-/* ── HOW IT WORKS ── */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);margin-top:52px;border:1px solid var(--border)}
-.step{padding:36px 30px;border-right:1px solid var(--border)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);margin-top:52px;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.step{padding:36px 30px;border-right:1px solid var(--border);background:var(--bg);transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);}
 .step:last-child{border-right:none}
-.step-num{font-family:'Outfit',sans-serif;font-weight:800;font-size:44px;color:var(--border2);letter-spacing:-0.02em;margin-bottom:20px;line-height:1}
+.step:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);background:var(--bg2);z-index:2;}
+.step-num{font-family:'Outfit',sans-serif;font-weight:800;font-size:44px;color:var(--border2);letter-spacing:-0.02em;margin-bottom:20px;line-height:1;transition:color 0.4s ease;}
+.step:hover .step-num{color:var(--accent);}
 .step-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:var(--white);margin-bottom:10px}
 .step-body{font-size:14px;color:var(--body);line-height:1.7}
 .step-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
-.tech-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;background:var(--bg3);color:var(--muted);padding:3px 8px;border:1px solid var(--border)}
+.tech-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;background:var(--bg3);color:var(--muted);padding:4px 8px;border:1px solid var(--border);border-radius:2px;}
 
-/* ── DEMO CENTREPIECE ── */
-.demo-hero{margin-top:52px;border:1px solid var(--border2);overflow:hidden;position:relative}
-.demo-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent)}
+.demo-hero{margin-top:52px;border:1px solid var(--border2);overflow:hidden;position:relative;border-radius:4px;box-shadow:var(--shadow-sm);}
+.demo-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),transparent);border-top-left-radius:4px;border-top-right-radius:4px;}
 .demo-hero-header{background:var(--bg2);padding:20px 32px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
 .demo-hero-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted)}
 .demo-hero-label span{color:var(--accent);margin-right:8px}
-.demo-live-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;background:rgba(200,245,96,0.12);color:var(--accent);border:1px solid rgba(200,245,96,0.25);display:flex;align-items:center;gap:6px}
-.live-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;animation:pulse 1.5s ease-in-out infinite}
-.demo-hero-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.demo-live-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;background:rgba(126,200,0,0.12);color:var(--accent);border:1px solid rgba(126,200,0,0.25);display:flex;align-items:center;gap:6px;border-radius:2px;}
+.live-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 1.5s ease-in-out infinite}
+.demo-hero-body{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--bg);}
 .demo-col{padding:32px}
 .demo-col:first-child{border-right:1px solid var(--border)}
 .demo-col-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
 .demo-metric-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
 .demo-metric-row:last-child{border-bottom:none}
 .demo-metric-name{font-size:13px;color:var(--body)}
-.demo-metric-val{font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:var(--white);text-align:right}
+.demo-metric-val{font-family:'Outfit',sans-serif;font-weight:800;font-size:14px;color:var(--white);text-align:right}
 .demo-metric-val.up{color:var(--accent)}.demo-metric-val.down{color:var(--red)}.demo-metric-val.warn{color:var(--gold)}
 .demo-metric-note{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);text-align:right;margin-top:2px}
-.demo-cta-row{background:rgba(200,245,96,0.05);border-top:1px solid rgba(200,245,96,0.15);padding:20px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.demo-cta-row{background:rgba(126,200,0,0.05);border-top:1px solid rgba(126,200,0,0.15);padding:20px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .demo-cta-text{font-size:14px;color:var(--body)}
-.demo-cta-text strong{color:var(--white)}
+.demo-cta-text strong{color:var(--white);font-weight:600;}
 
-/* ── PRICING ── */
-.pricing-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:52px}
-.price-card{background:var(--bg);padding:40px;position:relative;transition:background .25s}
-.price-card:hover{background:var(--bg2)}
-.price-card.featured{background:var(--bg2);border-top:2px solid var(--accent)}
-.price-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;background:rgba(200,245,96,0.15);color:var(--accent);padding:4px 10px;margin-bottom:22px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;margin-top:52px}
+.price-card{background:var(--bg);padding:40px;position:relative;border:1px solid var(--border);border-radius:4px;transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);display:flex;flex-direction:column;}
+.price-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--border2);}
+.price-card.featured{background:var(--bg2);border:2px solid var(--accent);box-shadow:var(--shadow-sm);}
+.price-card.featured:hover{box-shadow:var(--shadow-lg);transform:translateY(-6px);}
+.price-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;background:rgba(126,200,0,0.15);color:var(--accent);padding:4px 12px;margin-bottom:22px;border-radius:2px;font-weight:500;}
 .price-tier{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .price-name{font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:var(--white);margin-bottom:10px}
 .price-desc{font-size:14px;color:var(--body);line-height:1.65;margin-bottom:24px;min-height:50px}
-.price-main{margin-bottom:6px}
+.price-main{margin-bottom:6px;display:flex;align-items:baseline;gap:6px;}
 .price-amount{font-family:'Outfit',sans-serif;font-weight:800;font-size:36px;color:var(--white);letter-spacing:-0.02em}
-.price-period{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);margin-left:4px}
-.price-note-small{font-size:13px;color:var(--muted);margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border);line-height:1.5}
-.price-note-small strong{color:var(--accent)}
-.price-features{list-style:none;margin-bottom:28px}
+.price-period{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);}
+.price-note-small{font-size:13px;color:var(--muted);margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border);line-height:1.5;min-height:70px;}
+.price-note-small strong{color:var(--accent);font-weight:600;}
+.price-features{list-style:none;margin-bottom:28px;flex-grow:1;}
 .price-features li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--body);padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);line-height:1.5}
 .price-features li:last-child{border-bottom:none}
-.price-features .ck{font-size:14px;flex-shrink:0;margin-top:1px}
-.price-cta{display:block;text-align:center;padding:14px 20px;font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-decoration:none;transition:all .2s}
+.price-features .ck{font-size:15px;flex-shrink:0;margin-top:1px}
+.price-cta{display:block;text-align:center;padding:14px 20px;font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-decoration:none;transition:all 0.3s ease;border-radius:2px;margin-top:auto;}
 .price-cta-primary{background:var(--accent);color:var(--accent-fg)}
-.price-cta-primary:hover{opacity:.87}
-.price-cta-ghost{border:1px solid var(--border2);color:var(--text)}
-.price-cta-ghost:hover{border-color:var(--text)}
-.pricing-footer-note{font-size:14px;color:var(--muted);text-align:center;margin-top:22px;line-height:1.7}
+.price-cta-primary:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 6px 16px rgba(126,200,0,0.25);}
+.price-cta-ghost{border:1px solid var(--border2);color:var(--text);background:transparent;}
+.price-cta-ghost:hover{border-color:var(--accent);color:var(--accent);background:rgba(126,200,0,0.03);}
+.pricing-footer-note{font-size:14px;color:var(--muted);text-align:center;margin-top:32px;line-height:1.7}
 
-/* ── PLATFORMS ── */
-.platforms-grid{display:flex;flex-wrap:wrap;border:1px solid var(--border);margin-top:36px}
-.platform-card{flex:1;min-width:155px;padding:26px 18px;display:flex;flex-direction:column;align-items:center;gap:10px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background .2s}
-.platform-card:hover{background:var(--bg2)}
+.platforms-grid{display:flex;flex-wrap:wrap;border:1px solid var(--border);margin-top:36px;border-radius:4px;overflow:hidden;}
+.platform-card{flex:1;min-width:155px;padding:26px 18px;display:flex;flex-direction:column;align-items:center;gap:10px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg);transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1);}
+.platform-card:hover{background:var(--bg2);transform:scale(1.02);z-index:2;box-shadow:var(--shadow-sm);}
 .platform-icon{font-size:26px;line-height:1}
 .platform-name{font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;color:var(--text)}
 .platform-type{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase}
-.platform-status{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px}
-.status-live{background:rgba(200,245,96,0.12);color:var(--accent);border:1px solid rgba(200,245,96,0.2)}
+.platform-status{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border-radius:2px;}
+.status-live{background:rgba(126,200,0,0.12);color:var(--accent);border:1px solid rgba(126,200,0,0.2)}
 .platforms-row-label{width:100%;flex-basis:100%;padding:10px 22px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);background:var(--bg3);border-bottom:1px solid var(--border);border-top:1px solid var(--border)}
 .platforms-row-label:first-child{border-top:none}
 
-/* ── WHY ── */
-.why-grid{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:52px;border:1px solid var(--border)}
-.why-item{padding:36px 30px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.why-grid{display:grid;grid-template-columns:repeat(3, 1fr);margin-top:52px;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.why-item{padding:36px 30px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg);transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);}
 .why-item:nth-child(3n){border-right:none}
 .why-item:nth-last-child(-n+3){border-bottom:none}
-.why-num{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--accent);margin-bottom:14px;display:block}
+.why-item:hover{background:var(--bg2);transform:translateY(-4px);box-shadow:var(--shadow-lg);z-index:2;}
+.why-num{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--accent);margin-bottom:14px;display:block;font-weight:500;}
 .why-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:var(--white);margin-bottom:10px}
 .why-body{font-size:14px;color:var(--body);line-height:1.7}
 
-/* ── WAITLIST ── */
-.waitlist-section{padding:72px 64px;border-top:1px solid var(--border);background:var(--bg2)}
+.waitlist-section{padding:80px 64px;border-top:1px solid var(--border);background:var(--bg2)}
 .waitlist-inner{max-width:620px;margin:0 auto;text-align:center}
 .waitlist-inner h2{margin-bottom:14px}
 .waitlist-inner p{font-size:1rem;color:var(--body);margin-bottom:32px;line-height:1.7}
-.waitlist-form{display:flex;gap:0;border:1px solid var(--border2)}
-.waitlist-form input{flex:1;background:var(--bg);border:none;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;padding:14px 18px;outline:none}
+.waitlist-form{display:flex;gap:0;border:1px solid var(--border2);border-radius:2px;overflow:hidden;}
+.waitlist-form input{flex:1;background:var(--bg);border:none;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;padding:16px 20px;outline:none;transition:background 0.3s ease;}
 .waitlist-form input::placeholder{color:var(--muted)}
 .waitlist-form input:focus{background:var(--bg3)}
-.waitlist-form button{background:var(--accent);color:var(--accent-fg);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.03em;padding:14px 24px;border:none;cursor:pointer;transition:opacity .2s;white-space:nowrap}
-.waitlist-form button:hover{opacity:.87}
+.waitlist-form button{background:var(--accent);color:var(--accent-fg);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.03em;padding:16px 28px;border:none;cursor:pointer;transition:all 0.3s ease;white-space:nowrap}
+.waitlist-form button:hover{opacity:.9;box-shadow:0 0 12px rgba(126,200,0,0.3);}
 .waitlist-note{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-top:14px;letter-spacing:0.04em}
-.waitlist-count{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);background:var(--bg3);border:1px solid var(--border);padding:6px 14px;margin-bottom:28px}
+.waitlist-count{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);background:var(--bg3);border:1px solid var(--border);padding:6px 14px;margin-bottom:28px;border-radius:2px;}
 .waitlist-count span{color:var(--accent)}
 
-/* ── DEMO / CONTACT SECTION ── */
 .contact-section{padding:96px 64px;border-top:1px solid var(--border);background:var(--bg);position:relative;overflow:hidden}
-.contact-section::after{content:'';position:absolute;bottom:-240px;right:-200px;width:520px;height:520px;background:radial-gradient(circle,rgba(200,245,96,0.05),transparent 70%);pointer-events:none}
+.contact-section::after{content:'';position:absolute;bottom:-240px;right:-200px;width:520px;height:520px;background:radial-gradient(circle,rgba(126,200,0,0.05),transparent 70%);pointer-events:none}
 .contact-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:start}
 .contact-left h2{margin-bottom:16px}
 .contact-left>p{font-size:1.0625rem;color:var(--body);line-height:1.75;margin-bottom:28px}
-.demo-promise{background:rgba(200,245,96,0.06);border:1px solid rgba(200,245,96,0.18);padding:20px 24px;margin-bottom:28px}
+.demo-promise{background:rgba(126,200,0,0.06);border:1px solid rgba(126,200,0,0.18);padding:20px 24px;margin-bottom:28px;border-radius:4px;}
 .demo-promise-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:var(--accent);margin-bottom:8px}
 .demo-promise p{font-size:14px;color:var(--body);line-height:1.65;margin:0}
-.demo-steps{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);margin-bottom:24px}
+.demo-steps{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);margin-bottom:24px;border-radius:4px;overflow:hidden;background:var(--bg2);}
 .demo-step{display:flex;gap:16px;padding:16px 20px;border-bottom:1px solid var(--border)}
 .demo-step:last-child{border-bottom:none}
 .demo-step-num{font-family:'Outfit',sans-serif;font-weight:800;font-size:13px;color:var(--accent);min-width:20px;flex-shrink:0;padding-top:1px}
 .demo-step-text{font-size:14px;color:var(--body);line-height:1.6}
-.demo-step-text strong{color:var(--text)}
+.demo-step-text strong{color:var(--text);font-weight:600;}
 .contact-sub-note{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.04em}
-.contact-form{display:flex;flex-direction:column;gap:16px}
+
+.contact-form{display:flex;flex-direction:column;gap:16px;background:var(--bg2);padding:32px;border:1px solid var(--border);border-radius:4px;box-shadow:var(--shadow-sm);}
 .field{display:flex;flex-direction:column;gap:7px}
-.field label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.11em;text-transform:uppercase;color:var(--muted)}
-.field input,.field select,.field textarea{background:var(--bg2);border:1px solid var(--border2);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;padding:13px 16px;outline:none;transition:border-color .2s;width:100%;-webkit-appearance:none;border-radius:0}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
+.field label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.11em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+.field input,.field select,.field textarea{background:var(--bg);border:1px solid var(--border2);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;padding:13px 16px;outline:none;transition:all .3s ease;width:100%;-webkit-appearance:none;border-radius:2px;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(126,200,0,0.15);background:var(--bg3);}
 .field input::placeholder,.field textarea::placeholder{color:var(--muted)}
-.field select option{background:var(--bg2)}
+.field select option{background:var(--bg)}
 .field textarea{resize:none;height:96px;line-height:1.6}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.form-submit{background:var(--accent);color:var(--accent-fg);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.03em;padding:17px 32px;border:none;cursor:pointer;transition:opacity .2s,transform .15s;align-self:flex-start;width:100%}
-.form-submit:hover{opacity:.87;transform:translateY(-1px)}
-.form-foot{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.03em;line-height:1.6}
+.form-submit{background:var(--accent);color:var(--accent-fg);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.03em;padding:17px 32px;border:none;cursor:pointer;transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1);align-self:flex-start;width:100%;border-radius:2px;}
+.form-submit:hover{opacity:.95;transform:translateY(-2px);box-shadow:0 8px 24px rgba(126,200,0,0.25);}
+.form-foot{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.03em;line-height:1.6;margin-top:8px;}
 
-/* ── FOOTER ── */
-footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify-content:space-between;align-items:center}
+footer{border-top:1px solid var(--border);padding:36px 64px;display:flex;justify-content:space-between;align-items:center;background:var(--bg2);}
 .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;color:var(--accent);text-decoration:none}
 .footer-links{display:flex;gap:28px;list-style:none}
-.footer-links a{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s ease}
 .footer-links a:hover{color:var(--text)}
 .footer-copy{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
 
-/* ── REVEAL ── */
 .reveal{opacity:1;transform:none}
-.js-ready .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.js-ready .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);}
 .js-ready .reveal.visible{opacity:1;transform:translateY(0)}
 
-/* ── ANIMATIONS & INTERACTIVITY ── */
-#scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:9998;width:0%;transition:width .05s linear;box-shadow:0 0 6px rgba(74,124,0,0.5)}
+#scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:9998;width:0%;transition:width .05s linear;box-shadow:0 0 8px rgba(126,200,0,0.6)}
 
 .hero-left>*{opacity:1;transform:none}
 .js-ready .hero-left>*{opacity:0;transform:translateY(24px)}
-.js-ready .hero-animate .hero-eyebrow{animation:heroIn .6s .05s cubic-bezier(.22,1,.36,1) forwards}
-.js-ready .hero-animate h1{animation:heroIn .7s .15s cubic-bezier(.22,1,.36,1) forwards}
-.js-ready .hero-animate .hero-qualifier{animation:heroIn .6s .25s cubic-bezier(.22,1,.36,1) forwards}
-.js-ready .hero-animate .hero-sub{animation:heroIn .6s .32s cubic-bezier(.22,1,.36,1) forwards}
-.js-ready .hero-animate .hero-actions{animation:heroIn .6s .42s cubic-bezier(.22,1,.36,1) forwards}
-.js-ready .hero-animate .hero-stats{animation:heroIn .6s .52s cubic-bezier(.22,1,.36,1) forwards}
+.js-ready .hero-animate .hero-eyebrow{animation:heroIn .8s .05s cubic-bezier(0.16, 1, 0.3, 1) forwards}
+.js-ready .hero-animate h1{animation:heroIn .8s .15s cubic-bezier(0.16, 1, 0.3, 1) forwards}
+.js-ready .hero-animate .hero-qualifier{animation:heroIn .8s .25s cubic-bezier(0.16, 1, 0.3, 1) forwards}
+.js-ready .hero-animate .hero-sub{animation:heroIn .8s .35s cubic-bezier(0.16, 1, 0.3, 1) forwards}
+.js-ready .hero-animate .hero-actions{animation:heroIn .8s .45s cubic-bezier(0.16, 1, 0.3, 1) forwards}
+.js-ready .hero-animate .hero-stats{animation:heroIn .8s .55s cubic-bezier(0.16, 1, 0.3, 1) forwards}
 @keyframes heroIn{to{opacity:1;transform:translateY(0)}}
 
 .hero-right{opacity:1;transform:none}
-.js-ready .hero-right{opacity:0;transform:translateX(20px);transition:opacity .8s .4s ease,transform .8s .4s cubic-bezier(.22,1,.36,1)}
+.js-ready .hero-right{opacity:0;transform:translateX(24px);transition:opacity 1s .4s ease,transform 1s .4s cubic-bezier(0.16, 1, 0.3, 1)}
 .js-ready .hero-animate .hero-right{opacity:1;transform:translateX(0)}
 
-#cursor-glow{position:fixed;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(74,124,0,0.06) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}
+#cursor-glow{position:fixed;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(126,200,0,0.06) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}
 
 .stat-num{transition:color .3s}
 
-.compare-table tbody tr{transition:background .2s,transform .15s}
-.compare-table tbody tr:hover{background:rgba(200,245,96,0.04)}
 .compare-table tbody tr:hover td.fn{color:var(--white)}
 
 .s-tab{cursor:pointer;transition:background .2s,color .2s;user-select:none}
-.s-tab:hover{color:var(--body);background:var(--bg2)}
 .sunday-content-pane{display:none}
 .sunday-content-pane.active{display:block}
 
 .roas-flip{position:relative;display:inline-block;cursor:default}
 .roas-flip .roas-reported{display:inline;transition:opacity .3s}
-.roas-flip .roas-true{display:none;color:var(--red);font-weight:700}
+.roas-flip .roas-true{display:none;color:var(--red);font-weight:800}
 .roas-flip.revealed .roas-reported{display:none}
 .roas-flip.revealed .roas-true{display:inline}
 
-.price-card,.why-item,.step,.problem-item{transition:background .25s,transform .2s,box-shadow .2s}
-.price-card:hover,.why-item:hover,.step:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.35)}
-.problem-item:hover{transform:translateY(-2px)}
-
 .demo-metric-row{opacity:1;transform:none}
-.js-ready .demo-metric-row{opacity:0;transform:translateX(-10px);transition:opacity .4s ease,transform .4s ease}
+.js-ready .demo-metric-row{opacity:0;transform:translateX(-12px);transition:opacity .6s cubic-bezier(0.16, 1, 0.3, 1), transform .6s cubic-bezier(0.16, 1, 0.3, 1)}
 .js-ready .demo-metric-row.in-view{opacity:1;transform:translateX(0)}
 
-.type-cursor{display:inline-block;width:3px;height:0.85em;background:var(--accent);vertical-align:middle;margin-left:3px;animation:blink .85s step-end infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-
-.field input:focus,.field select:focus,.field textarea:focus{box-shadow:0 0 0 2px rgba(200,245,96,0.15)}
-
-.platform-card{transition:background .2s,transform .2s}
-.platform-card:hover{transform:scale(1.03)}
-
-.nav-links a{position:relative}
-.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--accent);transition:width .25s ease}
-.nav-links a:hover::after{width:100%}
-
-@keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(200,245,96,.4)}70%{box-shadow:0 0 0 6px rgba(200,245,96,0)}}
+@keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(126,200,0,.4)}70%{box-shadow:0 0 0 6px rgba(126,200,0,0)}}
 .live-dot{animation:pulse 1.5s ease-in-out infinite,livePulse 2s ease-out infinite}
 
-.section-eyebrow::after{transition:max-width .6s .2s ease,opacity .4s}
+.section-eyebrow::after{transition:max-width .8s .2s cubic-bezier(0.16, 1, 0.3, 1),opacity .5s}
 .reveal:not(.visible) .section-eyebrow::after{max-width:0;opacity:0}
 
-/* ── MODALS ── */
-.modal-overlay{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.82);backdrop-filter:blur(6px);overflow-y:auto;padding:40px 20px}
-.modal-box{max-width:680px;margin:0 auto;background:var(--bg2);border:1px solid var(--border2);position:relative}
-.modal-sticky-header{position:sticky;top:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;z-index:1}
-.modal-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;color:var(--white)}
-.modal-close-btn{background:none;border:1px solid var(--border2);color:var(--muted);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;padding:7px 14px;transition:color .2s,border-color .2s}
-.modal-close-btn:hover{color:var(--text);border-color:var(--text)}
-.modal-body{padding:32px;font-size:15px;color:var(--body);line-height:1.8}
-.modal-body h3{font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:var(--white);margin:28px 0 10px}
+/* Modals */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);overflow-y:auto;padding:40px 20px}
+.modal-box{max-width:760px;margin:0 auto;background:var(--bg2);border:1px solid var(--border2);position:relative;border-radius:4px;box-shadow:var(--shadow-lg);transform:translateY(20px);transition:transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);opacity:0;animation:modalIn 0.4s forwards;}
+@keyframes modalIn{to{opacity:1;transform:translateY(0)}}
+.modal-sticky-header{position:sticky;top:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:24px 40px;display:flex;justify-content:space-between;align-items:center;z-index:1;border-top-left-radius:4px;border-top-right-radius:4px;}
+.modal-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:18px;color:var(--white)}
+.modal-close-btn{background:transparent;border:1px solid var(--border2);color:var(--muted);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;padding:8px 16px;transition:all 0.3s ease;border-radius:2px;}
+.modal-close-btn:hover{color:var(--text);border-color:var(--text);background:var(--bg);}
+.modal-body{padding:40px;font-size:15px;color:var(--body);line-height:1.8}
+.modal-body h3{font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:var(--white);margin:32px 0 12px}
 .modal-body h3:first-child{margin-top:0}
-.modal-body a{color:var(--accent);text-decoration:none}
-.modal-body ul{margin-left:22px;margin-bottom:4px;list-style:disc}
-.modal-body ul li{margin-bottom:4px}
-.modal-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:28px}
+.modal-body a{color:var(--accent);text-decoration:none;font-weight:500;}
+.modal-body a:hover{text-decoration:underline;}
+.modal-body ul{margin-left:24px;margin-bottom:16px;list-style:square;}
+.modal-body ul li{margin-bottom:8px}
+.modal-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:32px;letter-spacing:0.04em;}
 
-.success-overlay{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.88);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px}
-.success-box{max-width:460px;width:100%;background:var(--bg2);border:1px solid var(--border2);padding:52px 44px;text-align:center}
-.success-icon{width:56px;height:56px;background:rgba(200,245,96,0.12);border:1px solid rgba(200,245,96,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:22px}
-.success-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:var(--white);letter-spacing:-0.01em;margin-bottom:12px}
+.success-overlay{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.9);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
+.success-box{max-width:480px;width:100%;background:var(--bg2);border:1px solid var(--border2);padding:56px 48px;text-align:center;border-radius:4px;transform:scale(0.95);animation:modalIn 0.4s forwards;}
+.success-icon{width:64px;height:64px;background:rgba(126,200,0,0.12);border:2px solid rgba(126,200,0,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-size:28px;color:var(--accent);}
+.success-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:var(--white);letter-spacing:-0.01em;margin-bottom:12px}
 .success-body{font-size:15px;color:var(--body);line-height:1.7;margin-bottom:32px}
-.success-close{background:var(--accent);color:var(--accent-fg);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;padding:13px 28px;border:none;cursor:pointer;transition:opacity .2s}
-.success-close:hover{opacity:.87}
+.success-close{background:var(--accent);color:var(--accent-fg);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.04em;padding:16px 32px;border:none;cursor:pointer;transition:all 0.3s ease;border-radius:2px;width:100%;}
+.success-close:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 8px 24px rgba(126,200,0,0.25);}
 
-/* ── DARK MODE TOGGLE ── */
 .theme-switcher{display:flex;align-items:center;background:var(--bg3);border:1px solid var(--border2);border-radius:4px;padding:3px;gap:2px;flex-shrink:0}
-.theme-opt{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);cursor:pointer;border:none;background:transparent;transition:background .2s,color .2s;white-space:nowrap;line-height:1}
-.theme-opt:hover{color:var(--body)}
-.theme-opt.active{background:var(--bg);color:var(--text);box-shadow:0 1px 3px var(--shadow)}
+.theme-opt{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;border:none;background:transparent;transition:all 0.3s ease;white-space:nowrap;line-height:1;font-weight:500;}
+.theme-opt:hover{color:var(--body);background:rgba(255,255,255,0.05);}
+.theme-opt.active{background:var(--bg);color:var(--text);box-shadow:var(--shadow-sm);}
 html.dark .theme-opt.active{background:var(--bg2)}
 .theme-opt-icon{font-size:12px;line-height:1}
 
-/* ── LANGUAGE SWITCHER ── */
 .lang-switcher{display:flex;align-items:center;background:var(--bg3);border:1px solid var(--border2);border-radius:4px;padding:3px;gap:2px;flex-shrink:0}
-.lang-opt{display:flex;align-items:center;padding:5px 10px;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;border:none;background:transparent;transition:background .2s,color .2s;white-space:nowrap;line-height:1;font-weight:500}
-.lang-opt:hover{color:var(--body)}
-.lang-opt.active{background:var(--bg);color:var(--text);box-shadow:0 1px 3px var(--shadow)}
+.lang-opt{display:flex;align-items:center;padding:6px 12px;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;border:none;background:transparent;transition:all 0.3s ease;white-space:nowrap;line-height:1;font-weight:500}
+.lang-opt:hover{color:var(--body);background:rgba(255,255,255,0.05);}
+.lang-opt.active{background:var(--bg);color:var(--text);box-shadow:var(--shadow-sm);}
 html.dark .lang-opt.active{background:var(--bg2)}
-
-/* ── MOBILE FIXES ── */
-.compare-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.compare-table{min-width:560px}
 
 @media(max-width:480px){
   .steps{grid-template-columns:1fr}
@@ -424,19 +397,13 @@ html.dark .lang-opt.active{background:var(--bg2)}
   h2{font-size:clamp(24px,7vw,38px)}
   .hero-qualifier{font-size:10px}
   .sunday-wrap{margin-top:32px}
+  .nav-cta{display:none}
 }
-
 @media(max-width:960px){
   .theme-label,.lang-label{display:none}
   .theme-opt,.lang-opt{padding:6px 9px}
   .nav-cta{font-size:11px;padding:9px 14px;letter-spacing:0.01em}
   .theme-switcher,.lang-switcher{padding:2px;gap:1px}
-}
-@media(max-width:480px){
-  .nav-cta{display:none}
-}
-
-@media(max-width:960px){
   .hero{grid-template-columns:1fr}.hero-right{display:none}
   nav{padding:0 24px}.nav-links{display:none}
   .section,.contact-section,.waitlist-section{padding:64px 24px}
@@ -451,6 +418,7 @@ html.dark .lang-opt.active{background:var(--bg2)}
   .demo-col:first-child{border-right:none;border-bottom:1px solid var(--border)}
   .platforms-grid{justify-content:flex-start}
   .sunday-tabs{overflow-x:auto}
+  #roi-calc-wrap {grid-template-columns:1fr !important;}
 }
 </style>
 </head>
@@ -458,15 +426,15 @@ html.dark .lang-opt.active{background:var(--bg2)}
 <div id="scroll-progress"></div>
 <div id="cursor-glow"></div>
 
-<nav>
+<nav id="main-nav">
   <a href="#" class="logo">7Captur</a>
   <ul class="nav-links">
     <li><a href="#how" data-i18n="nav.how">How it works</a></li>
-    <li><a href="#demo" data-i18n="nav.demo">Live demo</a></li>
+    <li><a href="#demo" data-i18n="nav.demo">Try Demo</a></li>
     <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
     <li><a href="#platforms" data-i18n="nav.platforms">Platforms</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:10px">
+  <div style="display:flex;align-items:center;gap:12px">
     <div class="lang-switcher" role="group" aria-label="Language">
       <button class="lang-opt active" id="lang-en">EN</button>
       <button class="lang-opt" id="lang-fr">FR</button>
@@ -487,17 +455,17 @@ html.dark .lang-opt.active{background:var(--bg2)}
   <div class="hero-left">
     <div class="hero-eyebrow">
       <div class="eyebrow-dot"></div>
-      <span class="eyebrow-text mono" data-i18n="hero.eyebrow">AI Decision Intelligence · E-Commerce</span>
+      <span class="eyebrow-text mono" data-i18n="hero.eyebrow">Assisted Execution · E-Commerce</span>
     </div>
 
-    <h1 data-i18n-html="hero.h1">Finally know <em>exactly</em> which ads are losing you money—and pause them with one click.</h1>
+    <h1 data-i18n-html="hero.h1">Three decisions every Monday. One email. You click <em>'Approve'</em> — we handle the API change instantly.</h1>
 
     <div class="hero-qualifier mono">
-      <span data-i18n-html="hero.qualifier">Built for ambitious e-commerce brands</span>
+      <span data-i18n-html="hero.qualifier">Built for brands spending $5k+/mo on ads</span>
     </div>
 
     <p class="hero-sub">
-      <span data-i18n-html="hero.sub">Your ad platform shows you ROAS. But after your platform fees, returns, and cost of goods—<strong>half of what looks profitable is actually breaking even or bleeding cash.</strong><br><br>Every Monday morning, we send you three plain-English decisions based on your real numbers. Don't log into Ads Manager. Just click the button in your email to execute the change instantly via API. No new dashboards. No analysts. Just answers and action.</span>
+      <span data-i18n-html="hero.sub">Your ad platform shows you ROAS. But after platform fees, returns, and cost of goods—<strong>half of what looks profitable is actually losing money.</strong><br><br>Every Monday, we send you three plain-English decisions based on your real numbers. Each one shows a confidence score, an exact dollar impact, and a return-lag note. You click 'Approve' and we execute the API change. Or click 'Dismiss' — and nothing happens. <strong>You are always in control.</strong></span>
     </p>
 
     <div class="hero-actions">
@@ -527,7 +495,7 @@ html.dark .lang-opt.active{background:var(--bg2)}
       <div class="report-header">
         <div>
           <div class="report-store">Luminary Candle Co.</div>
-          <div class="report-week mono" data-i18n="report.week">Week 22 · May 26 – Jun 1, 2025</div>
+          <div class="report-week mono" data-i18n="report.week">Week 22 · May 26 – Jun 1</div>
           <span class="report-badge">Shopify · Meta Ads · Klaviyo</span>
         </div>
         <div class="report-kpis">
@@ -546,18 +514,19 @@ html.dark .lang-opt.active{background:var(--bg2)}
       <div class="decisions-label mono" data-i18n="report.decisionsLabel">This week's decisions</div>
       <div class="decision-item">
         <span class="d-num">01</span>
-        <span class="d-text" data-i18n-html="report.d1"><strong>Pause Meta campaign #4182 today.</strong><span class="d-tag tag-warn">Losing $0.40/order</span><br>Platform ROAS shows 1.8× — but after COGS, fees, and returns, true ROAS is 0.9×. This campaign is losing money on every order.</span>
+        <span class="d-text" data-i18n-html="report.d1"><strong>Pause Meta campaign #4182 today.</strong><span class="d-tag tag-warn">Losing $0.40/order</span><br>True ROAS 0.9× after COGS, fees &amp; returns. <em>Confidence: 91% · Returns lag 30 days.</em><br><span style="color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:11px">💰 This pause would save $412 this week.</span></span>
       </div>
       <div class="decision-item">
         <span class="d-num">02</span>
-        <span class="d-text" data-i18n-html="report.d2"><strong>Scale campaign #4178 — it's your only genuinely profitable ad.</strong><span class="d-tag tag-action">True ROAS 2.4×</span><br>After all deductions, this campaign earns $1.40 per dollar spent. Budget it up by 30% this week.</span>
+        <span class="d-text" data-i18n-html="report.d2"><strong>Scale campaign #4178 — your only genuinely profitable ad.</strong><span class="d-tag tag-action">True ROAS 2.4×</span><br>Earns $1.40 per dollar spent after all deductions. Max budget change: 30%. <em>Confidence: 87%</em><br><span style="color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:11px">💰 +$310 estimated upside this week.</span></span>
       </div>
       <div class="decision-item">
         <span class="d-num">03</span>
-        <span class="d-text" data-i18n-html="report.d3"><strong>Margin drop is a fee issue, not pricing.</strong><span class="d-tag tag-info">Save $180/mo</span><br>The 2.1pt dip traces to payment processing. Switching to an annual plan saves ~$180/mo — no price changes needed.</span>
+        <span class="d-text" data-i18n-html="report.d3"><strong>Margin drop is a fee issue, not pricing.</strong><span class="d-tag tag-info">Save $180/mo</span><br>The 2.1pt dip traces to payment processing. Switch to annual plan. <em>Confidence: 96%</em><br><span style="color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:11px">💰 $180/mo recovered with one plan change.</span></span>
       </div>
     </div>
-    <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:14px;letter-spacing:0.04em;" data-i18n="report.footnote">↑ Real report format. Data anonymised for illustration.</p>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:14px;letter-spacing:0.04em;" data-i18n="report.footnote">↑ Real report format. Returns data lags 30 days. Max budget change: 30%. 24h rollback available on all execution actions.</p>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);margin-top:6px;letter-spacing:0.04em;border-top:1px solid var(--border);padding-top:8px;">⚠ You are always responsible for the final action. Click 'Dismiss' and nothing changes.</p>
   </div>
 </section>
 
@@ -704,87 +673,120 @@ html.dark .lang-opt.active{background:var(--bg2)}
 
 <section class="section alt-bg" id="demo">
   <div class="section-inner">
-    <div class="section-eyebrow reveal" data-i18n="demo.eyebrow">The Live Demo</div>
-    <h2 class="reveal" data-i18n-html="demo.h2">We show you your numbers<br>before you pay a <em>single dollar.</em></h2>
-    <p class="section-sub reveal" data-i18n="demo.sub">Connect your store, we run a real report, and you see exactly what you'd receive every Monday — including which campaigns are losing you money right now. If you don't see at least one decision you'd act on immediately, we tell you it's not the right fit and you walk away. No invoice.</p>
+    <div class="section-eyebrow reveal" data-i18n="demo.eyebrow">Try Assisted Execution (Simulated)</div>
+    <h2 class="reveal" data-i18n-html="demo.h2">See exactly how it works<br>before you pay a <em>single dollar.</em></h2>
+    <p class="section-sub reveal" data-i18n="demo.sub">Simulate a real Monday report using dummy store data. Click "Approve" on any decision to see how the API execution works — with full safety rails. No real accounts needed. When you're ready, we'll run the same report with your actual store.</p>
 
     <div class="demo-hero reveal">
       <div class="demo-hero-header">
-        <div class="demo-hero-label"><span>// </span><span data-i18n="demo.headerLabel">Sample report — Luminary Candle Co. · Week 22</span></div>
-        <div class="demo-live-badge"><div class="live-dot"></div> <span data-i18n="demo.realDataFormat">Real data format</span></div>
+        <div class="demo-hero-label"><span>// </span><span data-i18n="demo.headerLabel">Simulated report — Luminary Candle Co. (Dummy Data) · Week 22</span></div>
+        <div class="demo-live-badge"><div class="live-dot"></div> <span data-i18n="demo.realDataFormat">Simulated · Dummy accounts</span></div>
       </div>
-      <div class="demo-hero-body">
-        <div class="demo-col">
-          <div class="demo-col-label mono" data-i18n="demo.col1Label">Ad profitability breakdown — this week</div>
-          <div class="demo-metric-row">
-            <div>
-              <div class="demo-metric-name" data-i18n="demo.m.c1r1.name">Campaign #4182 — "Summer Collection"</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px" data-i18n="demo.m.c1r1.roas">Meta reported ROAS: 1.8×</div>
+
+      <div style="background:rgba(160,120,0,0.08);border-bottom:1px solid rgba(160,120,0,0.25);padding:12px 32px;display:flex;align-items:center;gap:10px;">
+        <span style="font-size:15px">⚠</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:0.04em;">Simulated demo using dummy data. Your real report will use your actual store and ad accounts.</span>
+      </div>
+
+      <div id="sandbox-pre" style="padding:48px 32px;text-align:center;background:var(--bg2);">
+        <p style="font-size:15px;color:var(--body);margin-bottom:24px;line-height:1.7;">This sandbox is connected to <strong style="color:var(--text)">dummy Shopify + dummy Meta/Google accounts</strong>.<br>Click below to generate a simulated weekly Assisted Execution report.</p>
+        <button id="simulate-btn" class="btn-primary" style="margin:0 auto;cursor:pointer;border:none;font-size:14px;padding:16px 36px;">▶ Simulate a Report</button>
+      </div>
+
+      <div id="sandbox-decisions" style="display:none;">
+        <div style="padding:20px 32px;border-bottom:1px solid var(--border);background:var(--bg3);">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;">3 Assisted Execution decisions ready · Week 22</span>
+        </div>
+
+        <div class="sandbox-decision" id="sd1" style="padding:28px 32px;border-bottom:1px solid var(--border);background:var(--bg);">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;">
+            <div style="flex:1;min-width:280px;">
+              <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:var(--white);margin-bottom:6px;">Pause Meta campaign #4182 — "Summer Collection"</div>
+              <div style="font-size:14px;color:var(--body);line-height:1.65;margin-bottom:12px;">True ROAS 0.9× after COGS, fees &amp; returns (platform shows 1.8×). Losing money on every order.</div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;background:rgba(126,200,0,0.1);color:var(--accent);padding:4px 8px;border:1px solid rgba(126,200,0,0.2);border-radius:2px;">Confidence: 91%</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;background:rgba(245,200,96,0.1);color:var(--gold);padding:4px 8px;border:1px solid rgba(245,200,96,0.2);border-radius:2px;">Returns lag 30 days</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;background:rgba(126,200,0,0.1);color:var(--accent);padding:4px 8px;border:1px solid rgba(126,200,0,0.2);border-radius:2px;">💰 Saves $412 this week</span>
+              </div>
             </div>
-            <div>
-              <div class="demo-metric-val down" data-i18n="demo.m.c1r1.val">0.9× true</div>
-              <div class="demo-metric-note" data-i18n="demo.m.c1r1.note">after COGS + fees + returns</div>
+            <div id="sd1-actions" style="display:flex;gap:10px;align-items:center;flex-shrink:0;">
+              <button onclick="sandboxApprove(1,'Pause campaign #4182')" style="background:var(--accent);color:var(--accent-fg);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;padding:12px 20px;border:none;cursor:pointer;border-radius:2px;transition:all 0.3s ease;">✓ Approve</button>
+              <button onclick="sandboxDismiss(1)" style="background:transparent;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:12px 16px;border:1px solid var(--border2);cursor:pointer;border-radius:2px;transition:all 0.3s ease;">Dismiss</button>
             </div>
-          </div>
-          <div class="demo-metric-row">
-            <div>
-              <div class="demo-metric-name" data-i18n="demo.m.c1r2.name">Campaign #4178 — "Bestsellers Retarget"</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px" data-i18n="demo.m.c1r2.roas">Meta reported ROAS: 2.6×</div>
-            </div>
-            <div>
-              <div class="demo-metric-val up" data-i18n="demo.m.c1r2.val">2.4× true</div>
-              <div class="demo-metric-note" data-i18n="demo.m.c1r2.note">scale this one</div>
-            </div>
-          </div>
-          <div class="demo-metric-row">
-            <div>
-              <div class="demo-metric-name" data-i18n="demo.m.c1r3.name">Campaign #4165 — "New Arrivals Broad"</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px" data-i18n="demo.m.c1r3.roas">Meta reported ROAS: 1.4×</div>
-            </div>
-            <div>
-              <div class="demo-metric-val warn" data-i18n="demo.m.c1r3.val">0.96× true</div>
-              <div class="demo-metric-note" data-i18n="demo.m.c1r3.note">borderline — watch</div>
-            </div>
-          </div>
-          <div class="demo-metric-row">
-            <div>
-              <div class="demo-metric-name" data-i18n="demo.m.c1r4.name">Weekly spend on loss-making ads</div>
-            </div>
-            <div>
-              <div class="demo-metric-val down" data-i18n="demo.m.c1r4.val">$640</div>
-              <div class="demo-metric-note" data-i18n="demo.m.c1r4.note">recoverable this week</div>
-            </div>
+            <div id="sd1-result" style="display:none;width:100%;animation:modalIn 0.3s forwards;"></div>
           </div>
         </div>
-        <div class="demo-col">
-          <div class="demo-col-label mono" data-i18n="demo.col2Label">Margin analysis — week over week</div>
-          <div class="demo-metric-row">
-            <div class="demo-metric-name" data-i18n="demo.m.c2r1.name">Gross revenue</div>
-            <div><div class="demo-metric-val" data-i18n="demo.m.c2r1.val">$14,200</div><div class="demo-metric-note" data-i18n="demo.m.c2r1.note">↑ 12% vs last week</div></div>
-          </div>
-          <div class="demo-metric-row">
-            <div class="demo-metric-name" data-i18n="demo.m.c2r2.name">Platform fees (Shopify Payments)</div>
-            <div><div class="demo-metric-val down" data-i18n="demo.m.c2r2.val">−$384</div><div class="demo-metric-note" data-i18n="demo.m.c2r2.note">fixable: switch to annual plan</div></div>
-          </div>
-          <div class="demo-metric-row">
-            <div class="demo-metric-name" data-i18n="demo.m.c2r3.name">Returns this week</div>
-            <div><div class="demo-metric-val warn" data-i18n="demo.m.c2r3.val">$1,140</div><div class="demo-metric-note" data-i18n="demo.m.c2r3.note">up 3.2pts — investigate SKU #18</div></div>
-          </div>
-          <div class="demo-metric-row">
-            <div class="demo-metric-name" data-i18n="demo.m.c2r4.name">Net margin this week</div>
-            <div><div class="demo-metric-val down" data-i18n="demo.m.c2r4.val">4.1%</div><div class="demo-metric-note" data-i18n="demo.m.c2r4.note">↓ 2.1pts vs last week</div></div>
-          </div>
-          <div class="demo-metric-row">
-            <div class="demo-metric-name" data-i18n="demo.m.c2r5.name">Recoverable margin this week</div>
-            <div><div class="demo-metric-val up" data-i18n="demo.m.c2r5.val">+$820</div><div class="demo-metric-note" data-i18n="demo.m.c2r5.note">if you act on all 3 decisions</div></div>
+
+        <div class="sandbox-decision" id="sd2" style="padding:28px 32px;border-bottom:1px solid var(--border);background:var(--bg);">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;">
+            <div style="flex:1;min-width:280px;">
+              <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:var(--white);margin-bottom:6px;">Scale campaign #4178 — "Bestsellers Retarget" (+30% budget)</div>
+              <div style="font-size:14px;color:var(--body);line-height:1.65;margin-bottom:12px;">True ROAS 2.4×. Earns $1.40 per dollar spent after all deductions. Max change capped at 30%.</div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;background:rgba(126,200,0,0.1);color:var(--accent);padding:4px 8px;border:1px solid rgba(126,200,0,0.2);border-radius:2px;">Confidence: 87%</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;background:rgba(245,200,96,0.1);color:var(--gold);padding:4px 8px;border:1px solid rgba(245,200,96,0.2);border-radius:2px;">Max 30% budget change</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;background:rgba(126,200,0,0.1);color:var(--accent);padding:4px 8px;border:1px solid rgba(126,200,0,0.2);border-radius:2px;">💰 +$310 upside this week</span>
+              </div>
+            </div>
+            <div id="sd2-actions" style="display:flex;gap:10px;align-items:center;flex-shrink:0;">
+              <button onclick="sandboxApprove(2,'Scale campaign #4178 by 30%')" style="background:var(--accent);color:var(--accent-fg);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;padding:12px 20px;border:none;cursor:pointer;border-radius:2px;transition:all 0.3s ease;">✓ Approve</button>
+              <button onclick="sandboxDismiss(2)" style="background:transparent;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:12px 16px;border:1px solid var(--border2);cursor:pointer;border-radius:2px;transition:all 0.3s ease;">Dismiss</button>
+            </div>
+            <div id="sd2-result" style="display:none;width:100%;animation:modalIn 0.3s forwards;"></div>
           </div>
         </div>
-      </div>
-      <div class="demo-cta-row">
-        <p class="demo-cta-text" data-i18n-html="demo.ctaText"><strong>Want to see this with your actual store's numbers?</strong> That's exactly what the free demo is.</p>
-        <a href="#contact" class="btn-primary" style="flex-shrink:0" data-i18n="demo.ctaBtn">Book the free demo →</a>
+
+        <div class="sandbox-decision" id="sd3" style="padding:28px 32px;background:var(--bg);">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;">
+            <div style="flex:1;min-width:280px;">
+              <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:var(--white);margin-bottom:6px;">Switch Shopify Payments to annual plan — save $180/mo</div>
+              <div style="font-size:14px;color:var(--body);line-height:1.65;margin-bottom:12px;">2.1pt margin dip traces to monthly payment processing fee. One plan change fixes it permanently.</div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;background:rgba(126,200,0,0.1);color:var(--accent);padding:4px 8px;border:1px solid rgba(126,200,0,0.2);border-radius:2px;">Confidence: 96%</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;background:rgba(126,200,0,0.1);color:var(--accent);padding:4px 8px;border:1px solid rgba(126,200,0,0.2);border-radius:2px;">💰 $180/mo recovered</span>
+              </div>
+            </div>
+            <div id="sd3-actions" style="display:flex;gap:10px;align-items:center;flex-shrink:0;">
+              <button onclick="sandboxApprove(3,'Switch to annual Shopify plan')" style="background:var(--accent);color:var(--accent-fg);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;padding:12px 20px;border:none;cursor:pointer;border-radius:2px;transition:all 0.3s ease;">✓ Approve</button>
+              <button onclick="sandboxDismiss(3)" style="background:transparent;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:12px 16px;border:1px solid var(--border2);cursor:pointer;border-radius:2px;transition:all 0.3s ease;">Dismiss</button>
+            </div>
+            <div id="sd3-result" style="display:none;width:100%;animation:modalIn 0.3s forwards;"></div>
+          </div>
+        </div>
+
+        <div style="background:rgba(126,200,0,0.05);border-top:1px solid rgba(126,200,0,0.15);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+          <div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.06em;">⚠ You are always responsible for the final action. · 24h rollback available after execution. · Max 30% budget change per decision.</span>
+          </div>
+          <a href="#contact" class="btn-primary" style="flex-shrink:0;font-size:13px;padding:14px 24px;">Run with my real data →</a>
+        </div>
       </div>
     </div>
+
+    <script>
+    document.getElementById('simulate-btn').addEventListener('click', function() {
+      document.getElementById('sandbox-pre').style.display = 'none';
+      document.getElementById('sandbox-decisions').style.display = 'block';
+    });
+    function sandboxApprove(n, actionLabel) {
+      const result = document.getElementById('sd'+n+'-result');
+      const actions = document.getElementById('sd'+n+'-actions');
+      actions.style.display = 'none';
+      result.style.display = 'block';
+      result.innerHTML = '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:12px;background:rgba(126,200,0,0.1);color:var(--accent);border:1px solid rgba(126,200,0,0.25);padding:14px 18px;border-radius:4px;margin-top:12px;">'
+        + '<strong>✓ Executed (Simulated)</strong><br>'
+        + actionLabel + ' — dummy API call sent.<br>'
+        + '<span style="color:var(--muted);font-size:11px;">24h rollback available · No real accounts affected.</span></div>';
+    }
+    function sandboxDismiss(n) {
+      const result = document.getElementById('sd'+n+'-result');
+      const actions = document.getElementById('sd'+n+'-actions');
+      actions.style.display = 'none';
+      result.style.display = 'block';
+      result.innerHTML = '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:12px;background:rgba(155,155,155,0.08);color:var(--muted);border:1px solid var(--border2);padding:14px 18px;border-radius:4px;margin-top:12px;">'
+        + '— Dismissed. Nothing changed.</div>';
+    }
+    </script>
   </div>
 </section>
 
@@ -800,7 +802,7 @@ html.dark .lang-opt.active{background:var(--bg2)}
           <tr>
             <th data-i18n="compare.th.task">The task</th>
             <th data-i18n="compare.th.diy">Doing it yourself right now</th>
-            <th class="hl" data-i18n="compare.th.captur">With 7Captur</th>
+            <th class="hl" data-i18n="compare.th.captur">With 7Captur Assisted Execution</th>
           </tr>
         </thead>
         <tbody data-i18n-html="compare.tbody">
@@ -812,7 +814,7 @@ html.dark .lang-opt.active{background:var(--bg2)}
           <tr>
             <td class="fn">Executing campaign changes</td>
             <td>Logging into Meta/Google, finding the campaign, manually pausing or scaling.</td>
-            <td class="hl"><span class="ck">✓</span> 1-Click execution webhook buttons embedded directly inside your weekly email.</td>
+            <td class="hl"><span class="ck">✓</span> Click 'Approve' in your email — we execute via API. Click 'Dismiss' — nothing changes. 24h rollback always available.</td>
           </tr>
           <tr>
             <td class="fn">Understanding margin drops</td>
@@ -855,15 +857,15 @@ html.dark .lang-opt.active{background:var(--bg2)}
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <div class="step-title" data-i18n="how.step3.title">3 decisions & 1-Click execution</div>
-        <p class="step-body" data-i18n="how.step3.body">Every Monday before 9am: three plain-English decisions in your inbox. Click the embedded button below each insight to instantly pause or scale campaigns via API. No logging in.</p>
+        <div class="step-title" data-i18n="how.step3.title">3 decisions + Assisted Execution</div>
+        <p class="step-body" data-i18n="how.step3.body">Every Monday before 9am: three plain-English decisions in your inbox, each with a confidence score and dollar impact preview. Click 'Approve' to execute via API — or 'Dismiss' and nothing changes. Built-in safety rails limit budget changes to max 30% and a 24h rollback is always available.</p>
         <div class="step-tags"><span class="tech-tag">Email report</span><span class="tech-tag">Webhooks</span></div>
       </div>
       <div class="step">
         <div class="step-num">04</div>
         <div class="step-title" data-i18n="how.step4.title">The 30-Day Decision</div>
-        <p class="step-body" data-i18n="how.step4.body">After your 30-Day Paid Audit, you review the ROI. If you stay, it's a flat monthly fee. If you leave, you keep the entire automated infrastructure we built for you.</p>
-        <div class="step-tags"><span class="tech-tag">Zero contracts</span><span class="tech-tag">Pipeline ownership</span></div>
+        <p class="step-body" data-i18n="how.step4.body">After your 30-Day Paid Audit, you review the ROI. If you stay, it's a flat monthly fee based on your ad spend. If you cancel, you receive a JSON export of your logic and data. To keep infrastructure running automatically after cancellation, switch to our $299/mo Maintenance Plan.</p>
+        <div class="step-tags"><span class="tech-tag">Zero contracts</span><span class="tech-tag">Logic ownership</span></div>
       </div>
     </div>
   </div>
@@ -872,11 +874,10 @@ html.dark .lang-opt.active{background:var(--bg2)}
 <section class="section" id="pricing">
   <div class="section-inner">
     <div class="section-eyebrow reveal" data-i18n="pricing.eyebrow">Pricing</div>
-    <h2 class="reveal" data-i18n-html="pricing.h2">The 30-Day Paid Audit.<br><em>Zero contracts. Zero lock-in.</em></h2>
-    <p class="section-sub reveal" data-i18n="pricing.sub">We don't charge inflated setup fees or force 12-month contracts. You pay a flat fee for the first 30 days while we build your system. If it doesn't pay for itself, you walk away and keep the tech.</p>
+    <h2 class="reveal" data-i18n-html="pricing.h2">Fair, spend-based tiers.<br><em>Assisted Execution. Zero lock-in.</em></h2>
+    <p class="section-sub reveal" data-i18n="pricing.sub">Start with a 30-day paid audit — 100% credited if you continue. After Phase 1, our retainer automatically scales with your ad spend volume to ensure you never overpay while we handle increased data complexity.</p>
 
     <div class="pricing-grid reveal">
-
       <div class="price-card">
         <div class="price-tier mono" data-i18n="pricing.starter.tier">Phase 1</div>
         <div class="price-name" data-i18n="pricing.starter.name">30-Day Paid Audit</div>
@@ -885,9 +886,9 @@ html.dark .lang-opt.active{background:var(--bg2)}
           <span class="price-amount" data-i18n="pricing.starter.amount">$499</span>
           <span class="price-period mono" data-i18n="pricing.starter.period">flat fee</span>
         </div>
-        <div class="price-note-small" data-i18n-html="pricing.starter.note">Flat fee for the first 30 days.<br><strong>You own the pipeline if you cancel.</strong></div>
+        <div class="price-note-small" data-i18n-html="pricing.starter.note">Flat fee for the first 30 days.<br><strong>100% Credited to Month 2 if you continue.</strong></div>
         <ul class="price-features" data-i18n-html="pricing.starter.features">
-          <li><span class="ck">✓</span> Full custom API pipeline build</li>
+          <li><span class="ck">✓</span> Pre-built Engine Configured for Your Stack</li>
           <li><span class="ck">✓</span> 1 store + 2 platforms connected</li>
           <li><span class="ck">✓</span> 1-Click email execution buttons</li>
           <li><span class="ck">✓</span> 4 weekly intelligence reports</li>
@@ -896,46 +897,93 @@ html.dark .lang-opt.active{background:var(--bg2)}
       </div>
 
       <div class="price-card featured">
-        <div class="price-badge" data-i18n="pricing.growth.badge">Phase 2</div>
+        <div class="price-badge" data-i18n="pricing.growth.badge">Phase 2 · Tiered Retainer</div>
         <div class="price-tier mono" data-i18n="pricing.growth.tier">Month 2+</div>
         <div class="price-name" data-i18n="pricing.growth.name">Monthly Retainer</div>
-        <p class="price-desc" data-i18n="pricing.growth.desc">Ongoing pipeline management and weekly decision engine after your 30-Day Audit.</p>
-        <div class="price-main">
-          <span class="price-amount" data-i18n="pricing.growth.amount">$799</span>
-          <span class="price-period mono" data-i18n="pricing.growth.period">/month</span>
+        <p class="price-desc" data-i18n="pricing.growth.desc">Ongoing pipeline management and assisted execution. Pricing scales transparently with your ad spend.</p>
+        <div class="price-main" style="display:flex;align-items:baseline;gap:8px;">
+          <span style="font-size:18px;color:var(--muted);">From</span><span class="price-amount" data-i18n="pricing.growth.amount">$599</span>
+          <span class="price-period mono" data-i18n="pricing.growth.period">/mo</span>
         </div>
-        <div class="price-note-small" data-i18n-html="pricing.growth.note">Zero contracts. Cancel anytime.<br><strong>+$149/mo per additional platform.</strong></div>
+        <div class="price-note-small" data-i18n-html="pricing.growth.note">Zero contracts. Cancel anytime.<br><strong>Includes up to 3 Platforms.</strong></div>
         <ul class="price-features" data-i18n-html="pricing.growth.features">
-          <li><span class="ck">✓</span> Everything from the 30-Day Audit</li>
-          <li><span class="ck">✓</span> Continuous True ROAS calculation</li>
-          <li><span class="ck">✓</span> Weekly digest + execution buttons</li>
-          <li><span class="ck">✓</span> Anomaly &amp; margin drop alerts</li>
+          <li><strong>Growth (&lt;$15k spend):</strong> $599/mo</li>
+          <li><strong>Scale ($15k–$30k spend):</strong> $799/mo</li>
+          <li><strong>Pro ($30k–$50k spend):</strong> $1,199/mo</li>
+          <li style="margin-top:12px; border-top:1px solid rgba(255,255,255,0.04); padding-top:12px;"><span class="ck">✓</span> Continuous True ROAS calculation</li>
+          <li><span class="ck">✓</span> Weekly execution + safety rails</li>
           <li><span class="ck">✓</span> Monthly 1-hour strategy call</li>
         </ul>
         <a href="#contact" class="price-cta price-cta-primary" data-i18n="pricing.growth.cta">Book your 30-Day Audit →</a>
       </div>
 
       <div class="price-card">
-        <div class="price-tier mono" data-i18n="pricing.scale.tier">Phase 3</div>
-        <div class="price-name" data-i18n="pricing.scale.name">Custom E-Commerce Engine</div>
-        <p class="price-desc" data-i18n="pricing.scale.desc">For brands with complex stacks. We build fully custom data pipelines tailored to your needs.</p>
+        <div class="price-tier mono" data-i18n="pricing.scale.tier">Phase 3 — Post-Audit Add-on</div>
+        <div class="price-name" data-i18n="pricing.scale.name">Custom Engine Add-on</div>
+        <p class="price-desc" data-i18n="pricing.scale.desc">For complex stacks (> $50k spend, custom LTV, subscription cohorts, 4+ platforms).</p>
         <div class="price-main">
-          <span class="price-amount" data-i18n="pricing.scale.amount">$999+</span>
-          <span class="price-period mono" data-i18n="pricing.scale.period">/month</span>
+          <span class="price-amount" data-i18n="pricing.scale.amount">$1,999</span>
+          <span class="price-period mono" data-i18n="pricing.scale.period">base /mo</span>
         </div>
-        <div class="price-note-small" data-i18n-html="pricing.scale.note">Zero setup fees. Zero lock-in.<br><strong>For complex e-commerce stacks.</strong></div>
+        <div class="price-note-small" data-i18n-html="pricing.scale.note">Enterprise-level data engineering.<br><strong>Without the $120k/yr salary of a data scientist.</strong></div>
         <ul class="price-features" data-i18n-html="pricing.scale.features">
-          <li><span class="ck">✓</span> Custom webhook execution actions</li>
-          <li><span class="ck">✓</span> Advanced LTV cohort analysis</li>
-          <li><span class="ck">✓</span> Weekly calls + quarterly reviews</li>
-          <li><span class="ck">✓</span> Priority support &amp; custom builds</li>
-          <li><span class="ck">✓</span> &amp; more</li>
+          <li><span class="ck">✓</span> Bespoke Engine execution actions</li>
+          <li><span class="ck">✓</span> Advanced LTV & Subscription models</li>
+          <li><span class="ck">✓</span> Custom deduplication logic</li>
+          <li><span class="ck">✓</span> Priority support & custom workflows</li>
         </ul>
-        <a href="#contact" class="price-cta price-cta-ghost" data-i18n="pricing.scale.cta">Request Custom Build</a>
+        <a href="#contact" class="price-cta price-cta-ghost" data-i18n="pricing.scale.cta">Request Custom Engine</a>
       </div>
     </div>
 
     <p class="pricing-footer-note reveal" data-i18n-html="pricing.footerNote">All plans include a free demo with your real store data before you commit.<br>You own everything we build — if you ever leave, the whole system leaves with you. Nothing gets switched off.</p>
+
+    <div class="reveal" style="margin-top:28px;border:1px solid var(--border);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:var(--bg2);border-radius:4px;">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">Churn Protection & Downgrade Path</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:var(--white);margin-bottom:8px;">Maintenance Plan <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--accent);font-weight:400;">$299/mo</span></div>
+        <p style="font-size:14px;color:var(--body);line-height:1.6;max-width:600px;">If you cancel the monthly retainer but want to keep your pipeline running automatically, switch to the Maintenance Plan. This provides vital <strong>API break-fix protection</strong>, server costs, and platform updates so your data never goes dark. You own your logic—always.</p>
+      </div>
+      <a href="#contact" class="btn-ghost" style="flex-shrink:0;font-size:13px;">Learn more →</a>
+    </div>
+
+    <div class="reveal" style="margin-top:40px;border:1px solid var(--border2);overflow:hidden;border-radius:4px;box-shadow:var(--shadow-sm);">
+      <div style="background:var(--bg2);padding:20px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);">// </span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">Dynamic ROI Calculator — Tier Adjusted</span>
+      </div>
+      <div style="padding:40px 32px;display:grid;grid-template-columns:1fr 1fr;gap:48px;background:var(--bg);" id="roi-calc-wrap">
+        <div>
+          <div style="margin-bottom:28px;">
+            <label style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.11em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:12px;">Monthly ad spend ($)</label>
+            <input type="range" id="roi-spend" min="5000" max="60000" step="1000" value="20000"
+              style="width:100%;accent-color:var(--accent);cursor:pointer;" oninput="updateROI()">
+            <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-top:8px;"><span>$5k</span><span id="roi-spend-val" style="color:var(--text);font-weight:bold;">$20,000</span><span>$60k+</span></div>
+          </div>
+          <div>
+            <label style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.11em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:12px;">% of budget currently on losing ads (est.)</label>
+            <input type="range" id="roi-waste" min="5" max="40" step="5" value="20"
+              style="width:100%;accent-color:var(--accent);cursor:pointer;" oninput="updateROI()">
+            <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-top:8px;"><span>5%</span><span id="roi-waste-val" style="color:var(--text);font-weight:bold;">20%</span><span>40%</span></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;justify-content:center;">
+          <div style="border:1px solid var(--border);padding:20px 24px;background:var(--bg2);border-radius:4px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Recoverable ad waste / mo</div>
+            <div id="roi-savings" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:var(--accent);">$2,000</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px;">conservative 50% recovery estimate</div>
+          </div>
+          <div style="border:1px solid var(--border);padding:20px 24px;background:var(--bg2);border-radius:4px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Net ROI vs <span id="dynamic-tier-fee" style="color:var(--text);font-weight:600;">$799/mo</span> retainer</div>
+            <div id="roi-net" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:var(--accent);">+$1,201/mo</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px;">after tier service fee</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:16px 32px;background:var(--bg3);border-top:1px solid var(--border);">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);">⚠ Conservative estimates only. Actual results depend on your store, ad mix, and which decisions you act on. No guarantees implied.</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -962,7 +1010,7 @@ html.dark .lang-opt.active{background:var(--bg2)}
         <div class="platform-icon">➕</div>
         <div class="platform-name" data-i18n="platforms.your.name">Your platform?</div>
         <div class="platform-type mono" data-i18n="platforms.your.type">Request it</div>
-        <a href="#contact" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid rgba(200,245,96,.2);padding:2px 8px;" data-i18n="platforms.request.link">Request →</a>
+        <a href="#contact" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid rgba(126,200,0,.2);padding:2px 8px;border-radius:2px;" data-i18n="platforms.request.link">Request →</a>
       </div>
 
       <div class="platforms-row-label mono" data-i18n="platforms.label.ads">Ad platforms</div>
@@ -982,7 +1030,7 @@ html.dark .lang-opt.active{background:var(--bg2)}
         <div class="platform-icon">➕</div>
         <div class="platform-name" data-i18n="platforms.more.name">More platforms</div>
         <div class="platform-type mono" data-i18n="platforms.more.type">Added on request</div>
-        <a href="#contact" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid rgba(200,245,96,.2);padding:2px 8px;" data-i18n="platforms.request.link">Request →</a>
+        <a href="#contact" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid rgba(126,200,0,.2);padding:2px 8px;border-radius:2px;" data-i18n="platforms.request.link">Request →</a>
       </div>
 
       <div class="platforms-row-label mono" data-i18n="platforms.label.email">Email &amp; retention</div>
@@ -996,7 +1044,7 @@ html.dark .lang-opt.active{background:var(--bg2)}
         <div class="platform-icon">➕</div>
         <div class="platform-name" data-i18n="platforms.other.name">Other tools</div>
         <div class="platform-type mono" data-i18n="platforms.other.type">Added on request</div>
-        <a href="#contact" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid rgba(200,245,96,.2);padding:2px 8px;" data-i18n="platforms.request.link">Request →</a>
+        <a href="#contact" style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid rgba(126,200,0,.2);padding:2px 8px;border-radius:2px;" data-i18n="platforms.request.link">Request →</a>
       </div>
     </div>
   </div>
@@ -1009,8 +1057,8 @@ html.dark .lang-opt.active{background:var(--bg2)}
     <div class="why-grid reveal">
       <div class="why-item" data-i18n-html="why.item1">
         <span class="why-num mono">01 —</span>
-        <div class="why-title">Remote Control Execution, not just advice</div>
-        <p class="why-body">Every other tool gives you a dashboard and leaves. We give you three things to do—and the buttons right inside your email to execute them instantly via API.</p>
+        <div class="why-title">Assisted Execution, not just advice</div>
+        <p class="why-body">Every other tool gives you a dashboard and leaves. We deliver three decisions — each with a confidence score, dollar impact, and 'Approve' or 'Dismiss' button. You stay in control. We handle the API change.</p>
       </div>
       <div class="why-item" data-i18n-html="why.item2">
         <span class="why-num mono">02 —</span>
@@ -1034,8 +1082,52 @@ html.dark .lang-opt.active{background:var(--bg2)}
       </div>
       <div class="why-item" data-i18n-html="why.item6">
         <span class="why-num mono">06 —</span>
-        <div class="why-title">If you leave, the whole system leaves with you</div>
-        <p class="why-body">Every pipeline, automation, and integration we build belongs to you. If you ever cancel, you take the complete system. Nothing gets switched off. No ransom. No handcuffs.</p>
+        <div class="why-title">You own the Logic, we maintain the API</div>
+        <p class="why-body">Every pipeline and logic flow belongs to you. If you cancel, you receive a JSON export of your workflow and all raw data. If you wish to keep the pipeline running automatically, you must switch to a $299/mo Maintenance Plan (covers API auth, server costs, and updates).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq" style="padding-top:64px;padding-bottom:64px;">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">FAQ</div>
+    <h2 class="reveal" style="margin-bottom:32px;">Common questions<br>about <em>Assisted Execution.</em></h2>
+    <div class="reveal" style="border:1px solid var(--border);overflow:hidden;border-radius:4px;">
+      <div style="display:flex;align-items:flex-start;gap:20px;padding:22px 28px;border-bottom:1px solid var(--border);background:rgba(126,200,0,0.04);">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);flex-shrink:0;padding-top:1px;">Q</span>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:var(--white);margin-bottom:5px;">What if I disagree with a decision?</div>
+          <div style="font-size:14px;color:var(--body);line-height:1.65;">→ Click 'Dismiss' and nothing changes. No API calls are made, no budgets move. Every decision requires your explicit approval before anything happens.</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:20px;padding:22px 28px;border-bottom:1px solid var(--border);background:var(--bg);">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);flex-shrink:0;padding-top:1px;">Q</span>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:var(--white);margin-bottom:5px;">How much can a single decision change my ad budget?</div>
+          <div style="font-size:14px;color:var(--body);line-height:1.65;">A maximum of 30% per decision, per week. This is a hard safety rail — no single approval can make a drastic change. You can also roll back any executed action within 24 hours.</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:20px;padding:22px 28px;border-bottom:1px solid var(--border);background:var(--bg);">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);flex-shrink:0;padding-top:1px;">Q</span>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:var(--white);margin-bottom:5px;">Who is responsible for the final action?</div>
+          <div style="font-size:14px;color:var(--body);line-height:1.65;">You are. We provide the analysis and execute only on your explicit approval. You remain the decision-maker — we're the execution layer.</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:20px;padding:22px 28px;border-bottom:1px solid var(--border);background:var(--bg);">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);flex-shrink:0;padding-top:1px;">Q</span>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:var(--white);margin-bottom:5px;">What happens to my data and pipeline if I cancel?</div>
+          <div style="font-size:14px;color:var(--body);line-height:1.65;">You own your logic and data exports — always. If you cancel, you receive a full JSON export of your workflow. To keep the pipeline running automatically, switch to the $299/mo Maintenance Plan. Nothing is switched off without your knowledge.</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:20px;padding:22px 28px;background:var(--bg);">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);flex-shrink:0;padding-top:1px;">Q</span>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:var(--white);margin-bottom:5px;">Is this fully automatic? Does it act without me?</div>
+          <div style="font-size:14px;color:var(--body);line-height:1.65;">No. Nothing executes automatically. Every API change requires your explicit 'Approve' click. We are an <em>assisted</em> execution layer — not an autonomous one.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1109,13 +1201,13 @@ html.dark .lang-opt.active{background:var(--bg2)}
           </select>
         </div>
         <div class="field">
-          <label data-i18n="contact.form.revenue">Monthly revenue (approx.)</label>
+          <label data-i18n="contact.form.adspend">Monthly Ad Spend (approx.)</label>
           <select id="f-revenue">
             <option value="" disabled selected data-i18n="contact.form.revenuePlaceholder">Select a range</option>
-            <option data-i18n="contact.form.rev1">$8k – $25k/mo</option>
-            <option data-i18n="contact.form.rev2">$25k – $100k/mo</option>
-            <option data-i18n="contact.form.rev3">$100k – $500k/mo</option>
-            <option data-i18n="contact.form.rev4">$500k+/mo</option>
+            <option value="under15k" data-i18n="contact.form.rev1">Under $15k/mo</option>
+            <option value="15k-30k" data-i18n="contact.form.rev2">$15k – $30k/mo</option>
+            <option value="30k-50k" data-i18n="contact.form.rev3">$30k – $50k/mo</option>
+            <option value="50k+" data-i18n="contact.form.rev4">$50k+/mo</option>
           </select>
         </div>
         <div class="field"><label data-i18n="contact.form.headache">Biggest data headache right now</label><textarea id="f-headache" placeholder="e.g. I can't tell which ad campaigns are actually profitable after all my costs…" data-i18n-placeholder="contact.form.headachePh"></textarea></div>
@@ -1130,11 +1222,12 @@ html.dark .lang-opt.active{background:var(--bg2)}
   <a href="#" class="footer-logo">7Captur</a>
   <ul class="footer-links">
     <li><a href="#sunday" data-i18n="footer.problem">The problem</a></li>
-    <li><a href="#demo" data-i18n="nav.demo">Live demo</a></li>
+    <li><a href="#demo" data-i18n="nav.demo">Try Demo</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
     <li><a href="#platforms" data-i18n="nav.platforms">Platforms</a></li>
     <li><a href="#contact" data-i18n="footer.bookDemo">Book demo</a></li>
-    <li><a href="#" id="privacy-link" data-i18n="footer.privacy">Privacy</a></li>
+    <li><a href="#" id="privacy-link" data-i18n="footer.privacy">Privacy & Terms</a></li>
   </ul>
   <span class="footer-copy mono" data-i18n="footer.copy">© 2026 7Captur</span>
 </footer>
@@ -1142,30 +1235,28 @@ html.dark .lang-opt.active{background:var(--bg2)}
 <div class="modal-overlay" id="privacy-overlay">
   <div class="modal-box">
     <div class="modal-sticky-header">
-      <span class="modal-title" data-i18n="privacy.title">Privacy Policy</span>
+      <span class="modal-title" data-i18n="privacy.title">Privacy Policy & Terms of Service</span>
       <button class="modal-close-btn" id="privacy-close" data-i18n="modal.close">✕ Close</button>
     </div>
     <div class="modal-body" data-i18n-html="privacy.body">
-      <p class="modal-meta mono" data-i18n="privacy.meta">Last updated: March 2026</p>
+      <p class="modal-meta mono">Last updated: March 2026</p>
       <h3>1. Who we are</h3>
-      <p>7Captur is an AI decision intelligence service for e-commerce store owners. We are the data controller for information you provide. For any privacy questions: <a href="/cdn-cgi/l/email-protection#58282a312e393b21186f3b39282c2d2a763b3735"><span class="__cf_email__" data-cfemail="304042594651534970075351404445421e535f5d">[email&#160;protected]</span></a>.</p>
-      <h3>2. What data we collect</h3>
-      <p>When you submit a demo request, we collect your name, email address, store URL, platform, and any information you share in the free-text field. When onboarded as a client, we connect to your store platform, ad accounts, and email tools via their official APIs — accessing only what's needed to produce your weekly report.</p>
-      <h3>3. How we use your data</h3>
-      <ul>
-        <li>To respond to your demo request and schedule a call</li>
-        <li>To produce your weekly AI-powered decision report</li>
-        <li>To improve the quality of our analysis over time</li>
-        <li>We do not sell, rent, or share your data with third parties for marketing purposes — ever</li>
-      </ul>
-      <h3>4. Data storage and security</h3>
-      <p>Your data is encrypted in transit and stored securely. Contact form submissions are retained for up to 12 months. Client store data is retained only while your engagement is active, and deleted within 30 days of termination upon request.</p>
-      <h3>5. Your rights</h3>
-      <p>You have the right to access, correct, or delete the personal data we hold about you, and to withdraw consent at any time. To exercise any right, email <em><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7b0b09120d1a18023b4c181a0b0f0e0955181416">[email&#160;protected]</a></em>.</p>
-      <h3>6. Cookies</h3> 
-      <p>This website uses no tracking cookies, third-party analytics scripts, or advertising pixels of any kind.</p>
-      <h3>7. Changes</h3>
-      <p>We may update this policy from time to time. The date at the top reflects the most recent revision.</p>
+      <p>7Captur is an AI decision intelligence service for e-commerce store owners. For any privacy or legal questions, please contact us at: <a href="mailto:privacy@7captur.com">privacy@7captur.com</a>.</p>
+      
+      <h3>2. Privacy & Data Collection</h3>
+      <p>We collect your name, email, and store URL upon inquiry. Once onboarded, we connect to your store platform, ad accounts, and email tools via their official APIs. We access only the data strictly necessary to calculate True ROAS and execute approved campaign changes. We never sell, rent, or share your data with third parties for marketing purposes. Client store data is retained only while your engagement is active and is deleted within 30 days of termination upon request.</p>
+      
+      <h3>3. Ownership & Maintenance</h3>
+      <p>You fully own your Logic configurations and Data Exports. 7Captur retains ownership of the Hosting infrastructure and API Maintenance framework. If you cancel your service, you will receive a JSON export of your workflow. To keep the pipeline executing automatically after retainer cancellation, you must transition to our Maintenance Plan ($299/mo) which covers active API break-fix protection and server costs.</p>
+      
+      <h3>4. User Responsibilities & Assisted Execution</h3>
+      <p>7Captur is an <em>Assisted Execution</em> layer. We do not make autonomous changes to your ad accounts. Every API execution (e.g., pausing or scaling a campaign) requires explicit, human approval via the provided email links. While we implement hard safety rails (such as maximum 30% budget changes per click and 24-hour rollback availability), the User is ultimately responsible for all approved actions and resulting financial impacts on third-party platforms (Meta, Google, etc.).</p>
+
+      <h3>5. Limitation of Liability</h3>
+      <p>To the maximum extent permitted by law, 7Captur shall not be liable for any indirect, incidental, or consequential damages, including loss of profits, data, or ad spend, arising out of your use of our service. Our liability is strictly limited to the amount paid by you for the service in the three (3) months preceding the claim.</p>
+      
+      <h3>6. Service Availability & Third-Party APIs</h3>
+      <p>Our service relies on the continuous functioning of third-party APIs (Shopify, Meta, Google, etc.). 7Captur is not responsible for service interruptions caused by unexpected rate limits, deprecations, or outages from these third-party platforms, though we commit to resolving API connection issues promptly as part of our retainer and Maintenance Plans.</p>
     </div>
   </div>
 </div>
@@ -1188,25 +1279,49 @@ html.dark .lang-opt.active{background:var(--bg2)}
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ── SCROLL PROGRESS ── */
+<script>
+/* ── SCROLL PROGRESS & DYNAMIC CALCULATOR ── */
 const scrollBar = document.getElementById('scroll-progress');
 window.addEventListener('scroll', () => {
   const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
   scrollBar.style.width = pct + '%';
 }, { passive: true });
 
-/* ── ACTIVATE JS ENHANCEMENTS ── */
-/* Add js-ready so CSS animation states kick in only when JS is confirmed running */
-document.documentElement.classList.add('js-ready');
+function updateROI() {
+  const spendEl = document.getElementById('roi-spend');
+  if(!spendEl) return;
+  const spend = parseInt(spendEl.value);
+  const waste = parseInt(document.getElementById('roi-waste').value);
+  document.getElementById('roi-spend-val').textContent = '$' + spend.toLocaleString() + (spend === 60000 ? '+' : '');
+  document.getElementById('roi-waste-val').textContent = waste + '%';
 
-/* ── HERO ENTRANCE ── */
+  const savings = Math.round(spend * (waste / 100) * 0.5); // conservative 50% recovery
+
+  // Tier logic
+  let fee = 599; // Growth
+  if (spend > 15000 && spend <= 30000) fee = 799; // Scale
+  else if (spend > 30000 && spend <= 50000) fee = 1199; // Pro
+  else if (spend > 50000) fee = 1999; // Custom Engine
+
+  const feeEl = document.getElementById('dynamic-tier-fee');
+  if(feeEl) feeEl.textContent = '$' + fee.toLocaleString() + '/mo';
+
+  const net = savings - fee;
+  document.getElementById('roi-savings').textContent = '$' + savings.toLocaleString();
+  document.getElementById('roi-net').textContent = (net >= 0 ? '+' : '') + '$' + net.toLocaleString() + '/mo';
+  document.getElementById('roi-net').style.color = net >= 0 ? 'var(--accent)' : 'var(--red)';
+}
+// Init ROI
+setTimeout(updateROI, 100);
+
+/* ── INTERSECTION & ANIMATIONS ── */
+document.documentElement.classList.add('js-ready');
 document.querySelector('.hero').classList.add('hero-animate');
 
-/* ── CURSOR GLOW (hero only) ── */
 const glow = document.getElementById('cursor-glow');
 const heroEl = document.querySelector('.hero');
 document.addEventListener('mousemove', e => {
+  if(!glow || !heroEl) return;
   glow.style.left = e.clientX + 'px';
   glow.style.top  = e.clientY + 'px';
   const rect = heroEl.getBoundingClientRect();
@@ -1214,10 +1329,8 @@ document.addEventListener('mousemove', e => {
   glow.style.opacity = inHero ? '1' : '0';
 });
 
-/* ── SCROLL REVEAL — dual strategy ── */
 function makeVisible(el) { el.classList.add('visible'); }
 
-/* Strategy 1: IntersectionObserver for scroll-triggered reveals */
 const revealObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -1227,7 +1340,6 @@ const revealObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
 
-/* Strategy 2: immediately reveal anything already in viewport on load */
 function revealInViewport() {
   document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
     const rect = el.getBoundingClientRect();
@@ -1239,16 +1351,13 @@ function revealInViewport() {
   });
 }
 
-/* Strategy 3: hard fallback — reveal everything after 800ms regardless */
 setTimeout(() => {
   document.querySelectorAll('.reveal:not(.visible)').forEach(el => makeVisible(el));
 }, 800);
 
-/* Run immediately and again after fonts/images settle */
 revealInViewport();
 window.addEventListener('load', revealInViewport);
 
-/* ── COUNTER ANIMATION ── */
 function animateCounter(el, target, duration) {
   const start = performance.now();
   const update = now => {
@@ -1273,7 +1382,6 @@ const statsObs = new IntersectionObserver(entries => {
 const statsEl = document.querySelector('.hero-stats');
 if (statsEl) statsObs.observe(statsEl);
 
-/* ── DEMO METRIC ROW STAGGER ── */
 const metricObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -1285,13 +1393,12 @@ const metricObs = new IntersectionObserver(entries => {
 }, { threshold: 0 });
 document.querySelectorAll('.demo-hero-body').forEach(el => metricObs.observe(el));
 
-/* ── ROAS FLIP on hover ── */
 document.querySelectorAll('.roas-flip').forEach(el => {
   el.addEventListener('mouseenter', () => el.classList.add('revealed'));
   el.addEventListener('mouseleave', () => el.classList.remove('revealed'));
 });
 
-/* ── SUNDAY TABS ── */
+/* ── TABS ── */
 document.querySelectorAll('.s-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     const target = tab.dataset.tab;
@@ -1312,7 +1419,7 @@ document.querySelectorAll('.s-tab').forEach(tab => {
   });
 });
 
-/* ── NAV SCROLL TINT ── */
+/* ── NAV & THEME ── */
 var navEl = document.querySelector('nav');
 function updateNavBg() {
   if (!navEl) return;
@@ -1326,7 +1433,6 @@ function updateNavBg() {
 }
 window.addEventListener('scroll', updateNavBg, { passive: true });
 
-/* ── DARK MODE TOGGLE ── */
 function setTheme(mode) {
   const isDark = mode === 'dark';
   document.documentElement.classList.toggle('dark', isDark);
@@ -1337,14 +1443,13 @@ function setTheme(mode) {
 }
 document.getElementById('theme-light').addEventListener('click', function() { setTheme('light'); });
 document.getElementById('theme-dark').addEventListener('click', function() { setTheme('dark'); });
-// Restore saved preference on load
 (function() {
   let saved = 'light';
   try { saved = localStorage.getItem('theme') || 'light'; } catch(e) {}
   if (saved === 'dark') setTheme('dark');
 })();
 
-/* ── PRIVACY MODAL ── */
+/* ── MODALS ── */
 const privacyOverlay = document.getElementById('privacy-overlay');
 document.getElementById('privacy-link').addEventListener('click', e => {
   e.preventDefault();
@@ -1359,20 +1464,17 @@ privacyOverlay.addEventListener('click', e => {
   if (e.target === privacyOverlay) { privacyOverlay.style.display = 'none'; document.body.style.overflow = ''; }
 });
 
-/* ── SUCCESS MODALS ── */
 function openSuccess(id) { const el = document.getElementById(id); el.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
 function closeSuccess(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = ''; }
 document.getElementById('success-close').addEventListener('click', () => closeSuccess('success-overlay'));
 document.getElementById('waitlist-success-close').addEventListener('click', () => closeSuccess('waitlist-success-overlay'));
 
-/* ── FORMSPREE CONFIG ──
-   Replace YOUR_DEMO_FORM_ID and YOUR_WAITLIST_FORM_ID with your IDs from formspree.io
-*/
+/* ── FORMSPREE LOGIC ── */
 const FORMSPREE_DEMO     = 'https://formspree.io/f/YOUR_DEMO_FORM_ID';
 const FORMSPREE_WAITLIST = 'https://formspree.io/f/YOUR_WAITLIST_FORM_ID';
 
-/* ── DEMO FORM SUBMIT ── */
-document.getElementById('form-submit-btn').addEventListener('click', async () => {
+document.getElementById('form-submit-btn').addEventListener('click', async (e) => {
+  e.preventDefault();
   const name     = document.getElementById('f-name').value.trim();
   const email    = document.getElementById('f-email').value.trim();
   const store    = document.getElementById('f-store').value.trim();
@@ -1385,13 +1487,18 @@ document.getElementById('form-submit-btn').addEventListener('click', async () =>
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFormError('demo-error', (translations[currentLang]||translations.en)['form.errEmail']); return; }
   if (!platform) { showFormError('demo-error', (translations[currentLang]||translations.en)['form.errPlatform']); return; }
   
+  if (revenue === 'under5k') {
+    showFormError('demo-error', (translations[currentLang]||translations.en)['form.errSpend']);
+    return;
+  }
+
   const btn = document.getElementById('form-submit-btn');
   btn.textContent = (translations[currentLang]||translations.en)['form.sending']; btn.style.opacity = '0.6'; btn.style.pointerEvents = 'none';
   
   try {
     const res = await fetch(FORMSPREE_DEMO, {
       method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ name, email, store, revenue, platform, headache, _subject: `New demo request — ${name} (${store})` })
+      body: JSON.stringify({ name, email, store, adspend: revenue, platform, headache, _subject: `New demo request — ${name} (${store})` })
     });
     if (res.ok) {
       ['f-name','f-email','f-store','f-revenue','f-headache'].forEach(id => document.getElementById(id).value = '');
@@ -1402,8 +1509,8 @@ document.getElementById('form-submit-btn').addEventListener('click', async () =>
   finally { btn.textContent = (translations[currentLang]||translations.en)['contact.form.submit']; btn.style.opacity = ''; btn.style.pointerEvents = ''; }
 });
 
-/* ── WAITLIST SUBMIT ── */
-document.getElementById('waitlist-submit').addEventListener('click', async () => {
+document.getElementById('waitlist-submit').addEventListener('click', async (e) => {
+  e.preventDefault();
   const email = document.getElementById('waitlist-email').value.trim();
   removeFormError('waitlist-error');
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFormError('waitlist-error', (translations[currentLang]||translations.en)['form.errEmail']); return; }
@@ -1431,30 +1538,30 @@ function showFormError(id, msg) {
 }
 function removeFormError(id) { const el = document.getElementById(id); if (el) el.remove(); }
 
-/* ── INTERNATIONALISATION ── */
+/* ── I18N / TRANSLATIONS ── */
 const translations = {
   en: {
     'theme.light': ' Light', 'theme.dark': ' Dark',
-    'nav.how': 'How it works', 'nav.demo': 'Live demo',
+    'nav.how': 'How it works', 'nav.demo': 'Try Demo',
     'nav.pricing': 'Pricing', 'nav.platforms': 'Platforms',
     'nav.cta': 'Book free demo →',
-    'hero.eyebrow': 'AI Decision Intelligence · E-Commerce',
-    'hero.h1': 'Finally know <em>exactly</em> which ads are losing you money—and pause them with one click.',
-    'hero.qualifier': 'Built for ambitious e-commerce brands',
-    'hero.sub': 'Your ad platform shows you ROAS. But after your platform fees, returns, and cost of goods—<strong>half of what looks profitable is actually breaking even or bleeding cash.</strong><br><br>Every Monday morning, we send you three plain-English decisions based on your real numbers. Don\'t log into Ads Manager. Just click the button in your email to execute the change instantly via API. No new dashboards. No analysts. Just answers and action.',
+    'hero.eyebrow': 'Assisted Execution · E-Commerce',
+    'hero.h1': 'Three decisions every Monday. One email. You click <em>\'Approve\'</em> — we handle the API change instantly.',
+    'hero.qualifier': 'Built for brands spending $5k+/mo on ads',
+    'hero.sub': 'Your ad platform shows you ROAS. But after platform fees, returns, and cost of goods—<strong>half of what looks profitable is actually losing money.</strong><br><br>Every Monday, we send you three plain-English decisions based on your real numbers. Each one shows a confidence score, an exact dollar impact, and a return-lag note. You click \'Approve\' and we execute the API change. Or click \'Dismiss\' — and nothing happens. <strong>You are always in control.</strong>',
     'hero.cta1': 'Book a free 20-min demo →', 'hero.cta2': 'Sound familiar? ↓',
     'hero.stat1': 'Decisions in your inbox every Monday',
     'hero.stat2': 'From sign-up to first report',
     'hero.stat3': 'New dashboards to log into',
     'report.label': 'Sample weekly intelligence report',
-    'report.week': 'Week 22 · May 26 – Jun 1, 2026',
-    'report.kpiRevVal': '$64.2k', 'report.kpiRevChange': '↑ 12% wk/wk',
+    'report.week': 'Week 22 · May 26 – Jun 1',
+    'report.kpiRevVal': '$14.2k', 'report.kpiRevChange': '↑ 12% wk/wk',
     'report.revenue': 'Revenue', 'report.netMargin': 'Net margin',
     'report.decisionsLabel': "This week's decisions",
-    'report.d1': '<strong>Pause Meta campaign #4182 today.</strong><span class="d-tag tag-warn">Losing $0.40/order</span><br>Platform ROAS shows 1.8× on your Oudh Fragrance Candle campaign—but after COGS, fees, and returns, true ROAS is 0.9×. This campaign is bleeding margin.<br><br><strong>[ 🛑 Click Here to Pause Campaign #4182 Instantly ]</strong>',
-    'report.d2': "<strong>Scale campaign #4178 — it's your only genuinely profitable ad.</strong><span class=\"d-tag tag-action\">True ROAS 2.4×</span><br>After all deductions, the 25-Herb Hair Oil Retarget campaign earns $1.40 per dollar spent. Budget it up by 20% this week.<br><br><strong>[ 📈 Click Here to Increase Budget by 20% ]</strong>",
-    'report.d3': '<strong>Margin drop is a return issue, not ad performance.</strong><br>The 2.1pt dip traces directly to an anomaly in returns for the Pillow Mist Set. Investigate fulfillment for damage issues before adjusting ad spend.<br><br><strong>[ 👁️ Mark as Acknowledged ]</strong>',
-    'report.footnote': '↑ Real report format. Webhook buttons execute directly in your ad accounts.',
+    'report.d1': '<strong>Pause Meta campaign #4182 today.</strong><span class="d-tag tag-warn">Losing $0.40/order</span><br>True ROAS 0.9× after COGS, fees &amp; returns. <em>Confidence: 91% · Returns lag 30 days.</em><br><span style="color:var(--accent);font-family:\'IBM Plex Mono\',monospace;font-size:11px">💰 This pause would save $412 this week.</span>',
+    'report.d2': '<strong>Scale campaign #4178 — your only genuinely profitable ad.</strong><span class="d-tag tag-action">True ROAS 2.4×</span><br>Earns $1.40 per dollar spent after all deductions. Max budget change: 30%. <em>Confidence: 87%</em><br><span style="color:var(--accent);font-family:\'IBM Plex Mono\',monospace;font-size:11px">💰 +$310 estimated upside this week.</span>',
+    'report.d3': '<strong>Margin drop is a fee issue, not pricing.</strong><span class="d-tag tag-info">Save $180/mo</span><br>The 2.1pt dip traces to payment processing. Switch to annual plan. <em>Confidence: 96%</em><br><span style="color:var(--accent);font-family:\'IBM Plex Mono\',monospace;font-size:11px">💰 $180/mo recovered with one plan change.</span>',
+    'report.footnote': '↑ Real report format. Returns data lags 30 days. Max budget change: 30%. 24h rollback available on all execution actions.',
     'sunday.eyebrow': 'The Sunday Night Reality',
     'sunday.h2': "You already have the data.<br>That's the <em>problem.</em>",
     'sunday.sub': "If this is your Sunday night, you don't need more data. You need a system that does the manual expense reconciliation for you and executes the solution.",
@@ -1546,40 +1653,15 @@ const translations = {
             <div class="sunday-row-detail">This happens every Sunday. Multiply by 52 weeks: that\u2019s over 70 hours per year of uncertain, manual analysis that an API pipeline could do in seconds.</div>
           </div>
         </div>`,
-    'demo.eyebrow': 'The Live Demo',
-    'demo.h2': 'We show you your numbers<br>before you pay a <em>single dollar.</em>',
-    'demo.sub': "Connect your store, we run a real report, and you see exactly what you'd receive every Monday — including which campaigns are losing you money right now. If you don't see at least one decision you'd act on immediately, we tell you it's not the right fit and you walk away. No invoice.",
-    'demo.headerLabel': 'Sample report — Luminary Candle Co. · Week 22',
-    'demo.realDataFormat': 'Real data format',
-    'demo.col1Label': 'Ad profitability breakdown — this week',
-    'demo.col2Label': 'Margin analysis — week over week',
-    'demo.m.c1r1.name': 'Campaign #4182 — “Summer Collection”',
-    'demo.m.c1r1.roas': 'Meta reported ROAS: 1.8×',
-    'demo.m.c1r1.val': '0.9× true', 'demo.m.c1r1.note': 'after COGS + fees + returns',
-    'demo.m.c1r2.name': 'Campaign #4178 — “Bestsellers Retarget”',
-    'demo.m.c1r2.roas': 'Meta reported ROAS: 2.6×',
-    'demo.m.c1r2.val': '2.4× true', 'demo.m.c1r2.note': 'scale this one',
-    'demo.m.c1r3.name': 'Campaign #4165 — “New Arrivals Broad”',
-    'demo.m.c1r3.roas': 'Meta reported ROAS: 1.4×',
-    'demo.m.c1r3.val': '0.96× true', 'demo.m.c1r3.note': 'borderline — watch',
-    'demo.m.c1r4.name': 'Weekly spend on loss-making ads',
-    'demo.m.c1r4.val': '$640', 'demo.m.c1r4.note': 'recoverable this week',
-    'demo.m.c2r1.name': 'Gross revenue',
-    'demo.m.c2r1.val': '$14,200', 'demo.m.c2r1.note': '↑ 12% vs last week',
-    'demo.m.c2r2.name': 'Platform fees (Shopify Payments)',
-    'demo.m.c2r2.val': '−$384', 'demo.m.c2r2.note': 'fixable: switch to annual plan',
-    'demo.m.c2r3.name': 'Returns this week',
-    'demo.m.c2r3.val': '$1,140', 'demo.m.c2r3.note': 'up 3.2pts — investigate SKU #18',
-    'demo.m.c2r4.name': 'Net margin this week',
-    'demo.m.c2r4.val': '4.1%', 'demo.m.c2r4.note': '↓ 2.1pts vs last week',
-    'demo.m.c2r5.name': 'Recoverable margin this week',
-    'demo.m.c2r5.val': '+$820', 'demo.m.c2r5.note': 'if you act on all 3 decisions',
-    'demo.ctaText': "<strong>Want to see this with your actual store's numbers?</strong> That's exactly what the free demo is.",
-    'demo.ctaBtn': 'Book the free demo →',
+    'demo.eyebrow': 'Try Assisted Execution (Simulated)',
+    'demo.h2': 'See exactly how it works<br>before you pay a <em>single dollar.</em>',
+    'demo.sub': 'Simulate a real Monday report using dummy store data. Click "Approve" on any decision to see how the API execution works — with full safety rails. No real accounts needed. When you\'re ready, we\'ll run the same report with your actual store.',
+    'demo.headerLabel': 'Simulated report — Luminary Candle Co. (Dummy Data) · Week 22',
+    'demo.realDataFormat': 'Simulated · Dummy accounts',
     'compare.eyebrow': 'The Alternative',
     'compare.h2': "What you're doing right now<br>vs. what <em>Monday could look like.</em>",
     'compare.sub': 'No comparison to other tools. Just an honest look at the current situation — and what changes.',
-    'compare.th.task': 'The task', 'compare.th.diy': 'Doing it yourself right now', 'compare.th.captur': 'With 7Captur',
+    'compare.th.task': 'The task', 'compare.th.diy': 'Doing it yourself right now', 'compare.th.captur': 'With 7Captur Assisted Execution',
     'compare.tbody': `          <tr>
             <td class="fn">Knowing true ad profitability</td>
             <td>Manual spreadsheet reconciliation. 45+ mins. Inputs you aren't fully confident in.</td>
@@ -1588,7 +1670,7 @@ const translations = {
           <tr>
             <td class="fn">Executing campaign changes</td>
             <td>Logging into Meta/Google, finding the campaign, manually pausing or scaling.</td>
-            <td class="hl"><span class="ck">\u2713</span> 1-Click execution webhook buttons embedded directly inside your weekly email.</td>
+            <td class="hl"><span class="ck">\u2713</span> Click 'Approve' in your email \u2014 we execute via API. Click 'Dismiss' \u2014 nothing changes. 24h rollback always available.</td>
           </tr>
           <tr>
             <td class="fn">Understanding margin drops</td>
@@ -1609,33 +1691,33 @@ const translations = {
     'how.h2': 'Four steps. Fully automated.<br>First report in <em>under a week.</em>',
     'how.sub': 'We build a custom pipeline that connects your stack, runs the analysis, and delivers an interactive report—without you touching a thing after onboarding.',
     'how.step1.title': 'We connect your stack', 'how.step2.title': 'The system does the analysis',
-    'how.step3.title': '3 decisions & 1-Click execution', 'how.step4.title': 'The 30-Day Decision',
+    'how.step3.title': '3 decisions + Assisted Execution', 'how.step4.title': 'The 30-Day Decision',
     'how.step1.body': 'Your store platform, ad accounts, and email tool are connected via API during a single onboarding session. No CSV exports, no manual uploads — ever.',
     'how.step2.body': 'Every week, the pipeline calculates your true ad profitability after COGS, fees, and returns—then identifies actionable opportunities across all your data.',
-    'how.step3.body': 'Every Monday before 9am: three plain-English decisions in your inbox. Click the embedded button below each insight to instantly pause or scale campaigns via API. No logging in.',
-    'how.step4.body': "After your 30-Day Paid Audit, you review the ROI. If you stay, it's a flat monthly fee. If you leave, you keep the entire automated infrastructure we built for you.",
+    'how.step3.body': "Every Monday before 9am: three plain-English decisions in your inbox, each with a confidence score and dollar impact preview. Click 'Approve' to execute via API — or 'Dismiss' and nothing changes. Built-in safety rails limit budget changes to max 30% and a 24h rollback is always available.",
+    'how.step4.body': "After your 30-Day Paid Audit, you review the ROI. If you stay, it's a flat monthly fee based on your ad spend. If you cancel, you receive a JSON export of your logic and data. To keep infrastructure running automatically after cancellation, switch to our $299/mo Maintenance Plan.",
     'pricing.eyebrow': 'Pricing',
-    'pricing.h2': 'The 30-Day Paid Audit.<br><em>Zero contracts. Zero lock-in.</em>',
-    'pricing.sub': "We don't charge inflated setup fees or force 12-month contracts. You pay a flat fee for the first 30 days while we build your system. If it doesn't pay for itself, you walk away and keep the tech.",
+    'pricing.h2': 'Fair, spend-based tiers.<br><em>Assisted Execution. Zero lock-in.</em>',
+    'pricing.sub': "Start with a 30-day paid audit — 100% credited if you continue. After Phase 1, our retainer automatically scales with your ad spend volume to ensure you never overpay while we handle increased data complexity.",
     'pricing.starter.tier': 'Phase 1', 'pricing.starter.name': '30-Day Paid Audit',
     'pricing.starter.amount': '$499', 'pricing.starter.period': 'flat fee',
-    'pricing.starter.note': 'Flat fee for the first 30 days.<br><strong>You own the pipeline if you cancel.</strong>',
-    'pricing.starter.features': '<li><span class="ck">✓</span> Full custom API pipeline build</li><li><span class="ck">✓</span> 1 store + 2 platforms connected</li><li><span class="ck">✓</span> 1-Click email execution buttons</li><li><span class="ck">✓</span> 4 weekly intelligence reports</li>',
+    'pricing.starter.note': 'Flat fee for the first 30 days.<br><strong>100% Credited to Month 2 if you continue.</strong>',
+    'pricing.starter.features': '<li><span class="ck">✓</span> Pre-built Engine Configured for Your Stack</li><li><span class="ck">✓</span> 1 store + 2 platforms connected</li><li><span class="ck">✓</span> 1-Click email execution buttons</li><li><span class="ck">✓</span> 4 weekly intelligence reports</li>',
     'pricing.starter.cta': 'Book your 30-Day Audit',
-    'pricing.growth.badge': 'Phase 2',
+    'pricing.growth.badge': 'Phase 2 · Tiered Retainer',
     'pricing.growth.tier': 'Month 2+', 'pricing.growth.name': 'Monthly Retainer',
-    'pricing.growth.amount': '$799', 'pricing.growth.period': '/month',
-    'pricing.growth.note': 'Zero contracts. Cancel anytime.<br><strong>+$149/mo per additional ad platform.</strong>',
-    'pricing.growth.features': '<li><span class="ck">✓</span> Everything from the 30-Day Audit</li><li><span class="ck">✓</span> Continuous True ROAS calculation</li><li><span class="ck">✓</span> Weekly digest + execution buttons</li><li><span class="ck">✓</span> Anomaly &amp; margin drop alerts</li><li><span class="ck">✓</span> Monthly 1-hour strategy call</li>',
+    'pricing.growth.amount': '$599', 'pricing.growth.period': '/mo',
+    'pricing.growth.note': 'Zero contracts. Cancel anytime.<br><strong>Includes up to 3 Platforms.</strong>',
+    'pricing.growth.features': '<li><strong>Growth (&lt;$15k spend):</strong> $599/mo</li><li><strong>Scale ($15k–$30k spend):</strong> $799/mo</li><li><strong>Pro ($30k–$50k spend):</strong> $1,199/mo</li><li style="margin-top:12px; border-top:1px solid rgba(255,255,255,0.04); padding-top:12px;"><span class="ck">✓</span> Continuous True ROAS calculation</li><li><span class="ck">✓</span> Weekly execution + safety rails</li><li><span class="ck">✓</span> Monthly 1-hour strategy call</li>',
     'pricing.growth.cta': 'Book your 30-Day Audit →',
-    'pricing.growth.desc': 'Ongoing pipeline management and weekly decision engine after your 30-Day Audit.',
-    'pricing.scale.tier': 'Phase 3', 'pricing.scale.name': 'Custom E-Commerce Engine',
-    'pricing.scale.amount': '$999+', 'pricing.scale.period': '/month',
-    'pricing.scale.note': 'Zero setup fees. Zero lock-in.<br><strong>For complex e-commerce stacks.</strong>',
-    'pricing.scale.features': '<li><span class="ck">✓</span> Custom webhook execution actions</li><li><span class="ck">✓</span> Advanced LTV cohort analysis</li><li><span class="ck">✓</span> Weekly calls + quarterly reviews</li><li><span class="ck">✓</span> Priority support &amp; custom builds</li><li><span class="ck">✓</span> &amp; more</li>',
-    'pricing.scale.cta': 'Request Custom Build',
+    'pricing.growth.desc': 'Ongoing pipeline management and assisted execution. Pricing scales transparently with your ad spend.',
+    'pricing.scale.tier': 'Phase 3 — Post-Audit Add-on', 'pricing.scale.name': 'Custom Engine Add-on',
+    'pricing.scale.amount': '$1,999', 'pricing.scale.period': 'base /mo',
+    'pricing.scale.note': 'Enterprise-level data engineering.<br><strong>Without the $120k/yr salary of a data scientist.</strong>',
+    'pricing.scale.features': '<li><span class="ck">✓</span> Bespoke Engine execution actions</li><li><span class="ck">✓</span> Advanced LTV & Subscription models</li><li><span class="ck">✓</span> Custom deduplication logic</li><li><span class="ck">✓</span> Priority support & custom workflows</li>',
+    'pricing.scale.cta': 'Request Custom Engine',
     'pricing.starter.desc': 'For e-commerce brands ready to stop guessing and start executing.',
-    'pricing.scale.desc': 'For brands with complex stacks. We build fully custom data pipelines tailored to your needs.',
+    'pricing.scale.desc': 'For complex stacks (> $50k spend, custom LTV, subscription cohorts, 4+ platforms).',
     'pricing.footerNote': 'All plans include a free demo with your real store data before you commit.<br>You own everything we build — if you ever leave, the whole system leaves with you. Nothing gets switched off.',
     'platforms.eyebrow': 'Platforms',
     'platforms.h2': 'Works with your stack.<br><em>More added on request.</em>',
@@ -1650,12 +1732,12 @@ const translations = {
     'platforms.request.link': 'Request →',
     'why.eyebrow': 'Why 7Captur',
     'why.h2': 'Built for one problem,<br><em>obsessively.</em>',
-    'why.item1': '<span class="why-num mono">01 —</span><div class="why-title">Remote Control Execution, not just advice</div><p class="why-body">Every other tool gives you a dashboard and leaves. We give you three things to do—and the buttons right inside your email to execute them instantly via API.</p>',
+    'why.item1': '<span class="why-num mono">01 —</span><div class="why-title">Assisted Execution, not just advice</div><p class="why-body">Every other tool gives you a dashboard and leaves. We deliver three decisions — each with a confidence score, dollar impact, and Approve or Dismiss button. You stay in control. We handle the API change.</p>',
     'why.item2': '<span class="why-num mono">02 —</span><div class="why-title">True profitability is the only number that matters</div><p class="why-body">COGS, platform fees, and returns are factored into every ad calculation automatically. No manual expense logging. Baked in from day one.</p>',
     'why.item3': `<span class="why-num mono">03 —</span><div class="why-title">The 30-Day Proof Concept</div><p class="why-body">We spend 30 days proving the ROI on your actual store data. If you don't see massive value by day 30, you walk away with zero obligations.</p>`,
     'why.item4': `<span class="why-num mono">04 —</span><div class="why-title">Real API integrations, not workarounds</div><p class="why-body">We connect directly to each platform's API — not CSV exports, not copy-paste. Pipelines that pull your data silently every week without you doing anything.</p>`,
     'why.item5': '<span class="why-num mono">05 —</span><div class="why-title">Live in under a week</div><p class="why-body">First report in your inbox within 7 days of onboarding. No months of discovery calls. No sprawling setup documentation. We move fast.</p>',
-    'why.item6': '<span class="why-num mono">06 —</span><div class="why-title">If you leave, the whole system leaves with you</div><p class="why-body">Every pipeline, automation, and integration we build belongs to you. If you ever cancel, you take the complete system. Nothing gets switched off. No ransom. No handcuffs.</p>',
+    'why.item6': '<span class="why-num mono">06 —</span><div class="why-title">You own the Logic, we maintain the API</div><p class="why-body">Every pipeline and logic flow belongs to you. If you cancel, you receive a JSON export of your workflow and all raw data. If you wish to keep the pipeline running automatically, you must switch to a $299/mo Maintenance Plan (covers API auth, server costs, and updates).</p>',
     'waitlist.eyebrow': 'Waitlist',
     'waitlist.h2': 'Not ready yet?<br>Get notified when we <em>open spots.</em>',
     'waitlist.sub': "We're working with a small number of stores to refine the product. Join the waitlist and we'll reach out when a spot opens — or when we launch something new.",
@@ -1674,38 +1756,29 @@ const translations = {
     'contact.step3': "<strong>You decide.</strong> No hard sell. If it's a fit, we're live within 7 days.",
     'contact.form.name': 'Your name', 'contact.form.email': 'Email address',
     'contact.form.store': 'Your store URL', 'contact.form.platform': 'E-commerce platform',
+    'contact.form.adspend': 'Monthly Ad Spend (approx.)',
     'contact.form.headache': 'Biggest data headache right now',
     'contact.form.platformPlaceholder': 'Select your platform',
+    'contact.form.revenuePlaceholder': 'Select a range',
     'contact.form.namePh': 'Alex Chen', 'contact.form.emailPh': 'alex@yourstore.com',
     'contact.form.storePh': 'yourstore.com',
     'contact.form.headachePh': "e.g. I can't tell which ad campaigns are actually profitable after all my costs…",
     'contact.form.other': 'Other (tell us below)',
     'contact.form.submit': 'Book my free demo →',
     'contact.form.foot': 'Live in under a week. First report in your inbox within 7 days of onboarding.',
+    'contact.form.rev1': 'Under $15k/mo', 'contact.form.rev2': '$15k – $30k/mo',
+    'contact.form.rev3': '$30k – $50k/mo', 'contact.form.rev4': '$50k+/mo',
     'footer.problem': 'The problem', 'footer.bookDemo': 'Book demo',
-    'footer.privacy': 'Privacy', 'footer.copy': '© 2026 7Captur',
-    'privacy.title': 'Privacy Policy', 'modal.close': '✕ Close',
-    'privacy.meta': 'Last updated: March 2026',
-    'privacy.body': `      <p class="modal-meta mono">Last updated: March 2026</p>
-      <h3>1. Who we are</h3>
-      <p>7Captur is an AI decision intelligence service for e-commerce store owners. We are the data controller for information you provide. For any privacy questions: <a href="mailto:privacy@7captur.com">privacy@7captur.com</a>.</p>
-      <h3>2. What data we collect</h3>
-      <p>When you submit a demo request, we collect your name, email address, store URL, platform, and any information you share in the free-text field. When onboarded as a client, we connect to your store platform, ad accounts, and email tools via their official APIs \u2014 accessing only what\u2019s needed to produce your weekly report.</p>
-      <h3>3. How we use your data</h3>
-      <ul>
-        <li>To respond to your demo request and schedule a call</li>
-        <li>To produce your weekly AI-powered decision report</li>
-        <li>To improve the quality of our analysis over time</li>
-        <li>We do not sell, rent, or share your data with third parties for marketing purposes \u2014 ever</li>
-      </ul>
-      <h3>4. Data storage and security</h3>
-      <p>Your data is encrypted in transit and stored securely. Contact form submissions are retained for up to 12 months. Client store data is retained only while your engagement is active, and deleted within 30 days of termination upon request.</p>
-      <h3>5. Your rights</h3>
-      <p>You have the right to access, correct, or delete the personal data we hold about you, and to withdraw consent at any time. To exercise any right, email <a href="mailto:privacy@7captur.com">privacy@7captur.com</a>.</p>
-      <h3>6. Cookies</h3>
-      <p>This website uses no tracking cookies, third-party analytics scripts, or advertising pixels of any kind.</p>
-      <h3>7. Changes</h3>
-      <p>We may update this policy from time to time. The date at the top reflects the most recent revision.</p>`,
+    'footer.privacy': 'Privacy & Terms', 'footer.copy': '© 2026 7Captur',
+    'privacy.title': 'Privacy Policy & Terms of Service', 'modal.close': '✕ Close',
+    'privacy.body': `
+      <p class="modal-meta mono">Last updated: March 2026</p>
+      <h3>1. Who we are</h3><p>7Captur is an AI decision intelligence service for e-commerce store owners. For any privacy or legal questions, please contact us at: <a href="mailto:privacy@7captur.com">privacy@7captur.com</a>.</p>
+      <h3>2. Privacy & Data Collection</h3><p>We collect your name, email, and store URL upon inquiry. Once onboarded, we connect to your store platform, ad accounts, and email tools via their official APIs. We access only the data strictly necessary to calculate True ROAS and execute approved campaign changes. We never sell, rent, or share your data with third parties for marketing purposes. Client store data is retained only while your engagement is active and is deleted within 30 days of termination upon request.</p>
+      <h3>3. Ownership & Maintenance</h3><p>You fully own your Logic configurations and Data Exports. 7Captur retains ownership of the Hosting infrastructure and API Maintenance framework. If you cancel your service, you will receive a JSON export of your workflow. To keep the pipeline executing automatically after retainer cancellation, you must transition to our Maintenance Plan ($299/mo) which covers active API break-fix protection and server costs.</p>
+      <h3>4. User Responsibilities & Assisted Execution</h3><p>7Captur is an <em>Assisted Execution</em> layer. We do not make autonomous changes to your ad accounts. Every API execution requires explicit, human approval via the provided email links. While we implement hard safety rails (such as maximum 30% budget changes per click and 24-hour rollback availability), the User is ultimately responsible for all approved actions and resulting financial impacts on third-party platforms (Meta, Google, etc.).</p>
+      <h3>5. Limitation of Liability</h3><p>To the maximum extent permitted by law, 7Captur shall not be liable for any indirect, incidental, or consequential damages, including loss of profits, data, or ad spend, arising out of your use of our service. Our liability is strictly limited to the amount paid by you for the service in the three (3) months preceding the claim.</p>
+      <h3>6. Service Availability & Third-Party APIs</h3><p>Our service relies on the continuous functioning of third-party APIs (Shopify, Meta, Google, etc.). 7Captur is not responsible for service interruptions caused by unexpected rate limits, deprecations, or outages from these third-party platforms, though we commit to resolving API connection issues promptly as part of our retainer and Maintenance Plans.</p>`,
     'modal.backToSite': 'Back to site',
     'success.demo.title': 'Demo request received.',
     'success.demo.body': "We'll review your details and reach out within 24 hours to book your free 20-minute demo. Check your inbox — we reply fast.",
@@ -1722,6 +1795,7 @@ const translations = {
     'form.errFields': 'Please fill in your name, email, and store URL.',
     'form.errEmail': 'Please enter a valid email address.',
     'form.errPlatform': 'Please select your platform.',
+    'form.errSpend': 'Our tool is best suited for brands spending at least $5k/mo on ads. Please join the waitlist for smaller tiers.',
     'form.errGeneric': 'Something went wrong — please try again.',
     'form.errNetwork': 'Network error — please check your connection and try again.',
     'form.sending': 'Sending…', 'form.adding': 'Adding you…',
@@ -1731,23 +1805,23 @@ const translations = {
     'nav.how': `Comment ça marche`, 'nav.demo': `Démo en direct`,
     'nav.pricing': `Tarifs`, 'nav.platforms': `Plateformes`,
     'nav.cta': `Démo gratuite →`,
-    'hero.eyebrow': `Intelligence Décisionnelle IA · E-Commerce`,
-    'hero.h1': `Sachez enfin <em>exactement</em> quelles publicités vous font perdre de l'argent—et mettez-les en pause en un clic.`,
-    'hero.qualifier': `Pour les marques e-commerce ambitieuses`,
-    'hero.sub': `Votre plateforme pub affiche un ROAS. Mais après vos frais de plateforme, retours et coût des marchandises — <strong>la moitié de ce qui semble rentable est en réalité à l'équilibre ou en perte.</strong><br><br>Chaque lundi matin, nous vous envoyons trois décisions en langage clair basées sur vos vrais chiffres. Ne vous connectez pas à Ads Manager. Cliquez simplement sur le bouton dans votre email pour exécuter le changement instantanément via API. Pas de nouveaux tableaux de bord. Pas d'analystes. Juste des réponses et de l'action.`,
-    'hero.cta1': `Réserver ma démo gratuite (20 min) →`, 'hero.cta2': `Vous vous reconnaissez ? ↓`,
+    'hero.eyebrow': `Exécution Assistée · E-Commerce`,
+    'hero.h1': `Trois décisions chaque lundi. Un email. Vous cliquez sur <em>\'Approuver\'</em> — nous gérons l\'API instantanément.`,
+    'hero.qualifier': `Pour les marques dépensant 5k€+/mois en pubs`,
+    'hero.sub': `Votre plateforme pub affiche un ROAS. Mais après frais, retours et coût des marchandises—<strong>la moitié de ce qui semble rentable perd en fait de l\'argent.</strong><br><br>Chaque lundi, nous envoyons trois décisions basées sur vos vrais chiffres. Chacune montre un score de confiance et un impact. Vous cliquez sur \'Approuver\' et nous exécutons le changement API. <strong>Vous gardez toujours le contrôle.</strong>`,
+    'hero.cta1': `Réserver ma démo gratuite (20 min) →`, 'hero.cta2': `Ça vous parle ? ↓`,
     'hero.stat1': `Décisions dans votre boîte mail chaque lundi`,
     'hero.stat2': `De l'inscription au premier rapport`,
     'hero.stat3': `Nouveaux tableaux de bord à consulter`,
-    'report.label': `Rapport d'intelligence hebdomadaire — exemple`,
-    'report.week': `Semaine 22 · 26 mai – 1er juin 2026`,
-    'report.kpiRevVal': `64,2 k€`, 'report.kpiRevChange': `↑ 12% sem/sem`,
+    'report.label': `Exemple de rapport d'Exécution Assistée`,
+    'report.week': `Semaine 22 · 26 mai – 1er juin`,
+    'report.kpiRevVal': `14,2 k€`, 'report.kpiRevChange': `↑ 12% sem/sem`,
     'report.revenue': `Chiffre d'affaires`, 'report.netMargin': `Marge nette`,
     'report.decisionsLabel': `Décisions de la semaine`,
-    'report.d1': `<strong>Mettre en pause la campagne Meta #4182 aujourd'hui.</strong><span class="d-tag tag-warn">Perte de 0,40 €/commande</span><br>Le ROAS affiché est de 1,8× sur votre campagne Bougie Oudh—mais après COGS, frais et retours, le vrai ROAS est de 0,9×. Cette campagne saigne votre marge.<br><br><strong>[ 🛑 Cliquez ici pour mettre en pause la campagne #4182 instantanément ]</strong>`,
-    'report.d2': `<strong>Augmenter la campagne #4178 — c'est votre seule pub vraiment rentable.</strong><span class="d-tag tag-action">Vrai ROAS 2,4×</span><br>Après toutes les déductions, la campagne Huile Capillaire 25 Herbes rapporte 1,40 € par euro dépensé. Augmentez le budget de 20 % cette semaine.<br><br><strong>[ 📈 Cliquez ici pour augmenter le budget de 20% ]</strong>`,
-    'report.d3': `<strong>La chute de marge est un problème de retours, pas de performance pub.</strong><br>La baisse de 2,1 points est liée directement à une anomalie des retours pour le Set de Brume d'Oreiller. Investiguez l'exécution pour des problèmes de dommages avant d'ajuster les dépenses pub.<br><br><strong>[ 👁️ Marquer comme reconnu ]</strong>`,
-    'report.footnote': `↑ Format réel du rapport. Les boutons Webhook s'exécutent directement dans vos comptes pub.`,
+    'report.d1': `<strong>Mettre en pause la campagne #4182 aujourd\'hui.</strong><span class="d-tag tag-warn">Perte de 0,40€/cmd</span><br>Vrai ROAS 0,9× après COGS, frais et retours. <em>Confiance: 91% · Retours décalés de 30j.</em><br><span style="color:var(--accent);font-family:\'IBM Plex Mono\',monospace;font-size:11px">💰 Cette pause économisera 412€ cette semaine.</span>`,
+    'report.d2': `<strong>Augmenter la campagne #4178.</strong><span class="d-tag tag-action">Vrai ROAS 2,4×</span><br>Rapporte 1,40€ par euro dépensé après déductions. Changement max : 30%. <em>Confiance: 87%</em><br><span style="color:var(--accent);font-family:\'IBM Plex Mono\',monospace;font-size:11px">💰 +310€ de potentiel cette semaine.</span>`,
+    'report.d3': `<strong>La chute de marge est un problème de frais, pas de prix.</strong><span class="d-tag tag-info">Économisez 180€/mois</span><br>La baisse de 2,1 points est liée au traitement des paiements. Passez au forfait annuel. <em>Confiance: 96%</em><br><span style="color:var(--accent);font-family:\'IBM Plex Mono\',monospace;font-size:11px">💰 180€/mois récupérés avec un changement.</span>`,
+    'report.footnote': `↑ Format réel du rapport. Les données de retours ont un décalage de 30 jours. Changement budget max: 30%. Annulation 24h disponible.`,
     'sunday.eyebrow': `La Réalité du Dimanche Soir`,
     'sunday.h2': `Vous avez déjà les données.<br>C'est ça, le <em>problème.</em>`,
     'sunday.sub': `Si c'est votre dimanche soir, vous n'avez pas besoin de plus de données. Vous avez besoin d'un système qui fait le rapprochement manuel des dépenses pour vous et exécute la solution.`,
@@ -1839,36 +1913,11 @@ const translations = {
             <div class="sunday-row-detail">C’est ce qui se passe chaque dimanche. Multiplié par 52 semaines : ça fait plus de 70 heures par an d’analyse manuelle et incertaine qu'un pipeline API pourrait faire en quelques secondes.</div>
           </div>
         </div>`,
-    'demo.eyebrow': `La Démo en Direct`,
-    'demo.h2': `On vous montre vos chiffres<br>avant que vous payiez <em>le moindre euro.</em>`,
-    'demo.sub': `Connectez votre boutique, on génère un vrai rapport, et vous voyez exactement ce que vous recevriez chaque lundi — dont quelles campagnes vous font perdre de l'argent. Si vous ne voyez pas au moins une décision à prendre immédiatement, on vous dit que ce n'est pas le bon fit. Aucune facture.`,
-    'demo.headerLabel': `Rapport exemple — Luminary Candle Co. · Semaine 22`,
-    'demo.realDataFormat': `Format de données réel`,
-    'demo.col1Label': `Rentabilité publicitaire — cette semaine`,
-    'demo.col2Label': `Analyse de marge — semaine sur semaine`,
-    'demo.m.c1r1.name': `Campagne #4182 — "Summer Collection"`,
-    'demo.m.c1r1.roas': `ROAS affiché Meta : 1,8×`,
-    'demo.m.c1r1.val': `0,9× réel`, 'demo.m.c1r1.note': `après COGS + frais + retours`,
-    'demo.m.c1r2.name': `Campagne #4178 — "Bestsellers Retarget"`,
-    'demo.m.c1r2.roas': `ROAS affiché Meta : 2,6×`,
-    'demo.m.c1r2.val': `2,4× réel`, 'demo.m.c1r2.note': `à augmenter`,
-    'demo.m.c1r3.name': `Campagne #4165 — "New Arrivals Broad"`,
-    'demo.m.c1r3.roas': `ROAS affiché Meta : 1,4×`,
-    'demo.m.c1r3.val': `0,96× réel`, 'demo.m.c1r3.note': `limité — surveiller`,
-    'demo.m.c1r4.name': `Dépenses hebdo sur pubs déficitaires`,
-    'demo.m.c1r4.val': `640 €`, 'demo.m.c1r4.note': `récupérable cette semaine`,
-    'demo.m.c2r1.name': `Chiffre d'affaires brut`,
-    'demo.m.c2r1.val': `14 200 €`, 'demo.m.c2r1.note': `↑ 12% vs semaine dernière`,
-    'demo.m.c2r2.name': `Frais de plateforme (Shopify Payments)`,
-    'demo.m.c2r2.val': `−384 €`, 'demo.m.c2r2.note': `solvable : passer à l'annuel`,
-    'demo.m.c2r3.name': `Retours cette semaine`,
-    'demo.m.c2r3.val': `1 140 €`, 'demo.m.c2r3.note': `+3,2pts — investiguer SKU #18`,
-    'demo.m.c2r4.name': `Marge nette cette semaine`,
-    'demo.m.c2r4.val': `4,1%`, 'demo.m.c2r4.note': `↓ 2,1pts vs semaine dernière`,
-    'demo.m.c2r5.name': `Marge récupérable cette semaine`,
-    'demo.m.c2r5.val': `+820 €`, 'demo.m.c2r5.note': `si vous agissez sur les 3 décisions`,
-    'demo.ctaText': `<strong>Vous voulez voir ça avec les vrais chiffres de votre boutique ?</strong> C'est exactement ce qu'est la démo gratuite.`,
-    'demo.ctaBtn': `Réserver la démo gratuite →`,
+    'demo.eyebrow': `La Démo en Direct (Simulée)`,
+    'demo.h2': `On vous montre comment ça marche<br>avant que vous payiez <em>le moindre euro.</em>`,
+    'demo.sub': `Simulez un rapport du lundi avec des données fictives. Cliquez sur "Approuver" sur n'importe quelle décision pour voir comment fonctionne l'exécution API — avec des limites de sécurité complètes. Aucune vraie connexion requise. Quand vous serez prêt, on le fera avec votre boutique.`,
+    'demo.headerLabel': `Rapport simulé — Luminary Candle Co. (Données Fictives) · Semaine 22`,
+    'demo.realDataFormat': `Simulé · Comptes fictifs`,
     'compare.eyebrow': `L'Alternative`,
     'compare.h2': `Ce que vous faites maintenant<br>vs. ce que <em>le lundi pourrait ressembler.</em>`,
     'compare.sub': `Pas de comparaison avec d'autres outils. Juste un regard honnête sur la situation actuelle — et ce qui change.`,
@@ -1879,19 +1928,19 @@ const translations = {
             <td class="hl"><span class="ck">✓</span> Calculé automatiquement chaque semaine, par campagne.</td>
           </tr>
           <tr>
-            <td class="fn">Exécuter les changements de campagne</td>
-            <td>Se connecter à Meta/Google, trouver la campagne, mettre en pause ou augmenter manuellement.</td>
-            <td class="hl"><span class="ck">✓</span> Boutons webhook d'exécution en 1 clic intégrés directement dans votre email hebdomadaire.</td>
+            <td class="fn">Exécuter les changements pub</td>
+            <td>Se connecter à Meta/Google, pause ou augmentation manuelle.</td>
+            <td class="hl"><span class="ck">✓</span> Cliquez sur 'Approuver' dans votre email. Annulation 24h disponible.</td>
           </tr>
           <tr>
             <td class="fn">Comprendre pourquoi la marge a baissé</td>
-            <td>Aller-retour entre 4 à 5 onglets, souvent sans conclusion, souvent sauté.</td>
+            <td>Aller-retour entre 4 à 5 onglets, souvent sans conclusion.</td>
             <td class="hl"><span class="ck">✓</span> Cause identifiée — frais, retours, COGS ou mix pub — en langage clair.</td>
           </tr>
           <tr>
             <td class="fn">Temps consacré à l'analyse hebdo</td>
-            <td>60 à 90 minutes de travail le dimanche soir avec des résultats incertains.</td>
-            <td class="hl"><span class="ck">✓</span> 2 minutes à lire trois décisions et cliquer sur 'Exécuter' le lundi matin.</td>
+            <td>60 à 90 minutes de travail le dimanche soir.</td>
+            <td class="hl"><span class="ck">✓</span> 2 minutes à lire trois décisions et cliquer sur 'Exécuter' le lundi.</td>
           </tr>
           <tr>
             <td class="fn">Coût et Engagement</td>
@@ -1902,33 +1951,33 @@ const translations = {
     'how.h2': `Quatre étapes. Entièrement automatisé.<br>Premier rapport en <em>moins d'une semaine.</em>`,
     'how.sub': `Nous construisons un pipeline sur mesure qui connecte votre stack, effectue l'analyse et livre un rapport interactif — sans que vous ayez à toucher quoi que ce soit après l'intégration.`,
     'how.step1.title': `On connecte votre stack`, 'how.step2.title': `Le système fait l'analyse`,
-    'how.step3.title': `3 décisions et exécution en 1 clic`, 'how.step4.title': `La décision des 30 jours`,
-    'how.step1.body': `Votre plateforme boutique, vos comptes pub et votre outil email sont connectés via API lors d'une seule session d'intégration. Pas d'exports CSV, pas d'uploads manuels — jamais.`,
-    'how.step2.body': `Chaque semaine, le pipeline calcule votre vraie rentabilité pub après COGS, frais et retours — puis identifie des opportunités exploitables dans toutes vos données.`,
-    'how.step3.body': `Chaque lundi avant 9h : trois décisions en langage clair dans votre boîte de réception. Cliquez sur le bouton intégré sous chaque insight pour mettre en pause ou augmenter instantanément les campagnes via API. Pas de connexion.`,
-    'how.step4.body': `Après votre Audit Rémunéré de 30 jours, vous évaluez le ROI. Si vous restez, c'est un forfait mensuel fixe. Si vous partez, vous gardez l'intégralité de l'infrastructure automatisée que nous avons construite pour vous.`,
+    'how.step3.title': `3 décisions + Exécution Assistée`, 'how.step4.title': `La décision des 30 jours`,
+    'how.step1.body': `Votre plateforme boutique, vos comptes pub et votre outil email sont connectés via API. Pas d'exports CSV, pas d'uploads manuels — jamais.`,
+    'how.step2.body': `Chaque semaine, le pipeline calcule votre vraie rentabilité pub après COGS, frais et retours — puis identifie des opportunités exploitables.`,
+    'how.step3.body': `Chaque lundi avant 9h : trois décisions claires dans votre boîte mail. Cliquez sur 'Approuver' pour exécuter via API (max 30% de changement, annulation 24h).`,
+    'how.step4.body': `Après votre Audit, vous évaluez le ROI. Si vous restez, le tarif s'adapte à vos dépenses. Si vous annulez, vous recevez un export de votre logique. Conservez l'infrastructure pour 299€/mois.`,
     'pricing.eyebrow': `Tarifs`,
-    'pricing.h2': `L'Audit Rémunéré de 30 Jours.<br><em>Zéro contrat. Zéro engagement.</em>`,
-    'pricing.sub': `Nous ne facturons pas de frais de setup gonflés ni ne forçons des contrats de 12 mois. Vous payez un forfait pour les 30 premiers jours pendant que nous construisons votre système. S'il ne se rentabilise pas de lui-même, vous partez et gardez la technologie.`,
+    'pricing.h2': `Paliers équitables.<br><em>Exécution Assistée. Zéro engagement.</em>`,
+    'pricing.sub': `Commencez par un audit payant de 30 jours — 100% crédité si vous continuez. Après la Phase 1, notre forfait évolue automatiquement avec votre volume de dépenses pour vous éviter de surpayer.`,
     'pricing.starter.tier': `Phase 1`, 'pricing.starter.name': `Audit de 30 Jours`,
     'pricing.starter.amount': `499 €`, 'pricing.starter.period': `forfait`,
-    'pricing.starter.note': `Forfait pour les 30 premiers jours.<br><strong>Vous possédez le pipeline si vous annulez.</strong>`,
-    'pricing.starter.features': `<li><span class="ck">✓</span> Création complète du pipeline API sur mesure</li><li><span class="ck">✓</span> 1 boutique + 2 plateformes connectées</li><li><span class="ck">✓</span> Boutons d'exécution email en 1 clic</li><li><span class="ck">✓</span> 4 rapports d'intelligence hebdomadaires</li>`,
-    'pricing.starter.cta': `Réserver votre Audit de 30 Jours`,
-    'pricing.starter.desc': `Pour les marques e-commerce prêtes à arrêter de deviner et à commencer à exécuter.`,
-    'pricing.growth.badge': `Phase 2`,
-    'pricing.growth.tier': `Mois 2+`, 'pricing.growth.name': `Retainer Mensuel`,
-    'pricing.growth.amount': `799 €`, 'pricing.growth.period': `/mois`,
-    'pricing.growth.note': `Zéro contrat. Annulez à tout moment.<br><strong>+149 €/mois par plateforme suppl.</strong>`,
-    'pricing.growth.features': `<li><span class="ck">✓</span> Tout ce qui est inclus dans l'Audit de 30 Jours</li><li><span class="ck">✓</span> Calcul continu du vrai ROAS</li><li><span class="ck">✓</span> Digest hebdomadaire + boutons d'exécution</li><li><span class="ck">✓</span> Alertes d'anomalies et de baisse de marge</li><li><span class="ck">✓</span> Appel stratégique mensuel d'1 heure</li>`,
-    'pricing.growth.cta': `Réserver votre Audit de 30 Jours →`,
-    'pricing.growth.desc': `Gestion continue du pipeline et moteur de décision hebdomadaire après votre Audit de 30 Jours.`,
-    'pricing.scale.tier': `Phase 3`, 'pricing.scale.name': `Moteur E-Commerce Sur Mesure`,
-    'pricing.scale.amount': `999 €+`, 'pricing.scale.period': `/mois`,
-    'pricing.scale.note': `Zéro frais de setup. Sans engagement.<br><strong>Pour les stacks e-commerce complexes.</strong>`,
-    'pricing.scale.features': `<li><span class="ck">✓</span> Actions webhook sur mesure</li><li><span class="ck">✓</span> Analyse de cohortes LTV avancée</li><li><span class="ck">✓</span> Appels hebdos + bilans trimestriels</li><li><span class="ck">✓</span> Support prioritaire &amp; builds sur mesure</li><li><span class="ck">✓</span> &amp; plus</li>`,
-    'pricing.scale.cta': `Demander un Build Sur Mesure`,
-    'pricing.scale.desc': `Pour les marques avec des stacks complexes. Nous construisons des pipelines de données 100% sur mesure.`,
+    'pricing.starter.note': `Forfait pour les 30 premiers jours.<br><strong>100% crédité au Mois 2 si vous continuez.</strong>`,
+    'pricing.starter.features': `<li><span class="ck">✓</span> Moteur Pré-configuré pour Votre Stack</li><li><span class="ck">✓</span> 1 boutique + 2 plateformes connectées</li><li><span class="ck">✓</span> Boutons d'exécution email en 1 clic</li><li><span class="ck">✓</span> 4 rapports hebdomadaires</li>`,
+    'pricing.starter.cta': `Réserver votre Audit`,
+    'pricing.starter.desc': `Pour les marques e-commerce prêtes à commencer l'exécution assistée.`,
+    'pricing.growth.badge': `Phase 2 · Forfait par Palier`,
+    'pricing.growth.tier': `Mois 2+`, 'pricing.growth.name': `Forfait Mensuel`,
+    'pricing.growth.amount': `599 €`, 'pricing.growth.period': `/mois`,
+    'pricing.growth.note': `Zéro contrat. Annulez à tout moment.<br><strong>Inclus jusqu'à 3 Plateformes.</strong>`,
+    'pricing.growth.features': `<li><strong>Growth (&lt;15k€/mois):</strong> 599€/mois</li><li><strong>Scale (15k€–30k€/mois):</strong> 799€/mois</li><li><strong>Pro (30k€–50k€/mois):</strong> 1199€/mois</li><li style="margin-top:12px; border-top:1px solid rgba(255,255,255,0.04); padding-top:12px;"><span class="ck">✓</span> Calcul continu du vrai ROAS</li><li><span class="ck">✓</span> Décisions hebdomadaires + exécution assistée</li><li><span class="ck">✓</span> Appel stratégique mensuel d'1 heure</li>`,
+    'pricing.growth.cta': `Réserver votre Audit →`,
+    'pricing.growth.desc': `Gestion continue du pipeline et exécution assistée. Le tarif évolue de manière transparente avec vos dépenses.`,
+    'pricing.scale.tier': `Phase 3 — Supplément Post-Audit`, 'pricing.scale.name': `Moteur Personnalisé`,
+    'pricing.scale.amount': `1 999 €`, 'pricing.scale.period': `base /mo`,
+    'pricing.scale.note': `Ingénierie de données niveau entreprise.<br><strong>Sans le salaire de 120k€/an d'un data scientist.</strong>`,
+    'pricing.scale.features': `<li><span class="ck">✓</span> Actions d'exécution sur mesure</li><li><span class="ck">✓</span> Modèles LTV & Abonnements avancés</li><li><span class="ck">✓</span> Logique de déduplication personnalisée</li><li><span class="ck">✓</span> Support prioritaire</li>`,
+    'pricing.scale.cta': `Demander le Moteur Personnalisé`,
+    'pricing.scale.desc': `Pour les stacks complexes (> 50k€ dépense, LTV personnalisé, abonnements, 4+ plateformes).`,
     'pricing.footerNote': `Tous les plans incluent une démo gratuite avec les vraies données de votre boutique avant tout engagement.<br>Vous possédez tout ce que nous construisons — si vous partez, tout le système part avec vous. Rien ne s'arrête.`,
     'platforms.eyebrow': `Plateformes`,
     'platforms.h2': `Compatible avec votre stack.<br><em>D'autres ajoutées sur demande.</em>`,
@@ -1943,12 +1992,12 @@ const translations = {
     'platforms.request.link': `Demander →`,
     'why.eyebrow': `Pourquoi 7Captur`,
     'why.h2': `Conçu pour un seul problème,<br><em>obsessionnellement.</em>`,
-    'why.item1': `<span class="why-num mono">01 —</span><div class="why-title">Exécution par Télécommande, pas juste des conseils</div><p class="why-body">Tous les autres outils vous donnent un tableau de bord et s'en vont. Nous vous donnons trois choses à faire — et les boutons directement dans votre email pour les exécuter instantanément via API.</p>`,
+    'why.item1': `<span class="why-num mono">01 —</span><div class="why-title">Exécution Assistée, pas juste des conseils</div><p class="why-body">Tous les autres outils vous donnent un tableau de bord et s'en vont. Nous livrons trois décisions — chacune avec un score de confiance, un impact en dollars, et un bouton Approuver ou Ignorer. Vous gardez le contrôle. Nous gérons l'exécution API.</p>`,
     'why.item2': `<span class="why-num mono">02 —</span><div class="why-title">La vraie rentabilité est le seul chiffre qui compte</div><p class="why-body">Le COGS, les frais de plateforme et les retours sont intégrés dans chaque calcul pub automatiquement. Pas d'enregistrement manuel des dépenses. Intégré dès le premier jour.</p>`,
     'why.item3': `<span class="why-num mono">03 —</span><div class="why-title">Le Concept de Preuve sur 30 Jours</div><p class="why-body">Nous passons 30 jours à prouver le ROI sur les données réelles de votre boutique. Si vous ne voyez pas de valeur massive au jour 30, vous partez sans aucune obligation.</p>`,
     'why.item4': `<span class="why-num mono">04 —</span><div class="why-title">De vraies intégrations API, pas des contournements</div><p class="why-body">Nous nous connectons directement à l'API de chaque plateforme — pas d'exports CSV, pas de copier-coller. Des pipelines qui récupèrent vos données silencieusement chaque semaine sans que vous fassiez quoi que ce soit.</p>`,
     'why.item5': `<span class="why-num mono">05 —</span><div class="why-title">Opérationnel en moins d'une semaine</div><p class="why-body">Premier rapport dans votre boîte mail sous 7 jours d'intégration. Pas de mois d'appels de découverte. Pas de documentation de setup interminable. Nous allons vite.</p>`,
-    'why.item6': `<span class="why-num mono">06 —</span><div class="why-title">Si vous partez, tout le système part avec vous</div><p class="why-body">Chaque pipeline, automatisation et intégration que nous construisons vous appartient. Si vous annulez un jour, vous récupérez le système complet. Rien ne s'arrête. Pas de rançon. Pas de menottes.</p>`,
+    'why.item6': `<span class="why-num mono">06 —</span><div class="why-title">Vous possédez la Logique, nous gérons l'API</div><p class="why-body">Si vous annulez, vous recevez un export complet JSON de vos données et logique. Conservez l'infrastructure en automatique pour 299€/mois (frais de maintenance d'API et serveurs).</p>`,
     'waitlist.eyebrow': `Liste d'attente`,
     'waitlist.h2': `Pas encore prêt ?<br>Soyez notifié quand on <em>ouvre des places.</em>`,
     'waitlist.sub': `Nous travaillons avec un petit nombre de boutiques pour affiner le produit. Rejoignez la liste d'attente et nous vous contacterons quand une place s'ouvre — ou quand nous lançons quelque chose de nouveau.`,
@@ -1967,38 +2016,29 @@ const translations = {
     'contact.step3': `<strong>Vous décidez.</strong> Pas de pression. Si c'est un match, on est opérationnel sous 7 jours.`,
     'contact.form.name': `Votre nom`, 'contact.form.email': `Adresse email`,
     'contact.form.store': `URL de votre boutique`, 'contact.form.platform': `Plateforme e-commerce`,
+    'contact.form.adspend': `Dépense Pub Mensuelle (approx.)`,
     'contact.form.headache': `Votre principal problème de données en ce moment`,
     'contact.form.platformPlaceholder': `Sélectionnez votre plateforme`,
+    'contact.form.revenuePlaceholder': `Sélectionnez une fourchette`,
     'contact.form.namePh': `Alex Dupont`, 'contact.form.emailPh': `alex@votreboutique.com`,
     'contact.form.storePh': `votreboutique.com`,
     'contact.form.headachePh': `ex. Je n'arrive pas à savoir quelles campagnes pub sont vraiment rentables après tous mes coûts…`,
     'contact.form.other': `Autre (précisez ci-dessous)`,
     'contact.form.submit': `Réserver ma démo gratuite →`,
     'contact.form.foot': `Opérationnel en moins d'une semaine. Premier rapport dans votre boîte mail sous 7 jours.`,
+    'contact.form.rev1': 'Moins de 15k€/mois', 'contact.form.rev2': '15k€ – 30k€/mois',
+    'contact.form.rev3': '30k€ – 50k€/mois', 'contact.form.rev4': '50k€+/mois',
     'footer.problem': `Le problème`, 'footer.bookDemo': `Réserver une démo`,
-    'footer.privacy': `Confidentialité`, 'footer.copy': `© 2026 7Captur`,
-    'privacy.title': `Politique de Confidentialité`, 'modal.close': `✕ Fermer`,
-    'privacy.meta': `Dernière mise à jour : mars 2026`,
-    'privacy.body': `      <p class="modal-meta mono">Dernière mise à jour : mars 2026</p>
-      <h3>1. Qui sommes-nous</h3>
-      <p>7Captur est un service d'intelligence décisionnelle IA pour les propriétaires de boutiques e-commerce. Nous sommes le responsable du traitement des données que vous fournissez. Pour toute question relative à la confidentialité : <a href="mailto:privacy@7captur.com">privacy@7captur.com</a>.</p>
-      <h3>2. Données que nous collectons</h3>
-      <p>Lorsque vous soumettez une demande de démo, nous collectons votre nom, adresse email, URL de boutique, plateforme, et toute information que vous partagez dans le champ libre. Lorsque vous êtes client, nous nous connectons à votre plateforme boutique, comptes pub et outils email via leurs API officielles — en accédant uniquement à ce qui est nécessaire pour produire votre rapport hebdomadaire.</p>
-      <h3>3. Comment nous utilisons vos données</h3>
-      <ul>
-        <li>Pour répondre à votre demande de démo et planifier un appel</li>
-        <li>Pour produire votre rapport de décision IA hebdomadaire</li>
-        <li>Pour améliorer la qualité de notre analyse dans le temps</li>
-        <li>Nous ne vendons, ne louons ni ne partageons vos données avec des tiers à des fins marketing — jamais</li>
-      </ul>
-      <h3>4. Stockage et sécurité des données</h3>
-      <p>Vos données sont chiffrées en transit et stockées de façon sécurisée. Les soumissions de formulaire de contact sont conservées jusqu'à 12 mois. Les données boutique client sont conservées uniquement pendant la durée de votre engagement, et supprimées dans les 30 jours suivant la résiliation sur demande.</p>
-      <h3>5. Vos droits</h3>
-      <p>Vous avez le droit d'accéder, corriger ou supprimer les données personnelles que nous détenons sur vous, et de retirer votre consentement à tout moment. Pour exercer tout droit, écrivez à <a href="mailto:privacy@7captur.com">privacy@7captur.com</a>.</p>
-      <h3>6. Cookies</h3>
-      <p>Ce site n'utilise aucun cookie de suivi, script d'analyse tiers ni pixel publicitaire d'aucune sorte.</p>
-      <h3>7. Modifications</h3>
-      <p>Nous pouvons mettre à jour cette politique de temps en temps. La date en haut indique la dernière révision.</p>`,
+    'footer.privacy': `Confidentialité & CGU`, 'footer.copy': `© 2026 7Captur`,
+    'privacy.title': `Politique de Confidentialité & CGU`, 'modal.close': `✕ Fermer`,
+    'privacy.body': `
+      <p class="modal-meta mono">Dernière mise à jour : Mars 2026</p>
+      <h3>1. Qui sommes-nous</h3><p>7Captur est un service d'intelligence décisionnelle pour l'e-commerce. Pour toute question légale : <a href="mailto:privacy@7captur.com">privacy@7captur.com</a>.</p>
+      <h3>2. Confidentialité & Collecte de Données</h3><p>Nous collectons votre nom, email et URL. Une fois client, nous nous connectons à vos plateformes via leurs API officielles. Nous n'accédons qu'aux données strictement nécessaires pour calculer le Vrai ROAS. Nous ne vendons jamais vos données. Les données client sont conservées uniquement pendant l'engagement et supprimées sous 30 jours après résiliation.</p>
+      <h3>3. Propriété & Maintenance</h3><p>Vous possédez pleinement vos configurations et données. 7Captur conserve la propriété de l'infrastructure d'hébergement. En cas d'annulation, vous recevez un export JSON de votre workflow. Pour que le pipeline s'exécute automatiquement après l'annulation, vous devez passer au Forfait Maintenance (299€/mois) qui couvre la protection API et les serveurs.</p>
+      <h3>4. Responsabilités Utilisateur & Exécution Assistée</h3><p>7Captur est une couche d'<em>Exécution Assistée</em>. Nous ne faisons aucun changement autonome. Chaque exécution API nécessite une approbation humaine explicite via nos emails. Bien que nous appliquions des limites de sécurité (changement max de 30% et retour arrière de 24h), l'Utilisateur est responsable de toutes les actions approuvées et des impacts financiers résultants.</p>
+      <h3>5. Limitation de Responsabilité</h3><p>Dans la limite permise par la loi, 7Captur ne sera pas responsable des dommages indirects, incidents ou consécutifs (perte de profit, de données, dépenses pub). Notre responsabilité est strictement limitée au montant que vous avez payé pour le service dans les trois (3) mois précédant la réclamation.</p>
+      <h3>6. Disponibilité & API Tiers</h3><p>Notre service repose sur le fonctionnement continu des API tierces (Shopify, Meta, etc.). 7Captur n'est pas responsable des interruptions causées par des limites de taux inattendues ou des pannes de ces plateformes, bien que nous nous engagions à résoudre les problèmes de connexion API rapidement.</p>`,
     'modal.backToSite': `Retour au site`,
     'success.demo.title': `Demande de démo reçue.`,
     'success.demo.body': `Nous examinerons vos informations et vous contacterons sous 24 heures pour planifier votre démo gratuite de 20 minutes. Vérifiez votre boîte mail — nous répondons vite.`,
@@ -2015,6 +2055,7 @@ const translations = {
     'form.errFields': `Veuillez renseigner votre nom, email et URL de boutique.`,
     'form.errEmail': `Veuillez saisir une adresse email valide.`,
     'form.errPlatform': `Veuillez sélectionner votre plateforme.`,
+    'form.errSpend': `Notre outil est conçu pour les marques dépensant au moins 5k€/mois en publicités. Veuillez rejoindre la liste d\'attente pour les plus petits budgets.`,
     'form.errGeneric': `Une erreur est survenue — veuillez réessayer.`,
     'form.errNetwork': `Erreur réseau — vérifiez votre connexion et réessayez.`,
     'form.sending': `Envoi en cours…`, 'form.adding': `Ajout en cours…`,
@@ -2040,7 +2081,6 @@ function applyLang(lang) {
     const v = T[el.dataset.i18nPlaceholder];
     if (v !== undefined) el.placeholder = v;
   });
-  // Translate select disabled options (placeholders)
   document.querySelectorAll('option[data-i18n]').forEach(el => {
     const v = T[el.dataset.i18n];
     if (v !== undefined) el.textContent = v;
@@ -2050,8 +2090,6 @@ function applyLang(lang) {
 
 document.getElementById('lang-en').addEventListener('click', () => applyLang('en'));
 document.getElementById('lang-fr').addEventListener('click', () => applyLang('fr'));
-
-// Auto-detect language from browser, fall back to saved pr
 </script>
 </body>
 </html>
