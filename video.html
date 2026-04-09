@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7Captur — Video Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #1a1a1a;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .branding {
+            text-align: center;
+            margin-top: 24px;
+            color: #F5F1E8;
+            opacity: 0.6;
+            font-size: 14px;
+        }
+        
+        .branding a {
+            color: #4A7C00;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .branding a:hover {
+            opacity: 0.8;
+        }
+        
+        .error {
+            text-align: center;
+            color: #F5F1E8;
+            padding: 60px 20px;
+        }
+        
+        .error h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: #C97A00;
+        }
+        
+        .error p {
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="video-wrapper" id="videoContainer">
+            <video id="videoPlayer" controls preload="metadata">
+                <source id="videoSource" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="branding">
+            <a href="https://7captur.com">7Captur</a> — Automated ROAS Intelligence
+        </div>
+    </div>
+
+    <script>
+        // Get brand slug from URL parameter
+        // Example: 7captur.com/video?brand=cocokind
+        const urlParams = new URLSearchParams(window.location.search);
+        const brandSlug = urlParams.get('brand');
+        
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoSource = document.getElementById('videoSource');
+        const videoContainer = document.getElementById('videoContainer');
+        
+        if (brandSlug) {
+            // Construct video path from brand slug
+            videoSource.src = `videos/${brandSlug}.mp4`;
+            videoPlayer.load();
+            
+            // Handle video load error
+            videoPlayer.addEventListener('error', function() {
+                videoContainer.innerHTML = `
+                    <div class="error">
+                        <h2>Video not found</h2>
+                        <p>The video file for "${brandSlug}" could not be loaded.</p>
+                    </div>
+                `;
+            });
+        } else {
+            // No brand parameter provided
+            videoContainer.innerHTML = `
+                <div class="error">
+                    <h2>No video specified</h2>
+                    <p>Please use a valid video link.</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
