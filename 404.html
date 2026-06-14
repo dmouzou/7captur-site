@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>7Captur</title>
+<script>
+  // GitHub Pages SPA redirect trick:
+  // Store the path in sessionStorage, then redirect to root,
+  // which picks it up and navigates to the right page.
+  const path = window.location.pathname;
+  sessionStorage.setItem('redirect', path);
+  window.location.replace('/');
+</script>
+</head>
+<body></body>
+</html>
