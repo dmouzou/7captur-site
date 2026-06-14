@@ -1,1 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pricing, 7Captur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   7CAPTUR — DESIGN TOKENS (shared)
+   ============================================================ */
+:root {
+  --bg:           #fdf6ee;
+  --bg2:          #f5ebe0;
+  --bg3:          #ecdfd2;
+  --line:         rgba(28,24,18,.10);
+  --line-strong:  rgba(28,24,18,.20);
+  --ink:          #1c1812;
+  --body:         #5c534a;
+  --muted:        #9a9088;
+  --accent:       #3f6b00;
+  --accent-soft:  #eaf0dd;
+  --accent-line:  rgba(63,107,0,.22);
+  --gold:         #8a6a00;
+  --gold-soft:    #f5eed9;
+  --red:          #a82020;
+  --red-soft:     #f7e8e6;
+  --card:         #f7f0e6;
+}
+html.dark {
+  --bg:           #15171d;
+  --bg2:          #1b1e26;
+  --bg3:          #232733;
+  --line:         rgba(255,255,255,.08);
+  --line-strong:  rgba(255,255,255,.16);
+  --ink:          #f1ede4;
+  --body:         #aba39a;
+  --muted:        #6b6560;
+  --accent:       #8fce3a;
+  --accent-soft:  #1f2a14;
+  --accent-line:  rgba(143,206,58,.25);
+  --gold:         #d8b14a;
+  --gold-soft:    #2a2418;
+  --red:          #e2685f;
+  --red-soft:     #2a1c1b;
+  --card:         #1e2128;
+}
 
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);color:var(--body);font-family:'Inter',sans-serif;font-weight:400;
+  line-height:1.65;-webkit-font-smoothing:antialiased;transition:background-color .3s ease;
+}
+a{color:inherit}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 48px}
+.section{padding:104px 0}
+.section-tight{padding:72px 0}
+.section-border-t{border-top:1px solid var(--line)}
+.alt-bg{background:var(--bg2)}
+
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:18px;
+}
+.eyebrow::after{content:'';flex:0 0 40px;height:1px;background:var(--accent-line)}
+
+h1,h2,h3{font-family:'Inter Tight',sans-serif;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+h1{font-size:clamp(34px,4.2vw,52px);line-height:1.1;font-weight:800}
+h2{font-size:clamp(28px,3.2vw,42px);line-height:1.14;margin-bottom:18px}
+h3{font-size:18px;line-height:1.3}
+.lede{font-size:1.0625rem;line-height:1.75;color:var(--body);max-width:600px}
+
+/* ============================================================
+   NAV (shared)
+   ============================================================ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;
+  height:72px;border-bottom:1px solid var(--line);background:rgba(253,246,238,.92);backdrop-filter:blur(10px);
+  transition:background .3s ease,border-color .3s ease;
+}
+html.dark nav{background:rgba(21,23,29,.92)}
+.nav-inner{max-width:1180px;margin:0 auto;width:100%;padding:0 48px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.02em;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:11px}
+.logo-mark{width:22px;height:auto;color:var(--accent);flex-shrink:0}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:14px;font-weight:500;color:var(--body);text-decoration:none;transition:color .15s}
+.nav-links a:hover,.nav-links a.current{color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-cta{background:var(--ink);color:var(--bg);font-family:'Inter Tight',sans-serif;font-weight:600;font-size:13.5px;padding:11px 22px;text-decoration:none;letter-spacing:-.005em;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+.theme-toggle{background:none;border:1px solid var(--line-strong);color:var(--body);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;padding:8px 12px;cursor:pointer;transition:color .15s,border-color .15s}
+.theme-toggle:hover{color:var(--ink);border-color:var(--ink)}
+.nav-mobile-toggle{display:none;background:none;border:none;color:var(--ink);cursor:pointer;padding:6px}
+@media(max-width:900px){.nav-links{display:none}.nav-mobile-toggle{display:block}}
+
+.mobile-drawer{display:none;position:fixed;inset:0;z-index:300;background:var(--bg);padding:24px 28px;flex-direction:column}
+.mobile-drawer.open{display:flex}
+.mobile-drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;height:48px}
+.mobile-drawer a{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:20px;color:var(--ink);text-decoration:none;padding:18px 0;border-bottom:1px solid var(--line)}
+.mobile-drawer .nav-cta{margin-top:24px;text-align:center}
+.mobile-drawer-close{background:none;border:none;color:var(--ink);cursor:pointer;padding:6px}
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+.page-header{
+  padding:168px 0 64px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 60% at 85% 0%, rgba(63,107,0,.14), transparent 60%),
+    radial-gradient(ellipse 50% 45% at 15% 10%, rgba(138,106,0,.08), transparent 60%),
+    linear-gradient(180deg, var(--bg2) 0%, var(--bg) 55%);
+}
+html.dark .page-header::before{
+  background:
+    radial-gradient(ellipse 60% 60% at 85% 0%, rgba(143,206,58,.16), transparent 60%),
+    radial-gradient(ellipse 50% 45% at 15% 10%, rgba(216,177,74,.10), transparent 60%),
+    linear-gradient(180deg, var(--bg2) 0%, var(--bg) 55%);
+}
+.page-header > .wrap{position:relative;z-index:1}
+.page-header-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;display:flex;align-items:center;gap:10px}
+.page-header-eyebrow .dot{width:6px;height:6px;background:var(--accent);border-radius:50%}
+.page-header h1{margin-bottom:20px}
+.page-header .lede{font-size:1.125rem}
+@media(max-width:900px){.page-header{padding:140px 0 48px}}
+
+/* ============================================================
+   PRICING GRID
+   ============================================================ */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line-strong);margin-top:48px}
+.price-card{padding:36px 32px;border-right:1px solid var(--line);display:flex;flex-direction:column}
+.price-card:last-child{border-right:none}
+.price-card.featured{
+  background:
+    radial-gradient(ellipse 100% 60% at 100% 0%, rgba(63,107,0,.08), transparent 65%),
+    var(--bg2);
+}
+html.dark .price-card.featured{
+  background:
+    radial-gradient(ellipse 100% 60% at 100% 0%, rgba(143,206,58,.10), transparent 65%),
+    var(--bg2);
+}
+.price-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.price-phase{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.price-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--accent-line);color:var(--accent);background:var(--accent-soft)}
+.price-name{font-size:21px;margin-bottom:8px}
+.price-desc{font-size:13.5px;color:var(--body);line-height:1.6;margin-bottom:22px;min-height:58px}
+.price-amount-row{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.price-amount{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:38px;color:var(--ink);letter-spacing:-.02em}
+.price-period{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted)}
+.price-note{
+  font-size:13.5px;color:var(--body);line-height:1.6;margin:14px 0 24px;padding-bottom:24px;
+  border-bottom:1px solid var(--line);
+}
+.price-note strong{color:var(--accent)}
+.price-features{list-style:none;margin-bottom:28px;flex:1}
+.price-features li{display:flex;gap:10px;font-size:13.5px;color:var(--body);padding:7px 0;line-height:1.5}
+.price-features li .ck{color:var(--accent);flex-shrink:0;font-weight:600}
+.price-features li strong{color:var(--ink)}
+.price-cta-primary{
+  background:var(--accent);color:#fff;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14px;
+  padding:14px 20px;text-align:center;text-decoration:none;letter-spacing:-.005em;transition:opacity .15s;
+}
+html.dark .price-cta-primary{color:#0e1206}
+.price-cta-primary:hover{opacity:.88}
+.price-cta-secondary{
+  color:var(--ink);font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14px;
+  padding:13px 20px;text-align:center;text-decoration:none;border:1px solid var(--line-strong);
+  transition:border-color .15s,color .15s;
+}
+.price-cta-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+@media(max-width:900px){
+  .pricing-grid{grid-template-columns:1fr}
+  .price-card{border-right:none;border-bottom:1px solid var(--line)}
+  .price-card:last-child{border-bottom:none}
+}
+
+/* ============================================================
+   MAINTENANCE / DOWNGRADE STRIP
+   ============================================================ */
+.addon-strip{
+  border:1px solid var(--line-strong);margin-top:24px;padding:28px 32px;
+  display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;
+}
+.addon-strip h3{margin-bottom:6px}
+.addon-strip p{font-size:13.5px;color:var(--body);line-height:1.65;max-width:620px}
+.addon-strip p strong{color:var(--ink)}
+.addon-amount{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--accent);margin-left:8px}
+@media(max-width:760px){.addon-strip{grid-template-columns:1fr}}
+
+/* ============================================================
+   ROI CALCULATOR
+   ============================================================ */
+.roi-wrap{border:1px solid var(--line-strong);margin-top:48px;padding:36px}
+.roi-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.roi-head h3{margin-bottom:4px}
+.roi-head p{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.roi-controls{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:28px}
+.roi-control-label{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink);margin-bottom:10px}
+.roi-control-label .val{color:var(--accent);font-weight:500}
+input[type=range]{width:100%;accent-color:var(--accent);height:4px}
+.roi-results{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-strong);border:1px solid var(--line-strong)}
+.roi-result{background:var(--bg);padding:22px 24px}
+.roi-result.is-key{
+  background:
+    radial-gradient(ellipse 90% 100% at 100% 50%, rgba(63,107,0,.10), transparent 70%),
+    var(--bg);
+}
+html.dark .roi-result.is-key{
+  background:
+    radial-gradient(ellipse 90% 100% at 100% 50%, rgba(143,206,58,.12), transparent 70%),
+    var(--bg);
+}
+.roi-result-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.roi-result-val{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:28px;color:var(--ink);letter-spacing:-.02em}
+.roi-disclaimer{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-top:18px;line-height:1.7}
+@media(max-width:760px){.roi-controls{grid-template-columns:1fr}.roi-results{grid-template-columns:1fr}}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-list{border:1px solid var(--line-strong);margin-top:48px}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 28px;
+  cursor:pointer;user-select:none;transition:background .15s;
+}
+.faq-q:hover{background:var(--bg2)}
+.faq-q-text{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:15.5px;color:var(--ink)}
+.faq-icon{flex-shrink:0;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:18px;transition:transform .2s ease}
+.faq-item.open .faq-icon{transform:rotate(45deg);color:var(--accent)}
+.faq-a{display:none;padding:0 28px 22px;font-size:14px;color:var(--body);line-height:1.7;max-width:680px}
+.faq-item.open .faq-a{display:block}
+
+/* ============================================================
+   CTA BAND + FOOTER (shared)
+   ============================================================ */
+.cta-band{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(63,107,0,.10), transparent 70%),
+    var(--bg2);
+}
+html.dark .cta-band{
+  background:
+    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(143,206,58,.12), transparent 70%),
+    var(--bg2);
+}
+.cta-band .wrap{padding:72px 48px;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
+.cta-band h2{margin-bottom:8px;font-size:clamp(24px,2.8vw,34px)}
+.cta-band p{font-size:15px;color:var(--body)}
+.btn-primary{background:var(--accent);color:#fff;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14.5px;padding:15px 30px;text-decoration:none;letter-spacing:-.005em;display:inline-flex;align-items:center;gap:8px;transition:opacity .15s}
+html.dark .btn-primary{color:#0e1206}
+.btn-primary:hover{opacity:.88}
+.btn-secondary{color:var(--ink);font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14.5px;padding:15px 28px;text-decoration:none;border:1px solid var(--line-strong);display:inline-flex;align-items:center;gap:8px;transition:border-color .15s,color .15s}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+footer{padding:56px 0 40px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand .logo{margin-bottom:14px}
+.footer-brand p{font-size:13.5px;color:var(--muted);line-height:1.7;max-width:280px}
+.footer-col h4{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col a{font-size:14px;color:var(--body);text-decoration:none;transition:color .15s}
+.footer-col a:hover{color:var(--ink)}
+.footer-bottom{padding-top:28px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-copy{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none}
+.footer-legal a:hover{color:var(--ink)}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:36px}.footer-brand{grid-column:1/-1}}
+@media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
+
+@media(max-width:900px){.wrap{padding:0 28px}.nav-inner{padding:0 28px}.section{padding:72px 0}}
+
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
+    <ul class="nav-links">
+      <li><a href="/how-it-works/">How it works</a></li>
+      <li><a href="/pricing/" class="current">Pricing</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/security/">Security &amp; Data</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle">DARK</button>
+      <a href="/contact/" class="nav-cta">Book a demo</a>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Menu" id="mobileMenuBtn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="mobile-drawer-head">
+    <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
+    <button class="mobile-drawer-close" id="mobileDrawerClose" aria-label="Close menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <a href="/how-it-works/">How it works</a>
+  <a href="/pricing/">Pricing</a>
+  <a href="/about/">About</a>
+  <a href="/security/">Security &amp; Data</a>
+  <a href="/contact/" class="nav-cta">Book a demo</a>
+</div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="wrap">
+    <div class="page-header-eyebrow"><span class="dot"></span> Pricing</div>
+    <h1>Start with a paid audit, then move to a retainer that scales with your ad spend.</h1>
+    <p class="lede">The first 30 days are a fixed-fee engagement, fully credited toward month two. After that, pricing is tiered by your monthly ad spend, never by guesswork.</p>
+  </div>
+</header>
+
+<!-- PRICING GRID -->
+<section class="section">
+  <div class="wrap">
+    <div class="pricing-grid reveal">
+
+      <!-- Phase 1 -->
+      <div class="price-card">
+        <div class="price-card-top">
+          <div class="price-phase">Phase 1</div>
+        </div>
+        <h3 class="price-name">30-Day Paid Audit</h3>
+        <p class="price-desc">For brands ready to stop guessing and start with assisted execution.</p>
+        <div class="price-amount-row">
+          <span class="price-amount">$499</span>
+          <span class="price-period">flat fee</span>
+        </div>
+        <div class="price-note">Credited in full toward Month 2 if you continue. <strong>If the 30-day summary doesn't justify continuing, you walk away with a full export and no further obligation.</strong></div>
+        <ul class="price-features">
+          <li><span class="ck">✓</span> Pipeline configured for your store and ad accounts</li>
+          <li><span class="ck">✓</span> 1 store + 2 ad platforms connected via API</li>
+          <li><span class="ck">✓</span> 1-click approve/dismiss execution in every report</li>
+          <li><span class="ck">✓</span> 4 weekly reports across the audit period</li>
+          <li><span class="ck">✓</span> Written 30-day ROI summary</li>
+        </ul>
+        <a href="/contact/" class="price-cta-secondary">Book your 30-day audit</a>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="price-card featured">
+        <div class="price-card-top">
+          <div class="price-phase">Phase 2 · Month 2+</div>
+          <span class="price-badge">Tiered by spend</span>
+        </div>
+        <h3 class="price-name">Monthly Retainer</h3>
+        <p class="price-desc">Ongoing pipeline management and weekly assisted execution. Pricing scales with your ad spend.</p>
+        <div class="price-amount-row">
+          <span style="font-size:14px;color:var(--muted);font-family:'IBM Plex Mono',monospace">from</span>
+          <span class="price-amount">$599</span>
+          <span class="price-period">/mo</span>
+        </div>
+        <div class="price-note">Zero contracts. Cancel anytime. <strong>Includes up to 3 connected platforms.</strong></div>
+        <ul class="price-features">
+          <li><strong>Growth</strong> &nbsp;·&nbsp; under $15k/mo spend &nbsp;·&nbsp; $599/mo</li>
+          <li><strong>Scale</strong> &nbsp;·&nbsp; $15k–$30k/mo spend &nbsp;·&nbsp; $799/mo</li>
+          <li><strong>Pro</strong> &nbsp;·&nbsp; $30k–$50k/mo spend &nbsp;·&nbsp; $1,199/mo</li>
+          <li style="margin-top:6px;border-top:1px solid var(--line);padding-top:13px"><span class="ck">✓</span> Continuous true ROAS calculation</li>
+          <li><span class="ck">✓</span> Weekly execution with 30% cap and 24h rollback</li>
+          <li><span class="ck">✓</span> Monthly 1-hour strategy call</li>
+        </ul>
+        <a href="/contact/" class="price-cta-primary">Book your 30-day audit →</a>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="price-card">
+        <div class="price-card-top">
+          <div class="price-phase">Phase 3 · Post-audit add-on</div>
+        </div>
+        <h3 class="price-name">Custom Engine</h3>
+        <p class="price-desc">For complex stacks: $50k+ spend, custom LTV models, subscription cohorts, or 4+ platforms.</p>
+        <div class="price-amount-row">
+          <span class="price-amount">$1,999</span>
+          <span class="price-period">base /mo</span>
+        </div>
+        <div class="price-note">Enterprise-level data engineering. <strong>Without the salary of a dedicated data scientist.</strong></div>
+        <ul class="price-features">
+          <li><span class="ck">✓</span> Bespoke execution actions and logic</li>
+          <li><span class="ck">✓</span> Advanced LTV and subscription cohort models</li>
+          <li><span class="ck">✓</span> Custom cross-platform deduplication</li>
+          <li><span class="ck">✓</span> Priority support and custom workflows</li>
+        </ul>
+        <a href="/contact/" class="price-cta-secondary">Request a custom engine</a>
+      </div>
+    </div>
+
+    <!-- Maintenance addon -->
+    <div class="addon-strip reveal">
+      <div>
+        <h3>Maintenance Plan <span class="addon-amount">$299/mo</span></h3>
+        <p>If you cancel the monthly retainer but want your pipeline to keep running automatically, switch to the Maintenance Plan. It covers API authentication, server costs, and platform updates, so your data never goes dark. <strong>You own your logic and data either way.</strong></p>
+      </div>
+      <a href="/contact/" class="btn-secondary">Learn more →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ROI CALCULATOR -->
+<section class="section alt-bg section-border-t">
+  <div class="wrap">
+    <div class="eyebrow">Estimate</div>
+    <h2>What's recoverable from your current ad spend.</h2>
+    <p class="lede">A conservative estimate based on monthly ad spend and the share of budget you believe is going to underperforming campaigns.</p>
+
+    <div class="roi-wrap reveal">
+      <div class="roi-head">
+        <div>
+          <h3>Recoverable ad waste</h3>
+          <p>Adjust the two inputs below</p>
+        </div>
+      </div>
+      <div class="roi-controls">
+        <div>
+          <div class="roi-control-label"><span>Monthly ad spend</span><span class="val" id="spendVal">$20,000</span></div>
+          <input type="range" min="5000" max="60000" step="500" value="20000" id="spendSlider" oninput="calcROI()">
+        </div>
+        <div>
+          <div class="roi-control-label"><span>Share of budget on underperforming ads</span><span class="val" id="lossVal">20%</span></div>
+          <input type="range" min="5" max="40" step="1" value="20" id="lossSlider" oninput="calcROI()">
+        </div>
+      </div>
+      <div class="roi-results">
+        <div class="roi-result">
+          <div class="roi-result-label">Recoverable ad waste / mo</div>
+          <div class="roi-result-val" id="roiWaste">$2,000</div>
+        </div>
+        <div class="roi-result is-key">
+          <div class="roi-result-label">Net, vs. retainer fee at this spend tier</div>
+          <div class="roi-result-val" id="roiNet">+$1,201/mo</div>
+        </div>
+      </div>
+      <p class="roi-disclaimer">Conservative estimate assuming 50% of identified waste is recoverable through approved decisions. Actual results depend on your store, ad mix, and which decisions you approve. No guarantee is implied.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow">Questions</div>
+    <h2>Pricing and execution, in detail.</h2>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">What happens if the 30-day audit doesn't show enough value?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">You receive a written summary of decisions delivered and their estimated impact either way. If it isn't compelling, you walk away with a full data export and no further obligation. The $499 fee is not refunded, but nothing further is owed.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">How are the retainer tiers determined?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">By your monthly ad spend across connected platforms, reviewed at the start of each billing cycle. If your spend changes significantly, the tier is adjusted accordingly, with notice before any change takes effect.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">How much can a single decision change my ad budget?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">A maximum of 30% per decision, per week. This limit is enforced in the execution logic itself, not just stated as policy. Any executed change can also be rolled back within 24 hours.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">What happens to my data and pipeline if I cancel?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">You receive a full JSON export of your pipeline logic and a CSV export of your data. To keep the pipeline running automatically without the weekly analysis layer, switch to the $299/mo Maintenance Plan. Nothing is switched off without your knowledge.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Is any part of this automatic?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">The analysis and reporting run automatically. Execution does not. Every approved decision requires an explicit click, and dismissing a decision makes no API call and changes nothing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="wrap">
+    <div>
+      <h2>See where your spend tier lands.</h2>
+      <p>A 20-minute call, using your real store and ad account data. No pitch deck.</p>
+    </div>
+    <a href="/contact/" class="btn-primary">Book a 20-minute walkthrough →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
+        <p>Assisted execution for e-commerce ad spend. True profitability calculated weekly, with execution proposed, never automatic.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/how-it-works/">How it works</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/how-it-works/#platforms">Platforms</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/security/">Security &amp; data</a></li>
+          <li><a href="/contact/">Book a demo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get started</h4>
+        <ul>
+          <li><a href="/contact/">Book a walkthrough</a></li>
+          <li><a href="/pricing/">View pricing</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 7Captur</div>
+      <div class="footer-legal">
+        <a href="/security/#privacy">Privacy policy</a>
+        <a href="/security/#terms">Terms of service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+function setTheme(t){
+  root.classList.toggle('dark', t === 'dark');
+  toggle.textContent = t === 'dark' ? 'LIGHT' : 'DARK';
+  try { localStorage.setItem('theme', t); } catch(e) {}
+}
+let saved = 'light';
+try { saved = localStorage.getItem('theme') || 'light'; } catch(e) {}
+setTheme(saved);
+toggle.addEventListener('click', () => setTheme(root.classList.contains('dark') ? 'light' : 'dark'));
+
+const drawer = document.getElementById('mobileDrawer');
+document.getElementById('mobileMenuBtn').addEventListener('click', () => drawer.classList.add('open'));
+document.getElementById('mobileDrawerClose').addEventListener('click', () => drawer.classList.remove('open'));
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+function toggleFaq(el){
+  const item = el.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+function calcROI(){
+  const spend = parseInt(document.getElementById('spendSlider').value);
+  const loss = parseInt(document.getElementById('lossSlider').value);
+  document.getElementById('spendVal').textContent = '$' + spend.toLocaleString();
+  document.getElementById('lossVal').textContent = loss + '%';
+  const waste = Math.round(spend * (loss / 100) * 0.5);
+  let fee = 599;
+  if (spend >= 15000 && spend < 30000) fee = 799;
+  else if (spend >= 30000 && spend < 50000) fee = 1199;
+  else if (spend >= 50000) fee = 1999;
+  const net = waste - fee;
+  document.getElementById('roiWaste').textContent = '$' + waste.toLocaleString();
+  const netEl = document.getElementById('roiNet');
+  netEl.textContent = (net >= 0 ? '+' : '−') + '$' + Math.abs(net).toLocaleString() + '/mo';
+  netEl.style.color = net >= 0 ? 'var(--accent)' : 'var(--red)';
+}
+calcROI();
+</script>
+</body>
+</html>
