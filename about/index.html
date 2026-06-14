@@ -1,1 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About, 7Captur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   7CAPTUR — DESIGN TOKENS (shared)
+   ============================================================ */
+:root {
+  --bg:           #fdf6ee;
+  --bg2:          #f5ebe0;
+  --bg3:          #ecdfd2;
+  --line:         rgba(28,24,18,.10);
+  --line-strong:  rgba(28,24,18,.20);
+  --ink:          #1c1812;
+  --body:         #5c534a;
+  --muted:        #9a9088;
+  --accent:       #3f6b00;
+  --accent-soft:  #eaf0dd;
+  --accent-line:  rgba(63,107,0,.22);
+  --gold:         #8a6a00;
+  --gold-soft:    #f5eed9;
+  --red:          #a82020;
+  --red-soft:     #f7e8e6;
+  --card:         #f7f0e6;
+}
+html.dark {
+  --bg:           #15171d;
+  --bg2:          #1b1e26;
+  --bg3:          #232733;
+  --line:         rgba(255,255,255,.08);
+  --line-strong:  rgba(255,255,255,.16);
+  --ink:          #f1ede4;
+  --body:         #aba39a;
+  --muted:        #6b6560;
+  --accent:       #8fce3a;
+  --accent-soft:  #1f2a14;
+  --accent-line:  rgba(143,206,58,.25);
+  --gold:         #d8b14a;
+  --gold-soft:    #2a2418;
+  --red:          #e2685f;
+  --red-soft:     #2a1c1b;
+  --card:         #1e2128;
+}
 
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);color:var(--body);font-family:'Inter',sans-serif;font-weight:400;
+  line-height:1.65;-webkit-font-smoothing:antialiased;transition:background-color .3s ease;
+}
+a{color:inherit}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 48px}
+.section{padding:104px 0}
+.section-tight{padding:72px 0}
+.section-border-t{border-top:1px solid var(--line)}
+.alt-bg{background:var(--bg2)}
+
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:18px;
+}
+.eyebrow::after{content:'';flex:0 0 40px;height:1px;background:var(--accent-line)}
+
+h1,h2,h3{font-family:'Inter Tight',sans-serif;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+h1{font-size:clamp(34px,4.2vw,52px);line-height:1.1;font-weight:800}
+h2{font-size:clamp(28px,3.2vw,42px);line-height:1.14;margin-bottom:18px}
+h3{font-size:18px;line-height:1.3}
+.lede{font-size:1.0625rem;line-height:1.75;color:var(--body);max-width:600px}
+
+/* ============================================================
+   NAV (shared)
+   ============================================================ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;
+  height:72px;border-bottom:1px solid var(--line);background:rgba(253,246,238,.92);backdrop-filter:blur(10px);
+  transition:background .3s ease,border-color .3s ease;
+}
+html.dark nav{background:rgba(21,23,29,.92)}
+.nav-inner{max-width:1180px;margin:0 auto;width:100%;padding:0 48px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.02em;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:11px}
+.logo-mark{width:22px;height:auto;color:var(--accent);flex-shrink:0}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:14px;font-weight:500;color:var(--body);text-decoration:none;transition:color .15s}
+.nav-links a:hover,.nav-links a.current{color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-cta{background:var(--ink);color:var(--bg);font-family:'Inter Tight',sans-serif;font-weight:600;font-size:13.5px;padding:11px 22px;text-decoration:none;letter-spacing:-.005em;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+.theme-toggle{background:none;border:1px solid var(--line-strong);color:var(--body);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;padding:8px 12px;cursor:pointer;transition:color .15s,border-color .15s}
+.theme-toggle:hover{color:var(--ink);border-color:var(--ink)}
+.nav-mobile-toggle{display:none;background:none;border:none;color:var(--ink);cursor:pointer;padding:6px}
+@media(max-width:900px){.nav-links{display:none}.nav-mobile-toggle{display:block}}
+
+.mobile-drawer{display:none;position:fixed;inset:0;z-index:300;background:var(--bg);padding:24px 28px;flex-direction:column}
+.mobile-drawer.open{display:flex}
+.mobile-drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;height:48px}
+.mobile-drawer a{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:20px;color:var(--ink);text-decoration:none;padding:18px 0;border-bottom:1px solid var(--line)}
+.mobile-drawer .nav-cta{margin-top:24px;text-align:center}
+.mobile-drawer-close{background:none;border:none;color:var(--ink);cursor:pointer;padding:6px}
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+.page-header{
+  padding:168px 0 64px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 60% at 85% 0%, rgba(63,107,0,.14), transparent 60%),
+    radial-gradient(ellipse 50% 45% at 15% 10%, rgba(138,106,0,.08), transparent 60%),
+    linear-gradient(180deg, var(--bg2) 0%, var(--bg) 55%);
+}
+html.dark .page-header::before{
+  background:
+    radial-gradient(ellipse 60% 60% at 85% 0%, rgba(143,206,58,.16), transparent 60%),
+    radial-gradient(ellipse 50% 45% at 15% 10%, rgba(216,177,74,.10), transparent 60%),
+    linear-gradient(180deg, var(--bg2) 0%, var(--bg) 55%);
+}
+.page-header > .wrap{position:relative;z-index:1}
+.page-header-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;display:flex;align-items:center;gap:10px}
+.page-header-eyebrow .dot{width:6px;height:6px;background:var(--accent);border-radius:50%}
+.page-header h1{margin-bottom:20px}
+.page-header .lede{font-size:1.125rem}
+@media(max-width:900px){.page-header{padding:140px 0 48px}}
+
+/* ============================================================
+   FOUNDER / OPERATOR BLOCK
+   ============================================================ */
+.founder-block{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start;margin-top:48px}
+.founder-mark{
+  width:200px;height:200px;border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(ellipse 90% 90% at 30% 20%, rgba(63,107,0,.10), transparent 70%),
+    var(--bg2);
+}
+html.dark .founder-mark{
+  background:
+    radial-gradient(ellipse 90% 90% at 30% 20%, rgba(143,206,58,.12), transparent 70%),
+    var(--bg2);
+}
+.founder-mark svg{width:88px;height:auto;color:var(--accent)}
+.founder-copy p{font-size:14.5px;color:var(--body);line-height:1.75;margin-bottom:16px;max-width:640px}
+.founder-copy p:last-child{margin-bottom:0}
+.founder-copy strong{color:var(--ink)}
+@media(max-width:760px){.founder-block{grid-template-columns:1fr}.founder-mark{width:120px;height:120px}.founder-mark svg{width:56px}}
+
+/* ============================================================
+   PRINCIPLES GRID
+   ============================================================ */
+.principles-grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--line-strong);margin-top:48px}
+.principle-item{padding:32px 30px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);position:relative}
+.principle-item:nth-child(2n){border-right:none}
+.principle-item:nth-last-child(-n+2){border-bottom:none}
+.principle-item.is-key{
+  background:
+    radial-gradient(ellipse 100% 80% at 0% 0%, rgba(63,107,0,.08), transparent 70%);
+}
+html.dark .principle-item.is-key{
+  background:
+    radial-gradient(ellipse 100% 80% at 0% 0%, rgba(143,206,58,.10), transparent 70%);
+}
+.principle-num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.08em;margin-bottom:14px}
+.principle-item h3{margin-bottom:10px}
+.principle-item p{font-size:13.5px;color:var(--body);line-height:1.7}
+@media(max-width:760px){
+  .principles-grid{grid-template-columns:1fr}
+  .principle-item{border-right:none!important;border-bottom:1px solid var(--line)!important}
+  .principle-item:last-child{border-bottom:none!important}
+}
+
+/* ============================================================
+   PROOF CONCEPT TIMELINE
+   ============================================================ */
+.proof-list{border:1px solid var(--line-strong);margin-top:48px}
+.proof-row{display:grid;grid-template-columns:120px 1fr;gap:32px;padding:28px 28px;border-bottom:1px solid var(--line)}
+.proof-row:last-child{border-bottom:none}
+.proof-row.is-key{
+  background:
+    radial-gradient(ellipse 90% 100% at 100% 50%, rgba(63,107,0,.07), transparent 70%);
+}
+html.dark .proof-row.is-key{
+  background:
+    radial-gradient(ellipse 90% 100% at 100% 50%, rgba(143,206,58,.09), transparent 70%);
+}
+.proof-day{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);padding-top:3px}
+.proof-day strong{display:block;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:16px;color:var(--ink);margin-bottom:4px;letter-spacing:-.01em}
+.proof-body h4{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15.5px;color:var(--ink);margin-bottom:6px}
+.proof-body p{font-size:13.5px;color:var(--body);line-height:1.65;max-width:600px}
+@media(max-width:760px){.proof-row{grid-template-columns:1fr;gap:8px}}
+
+/* ============================================================
+   ICP STRIP
+   ============================================================ */
+.icp-strip{border:1px solid var(--line-strong);margin-top:48px;padding:32px}
+.icp-strip h3{margin-bottom:18px}
+.icp-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--body)}
+.icp-row:last-child{border-bottom:none}
+.icp-row strong{color:var(--ink);font-weight:600}
+.icp-row .icp-mark{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent)}
+/* ============================================================
+   CTA BAND + FOOTER (shared)
+   ============================================================ */
+.cta-band{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(63,107,0,.10), transparent 70%),
+    var(--bg2);
+}
+html.dark .cta-band{
+  background:
+    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(143,206,58,.12), transparent 70%),
+    var(--bg2);
+}
+.cta-band .wrap{padding:72px 48px;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
+.cta-band h2{margin-bottom:8px;font-size:clamp(24px,2.8vw,34px)}
+.cta-band p{font-size:15px;color:var(--body)}
+.btn-primary{background:var(--accent);color:#fff;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14.5px;padding:15px 30px;text-decoration:none;letter-spacing:-.005em;display:inline-flex;align-items:center;gap:8px;transition:opacity .15s}
+html.dark .btn-primary{color:#0e1206}
+.btn-primary:hover{opacity:.88}
+.btn-secondary{color:var(--ink);font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14.5px;padding:15px 28px;text-decoration:none;border:1px solid var(--line-strong);display:inline-flex;align-items:center;gap:8px;transition:border-color .15s,color .15s}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+footer{padding:56px 0 40px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand .logo{margin-bottom:14px}
+.footer-brand p{font-size:13.5px;color:var(--muted);line-height:1.7;max-width:280px}
+.footer-col h4{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col a{font-size:14px;color:var(--body);text-decoration:none;transition:color .15s}
+.footer-col a:hover{color:var(--ink)}
+.footer-bottom{padding-top:28px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-copy{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none}
+.footer-legal a:hover{color:var(--ink)}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:36px}.footer-brand{grid-column:1/-1}}
+@media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
+
+@media(max-width:900px){.wrap{padding:0 28px}.nav-inner{padding:0 28px}.section{padding:72px 0}}
+
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
+    <ul class="nav-links">
+      <li><a href="/how-it-works/">How it works</a></li>
+      <li><a href="/pricing/">Pricing</a></li>
+      <li><a href="/about/" class="current">About</a></li>
+      <li><a href="/security/">Security &amp; Data</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle">DARK</button>
+      <a href="/contact/" class="nav-cta">Book a demo</a>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Menu" id="mobileMenuBtn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="mobile-drawer-head">
+    <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
+    <button class="mobile-drawer-close" id="mobileDrawerClose" aria-label="Close menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <a href="/how-it-works/">How it works</a>
+  <a href="/pricing/">Pricing</a>
+  <a href="/about/">About</a>
+  <a href="/security/">Security &amp; Data</a>
+  <a href="/contact/" class="nav-cta">Book a demo</a>
+</div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="wrap">
+    <div class="page-header-eyebrow"><span class="dot"></span> About</div>
+    <h1>Built around one calculation, and the discipline to act on it carefully.</h1>
+    <p class="lede">7Captur is a small, focused operation. One person handles onboarding, pipeline configuration, and the weekly review of every report before it's sent. The goal is a system precise enough to trust and conservative enough to never need blind trust.</p>
+  </div>
+</header>
+
+<!-- FOUNDER / OPERATOR -->
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow">Who's Behind This</div>
+    <h2>A single point of contact, by design.</h2>
+    <p class="lede">During onboarding and the 30-day audit, every client has one name, one email, and one phone number. No ticket system, no rotating account managers.</p>
+
+    <div class="founder-block reveal">
+      <div class="founder-mark">
+        <svg viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>
+      </div>
+      <div class="founder-copy">
+        <p>7Captur was built after watching the same pattern repeat across e-commerce accounts: a platform-reported ROAS that looked healthy, and a margin that didn't move the way it should have. The gap was never a mystery once cost of goods, returns, and processing fees were laid out next to the ad numbers, but almost nobody had the time to do that reconciliation every week.</p>
+        <p>The pipeline exists to do that reconciliation automatically. <strong>The execution model exists so that automation never has to be trusted blindly.</strong> Every proposed change is small, capped, reversible, and disclosed with its confidence level and any relevant data lag.</p>
+        <p>Onboarding, pipeline configuration, the weekly review before a report goes out, and the 30-day summary are all handled directly. As the client list grows, the team will grow with it, but the standard stays the same: a person reviews the pipeline's output before a client sees it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPERATING PRINCIPLES -->
+<section class="section alt-bg section-border-t">
+  <div class="wrap">
+    <div class="eyebrow">Operating Principles</div>
+    <h2>The rules that don't change, regardless of client size.</h2>
+    <p class="lede">These apply identically during the 30-day audit and on an ongoing retainer.</p>
+
+    <div class="principles-grid reveal">
+      <div class="principle-item is-key">
+        <div class="principle-num">PRINCIPLE 01</div>
+        <h3>No decision executes without explicit approval</h3>
+        <p>Stated in the onboarding email, the session, the report footer, and the FAQ. Repetition of a safety guarantee isn't redundant, it's reassurance that holds up under scrutiny.</p>
+      </div>
+      <div class="principle-item">
+        <div class="principle-num">PRINCIPLE 02</div>
+        <h3>Every report is reviewed by a person before it's sent</h3>
+        <p>Confidence scores, dollar impacts, and rollback logic are checked against the underlying data before any report reaches a client's inbox. Automated analysis, human-reviewed delivery.</p>
+      </div>
+      <div class="principle-item">
+        <div class="principle-num">PRINCIPLE 03</div>
+        <h3>The client owns the logic and the data</h3>
+        <p>If a client cancels at any point, they receive a full export of their pipeline configuration and data. Nothing is withheld to create switching costs.</p>
+      </div>
+      <div class="principle-item">
+        <div class="principle-num">PRINCIPLE 04</div>
+        <h3>The 30-day review is honest in both directions</h3>
+        <p>If the audit doesn't show enough value to justify continuing, that's said directly, along with what would need to change to make it work. A client who leaves on good terms is worth more than one who stays reluctantly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 30-DAY PROOF CONCEPT -->
+<section class="section section-border-t">
+  <div class="wrap">
+    <div class="eyebrow">The 30-Day Audit</div>
+    <h2>A fixed window to prove the calculation on your numbers.</h2>
+    <p class="lede">The first 30 days exist to answer one question honestly: does the true-ROAS calculation surface decisions worth acting on for this specific store?</p>
+
+    <div class="proof-list reveal">
+      <div class="proof-row">
+        <div class="proof-day"><strong>Day 0</strong>Onboarding</div>
+        <div class="proof-body">
+          <h4>Pipeline is configured for your stack</h4>
+          <p>Store, ad accounts, and email tool are connected via API in a single session. Cost of goods is captured at the SKU level for your top products.</p>
+        </div>
+      </div>
+      <div class="proof-row">
+        <div class="proof-day"><strong>Days 1–6</strong>Build</div>
+        <div class="proof-body">
+          <h4>The pipeline runs silently</h4>
+          <p>No check-ins beyond a brief note confirming the first full week of data has been pulled. Nothing is required from you during this period.</p>
+        </div>
+      </div>
+      <div class="proof-row is-key">
+        <div class="proof-day"><strong>Days 7, 14, 21, 28</strong>Reports</div>
+        <div class="proof-body">
+          <h4>Four weekly reports, three decisions each</h4>
+          <p>Every report includes a confidence score, an estimated dollar impact, and approve/dismiss actions. Each approved decision is capped at 30% of current budget with a 24-hour rollback window.</p>
+        </div>
+      </div>
+      <div class="proof-row">
+        <div class="proof-day"><strong>Day 30</strong>Review</div>
+        <div class="proof-body">
+          <h4>A written summary, and a direct recommendation</h4>
+          <p>Decisions delivered, decisions approved, and their estimated impact, laid out plainly. If continuing makes sense, the $499 audit fee is credited in full toward month two. If it doesn't, you keep a full export of the pipeline and data.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO THIS IS FOR -->
+<section class="section alt-bg section-border-t">
+  <div class="wrap">
+    <div class="eyebrow">Fit</div>
+    <h2>Built for a specific kind of store, not every store.</h2>
+    <p class="lede">The calculation depends on having enough ad spend and order volume for weekly recalculation to surface meaningful patterns. Below a certain scale, the noise outweighs the signal.</p>
+
+    <div class="icp-strip reveal">
+      <h3>A good fit looks like</h3>
+      <div class="icp-row"><span><strong>Platform:</strong> Shopify or WooCommerce, with order and return data accessible via API</span><span class="icp-mark">Required</span></div>
+      <div class="icp-row"><span><strong>Ad spend:</strong> $5,000+/month across Meta and/or Google Ads</span><span class="icp-mark">Required</span></div>
+      <div class="icp-row"><span><strong>Cost of goods:</strong> Known or estimable at the SKU level for top-selling products</span><span class="icp-mark">Required</span></div>
+      <div class="icp-row"><span><strong>Decision-maker access:</strong> Founder, marketing lead, or operator who can approve API access and act on weekly reports</span><span class="icp-mark">Required</span></div>
+      <div class="icp-row"><span><strong>Multi-platform or multi-market brands:</strong> additional complexity is handled, not a blocker</span><span class="icp-mark">Supported</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="wrap">
+    <div>
+      <h2>See whether the fit is right, with your own numbers.</h2>
+      <p>A 20-minute call, using your real store and ad account data. No pitch deck.</p>
+    </div>
+    <a href="/contact/" class="btn-primary">Book a 20-minute walkthrough →</a>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
+        <p>Assisted execution for e-commerce ad spend. True profitability calculated weekly, with execution proposed, never automatic.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/how-it-works/">How it works</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/how-it-works/#platforms">Platforms</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/security/">Security &amp; data</a></li>
+          <li><a href="/contact/">Book a demo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get started</h4>
+        <ul>
+          <li><a href="/contact/">Book a walkthrough</a></li>
+          <li><a href="/pricing/">View pricing</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 7Captur</div>
+      <div class="footer-legal">
+        <a href="/security/#privacy">Privacy policy</a>
+        <a href="/security/#terms">Terms of service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+function setTheme(t){
+  root.classList.toggle('dark', t === 'dark');
+  toggle.textContent = t === 'dark' ? 'LIGHT' : 'DARK';
+  try { localStorage.setItem('theme', t); } catch(e) {}
+}
+let saved = 'light';
+try { saved = localStorage.getItem('theme') || 'light'; } catch(e) {}
+setTheme(saved);
+toggle.addEventListener('click', () => setTheme(root.classList.contains('dark') ? 'light' : 'dark'));
+
+const drawer = document.getElementById('mobileDrawer');
+document.getElementById('mobileMenuBtn').addEventListener('click', () => drawer.classList.add('open'));
+document.getElementById('mobileDrawerClose').addEventListener('click', () => drawer.classList.remove('open'));
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
