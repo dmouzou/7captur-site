@@ -155,6 +155,8 @@ html.dark .price-card.featured{
 .price-amount-row{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
 .price-amount{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:38px;color:var(--ink);letter-spacing:-.02em}
 .price-period{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted)}
+.price-was{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:21px;color:var(--muted);text-decoration:line-through}
+.price-limited-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--red);background:var(--red-soft);padding:4px 9px;border-radius:3px}
 .price-note{
   font-size:13.5px;color:var(--body);line-height:1.6;margin:14px 0 24px;padding-bottom:24px;
   border-bottom:1px solid var(--line);
@@ -328,8 +330,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 <header class="page-header">
   <div class="wrap">
     <div class="page-header-eyebrow"><span class="dot"></span> Pricing</div>
-    <h1>Start with a paid audit, then move to a retainer that scales with your ad spend.</h1>
-    <p class="lede">The first 30 days are a fixed-fee engagement, fully credited toward month two. After that, pricing is tiered by your monthly ad spend, never by guesswork.</p>
+    <h1>Start with a free 30-day audit, then move to a retainer that scales with your ad spend.</h1>
+    <p class="lede">The first 30 days are free, for a limited time. After that, pricing is tiered by your monthly ad spend, never by guesswork.</p>
   </div>
 </header>
 
@@ -343,13 +345,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
         <div class="price-card-top">
           <div class="price-phase">Phase 1</div>
         </div>
-        <h3 class="price-name">30-Day Paid Audit</h3>
+        <h3 class="price-name">30-Day Free Audit</h3>
         <p class="price-desc">For brands ready to stop guessing and start with assisted execution.</p>
         <div class="price-amount-row">
-          <span class="price-amount">$499</span>
-          <span class="price-period">flat fee</span>
+          <span class="price-was">$499</span>
+          <span class="price-amount">$0</span>
+          <span class="price-period">today</span>
+          <span class="price-limited-tag">Limited time</span>
         </div>
-        <div class="price-note">Credited in full toward Month 2 if you continue. <strong>If the 30-day summary doesn't justify continuing, you walk away with a full export and no further obligation.</strong></div>
+        <div class="price-note">Normally $499. Free for the first 30 days, for a limited time only. <strong>If the 30-day summary doesn't justify continuing, you walk away with a full export and no further obligation.</strong></div>
         <ul class="price-features">
           <li><span class="ck">✓</span> Pipeline configured for your store and ad accounts</li>
           <li><span class="ck">✓</span> 1 store + 2 ad platforms connected via API</li>
@@ -466,7 +470,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
     <div class="faq-list reveal">
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">What happens if the 30-day audit doesn't show enough value?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a">You receive a written summary of decisions delivered and their estimated impact either way. If it isn't compelling, you walk away with a full data export and no further obligation. The $499 fee is not refunded, but nothing further is owed.</div>
+        <div class="faq-a">You receive a written summary of decisions delivered and their estimated impact either way. If it isn't compelling, you walk away with a full data export and no further obligation.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">How are the retainer tiers determined?</span><span class="faq-icon">+</span></div>
