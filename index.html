@@ -401,6 +401,9 @@ html.dark .pricing-teaser-card{
 .pricing-teaser-card .phase-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
 .pricing-teaser-card .amount{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:40px;color:var(--ink);letter-spacing:-.02em}
 .pricing-teaser-card .period{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);margin-left:6px}
+.pricing-teaser-card .was{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:22px;color:var(--muted);text-decoration:line-through;margin-right:10px}
+.pricing-teaser-card .price-row{display:flex;align-items:baseline;flex-wrap:wrap}
+.pricing-teaser-card .limited-tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--red);background:var(--red-soft);padding:4px 9px;border-radius:3px;margin-left:10px}
 .pricing-teaser-card .note{font-size:14px;color:var(--body);margin:14px 0 24px;line-height:1.65;padding-bottom:24px;border-bottom:1px solid var(--line)}
 .pricing-teaser-card .note strong{color:var(--accent)}
 .pricing-feature-list{list-style:none;margin-bottom:28px}
@@ -774,14 +777,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
     <div class="pricing-teaser">
       <div>
         <div class="eyebrow">Engagement Structure</div>
-        <h2>Start with a paid audit. Continue only if the numbers justify it.</h2>
-        <p class="lede" style="margin-bottom:32px">The first 30 days are a fixed-fee engagement, fully credited toward month two if you continue. At day 30, you receive a written summary of decisions delivered and approved, along with their estimated impact, and decide from there.</p>
+        <h2>Start with a free 30-day audit. Continue only if the numbers justify it.</h2>
+        <p class="lede" style="margin-bottom:32px">The first 30 days are free, for a limited time. At day 30, you receive a written summary of decisions delivered and approved, along with their estimated impact, and decide from there. If you continue, you move to the standard monthly retainer.</p>
         <a href="/pricing/" class="btn-secondary">View full pricing →</a>
       </div>
       <div class="pricing-teaser-card">
         <div class="phase-tag">Phase 1 · First 30 Days</div>
-        <div><span class="amount">$499</span><span class="period">flat fee</span></div>
-        <div class="note">Credited in full toward Month 2 if you continue. <strong>If the 30-day summary doesn't justify continuing, you walk away with a full data export and no further obligation.</strong></div>
+        <div class="price-row"><span class="was">$499</span><span class="amount">$0</span><span class="period">today</span><span class="limited-tag">Limited time</span></div>
+        <div class="note">Normally $499. Free for the first 30 days, for a limited time only. <strong>If the 30-day summary doesn't justify continuing, you walk away with a full data export and no further obligation.</strong></div>
         <ul class="pricing-feature-list">
           <li><span class="ck">✓</span> Pipeline configured for your store and ad accounts</li>
           <li><span class="ck">✓</span> 1 store + 2 ad platforms connected via API</li>
