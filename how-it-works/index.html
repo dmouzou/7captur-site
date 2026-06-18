@@ -263,6 +263,29 @@ html.dark .sandbox-approve{color:#0e1206}
 .sandbox-cta{margin-top:24px;display:none}
 .sandbox-cta.visible{display:block}
 
+/* Info icon + tooltip */
+.sandbox-info-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:16px;height:16px;border-radius:50%;
+  font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;
+  color:var(--muted);border:1px solid var(--line-strong);background:transparent;
+  cursor:pointer;vertical-align:middle;margin-left:7px;margin-bottom:1px;
+  transition:color .15s,border-color .15s;flex-shrink:0;padding:0;line-height:1;
+}
+.sandbox-info-btn:hover{color:var(--ink);border-color:var(--ink)}
+.sandbox-tooltip{
+  position:fixed;z-index:500;
+  max-width:260px;width:max-content;
+  background:var(--ink);color:var(--bg);
+  font-family:'Plus Jakarta Sans',Inter,sans-serif;font-size:12.5px;line-height:1.55;
+  padding:11px 14px;pointer-events:none;
+  opacity:0;transform:translateY(4px);
+  transition:opacity .18s ease,transform .18s ease;
+  box-shadow:0 6px 20px rgba(0,0,0,.18);
+}
+.sandbox-tooltip.is-visible{opacity:1;transform:translateY(0)}
+html.dark .sandbox-tooltip{box-shadow:0 6px 20px rgba(0,0,0,.5)}
+
 @media(max-width:640px){
   .sandbox-card-row{grid-template-columns:1fr}
   .sandbox-card-num{display:none}
@@ -426,6 +449,7 @@ html.dark .wtl-card.is-key{
   text-transform:uppercase;padding:3px 9px;border:1px solid;
 }
 .platform-logo-badge.live{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
+.platform-logo-badge.optional{color:var(--gold);border-color:rgba(138,106,0,.3);background:var(--gold-soft)}
 .platform-logo-badge.request{
   color:var(--muted);border-color:var(--line-strong);background:transparent;
   text-decoration:none;cursor:pointer;transition:color .15s,border-color .15s;
@@ -459,7 +483,7 @@ html.dark .wtl-card.is-key{
     </ul>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle">DARK</button>
-      <a href="/contact/" class="nav-cta">Book a demo</a>
+      <a href="/contact/" class="nav-cta">Get your report</a>
     </div>
     <button class="nav-mobile-toggle" aria-label="Menu" id="mobileMenuBtn">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
@@ -478,7 +502,43 @@ html.dark .wtl-card.is-key{
   <a href="/pricing/">Pricing</a>
   <a href="/about/">About</a>
   <a href="/security/">Security &amp; Data</a>
-  <a href="/contact/" class="nav-cta">Book a demo</a>
+  <a href="/contact/" class="nav-cta">Get your report</a>
+</div>
+
+<!-- ============================================================
+     PROCESS BAR — sticky, sits just under the fixed nav
+     ============================================================ -->
+<style>
+.process-bar{
+  position:sticky;top:72px;z-index:150;
+  background:var(--bg);border-bottom:1px solid var(--line);
+}
+.process-bar-inner{
+  max-width:1180px;margin:0 auto;padding:10px 48px;
+  display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;
+}
+.process-bar-step{
+  display:flex;align-items:center;gap:7px;
+  font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);
+  white-space:nowrap;
+}
+.process-bar-step.is-active{color:var(--accent)}
+.process-bar-divider{color:var(--line-strong);margin:0 16px;font-size:12px}
+@media(max-width:900px){
+  .process-bar-inner{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;padding:10px 28px}
+  .process-bar-divider{margin:0 12px}
+}
+</style>
+<div class="process-bar">
+  <div class="process-bar-inner">
+    <div class="process-bar-step"><span>🔐</span><span>Connect API</span></div>
+    <span class="process-bar-divider">→</span>
+    <div class="process-bar-step"><span>📊</span><span>7-Day Silent Audit</span></div>
+    <span class="process-bar-divider">→</span>
+    <div class="process-bar-step"><span>📋</span><span>Monday Report</span></div>
+    <span class="process-bar-divider">→</span>
+    <div class="process-bar-step is-active"><span>✅</span><span>You Approve &amp; Execute</span></div>
+  </div>
 </div>
 
 <!-- PAGE HEADER -->
@@ -626,7 +686,7 @@ html.dark .wtl-card.is-key{
             <div class="sandbox-card-row">
               <div class="sandbox-card-num">01</div>
               <div class="sandbox-card-body">
-                <h4>Pause campaign #4182, "Summer Collection"</h4>
+                <h4>Pause campaign #4182, "Summer Collection" <button class="sandbox-info-btn" aria-label="Why this action" data-tip="Platform shows 1.8x ROAS but once COGS, returns, and fees are deducted the true figure drops to 0.9x. Every order in this campaign is losing money. Pausing stops the bleed immediately while the rest of the account continues running.">i</button></h4>
                 <p>True ROAS 0.9× after cost of goods, fees, and returns (platform shows 1.8×). Losing money on every order.</p>
                 <div class="sandbox-card-tags">
                   <span class="cycle-tag">Confidence 91%</span>
@@ -646,7 +706,7 @@ html.dark .wtl-card.is-key{
             <div class="sandbox-card-row">
               <div class="sandbox-card-num">02</div>
               <div class="sandbox-card-body">
-                <h4>Scale campaign #4178, "Bestsellers Retarget" (+30% budget)</h4>
+                <h4>Scale campaign #4178, "Bestsellers Retarget" (+30% budget) <button class="sandbox-info-btn" aria-label="Why this action" data-tip="At 2.4x true ROAS this campaign earns $1.40 for every dollar spent after all deductions. It's the strongest performer this week. The 30% cap limits exposure if conditions shift before next Monday's report.">i</button></h4>
                 <p>True ROAS 2.4×. Earns $1.40 per dollar spent after all deductions. Increase capped at 30% of current weekly budget.</p>
                 <div class="sandbox-card-tags">
                   <span class="cycle-tag">Confidence 87%</span>
@@ -666,7 +726,7 @@ html.dark .wtl-card.is-key{
             <div class="sandbox-card-row">
               <div class="sandbox-card-num">03</div>
               <div class="sandbox-card-body">
-                <h4>Switch payment processing to an annual plan</h4>
+                <h4>Switch payment processing to an annual plan <button class="sandbox-info-btn" aria-label="Why this action" data-tip="The 2.1pt margin drop this week doesn't trace to ad performance at all. It traces to a monthly payment-processing fee tier. No campaign change would fix it. Switching to an annual plan eliminates the fee permanently.">i</button></h4>
                 <p>The 2.1pt margin dip traces to a monthly payment-processing fee tier. One plan change resolves it permanently. No ad account change required.</p>
                 <div class="sandbox-card-tags">
                   <span class="cycle-tag">Confidence 96%</span>
@@ -688,7 +748,7 @@ html.dark .wtl-card.is-key{
         </div>
 
         <div class="sandbox-cta" id="sandboxCta">
-          <a href="/contact/" class="btn-secondary">Run this with your real store data →</a>
+          <a href="/contact/" class="btn-secondary">Get your report with real data →</a>
         </div>
       </div>
     </div>
@@ -744,14 +804,14 @@ html.dark .wtl-card.is-key{
         <span class="platform-logo-badge live">Live</span>
       </div>
 
-      <!-- Klaviyo -->
+      <!-- Klaviyo (optional) -->
       <div class="platform-logo-card">
         <div class="platform-logo-icon">
           <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><rect width="32" height="32" fill="#22C55E" rx="4"/><path fill="#fff" d="M8 6h4v12.5l7-12.5h4.5l-7.5 13 8 7H19l-7-6.5V26H8z"/></svg>
         </div>
         <div class="platform-logo-name">Klaviyo</div>
-        <div class="platform-logo-type">Email / SMS</div>
-        <span class="platform-logo-badge live">Live</span>
+        <div class="platform-logo-type">Email / SMS, optional</div>
+        <span class="platform-logo-badge optional">If connected</span>
       </div>
 
       <!-- Request -->
@@ -775,7 +835,7 @@ html.dark .wtl-card.is-key{
       <h2>Ready to see this with your data?</h2>
       <p>A 20-minute call, using your real store and ad account data. No pitch deck.</p>
     </div>
-    <a href="/contact/" class="btn-primary">Book a 20-minute walkthrough →</a>
+    <a href="/contact/" class="btn-primary">Get your report →</a>
   </div>
 </div>
 
@@ -785,7 +845,7 @@ html.dark .wtl-card.is-key{
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
-        <p>Assisted execution for e-commerce ad spend. True profitability calculated weekly, with execution proposed, never automatic.</p>
+        <p>Assisted execution for e-commerce ad spend.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
@@ -800,7 +860,7 @@ html.dark .wtl-card.is-key{
         <ul>
           <li><a href="/about/">About</a></li>
           <li><a href="/security/">Security &amp; data</a></li>
-          <li><a href="/contact/">Book a demo</a></li>
+          <li><a href="/contact/">Get your report</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -880,6 +940,41 @@ function sandboxDismiss(btn){
   note.classList.add('visible');
   card.style.opacity = '.6';
 }
+
+// Tooltip logic
+const tooltip = document.createElement('div');
+tooltip.className = 'sandbox-tooltip';
+document.body.appendChild(tooltip);
+
+let tooltipTimeout;
+document.addEventListener('mouseover', e => {
+  const btn = e.target.closest('.sandbox-info-btn');
+  if (!btn) return;
+  clearTimeout(tooltipTimeout);
+  const tip = btn.getAttribute('data-tip');
+  if (!tip) return;
+  tooltip.textContent = tip;
+  const rect = btn.getBoundingClientRect();
+  const gap = 10;
+  let left = rect.right + gap;
+  let top = rect.top + rect.height / 2 - 20;
+  tooltip.style.left = left + 'px';
+  tooltip.style.top = top + 'px';
+  // Keep within viewport right edge
+  requestAnimationFrame(() => {
+    const tw = tooltip.offsetWidth;
+    if (left + tw > window.innerWidth - 12) {
+      tooltip.style.left = (rect.left - tw - gap) + 'px';
+    }
+    tooltip.classList.add('is-visible');
+  });
+});
+
+document.addEventListener('mouseout', e => {
+  const btn = e.target.closest('.sandbox-info-btn');
+  if (!btn) return;
+  tooltipTimeout = setTimeout(() => tooltip.classList.remove('is-visible'), 80);
+});
 </script>
 </body>
 </html>
