@@ -506,7 +506,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
     </ul>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle">DARK</button>
-      <a href="/contact/" class="nav-cta">Book a demo</a>
+      <a href="/contact/" class="nav-cta">Get your report</a>
     </div>
     <button class="nav-mobile-toggle" aria-label="Menu" id="mobileMenuBtn">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
@@ -525,7 +525,43 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   <a href="/pricing/">Pricing</a>
   <a href="/about/">About</a>
   <a href="/security/">Security &amp; Data</a>
-  <a href="/contact/" class="nav-cta">Book a demo</a>
+  <a href="/contact/" class="nav-cta">Get your report</a>
+</div>
+
+<!-- ============================================================
+     PROCESS BAR — sticky, sits just under the fixed nav
+     ============================================================ -->
+<style>
+.process-bar{
+  position:sticky;top:72px;z-index:150;
+  background:var(--bg);border-bottom:1px solid var(--line);
+}
+.process-bar-inner{
+  max-width:1180px;margin:0 auto;padding:10px 48px;
+  display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;
+}
+.process-bar-step{
+  display:flex;align-items:center;gap:7px;
+  font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);
+  white-space:nowrap;
+}
+.process-bar-step.is-active{color:var(--accent)}
+.process-bar-divider{color:var(--line-strong);margin:0 16px;font-size:12px}
+@media(max-width:900px){
+  .process-bar-inner{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;padding:10px 28px}
+  .process-bar-divider{margin:0 12px}
+}
+</style>
+<div class="process-bar">
+  <div class="process-bar-inner">
+    <div class="process-bar-step"><span>🔐</span><span>Connect API</span></div>
+    <span class="process-bar-divider">→</span>
+    <div class="process-bar-step"><span>📊</span><span>7-Day Silent Audit</span></div>
+    <span class="process-bar-divider">→</span>
+    <div class="process-bar-step"><span>📋</span><span>Monday Report</span></div>
+    <span class="process-bar-divider">→</span>
+    <div class="process-bar-step is-active"><span>✅</span><span>You Approve &amp; Execute</span></div>
+  </div>
 </div>
 
 <!-- ============================================================
@@ -538,7 +574,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
       <h1>True profitability calculated weekly, with <span class="accent-word">execution proposed</span>, never automatic.</h1>
       <p class="hero-sub">Ad platforms report ROAS before returns, fees, and cost of goods. 7Captur recalculates it after, then proposes three specific budget actions every Monday, each with a confidence score and an exact dollar impact. <strong>You approve every change.</strong></p>
       <div class="hero-actions">
-        <a href="/contact/" class="btn-primary">Book a 20-minute walkthrough →</a>
+        <a href="/contact/" class="btn-primary">Get your report →</a>
         <a href="/how-it-works/" class="btn-secondary">See how it works</a>
       </div>
     </div>
@@ -561,6 +597,202 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 </header>
 
 <!-- ============================================================
+     ROAS LEAK CALCULATOR
+     ============================================================ -->
+<style>
+.leak-calc{border:1px solid var(--line-strong);background:var(--card);padding:48px}
+.leak-calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.leak-slider{margin-bottom:26px}
+.leak-slider:last-child{margin-bottom:0}
+.leak-slider-label{
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--body);
+  margin-bottom:10px;letter-spacing:.02em;
+}
+.leak-slider-label .val{color:var(--accent);font-weight:500}
+.leak-slider input[type="range"]{
+  width:100%;height:3px;border-radius:0;background:var(--line-strong);
+  outline:none;-webkit-appearance:none;
+}
+.leak-slider input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:15px;height:15px;border-radius:50%;
+  background:var(--accent);cursor:pointer;box-shadow:0 0 0 4px var(--accent-soft);
+}
+.leak-slider input[type="range"]::-moz-range-thumb{
+  width:15px;height:15px;border-radius:50%;background:var(--accent);cursor:pointer;border:none;
+}
+.leak-results{
+  display:flex;flex-direction:column;justify-content:center;gap:22px;
+  border-left:1px solid var(--line-strong);padding-left:48px;
+}
+.leak-result-row{display:flex;justify-content:space-between;align-items:baseline}
+.leak-result-row .label{font-size:13.5px;color:var(--body)}
+.leak-result-row .value{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:24px;color:var(--ink)}
+.leak-result-row.is-true .value{color:var(--accent)}
+.leak-result-row.is-leak{
+  margin-top:6px;padding-top:22px;border-top:1px solid var(--line-strong);
+}
+.leak-result-row.is-leak .label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em}
+.leak-result-row.is-leak .value{color:var(--gold);font-size:30px}
+.leak-disclaimer{font-size:12px;color:var(--muted);margin-top:28px;grid-column:1/-1}
+@media(max-width:900px){
+  .leak-calc{padding:32px 24px}
+  .leak-calc-grid{grid-template-columns:1fr;gap:0}
+  .leak-results{border-left:none;border-top:1px solid var(--line-strong);padding-left:0;padding-top:28px;margin-top:8px}
+}
+</style>
+
+<section class="section-tight">
+  <div class="wrap">
+    <div class="eyebrow">Try it yourself</div>
+    <h2>See your own leak, before you book anything.</h2>
+    <p class="lede" style="margin-bottom:40px">Move the sliders to match your store. This runs the same calculation used in every weekly report.</p>
+
+    <div class="leak-calc">
+      <div class="leak-calc-grid">
+        <div>
+          <div class="leak-slider">
+            <div class="leak-slider-label"><span>Monthly ad spend</span><span class="val" id="lc-spend-val">$20,000</span></div>
+            <input type="range" id="lc-spend" min="1000" max="100000" step="500" value="20000">
+          </div>
+          <div class="leak-slider">
+            <div class="leak-slider-label"><span>Average COGS</span><span class="val" id="lc-cogs-val">35%</span></div>
+            <input type="range" id="lc-cogs" min="0" max="80" step="1" value="35">
+          </div>
+          <div class="leak-slider">
+            <div class="leak-slider-label"><span>Return rate</span><span class="val" id="lc-returns-val">12%</span></div>
+            <input type="range" id="lc-returns" min="0" max="40" step="1" value="12">
+          </div>
+          <div class="leak-slider">
+            <div class="leak-slider-label"><span>Payment processor fee</span><span class="val" id="lc-fees-val">2.9%</span></div>
+            <input type="range" id="lc-fees" min="0" max="5" step="0.1" value="2.9">
+          </div>
+        </div>
+
+        <div class="leak-results">
+          <div class="leak-result-row">
+            <span class="label">Reported ROAS (platform view)</span>
+            <span class="value" id="lc-reported">3.20×</span>
+          </div>
+          <div class="leak-result-row is-true">
+            <span class="label">True ROAS (after COGS, returns, fees)</span>
+            <span class="value" id="lc-true">1.84×</span>
+          </div>
+          <div class="leak-result-row is-leak">
+            <span class="label">Annual profit leak</span>
+            <span class="value" id="lc-leak">$163,200</span>
+          </div>
+        </div>
+
+        <p class="leak-disclaimer">Illustrative calculation assuming a 3.2× platform-reported ROAS baseline. Your actual reported ROAS varies by account; this tool shows the mechanism, not a quote.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const spend = document.getElementById('lc-spend');
+  const cogs = document.getElementById('lc-cogs');
+  const returns = document.getElementById('lc-returns');
+  const fees = document.getElementById('lc-fees');
+  const spendVal = document.getElementById('lc-spend-val');
+  const cogsVal = document.getElementById('lc-cogs-val');
+  const returnsVal = document.getElementById('lc-returns-val');
+  const feesVal = document.getElementById('lc-fees-val');
+  const reportedOut = document.getElementById('lc-reported');
+  const trueOut = document.getElementById('lc-true');
+  const leakOut = document.getElementById('lc-leak');
+  const REPORTED_ROAS = 3.2;
+
+  function fmtCurrency(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+
+  function calculate() {
+    const s = parseFloat(spend.value);
+    const c = parseFloat(cogs.value) / 100;
+    const r = parseFloat(returns.value) / 100;
+    const f = parseFloat(fees.value) / 100;
+
+    spendVal.textContent = fmtCurrency(s);
+    cogsVal.textContent = cogs.value + '%';
+    returnsVal.textContent = returns.value + '%';
+    feesVal.textContent = parseFloat(fees.value).toFixed(1) + '%';
+
+    const reportedRevenue = s * REPORTED_ROAS;
+    const afterReturns = reportedRevenue * (1 - r);
+    const afterCogs = afterReturns * (1 - c);
+    const afterFees = afterCogs * (1 - f);
+    const trueRoas = afterFees / s;
+
+    reportedOut.textContent = REPORTED_ROAS.toFixed(2) + '×';
+    trueOut.textContent = trueRoas.toFixed(2) + '×';
+    leakOut.textContent = fmtCurrency((reportedRevenue - afterFees) * 12);
+  }
+
+  [spend, cogs, returns, fees].forEach(el => el.addEventListener('input', calculate));
+  calculate();
+})();
+</script>
+
+<!-- ============================================================
+     BEFORE/AFTER VISUAL PANELS
+     ============================================================ -->
+<style>
+.ba-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line-strong);border:1px solid var(--line-strong)}
+.ba-card{background:var(--card);padding:28px 26px}
+.ba-card .eyebrow{margin-bottom:16px}
+.ba-card.is-red .eyebrow{color:var(--red)}
+.ba-card.is-red .eyebrow::after{background:var(--red-soft)}
+.ba-card.is-gold .eyebrow::after{background:var(--gold-soft)}
+.ba-card.is-gold .eyebrow{color:var(--gold)}
+.ba-roas{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:38px;letter-spacing:-.02em;margin-bottom:4px}
+.ba-card.is-red .ba-roas{color:var(--red)}
+.ba-card.is-gold .ba-roas{color:var(--gold)}
+.ba-roas-label{font-size:13px;color:var(--muted);margin-bottom:16px}
+.ba-card h4{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:15px;color:var(--ink);line-height:1.4}
+.ba-action-list{list-style:none;display:flex;flex-direction:column;gap:13px}
+.ba-action-item{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:var(--body)}
+.ba-action-item .check{color:var(--accent);flex-shrink:0;margin-top:1px}
+.ba-action-item .impact{font-family:'IBM Plex Mono',monospace;color:var(--accent);font-weight:500;margin-left:auto;white-space:nowrap}
+.ba-caption{text-align:center;font-size:12px;color:var(--muted);margin-top:20px}
+@media(max-width:900px){ .ba-grid{grid-template-columns:1fr} }
+</style>
+
+<section class="section-tight section-border-t">
+  <div class="wrap">
+    <div class="eyebrow">Same campaign, three views</div>
+    <h2 style="margin-bottom:36px">What the dashboard hides.</h2>
+
+    <div class="ba-grid">
+      <div class="ba-card is-red">
+        <div class="eyebrow">Platform says</div>
+        <div class="ba-roas">3.2×</div>
+        <div class="ba-roas-label">Reported ROAS, "Bestsellers Retarget"</div>
+        <h4>Looks profitable on Meta's dashboard.</h4>
+      </div>
+
+      <div class="ba-card is-gold">
+        <div class="eyebrow">True cost adjusted</div>
+        <div class="ba-roas">1.9×</div>
+        <div class="ba-roas-label">After COGS, returns, and processing fees</div>
+        <h4>Still profitable, but less than half the picture you started with.</h4>
+      </div>
+
+      <div class="ba-card">
+        <div class="eyebrow">Our 3 actions</div>
+        <ul class="ba-action-list">
+          <li class="ba-action-item"><span class="check">✓</span><span>Scale this campaign 20%</span><span class="impact">+$200/wk</span></li>
+          <li class="ba-action-item"><span class="check">✓</span><span>Pause the lookalike adjacent set</span><span class="impact">-$150/wk</span></li>
+          <li class="ba-action-item"><span class="check">✓</span><span>Shift budget to top SKU ad group</span><span class="impact">+$90/wk</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="ba-caption">Illustrative example. Every action in a real report requires your approval before execution.</p>
+  </div>
+</section>
+
+<!-- ============================================================
      DECISION LEDGER — signature element
      ============================================================ -->
 <section class="section-tight">
@@ -569,7 +801,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
       <div class="ledger-head">
         <div class="ledger-head-left">
           <strong>Sample Weekly Report, Illustrative Store</strong>
-          Week 22 · Shopify · Meta Ads · Klaviyo
+          Week 22 · Shopify · Meta Ads
         </div>
         <div class="ledger-head-right">
           <div>
@@ -586,18 +818,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
         <div class="ledger-row">
           <div class="ledger-row-num">01</div>
           <div class="ledger-row-body">
-            <h4>Pause campaign #4182, "Summer Collection" <span class="ledger-tag tag-warn">Losing $0.40/order</span></h4>
-            <p>Platform-reported ROAS is 1.8×. After cost of goods, processing fees, and a 30-day return-rate adjustment, true ROAS is 0.9×.</p>
-            <span class="confidence">Confidence 91% · Return-rate data lags 30 days, so this estimate is conservative</span>
+            <h4>Pause "Summer Collection" <span class="ledger-tag tag-warn">True ROAS 0.9×</span></h4>
           </div>
           <div class="ledger-row-impact"><span class="impact-label">If approved</span>+$412 / wk</div>
         </div>
         <div class="ledger-row">
           <div class="ledger-row-num">02</div>
           <div class="ledger-row-body">
-            <h4>Scale campaign #4178, "Bestsellers Retarget" <span class="ledger-tag tag-action">True ROAS 2.4×</span></h4>
-            <p>Earns $1.40 per dollar spent after all deductions, the strongest performer this week. Proposed increase capped at 30% of current weekly budget.</p>
-            <span class="confidence">Confidence 87% · 24h rollback available after execution</span>
+            <h4>Scale "Bestsellers Retarget" <span class="ledger-tag tag-action">True ROAS 2.4×</span></h4>
           </div>
           <div class="ledger-row-impact"><span class="impact-label">If approved</span>+$310 / wk</div>
         </div>
@@ -605,15 +833,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
           <div class="ledger-row-num">03</div>
           <div class="ledger-row-body">
             <h4>Margin drop traced to payment processing <span class="ledger-tag tag-info">No ad change required</span></h4>
-            <p>The 2.1pt margin decline is not a performance issue. It traces to a monthly payment-processing fee tier. Switching to an annual plan resolves it.</p>
-            <span class="confidence">Confidence 96%</span>
           </div>
           <div class="ledger-row-impact"><span class="impact-label">If approved</span>+$180 / mo</div>
         </div>
       </div>
       <div class="ledger-foot">
         <span>Illustrative report based on the 7Captur reporting format. Figures are representative, not from a live account.</span>
-        <span>Every line requires "Approve" before any account is changed.</span>
+        <a href="/how-it-works/#demo" style="color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:12.5px;text-decoration:none;white-space:nowrap">Try the live sandbox →</a>
       </div>
     </div>
   </div>
@@ -791,7 +1017,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
           <li><span class="ck">✓</span> 4 weekly reports with approve/dismiss execution</li>
           <li><span class="ck">✓</span> 30-day written ROI summary</li>
         </ul>
-        <a href="/contact/" class="btn-primary" style="width:100%;justify-content:center">Book your 30-day audit →</a>
+        <a href="/contact/" class="btn-primary" style="width:100%;justify-content:center">Get your report →</a>
       </div>
     </div>
   </div>
@@ -806,7 +1032,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
       <h2>See your numbers before you commit to anything.</h2>
       <p>A 20-minute call, using your real store and ad account data. No pitch deck.</p>
     </div>
-    <a href="/contact/" class="btn-primary">Book a 20-minute walkthrough →</a>
+    <a href="/contact/" class="btn-primary">Get your report →</a>
   </div>
 </div>
 
@@ -818,7 +1044,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
-        <p>Assisted execution for e-commerce ad spend. True profitability calculated weekly, with execution proposed, never automatic.</p>
+        <p>Assisted execution for e-commerce ad spend.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
@@ -833,7 +1059,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
         <ul>
           <li><a href="/about/">About</a></li>
           <li><a href="/security/">Security &amp; data</a></li>
-          <li><a href="/contact/">Book a demo</a></li>
+          <li><a href="/contact/">Get your report</a></li>
         </ul>
       </div>
       <div class="footer-col">
