@@ -17,6 +17,9 @@
   --bg3:          #ecdfd2;
   --line:         rgba(28,24,18,.10);
   --line-strong:  rgba(28,24,18,.20);
+  --shadow-sm:    0 1px 4px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:    0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.05);
+  --shadow-lg:    0 8px 24px rgba(0,0,0,.10), 0 3px 8px rgba(0,0,0,.06);
   --ink:          #1c1812;
   --body:         #5c534a;
   --muted:        #9a9088;
@@ -35,6 +38,9 @@ html.dark {
   --bg3:          #232733;
   --line:         rgba(255,255,255,.08);
   --line-strong:  rgba(255,255,255,.16);
+  --shadow-sm:    0 1px 4px rgba(0,0,0,.25);
+  --shadow-md:    0 4px 12px rgba(0,0,0,.35);
+  --shadow-lg:    0 8px 24px rgba(0,0,0,.45);
   --ink:          #f1ede4;
   --body:         #aba39a;
   --muted:        #6b6560;
@@ -60,7 +66,7 @@ a{color:inherit}
 .wrap{max-width:1180px;margin:0 auto;padding:0 48px}
 .section{padding:104px 0}
 .section-tight{padding:72px 0}
-.section-border-t{border-top:1px solid var(--line)}
+.section-border-t{border-top:none}
 .alt-bg{background:var(--bg2)}
 
 .eyebrow{
@@ -109,7 +115,7 @@ html.dark nav{background:rgba(21,23,29,.92)}
    PAGE HEADER
    ============================================================ */
 .page-header{
-  padding:168px 0 64px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;
+  padding:168px 0 64px;position:relative;overflow:hidden;
 }
 .page-header::before{
   content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
@@ -229,8 +235,8 @@ html.dark .roi-result.is-key{
 /* ============================================================
    FAQ
    ============================================================ */
-.faq-list{border:1px solid var(--line-strong);margin-top:48px}
-.faq-item{border-bottom:1px solid var(--line)}
+.faq-list{margin-top:48px;display:flex;flex-direction:column;gap:12px}
+.faq-item{border-bottom:none}
 .faq-item:last-child{border-bottom:none}
 .faq-q{
   display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 28px;
@@ -247,7 +253,7 @@ html.dark .roi-result.is-key{
    CTA BAND + FOOTER (shared)
    ============================================================ */
 .cta-band{
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  
   background:
     radial-gradient(ellipse 60% 120% at 90% 50%, rgba(63,107,0,.10), transparent 70%),
     var(--bg2);
@@ -321,6 +327,274 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   color:var(--accent);font-weight:500;text-align:right;white-space:nowrap;
 }
 
+
+
+/* ============================================================
+   DESIGN SYSTEM — SINGLE CLEAN BLOCK
+   ============================================================ */
+
+/* Rounded corners: buttons */
+.btn-primary,.btn-secondary,.nav-cta,
+.sandbox-trigger,.sandbox-approve,.sandbox-dismiss,
+.price-cta-primary,.price-cta-secondary,.theme-toggle{border-radius:8px}
+
+/* Rounded corners: tags and badges */
+.ledger-tag,.cycle-tag,.wtl-card-tag,.confidence,
+.platform-logo-badge,.limited-tag,.price-badge,
+.sandbox-badge,.sandbox-result-note,.delta-up,.delta-down,
+.hero-eyebrow-tag,.icp-mark{border-radius:8px}
+
+/* Rounded corners + overflow clipping on all card containers */
+.ledger,.spread-card,.sandbox,.platform-logo-card,.pricing-grid,
+.access-table,.wtl-cards,.roi-wrap,.leak-calc,.ba-grid,
+.cta-band,.faq-list,.principles-grid,.proof-list,.lifecycle-list{
+  border-radius:8px;overflow:hidden
+}
+
+/* Shadow elevation */
+.ledger,.sandbox,.pricing-grid,.access-table{box-shadow:var(--shadow-lg)}
+.spread-card,.wtl-cards,.leak-calc,.ba-grid{box-shadow:var(--shadow-md)}
+.platform-logo-card,.cta-band,.price-card{box-shadow:var(--shadow-sm)}
+
+/* Section color transitions: gradient not hard cut */
+.alt-bg{background:transparent}
+section.alt-bg,div.alt-bg{
+  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)
+}
+.trust-strip{
+  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg2) 55%,var(--bg) 100%)
+}
+
+/* No section dividers */
+.section-border-t{border-top:none}
+.hero{border-bottom:none}
+.page-header{border-bottom:none}
+.trust-strip{border-bottom:none}
+.process-bar{border-bottom:none}
+.footer-bottom{border-top:none}
+
+/* Nav: no underlines anywhere in nav or mobile drawer */
+nav a,.logo,.nav-cta,.mobile-drawer a,.mobile-drawer .nav-cta{text-decoration:none}
+
+/* Mobile drawer: clean CTA button text visibility */
+.mobile-drawer .nav-cta{color:#fff;border-bottom:none;display:block}
+html.dark .mobile-drawer .nav-cta{color:#0e1206}
+
+/* Body links: underline, excluding nav and buttons */
+a:not(.nav-cta):not(.btn-primary):not(.btn-secondary):not(.price-cta-primary):not(.price-cta-secondary):not(.logo):not(.sandbox-approve):not(.sandbox-dismiss):not(.sandbox-info-btn){
+  text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px
+}
+nav a,.logo,.mobile-drawer a,.btn-primary,.btn-secondary{text-decoration:none}
+.footer-col a,.ledger-foot a{text-decoration:underline;text-underline-offset:3px}
+
+
+/* ── FIX PASS 3 ────────────────────────────────────────────────────────────── */
+
+/* 1. Nav underlines — !important to beat high-specificity a:not() rule */
+nav a,.mobile-drawer a,.mobile-drawer .nav-cta,.nav-links a,.logo,footer .logo{text-decoration:none !important}
+
+/* 9. Theme toggle: compact emoji style */
+.theme-toggle{font-size:16px;padding:6px 8px;line-height:1;border-radius:8px;min-width:0;letter-spacing:0}
+.mobile-drawer-head{gap:16px}
+
+/* 2. Founder mark: no border, elevated shadow */
+.founder-mark{border:none !important;box-shadow:0 12px 40px rgba(0,0,0,.18),0 4px 12px rgba(0,0,0,.10) !important}
+html.dark .founder-mark{box-shadow:0 12px 40px rgba(0,0,0,.55),0 4px 12px rgba(0,0,0,.35) !important}
+.founder-mark svg{width:80px !important;height:80px !important}
+
+/* 3. Fit section: no outer border */
+.icp-strip{border:none !important;padding:0 !important}
+
+/* 5. Pipeline: no outer border, tags + num badges rounded */
+.wtl-cards{border:none !important}
+.wtl-card-tag{border-radius:8px !important}
+.wtl-num{border-radius:50% !important;box-shadow:var(--shadow-sm)}
+
+/* 6. Platforms: no outer border, individual cards with gaps */
+.platform-logo-grid{border:none !important;gap:16px !important}
+.platform-logo-card{border:1px solid var(--line-strong) !important;border-radius:8px !important;border-right:1px solid var(--line-strong) !important}
+
+/* 7. Pricing: addon-strip + roi-wrap rounded */
+.addon-strip{border-radius:8px !important}
+.roi-wrap{border-radius:8px !important}
+
+/* 8. Contact: outer containers rounded */
+.expect-list{border-radius:8px !important;overflow:hidden}
+.contact-form-wrap{border-radius:8px !important}
+.guarantee-box{border-radius:8px !important}
+.success-box{border-radius:8px !important}
+.form-input,.form-textarea{border-radius:6px !important}
+
+/* 4. CTA band: consistent gradient card across all pages */
+.cta-band-inner{
+  border:1px solid var(--line-strong);border-radius:10px;
+  padding:56px 64px;
+  display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;
+  background:radial-gradient(ellipse 60% 120% at 90% 50%,rgba(63,107,0,.10),transparent 70%),var(--card);
+  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(63,107,0,.18)
+}
+html.dark .cta-band-inner{
+  background:radial-gradient(ellipse 60% 120% at 90% 50%,rgba(143,206,58,.12),transparent 70%),var(--card);
+  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(143,206,58,.15)
+}
+.cta-band h2{margin-bottom:8px;font-size:clamp(24px,2.8vw,34px)}
+.cta-band p{font-size:15px;color:var(--body)}
+@media(max-width:760px){.cta-band-inner{padding:36px 28px}}
+
+/* 10. Section gradients: smooth blend top AND bottom — !important beats source */
+.alt-bg{background:transparent !important}
+section.alt-bg,div.alt-bg{
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 18%,var(--bg2) 82%,var(--bg) 100%) !important
+}
+.trust-strip{
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 15%,var(--bg2) 70%,var(--bg) 100%) !important;
+  border-bottom:none !important
+}
+
+
+/* ── ROUND 4 FIXES ─────────────────────────────────────────────────────────── */
+
+/* 1. Theme toggle: SVG-sized, no text */
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;padding:0;font-size:0;
+  border-radius:8px;margin-left:16px
+}
+.theme-toggle svg{display:block}
+
+/* 2. Pipeline: icon-wrap and tech-tag rounded */
+.process-icon-wrap{border-radius:8px !important}
+.tech-tag{border-radius:8px !important}
+
+/* 3. Pricing ROI results inner grid: rounded */
+.roi-results{border-radius:8px !important;overflow:hidden !important}
+
+/* 4. CTA band: remove outer card shadow/radius — inner card only */
+.cta-band{
+  border-radius:0 !important;overflow:visible !important;
+  box-shadow:none !important
+}
+
+/* 5. Process bar: semi-transparent, no visible borders, blends with nav */
+.process-bar{
+  background:rgba(253,246,238,.72);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:none !important;
+  border-top:none !important
+}
+html.dark .process-bar{
+  background:rgba(21,23,29,.72)
+}
+/* Also remove nav bottom border so nav+processbar merge cleanly */
+nav{border-bottom:none !important}
+
+
+/* Hero background logos */
+.hero-bg-logo{
+  position:absolute;z-index:0;pointer-events:none;
+  opacity:.07;color:var(--ink)
+}
+html.dark .hero-bg-logo{opacity:.09}
+@media(max-width:900px){.hero-bg-logo{display:none}}
+
+
+
+/* ── ROUND 5 FIXES ─────────────────────────────────────────────────────────── */
+
+/* 2. CTA band: remove border-top/bottom hard lines on all pages */
+.cta-band{border-top:none !important;border-bottom:none !important}
+
+/* 3. Pipeline process-grid: rounded corners + overflow:hidden to clip children */
+.process-grid{border-radius:8px !important;overflow:hidden !important}
+
+/* 4. Contact page: form-submit button and select fields rounded */
+.form-submit{border-radius:8px !important}
+.form-select{border-radius:8px !important}
+
+/* 5. Founder logo standalone */
+.founder-logo-standalone{
+  width:120px;height:auto;display:block;
+  color:var(--ink);
+  filter:drop-shadow(0 10px 28px rgba(0,0,0,.14)) drop-shadow(0 3px 8px rgba(0,0,0,.09));
+  margin-bottom:0
+}
+html.dark .founder-logo-standalone{
+  filter:drop-shadow(0 10px 28px rgba(0,0,0,.55)) drop-shadow(0 3px 8px rgba(0,0,0,.30))
+}
+
+/* 6. Hero background logos: image-based, more visible */
+.hero-bg-logo{
+  position:absolute;z-index:0;pointer-events:none;
+  opacity:.16;mix-blend-mode:multiply;object-fit:contain
+}
+html.dark .hero-bg-logo{opacity:.15;mix-blend-mode:screen}
+@media(max-width:900px){.hero-bg-logo{display:none}}
+
+/* Platform logo icon: image-based */
+.platform-logo-icon img{
+  width:40px;height:40px;object-fit:contain;display:block
+}
+
+
+/* ── ROUND 6 FIXES ─────────────────────────────────────────────────────────── */
+
+/* 1. CTA band: force correct gradient border (accent-line glow) on all pages */
+.cta-band-inner{
+  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(63,107,0,.20) !important;
+  background:
+    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(63,107,0,.10), transparent 70%),
+    var(--card) !important
+}
+html.dark .cta-band-inner{
+  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(143,206,58,.18) !important;
+  background:
+    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(143,206,58,.12), transparent 70%),
+    var(--card) !important
+}
+
+/* 2. Founder logo: elevated, larger */
+.founder-logo-standalone{
+  width:160px !important;
+  filter:
+    drop-shadow(0 0 18px rgba(143,206,58,.22))
+    drop-shadow(0 14px 36px rgba(0,0,0,.20))
+    drop-shadow(0 4px 10px rgba(0,0,0,.12)) !important
+}
+html.dark .founder-logo-standalone{
+  filter:
+    drop-shadow(0 0 22px rgba(143,206,58,.35))
+    drop-shadow(0 14px 36px rgba(0,0,0,.65))
+    drop-shadow(0 4px 10px rgba(0,0,0,.40)) !important
+}
+
+/* 3. Spend-tiers: rounded corners */
+.spend-tiers{border-radius:8px !important;overflow:hidden !important}
+
+/* 4. Green dot: pulse / bip animation */
+.dot{position:relative;overflow:visible}
+.dot::before{
+  content:'';
+  position:absolute;
+  inset:-3px;
+  border-radius:50%;
+  background:var(--accent);
+  opacity:0;
+  animation:dot-bip 2.4s ease-out infinite
+}
+@keyframes dot-bip{
+  0%{transform:scale(1);opacity:.7}
+  60%{transform:scale(2.8);opacity:0}
+  100%{transform:scale(2.8);opacity:0}
+}
+
+/* 5. ba-grid: remove outer card — just a layout wrapper */
+.ba-grid{
+  box-shadow:none !important;
+  border:none !important;
+  background:transparent !important
+}
+
 </style>
 </head>
 <body>
@@ -336,7 +610,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
       <li><a href="/security/">Security &amp; Data</a></li>
     </ul>
     <div class="nav-right">
-      <button class="theme-toggle" id="themeToggle">DARK</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
       <a href="/contact/" class="nav-cta">Get your report</a>
     </div>
     <button class="nav-mobile-toggle" aria-label="Menu" id="mobileMenuBtn">
@@ -446,7 +720,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
         <ul class="price-features" style="margin-top:16px">
           <li><span class="ck">✓</span> Continuous true ROAS calculation</li>
           <li><span class="ck">✓</span> Weekly execution · 30% cap · 24h rollback</li>
-          <li><span class="ck">✓</span> Monthly 1-hour strategy call</li>
+          <li><span class="ck">✓</span> Monthly 1-hour strategy call with an expert media buyer</li>
         </ul>
         <a href="/contact/" class="price-cta-primary">Get your report →</a>
       </div>
@@ -556,11 +830,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 <!-- CTA BAND -->
 <div class="cta-band">
   <div class="wrap">
-    <div>
-      <h2>See where your spend tier lands.</h2>
-      <p>A 20-minute call, using your real store and ad account data. No pitch deck.</p>
+    <div class="cta-band-inner">
+      <div>
+        <h2>See where your spend tier lands.</h2>
+        <p>A 20-minute call, using your real store and ad account data. No pitch deck.</p>
+      </div>
+      <a href="/contact/" class="btn-primary">Get your report →</a>
     </div>
-    <a href="/contact/" class="btn-primary">Get your report →</a>
   </div>
 </div>
 
@@ -611,7 +887,7 @@ const root = document.documentElement;
 const toggle = document.getElementById('themeToggle');
 function setTheme(t){
   root.classList.toggle('dark', t === 'dark');
-  toggle.textContent = t === 'dark' ? 'LIGHT' : 'DARK';
+  toggle.innerHTML = t === 'dark' ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>` : `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
   try { localStorage.setItem('theme', t); } catch(e) {}
 }
 let saved = 'light';
