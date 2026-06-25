@@ -17,6 +17,9 @@
   --bg3:          #ecdfd2;
   --line:         rgba(28,24,18,.10);
   --line-strong:  rgba(28,24,18,.20);
+  --shadow-sm:    0 1px 4px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:    0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.05);
+  --shadow-lg:    0 8px 24px rgba(0,0,0,.10), 0 3px 8px rgba(0,0,0,.06);
   --ink:          #1c1812;
   --body:         #5c534a;
   --muted:        #9a9088;
@@ -35,6 +38,9 @@ html.dark {
   --bg3:          #232733;
   --line:         rgba(255,255,255,.08);
   --line-strong:  rgba(255,255,255,.16);
+  --shadow-sm:    0 1px 4px rgba(0,0,0,.25);
+  --shadow-md:    0 4px 12px rgba(0,0,0,.35);
+  --shadow-lg:    0 8px 24px rgba(0,0,0,.45);
   --ink:          #f1ede4;
   --body:         #aba39a;
   --muted:        #6b6560;
@@ -60,7 +66,7 @@ a{color:inherit}
 .wrap{max-width:1180px;margin:0 auto;padding:0 48px}
 .section{padding:104px 0}
 .section-tight{padding:72px 0}
-.section-border-t{border-top:1px solid var(--line)}
+.section-border-t{border-top:none}
 .alt-bg{background:var(--bg2)}
 
 .eyebrow{
@@ -110,7 +116,7 @@ html.dark nav{background:rgba(21,23,29,.92)}
    PAGE HEADER
    ============================================================ */
 .page-header{
-  padding:168px 0 64px;border-bottom:1px solid var(--line);position:relative;overflow:hidden;
+  padding:168px 0 64px;position:relative;overflow:hidden;
 }
 .page-header::before{
   content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
@@ -157,11 +163,11 @@ html.dark .process-item.is-key{
   .process-grid{grid-template-columns:1fr 1fr}
   .process-item:nth-child(2){border-right:none}
   .process-item:nth-child(odd){border-right:1px solid var(--line)}
-  .process-item:nth-child(n+3){border-top:1px solid var(--line)}
+  .process-item:nth-child(n+3){border-top:none}
 }
 @media(max-width:560px){
   .process-grid{grid-template-columns:1fr}
-  .process-item{border-right:none!important;border-top:1px solid var(--line)}
+  .process-item{border-right:none!important;border-top:none}
   .process-item:first-child{border-top:none}
 }
 
@@ -313,7 +319,7 @@ html.dark .sandbox-tooltip{box-shadow:0 6px 20px rgba(0,0,0,.5)}
    CTA BAND + FOOTER (shared)
    ============================================================ */
 .cta-band{
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  
   background:
     radial-gradient(ellipse 60% 120% at 90% 50%, rgba(63,107,0,.10), transparent 70%),
     var(--bg2);
@@ -396,7 +402,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--muted);letter-spacing:.04em;
 }
 .wtl-cards{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line-strong)}
-.wtl-card{padding:22px 18px;border-right:1px solid var(--line);background:var(--bg)}
+.wtl-card{padding:22px 18px;background:var(--bg)}
 .wtl-card:last-child{border-right:none}
 .wtl-card.is-key{
   background:radial-gradient(ellipse 100% 80% at 50% 0%,rgba(63,107,0,.09),transparent 70%),var(--bg);
@@ -458,13 +464,281 @@ html.dark .wtl-card.is-key{
 @media(max-width:900px){
   .platform-logo-grid{grid-template-columns:repeat(3,1fr)}
   .platform-logo-card:nth-child(3n){border-right:none}
-  .platform-logo-card:nth-child(n+4){border-top:1px solid var(--line)}
+  .platform-logo-card:nth-child(n+4){border-top:none}
 }
 @media(max-width:560px){
   .platform-logo-grid{grid-template-columns:repeat(2,1fr)}
   .platform-logo-card:nth-child(3n){border-right:1px solid var(--line)}
   .platform-logo-card:nth-child(2n){border-right:none}
-  .platform-logo-card:nth-child(n+3){border-top:1px solid var(--line)}
+  .platform-logo-card:nth-child(n+3){border-top:none}
+}
+
+
+
+/* ============================================================
+   DESIGN SYSTEM — SINGLE CLEAN BLOCK
+   ============================================================ */
+
+/* Rounded corners: buttons */
+.btn-primary,.btn-secondary,.nav-cta,
+.sandbox-trigger,.sandbox-approve,.sandbox-dismiss,
+.price-cta-primary,.price-cta-secondary,.theme-toggle{border-radius:8px}
+
+/* Rounded corners: tags and badges */
+.ledger-tag,.cycle-tag,.wtl-card-tag,.confidence,
+.platform-logo-badge,.limited-tag,.price-badge,
+.sandbox-badge,.sandbox-result-note,.delta-up,.delta-down,
+.hero-eyebrow-tag,.icp-mark{border-radius:8px}
+
+/* Rounded corners + overflow clipping on all card containers */
+.ledger,.spread-card,.sandbox,.platform-logo-card,.pricing-grid,
+.access-table,.wtl-cards,.roi-wrap,.leak-calc,.ba-grid,
+.cta-band,.faq-list,.principles-grid,.proof-list,.lifecycle-list{
+  border-radius:8px;overflow:hidden
+}
+
+/* Shadow elevation */
+.ledger,.sandbox,.pricing-grid,.access-table{box-shadow:var(--shadow-lg)}
+.spread-card,.wtl-cards,.leak-calc,.ba-grid{box-shadow:var(--shadow-md)}
+.platform-logo-card,.cta-band,.price-card{box-shadow:var(--shadow-sm)}
+
+/* Section color transitions: gradient not hard cut */
+.alt-bg{background:transparent}
+section.alt-bg,div.alt-bg{
+  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)
+}
+.trust-strip{
+  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg2) 55%,var(--bg) 100%)
+}
+
+/* No section dividers */
+.section-border-t{border-top:none}
+.hero{border-bottom:none}
+.page-header{border-bottom:none}
+.trust-strip{border-bottom:none}
+.process-bar{border-bottom:none}
+.footer-bottom{border-top:none}
+
+/* Nav: no underlines anywhere in nav or mobile drawer */
+nav a,.logo,.nav-cta,.mobile-drawer a,.mobile-drawer .nav-cta{text-decoration:none}
+
+/* Mobile drawer: clean CTA button text visibility */
+.mobile-drawer .nav-cta{color:#fff;border-bottom:none;display:block}
+html.dark .mobile-drawer .nav-cta{color:#0e1206}
+
+/* Body links: underline, excluding nav and buttons */
+a:not(.nav-cta):not(.btn-primary):not(.btn-secondary):not(.price-cta-primary):not(.price-cta-secondary):not(.logo):not(.sandbox-approve):not(.sandbox-dismiss):not(.sandbox-info-btn){
+  text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px
+}
+nav a,.logo,.mobile-drawer a,.btn-primary,.btn-secondary{text-decoration:none}
+.footer-col a,.ledger-foot a{text-decoration:underline;text-underline-offset:3px}
+
+
+/* ── FIX PASS 3 ────────────────────────────────────────────────────────────── */
+
+/* 1. Nav underlines — !important to beat high-specificity a:not() rule */
+nav a,.mobile-drawer a,.mobile-drawer .nav-cta,.nav-links a,.logo,footer .logo{text-decoration:none !important}
+
+/* 9. Theme toggle: compact emoji style */
+.theme-toggle{font-size:16px;padding:6px 8px;line-height:1;border-radius:8px;min-width:0;letter-spacing:0}
+.mobile-drawer-head{gap:16px}
+
+/* 2. Founder mark: no border, elevated shadow */
+.founder-mark{border:none !important;box-shadow:0 12px 40px rgba(0,0,0,.18),0 4px 12px rgba(0,0,0,.10) !important}
+html.dark .founder-mark{box-shadow:0 12px 40px rgba(0,0,0,.55),0 4px 12px rgba(0,0,0,.35) !important}
+.founder-mark svg{width:80px !important;height:80px !important}
+
+/* 3. Fit section: no outer border */
+.icp-strip{border:none !important;padding:0 !important}
+
+/* 5. Pipeline: no outer border, tags + num badges rounded */
+.wtl-cards{border:none !important}
+.wtl-card-tag{border-radius:8px !important}
+.wtl-num{border-radius:50% !important;box-shadow:var(--shadow-sm)}
+
+/* 6. Platforms: no outer border, individual cards with gaps */
+.platform-logo-grid{border:none !important;gap:16px !important}
+.platform-logo-card{border:1px solid var(--line-strong) !important;border-radius:8px !important;border-right:1px solid var(--line-strong) !important}
+
+/* 7. Pricing: addon-strip + roi-wrap rounded */
+.addon-strip{border-radius:8px !important}
+.roi-wrap{border-radius:8px !important}
+
+/* 8. Contact: outer containers rounded */
+.expect-list{border-radius:8px !important;overflow:hidden}
+.contact-form-wrap{border-radius:8px !important}
+.guarantee-box{border-radius:8px !important}
+.success-box{border-radius:8px !important}
+.form-input,.form-textarea{border-radius:6px !important}
+
+/* 4. CTA band: consistent gradient card across all pages */
+.cta-band-inner{
+  border:1px solid var(--line-strong);border-radius:10px;
+  padding:56px 64px;
+  display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;
+  background:radial-gradient(ellipse 60% 120% at 90% 50%,rgba(63,107,0,.10),transparent 70%),var(--card);
+  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(63,107,0,.18)
+}
+html.dark .cta-band-inner{
+  background:radial-gradient(ellipse 60% 120% at 90% 50%,rgba(143,206,58,.12),transparent 70%),var(--card);
+  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(143,206,58,.15)
+}
+.cta-band h2{margin-bottom:8px;font-size:clamp(24px,2.8vw,34px)}
+.cta-band p{font-size:15px;color:var(--body)}
+@media(max-width:760px){.cta-band-inner{padding:36px 28px}}
+
+/* 10. Section gradients: smooth blend top AND bottom — !important beats source */
+.alt-bg{background:transparent !important}
+section.alt-bg,div.alt-bg{
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 18%,var(--bg2) 82%,var(--bg) 100%) !important
+}
+.trust-strip{
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 15%,var(--bg2) 70%,var(--bg) 100%) !important;
+  border-bottom:none !important
+}
+
+
+/* ── ROUND 4 FIXES ─────────────────────────────────────────────────────────── */
+
+/* 1. Theme toggle: SVG-sized, no text */
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;padding:0;font-size:0;
+  border-radius:8px;margin-left:16px
+}
+.theme-toggle svg{display:block}
+
+/* 2. Pipeline: icon-wrap and tech-tag rounded */
+.process-icon-wrap{border-radius:8px !important}
+.tech-tag{border-radius:8px !important}
+
+/* 3. Pricing ROI results inner grid: rounded */
+.roi-results{border-radius:8px !important;overflow:hidden !important}
+
+/* 4. CTA band: remove outer card shadow/radius — inner card only */
+.cta-band{
+  border-radius:0 !important;overflow:visible !important;
+  box-shadow:none !important
+}
+
+/* 5. Process bar: semi-transparent, no visible borders, blends with nav */
+.process-bar{
+  background:rgba(253,246,238,.72);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:none !important;
+  border-top:none !important
+}
+html.dark .process-bar{
+  background:rgba(21,23,29,.72)
+}
+/* Also remove nav bottom border so nav+processbar merge cleanly */
+nav{border-bottom:none !important}
+
+
+/* Hero background logos */
+.hero-bg-logo{
+  position:absolute;z-index:0;pointer-events:none;
+  opacity:.07;color:var(--ink)
+}
+html.dark .hero-bg-logo{opacity:.09}
+@media(max-width:900px){.hero-bg-logo{display:none}}
+
+
+
+/* ── ROUND 5 FIXES ─────────────────────────────────────────────────────────── */
+
+/* 2. CTA band: remove border-top/bottom hard lines on all pages */
+.cta-band{border-top:none !important;border-bottom:none !important}
+
+/* 3. Pipeline process-grid: rounded corners + overflow:hidden to clip children */
+.process-grid{border-radius:8px !important;overflow:hidden !important}
+
+/* 4. Contact page: form-submit button and select fields rounded */
+.form-submit{border-radius:8px !important}
+.form-select{border-radius:8px !important}
+
+/* 5. Founder logo standalone */
+.founder-logo-standalone{
+  width:120px;height:auto;display:block;
+  color:var(--ink);
+  filter:drop-shadow(0 10px 28px rgba(0,0,0,.14)) drop-shadow(0 3px 8px rgba(0,0,0,.09));
+  margin-bottom:0
+}
+html.dark .founder-logo-standalone{
+  filter:drop-shadow(0 10px 28px rgba(0,0,0,.55)) drop-shadow(0 3px 8px rgba(0,0,0,.30))
+}
+
+/* 6. Hero background logos: image-based, more visible */
+.hero-bg-logo{
+  position:absolute;z-index:0;pointer-events:none;
+  opacity:.16;mix-blend-mode:multiply;object-fit:contain
+}
+html.dark .hero-bg-logo{opacity:.15;mix-blend-mode:screen}
+@media(max-width:900px){.hero-bg-logo{display:none}}
+
+/* Platform logo icon: image-based */
+.platform-logo-icon img{
+  width:40px;height:40px;object-fit:contain;display:block
+}
+
+
+/* ── ROUND 6 FIXES ─────────────────────────────────────────────────────────── */
+
+/* 1. CTA band: force correct gradient border (accent-line glow) on all pages */
+.cta-band-inner{
+  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(63,107,0,.20) !important;
+  background:
+    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(63,107,0,.10), transparent 70%),
+    var(--card) !important
+}
+html.dark .cta-band-inner{
+  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(143,206,58,.18) !important;
+  background:
+    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(143,206,58,.12), transparent 70%),
+    var(--card) !important
+}
+
+/* 2. Founder logo: elevated, larger */
+.founder-logo-standalone{
+  width:160px !important;
+  filter:
+    drop-shadow(0 0 18px rgba(143,206,58,.22))
+    drop-shadow(0 14px 36px rgba(0,0,0,.20))
+    drop-shadow(0 4px 10px rgba(0,0,0,.12)) !important
+}
+html.dark .founder-logo-standalone{
+  filter:
+    drop-shadow(0 0 22px rgba(143,206,58,.35))
+    drop-shadow(0 14px 36px rgba(0,0,0,.65))
+    drop-shadow(0 4px 10px rgba(0,0,0,.40)) !important
+}
+
+/* 3. Spend-tiers: rounded corners */
+.spend-tiers{border-radius:8px !important;overflow:hidden !important}
+
+/* 4. Green dot: pulse / bip animation */
+.dot{position:relative;overflow:visible}
+.dot::before{
+  content:'';
+  position:absolute;
+  inset:-3px;
+  border-radius:50%;
+  background:var(--accent);
+  opacity:0;
+  animation:dot-bip 2.4s ease-out infinite
+}
+@keyframes dot-bip{
+  0%{transform:scale(1);opacity:.7}
+  60%{transform:scale(2.8);opacity:0}
+  100%{transform:scale(2.8);opacity:0}
+}
+
+/* 5. ba-grid: remove outer card — just a layout wrapper */
+.ba-grid{
+  box-shadow:none !important;
+  border:none !important;
+  background:transparent !important
 }
 
 </style>
@@ -482,7 +756,7 @@ html.dark .wtl-card.is-key{
       <li><a href="/security/">Security &amp; Data</a></li>
     </ul>
     <div class="nav-right">
-      <button class="theme-toggle" id="themeToggle">DARK</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
       <a href="/contact/" class="nav-cta">Get your report</a>
     </div>
     <button class="nav-mobile-toggle" aria-label="Menu" id="mobileMenuBtn">
@@ -505,41 +779,6 @@ html.dark .wtl-card.is-key{
   <a href="/contact/" class="nav-cta">Get your report</a>
 </div>
 
-<!-- ============================================================
-     PROCESS BAR — sticky, sits just under the fixed nav
-     ============================================================ -->
-<style>
-.process-bar{
-  position:sticky;top:72px;z-index:150;
-  background:var(--bg);border-bottom:1px solid var(--line);
-}
-.process-bar-inner{
-  max-width:1180px;margin:0 auto;padding:10px 48px;
-  display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;
-}
-.process-bar-step{
-  display:flex;align-items:center;gap:7px;
-  font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);
-  white-space:nowrap;
-}
-.process-bar-step.is-active{color:var(--accent)}
-.process-bar-divider{color:var(--line-strong);margin:0 16px;font-size:12px}
-@media(max-width:900px){
-  .process-bar-inner{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;padding:10px 28px}
-  .process-bar-divider{margin:0 12px}
-}
-</style>
-<div class="process-bar">
-  <div class="process-bar-inner">
-    <div class="process-bar-step"><span>🔐</span><span>Connect API</span></div>
-    <span class="process-bar-divider">→</span>
-    <div class="process-bar-step"><span>📊</span><span>7-Day Silent Audit</span></div>
-    <span class="process-bar-divider">→</span>
-    <div class="process-bar-step"><span>📋</span><span>Monday Report</span></div>
-    <span class="process-bar-divider">→</span>
-    <div class="process-bar-step is-active"><span>✅</span><span>You Approve &amp; Execute</span></div>
-  </div>
-</div>
 
 <!-- PAGE HEADER -->
 <header class="page-header">
@@ -767,7 +1006,7 @@ html.dark .wtl-card.is-key{
       <!-- Shopify -->
       <div class="platform-logo-card">
         <div class="platform-logo-icon">
-          <svg viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg" fill="#95BF47" width="32" height="36"><path d="M95.2 23.6c-.1-.7-.7-1-1.2-1.1-.5 0-10.9-.2-10.9-.2s-8.7-8.5-9.6-9.4c-.9-.9-2.7-.6-3.4-.4l-4.7 1.5C63.4 10.5 60 7 54.3 7c-.2 0-.3 0-.5.1C52.4 5.5 50.6 5 49 5c-12.5 0-18.5 15.6-20.3 23.5l-9.5 2.9c-2.9.9-3 1-3.4 3.7L8 97.1l62.4 11.7 33.8-7.3L95.2 23.6zM71.7 14.8l-3.8 1.2c0-.5 0-1-.1-1.5-.4-6.4-3.1-9.5-6.8-11L71.7 14.8zM54.2 9.5c.3 0 .6.1.9.2-6 2.8-8.9 9.7-10.3 19.3l-12.2 3.8C34.2 23 40 9.5 54.2 9.5zM60.3 9.3c3 1.4 5 4.7 5.3 10.5l-13.4 4.1c1.3-7.3 3.7-12 8.1-14.6zM70.1 112.4L8.7 101.3 14.7 57l54.9-16.8.5 72.2z"/></svg>
+          <img src="/assets/logos/Shopify.png" alt="Shopify" width="40" height="40" style="width:40px;height:40px;object-fit:contain">
         </div>
         <div class="platform-logo-name">Shopify</div>
         <div class="platform-logo-type">E-commerce</div>
@@ -777,7 +1016,7 @@ html.dark .wtl-card.is-key{
       <!-- WooCommerce -->
       <div class="platform-logo-card">
         <div class="platform-logo-icon">
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="#7F54B3" width="36" height="36"><path d="M17.9 0h164.1C191.9 0 200 8.1 200 18.1v103.7c0 10-8.1 18.1-18.1 18.1H115l13.5 28.5-42.3-28.5H17.9C8 139.9 0 131.8 0 121.8V18.1C0 8.1 8 0 17.9 0z"/><path fill="#fff" d="M11.3 26.7c1.6-2.1 4-3.3 7.3-3.5 5.9-.4 9.2 2.5 9.9 8.6 3-5 6.8-8.3 11.6-10 1.6-.6 3.2-.8 4.7-.6 3.5.3 5.7 2.5 6.5 6.5.5 2.5.5 5.3 0 8.6-.5 3.3-1.1 7-1.8 11.2-.7 4.2-1.1 7.2-1.1 9 0 2.5 1 3.7 2.9 3.8 2 .1 4.4-1.2 7.1-3.9 4.2-4.3 7.6-11.1 10.2-20.6.4-1.3.7-2.3.9-3.2.2-.9.4-1.8.6-2.6 1-4.1 3.2-6.1 6.8-5.9 3.4.2 5.1 2.4 5.1 6.5 0 .4-.2 1.6-.7 3.6l-8 30.5c-.4 1.4-.3 2.6.2 3.6s1.4 1.4 2.7 1.5c1.3.1 2.6-.5 4-1.7 3.5-2.9 6.5-7.9 9.2-15.1 0-.2.9-2.9 2.5-8.1.7-2.2 1.9-3.3 3.7-3.2 2.1.1 3.1 1.3 3.1 3.6 0 .6-.9 3.5-2.7 8.8-2.3 6.7-5.3 12.5-9.2 17.3-5.3 6.5-10.9 9.6-16.8 9.3-5.4-.3-9.1-2.8-11-7.6-4.7 5.1-9.3 7.5-13.7 7.2-4.8-.3-8-3.4-9.6-9.4-2.4 3.1-4.8 5.5-7.4 7.2-3.1 2-6.3 2.9-9.7 2.7-5.4-.3-8.5-3.6-9.2-9.9-.1-.7-.1-2.5-.2-5.3-.1-2.8.8-10.6 2.6-23.5C9.7 34.6 9.7 29.5 11.3 26.7zm122.9 64.4c5.8 4 9.5 10.4 11.1 19.1.4 2.2.6 4.5.6 6.7 0 10.6-3.5 19.5-10.5 26.6-7 7.1-15.8 10.5-26.3 10.2-9.1-.3-16.5-3.7-22.1-10.2-5.3-6.1-7.8-13.7-7.5-22.8.3-9 3.5-16.6 9.5-22.8 6-6.2 13.5-9.5 22.4-9.7 8.5-.3 16.6 1.6 22.8 2.9zm-21.8 47c3.6-2 6.2-5.2 7.9-9.6 1.3-3.5 2-7 2-10.6 0-3.4-.6-6.4-1.8-9-1.8-3.9-4.6-5.9-8.4-6.1-3.5-.2-6.5 1.2-9 4.2-2.5 3-3.8 7-4 12.1-.2 5.5 1 10.1 3.5 13.7 2.5 3.6 5.7 5.2 9.8 3.3zm65.7-47c5.8 4 9.5 10.4 11.1 19.1.4 2.2.6 4.5.6 6.7 0 10.6-3.5 19.5-10.5 26.6-7 7.1-15.8 10.5-26.3 10.2-9.1-.3-16.5-3.7-22.1-10.2-5.3-6.1-7.8-13.7-7.5-22.8.3-9 3.5-16.6 9.5-22.8 6-6.2 13.5-9.5 22.4-9.7 8.5-.3 16.6 1.6 22.8 2.9zm-21.9 47c3.6-2 6.2-5.2 7.9-9.6 1.3-3.5 2-7 2-10.6 0-3.4-.6-6.4-1.8-9-1.8-3.9-4.6-5.9-8.4-6.1-3.5-.2-6.5 1.2-9 4.2-2.5 3-3.8 7-4 12.1-.2 5.5 1 10.1 3.5 13.7 2.5 3.6 5.7 5.2 9.8 3.3z"/></svg>
+          <img src="/assets/logos/WooCommerce.png" alt="WooCommerce" width="40" height="40" style="width:40px;height:40px;object-fit:contain">
         </div>
         <div class="platform-logo-name">WooCommerce</div>
         <div class="platform-logo-type">E-commerce</div>
@@ -787,7 +1026,7 @@ html.dark .wtl-card.is-key{
       <!-- Meta Ads -->
       <div class="platform-logo-card">
         <div class="platform-logo-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#1877F2" width="36" height="36"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <img src="/assets/logos/Meta.jpg" alt="Meta Ads" width="40" height="40" style="width:40px;height:40px;object-fit:contain">
         </div>
         <div class="platform-logo-name">Meta Ads</div>
         <div class="platform-logo-type">Paid social</div>
@@ -807,7 +1046,7 @@ html.dark .wtl-card.is-key{
       <!-- Klaviyo (optional) -->
       <div class="platform-logo-card">
         <div class="platform-logo-icon">
-          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><rect width="32" height="32" fill="#22C55E" rx="4"/><path fill="#fff" d="M8 6h4v12.5l7-12.5h4.5l-7.5 13 8 7H19l-7-6.5V26H8z"/></svg>
+          <img src="/assets/logos/Klaviyo.png" alt="Klaviyo" width="40" height="40" style="width:40px;height:40px;object-fit:contain">
         </div>
         <div class="platform-logo-name">Klaviyo</div>
         <div class="platform-logo-type">Email / SMS, optional</div>
@@ -831,11 +1070,13 @@ html.dark .wtl-card.is-key{
 <!-- CTA BAND -->
 <div class="cta-band">
   <div class="wrap">
-    <div>
-      <h2>Ready to see this with your data?</h2>
-      <p>A 20-minute call, using your real store and ad account data. No pitch deck.</p>
+    <div class="cta-band-inner">
+      <div>
+        <h2>Ready to see this with your data?</h2>
+        <p>A 20-minute call, using your real store and ad account data. No pitch deck.</p>
+      </div>
+      <a href="/contact/" class="btn-primary">Get your report →</a>
     </div>
-    <a href="/contact/" class="btn-primary">Get your report →</a>
   </div>
 </div>
 
@@ -887,7 +1128,7 @@ const root = document.documentElement;
 const toggle = document.getElementById('themeToggle');
 function setTheme(t){
   root.classList.toggle('dark', t === 'dark');
-  toggle.textContent = t === 'dark' ? 'LIGHT' : 'DARK';
+  toggle.innerHTML = t === 'dark' ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>` : `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
   try { localStorage.setItem('theme', t); } catch(e) {}
 }
 let saved = 'light';
