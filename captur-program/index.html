@@ -1,1 +1,792 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Captur Program, 7Captur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --bg:           #fdf6ee;
+  --bg2:          #f5ebe0;
+  --bg3:          #ecdfd2;
+  --line:         rgba(28,24,18,.10);
+  --line-strong:  rgba(28,24,18,.20);
+  --shadow-sm:    0 1px 4px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:    0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.05);
+  --shadow-lg:    0 8px 24px rgba(0,0,0,.10), 0 3px 8px rgba(0,0,0,.06);
+  --ink:          #1c1812;
+  --body:         #5c534a;
+  --muted:        #9a9088;
+  --accent:       #c45e10;
+  --accent-soft:  #fdeedd;
+  --accent-line:  rgba(196,94,16,.22);
+  --card:         #f7f0e6;
+}
+html.dark {
+  --bg:           #15171d;
+  --bg2:          #1b1e26;
+  --bg3:          #232733;
+  --line:         rgba(255,255,255,.08);
+  --line-strong:  rgba(255,255,255,.16);
+  --shadow-sm:    0 1px 4px rgba(0,0,0,.25);
+  --shadow-md:    0 4px 12px rgba(0,0,0,.35);
+  --shadow-lg:    0 8px 24px rgba(0,0,0,.45);
+  --ink:          #f1ede4;
+  --body:         #aba39a;
+  --muted:        #6b6560;
+  --accent:       #E87A2A;
+  --accent-soft:  #2a1d10;
+  --accent-line:  rgba(232,122,42,.25);
+  --card:         #1e2128;
+}
 
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg); color: var(--body); font-family: 'Inter', sans-serif;
+  font-weight: 400; line-height: 1.65; -webkit-font-smoothing: antialiased;
+  transition: background-color .3s ease;
+}
+a { color: inherit; }
+.mono { font-family: 'IBM Plex Mono', monospace; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+@media(max-width:900px) { .wrap { padding: 0 28px; } }
+
+h1, h2, h3 { font-family: 'Inter Tight', sans-serif; font-weight: 700; letter-spacing: -.02em; color: var(--ink); }
+h1 { font-size: clamp(34px, 4.2vw, 56px); line-height: 1.08; font-weight: 800; }
+h2 { font-size: clamp(26px, 3vw, 38px); line-height: 1.14; margin-bottom: 16px; }
+h3 { font-size: 17px; line-height: 1.3; }
+.lede { font-size: 1.0625rem; line-height: 1.75; color: var(--body); max-width: 600px; }
+
+/* ============================================================
+   SITE HEADER (logo only, no nav)
+   ============================================================ */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 68px; display: flex; align-items: center;
+  background: rgba(21,23,29,.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  transition: background .3s ease, border-color .3s ease;
+}
+html:not(.dark) .site-header { background: rgba(253,246,238,.92); }
+.header-inner {
+  max-width: 1180px; margin: 0 auto; width: 100%; padding: 0 48px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+@media(max-width:900px) { .header-inner { padding: 0 28px; } }
+.logo {
+  font-family: 'Inter Tight', sans-serif; font-weight: 800; font-size: 18px;
+  letter-spacing: -.02em; color: var(--ink); text-decoration: none !important;
+  display: flex; align-items: center; gap: 11px;
+}
+.logo-mark { width: 22px; height: auto; color: var(--accent); flex-shrink: 0; }
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; padding: 0;
+  background: none; border: 1px solid var(--line-strong); border-radius: 8px;
+  color: var(--body); cursor: pointer; transition: color .15s, border-color .15s;
+}
+.theme-toggle:hover { color: var(--ink); border-color: var(--ink); }
+.theme-toggle svg { display: block; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  padding: 148px 0 80px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 70% at 90% -10%, rgba(232,122,42,.22), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 10% 110%, rgba(232,122,42,.10), transparent 55%),
+    linear-gradient(180deg, var(--bg2) 0%, var(--bg) 60%);
+}
+html:not(.dark) .hero::before {
+  background:
+    radial-gradient(ellipse 70% 70% at 90% -10%, rgba(196,94,16,.14), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 10% 110%, rgba(196,94,16,.07), transparent 55%),
+    linear-gradient(180deg, var(--bg2) 0%, var(--bg) 60%);
+}
+.hero > .wrap { position: relative; z-index: 1; }
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 28px;
+}
+.hero-eyebrow .dot {
+  width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
+  position: relative; overflow: visible; flex-shrink: 0;
+}
+.hero-eyebrow .dot::before {
+  content: ''; position: absolute; inset: -3px; border-radius: 50%;
+  background: var(--accent); opacity: 0;
+  animation: dot-bip 2.4s ease-out infinite;
+}
+@keyframes dot-bip {
+  0%   { transform: scale(1); opacity: .7; }
+  60%  { transform: scale(2.8); opacity: 0; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+.hero-limited {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 5px 12px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 28px;
+}
+.hero-limited svg { flex-shrink: 0; }
+
+.hero h1 { margin-bottom: 24px; max-width: 780px; }
+.hero h1 span { color: var(--accent); }
+.hero .lede { font-size: 1.125rem; max-width: 560px; margin-bottom: 40px; }
+
+.hero-benefits {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; max-width: 680px;
+}
+.hero-benefit {
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid var(--line-strong); border-radius: 8px;
+  padding: 8px 14px; background: var(--card);
+  font-size: 13px; color: var(--body);
+  box-shadow: var(--shadow-sm);
+}
+.hero-benefit-icon {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--accent-soft); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.hero-benefit-icon svg { color: var(--accent); }
+
+.hero-spots {
+  display: flex; align-items: center; gap: 16px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted);
+  letter-spacing: .04em;
+}
+.hero-spots-bar {
+  display: flex; gap: 5px;
+}
+.spot {
+  width: 14px; height: 14px; border-radius: 4px;
+}
+.spot.filled { background: var(--accent); opacity: .5; }
+.spot.open { background: var(--accent); }
+
+/* ============================================================
+   WHAT YOU GET
+   ============================================================ */
+.what-section { padding: 80px 0; }
+.section-eyebrow {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--accent);
+  display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+}
+.section-eyebrow::after {
+  content: ''; flex: 0 0 40px; height: 1px; background: var(--accent-line);
+}
+
+.what-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+  border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden;
+  margin-top: 40px; box-shadow: var(--shadow-md);
+}
+@media(max-width:760px) { .what-grid { grid-template-columns: 1fr; } }
+
+.what-card {
+  background: var(--card); padding: 32px 28px;
+  border-right: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+}
+.what-card:nth-child(2n) { border-right: none; }
+.what-card:nth-last-child(-n+2) { border-bottom: none; }
+@media(max-width:760px) {
+  .what-card { border-right: none; }
+  .what-card:last-child { border-bottom: none; }
+  .what-card:nth-last-child(-n+2) { border-bottom: 1px solid var(--line-strong); }
+  .what-card:last-child { border-bottom: none; }
+}
+.what-card-num {
+  font-family: 'Inter Tight', sans-serif; font-weight: 800;
+  font-size: 11px; letter-spacing: .08em; color: var(--accent);
+  text-transform: uppercase; margin-bottom: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.what-card h3 { font-size: 16px; margin-bottom: 8px; color: var(--ink); }
+.what-card p { font-size: 13.5px; color: var(--body); line-height: 1.7; }
+
+/* ============================================================
+   FORM SECTION
+   ============================================================ */
+.form-section {
+  padding: 80px 0 100px;
+}
+.form-layout {
+  display: grid; grid-template-columns: 1fr 1.35fr; gap: 64px; align-items: start;
+  margin-top: 48px;
+}
+@media(max-width:900px) { .form-layout { grid-template-columns: 1fr; gap: 40px; } }
+
+/* Left col */
+.form-left-intro { margin-bottom: 32px; }
+.form-left-intro h2 { font-size: clamp(22px, 2.6vw, 30px); margin-bottom: 12px; }
+.form-left-intro p { font-size: 14.5px; color: var(--body); line-height: 1.75; }
+
+.selection-note {
+  border: 1px solid var(--accent-line); border-radius: 8px;
+  padding: 24px; margin-bottom: 28px;
+  background:
+    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(232,122,42,.10), transparent 70%),
+    var(--bg);
+}
+html:not(.dark) .selection-note {
+  background:
+    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(196,94,16,.07), transparent 70%),
+    var(--bg);
+}
+.selection-note .section-eyebrow { margin-bottom: 10px; }
+.selection-note p { font-size: 13.5px; color: var(--body); line-height: 1.75; }
+
+.sidebar-meta {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--muted);
+  letter-spacing: .04em; line-height: 1.9;
+}
+.sidebar-meta span { color: var(--accent); }
+
+/* Right col: form card */
+.captur-form-wrap {
+  border: 1px solid var(--line-strong); border-radius: 8px; padding: 36px;
+  background: var(--card); box-shadow: var(--shadow-md);
+}
+.form-section-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted); margin: 24px 0 14px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--line);
+}
+.form-section-label:first-of-type { margin-top: 0; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:560px) { .form-row { grid-template-columns: 1fr; } }
+.form-group { margin-bottom: 16px; }
+.form-label {
+  display: block; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+}
+.form-input, .form-select {
+  width: 100%; padding: 12px 14px; border: 1px solid var(--line-strong);
+  background: var(--bg2); color: var(--ink); font-size: 14px;
+  font-family: 'Inter', sans-serif; transition: border-color .15s; border-radius: 6px;
+}
+.form-input:focus, .form-select:focus { outline: none; border-color: var(--accent); }
+.form-select {
+  cursor: pointer; appearance: none; border-radius: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239a9088' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+  background-color: var(--bg2);
+}
+
+/* Checkboxes and radios */
+.check-group, .radio-group {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.check-item, .radio-item {
+  display: flex; align-items: center; gap: 9px;
+  border: 1px solid var(--line-strong); border-radius: 8px;
+  padding: 9px 14px; cursor: pointer; background: var(--bg2);
+  transition: border-color .15s, background .15s;
+  font-size: 13.5px; color: var(--body); user-select: none;
+}
+.check-item:hover, .radio-item:hover {
+  border-color: var(--accent); color: var(--ink);
+}
+.check-item input, .radio-item input { display: none; }
+.check-item.selected, .radio-item.selected {
+  border-color: var(--accent); background: var(--accent-soft); color: var(--ink);
+}
+.check-box, .radio-box {
+  width: 16px; height: 16px; border: 1.5px solid var(--line-strong);
+  border-radius: 4px; flex-shrink: 0; display: flex; align-items: center;
+  justify-content: center; transition: border-color .15s, background .15s;
+}
+.radio-box { border-radius: 50%; }
+.check-item.selected .check-box,
+.radio-item.selected .radio-box {
+  background: var(--accent); border-color: var(--accent);
+}
+.check-item.selected .check-box::after {
+  content: ''; display: block; width: 9px; height: 5px;
+  border-left: 2px solid #fff; border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translateY(-1px);
+}
+.radio-item.selected .radio-box::after {
+  content: ''; display: block; width: 6px; height: 6px;
+  background: #fff; border-radius: 50%;
+}
+
+.form-error {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #e2685f;
+  margin-top: 10px; display: none;
+}
+.form-error.visible { display: block; }
+
+.form-submit {
+  background: var(--accent); color: #fff;
+  font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 15px;
+  padding: 16px 28px; border: none; cursor: pointer; width: 100%;
+  letter-spacing: -.005em; transition: opacity .15s; border-radius: 8px;
+  margin-top: 8px;
+}
+.form-submit:hover { opacity: .88; }
+.form-submit:disabled { opacity: .6; cursor: default; }
+.form-foot {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted);
+  margin-top: 14px; line-height: 1.7; text-align: center; letter-spacing: .03em;
+}
+
+/* ============================================================
+   SUCCESS OVERLAY
+   ============================================================ */
+.success-overlay {
+  display: none; position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,.7); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+.success-overlay.open { display: flex; }
+.success-box {
+  max-width: 460px; width: 100%; border: 1px solid var(--line-strong);
+  padding: 48px 40px; text-align: center; border-radius: 8px;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(232,122,42,.12), transparent 70%),
+    var(--bg);
+  box-shadow: var(--shadow-lg);
+}
+.success-icon {
+  width: 52px; height: 52px; border: 1px solid var(--accent-line);
+  background: var(--accent-soft); color: var(--accent); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 22px; font-size: 20px; font-weight: 700;
+}
+.success-title {
+  font-family: 'Inter Tight', sans-serif; font-weight: 800; font-size: 22px;
+  color: var(--ink); margin-bottom: 10px; letter-spacing: -.01em;
+}
+.success-body { font-size: 14px; color: var(--body); line-height: 1.75; margin-bottom: 28px; }
+.success-close {
+  background: var(--ink); color: var(--bg); font-family: 'Inter Tight', sans-serif;
+  font-weight: 600; font-size: 13.5px; padding: 12px 28px; border: none;
+  cursor: pointer; letter-spacing: -.005em; transition: opacity .15s; border-radius: 8px;
+}
+.success-close:hover { opacity: .85; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  padding: 36px 0; border-top: 1px solid var(--line);
+}
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-copy {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted);
+}
+.footer-brand-link {
+  display: flex; align-items: center; gap: 9px; text-decoration: none !important;
+  font-family: 'Inter Tight', sans-serif; font-weight: 800; font-size: 15px;
+  letter-spacing: -.02em; color: var(--muted); opacity: .6;
+  transition: opacity .15s;
+}
+.footer-brand-link:hover { opacity: 1; }
+.footer-brand-link svg { color: var(--accent); width: 16px; height: auto; }
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+@media(prefers-reduced-motion:reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/>
+      </svg>
+      7Captur
+    </a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      Captur Program
+    </div>
+
+    <div class="hero-limited">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      5 spots only, invite only
+    </div>
+
+    <h1>Your brand was<br>personally selected.</h1>
+    <p class="lede">We chose you because we think we can move your numbers. This is a free 30-day audit reserved for a very small group of brands we believe in.</p>
+
+    <div class="hero-benefits reveal">
+      <div class="hero-benefit">
+        <div class="hero-benefit-icon">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        4 weekly true ROAS reports
+      </div>
+      <div class="hero-benefit">
+        <div class="hero-benefit-icon">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        3 budget recommendations per report
+      </div>
+      <div class="hero-benefit">
+        <div class="hero-benefit-icon">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        Approve or dismiss, assisted execution
+      </div>
+      <div class="hero-benefit">
+        <div class="hero-benefit-icon">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        24h rollback on any change
+      </div>
+    </div>
+
+    <div class="hero-spots">
+      <div class="hero-spots-bar">
+        <div class="spot filled"></div>
+        <div class="spot filled"></div>
+        <div class="spot filled"></div>
+        <div class="spot open"></div>
+        <div class="spot open"></div>
+      </div>
+      3 of 5 spots claimed
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="what-section">
+  <div class="wrap">
+    <div class="section-eyebrow">What is included</div>
+    <h2>A full 30-day audit, at no cost.</h2>
+    <p class="lede" style="margin-bottom:0">Everything we do for paying clients, applied to your account, free, for 30 days. No pitch. No catch.</p>
+
+    <div class="what-grid reveal">
+      <div class="what-card">
+        <div class="what-card-num">Week 01 - 04</div>
+        <h3>True ROAS Reports</h3>
+        <p>One report delivered every week. We strip out returns, shipping, and fees so you see what your campaigns actually earn, not what the platform claims.</p>
+      </div>
+      <div class="what-card">
+        <div class="what-card-num">Each Report</div>
+        <h3>3 Budget Recommendations</h3>
+        <p>Every report comes with three specific, ranked actions: shift budget here, pause that, scale this. Ranked by expected impact, not gut feel.</p>
+      </div>
+      <div class="what-card">
+        <div class="what-card-num">Approve or Dismiss</div>
+        <h3>Assisted Execution</h3>
+        <p>You stay in control. Each recommendation comes with a one-click approve or dismiss. We execute only what you approve, immediately.</p>
+      </div>
+      <div class="what-card">
+        <div class="what-card-num">Any Change</div>
+        <h3>24-Hour Rollback</h3>
+        <p>If anything we execute underperforms in the first 24 hours, you trigger a rollback and we revert it. Full stop. No friction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION FORM -->
+<section class="form-section">
+  <div class="wrap">
+    <div class="section-eyebrow">Claim your spot</div>
+    <h2>Tell us about your brand.</h2>
+
+    <div class="form-layout">
+
+      <!-- LEFT -->
+      <div>
+        <div class="form-left-intro reveal">
+          <p>We review every application personally. If your brand is a strong fit, you will hear from us within 24 hours and we will get started within the week.</p>
+        </div>
+
+        <div class="selection-note reveal">
+          <div class="section-eyebrow">Why we reached out</div>
+          <p>We identified your brand as one where we believe a true ROAS gap exists. We have seen this pattern before and we know what to look for. This program lets us prove it, at no risk to you.</p>
+        </div>
+
+        <div class="sidebar-meta reveal">
+          <span>No payment required</span><br>
+          No commitment after 30 days<br>
+          Read-only API access, your logins<br>
+          <span>We reply within 24 hours</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: form -->
+      <div class="captur-form-wrap reveal">
+
+        <div class="form-section-label">Your details</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="f-name">Full name</label>
+            <input type="text" class="form-input" id="f-name" placeholder="Jane Smith">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-email">Email address</label>
+            <input type="email" class="form-input" id="f-email" placeholder="jane@yourbrand.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="f-brand">Brand name</label>
+          <input type="text" class="form-input" id="f-brand" placeholder="Your Brand">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="f-url">Website URL</label>
+          <input type="text" class="form-input" id="f-url" placeholder="yourbrand.com">
+        </div>
+
+        <div class="form-section-label">Ad setup</div>
+
+        <div class="form-group">
+          <label class="form-label" for="f-spend">Monthly ad spend</label>
+          <select class="form-select" id="f-spend">
+            <option value="" selected disabled>Select a range</option>
+            <option value="under5k">Under $5k/mo</option>
+            <option value="5k-15k">$5k - $15k/mo</option>
+            <option value="15k-30k">$15k - $30k/mo</option>
+            <option value="30k-50k">$30k - $50k/mo</option>
+            <option value="50k+">$50k+/mo</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ad platforms</label>
+          <div class="check-group" id="checkPlatforms">
+            <label class="check-item" data-val="meta">
+              <input type="checkbox" value="meta">
+              <span class="check-box"></span>
+              Meta
+            </label>
+            <label class="check-item" data-val="google">
+              <input type="checkbox" value="google">
+              <span class="check-box"></span>
+              Google
+            </label>
+            <label class="check-item" data-val="both">
+              <input type="checkbox" value="both">
+              <span class="check-box"></span>
+              Both
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">E-commerce platform</label>
+          <div class="radio-group" id="radioPlatform">
+            <label class="radio-item" data-val="shopify">
+              <input type="radio" name="ecom" value="shopify">
+              <span class="radio-box"></span>
+              Shopify
+            </label>
+            <label class="radio-item" data-val="woocommerce">
+              <input type="radio" name="ecom" value="woocommerce">
+              <span class="radio-box"></span>
+              WooCommerce
+            </label>
+          </div>
+        </div>
+
+        <p class="form-error" id="formError"></p>
+
+        <button class="form-submit" id="formSubmitBtn">Submit my application</button>
+        <p class="form-foot">Free. No commitment. 2 spots remaining as of today.</p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUCCESS OVERLAY -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-box">
+    <div class="success-icon">&#10003;</div>
+    <div class="success-title">Application received.</div>
+    <div class="success-body">We review every application personally. If your brand is a strong fit, you will hear from us within 24 hours. Check your inbox.</div>
+    <button class="success-close" id="successClose">Back to page</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-bottom">
+      <div class="footer-copy">&#169; 2026 7Captur</div>
+      <a href="/" class="footer-brand-link">
+        <svg viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/>
+        </svg>
+        7Captur
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---- Theme toggle ---- */
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+function setTheme(t) {
+  root.classList.toggle('dark', t === 'dark');
+  toggle.innerHTML = t === 'dark'
+    ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`
+    : `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+  try { localStorage.setItem('theme', t); } catch(e) {}
+}
+let saved = 'dark';
+try { saved = localStorage.getItem('theme') || 'dark'; } catch(e) {}
+setTheme(saved);
+toggle.addEventListener('click', () => setTheme(root.classList.contains('dark') ? 'light' : 'dark'));
+
+/* ---- Reveal on scroll ---- */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* ---- Custom checkboxes ---- */
+document.querySelectorAll('#checkPlatforms .check-item').forEach(item => {
+  item.addEventListener('click', () => {
+    item.classList.toggle('selected');
+    const inp = item.querySelector('input');
+    inp.checked = !inp.checked;
+  });
+});
+
+/* ---- Custom radios ---- */
+document.querySelectorAll('#radioPlatform .radio-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('#radioPlatform .radio-item').forEach(r => r.classList.remove('selected'));
+    item.classList.add('selected');
+    item.querySelector('input').checked = true;
+  });
+});
+
+/* ---- Success overlay ---- */
+function openSuccess() {
+  document.getElementById('successOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeSuccess() {
+  document.getElementById('successOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('successClose').addEventListener('click', closeSuccess);
+document.getElementById('successOverlay').addEventListener('click', e => {
+  if (e.target.id === 'successOverlay') closeSuccess();
+});
+
+/* ---- Form submit ---- */
+const ENDPOINT = 'https://formspree.io/f/xgojkvbj';
+
+function showErr(msg) {
+  const el = document.getElementById('formError');
+  el.textContent = msg; el.classList.add('visible');
+}
+function clearErr() {
+  document.getElementById('formError').classList.remove('visible');
+}
+
+document.getElementById('formSubmitBtn').addEventListener('click', async () => {
+  const name   = document.getElementById('f-name').value.trim();
+  const email  = document.getElementById('f-email').value.trim();
+  const brand  = document.getElementById('f-brand').value.trim();
+  const url    = document.getElementById('f-url').value.trim();
+  const spend  = document.getElementById('f-spend').value;
+
+  const platforms = [...document.querySelectorAll('#checkPlatforms input:checked')]
+    .map(i => i.value).join(', ');
+  const ecom = (document.querySelector('#radioPlatform input:checked') || {}).value || '';
+
+  clearErr();
+
+  if (!name || !email || !brand || !url) {
+    showErr('Please fill in your name, email, brand, and website.'); return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showErr('Please enter a valid email address.'); return;
+  }
+  if (!spend) {
+    showErr('Please select your monthly ad spend.'); return;
+  }
+  if (!platforms) {
+    showErr('Please select at least one ad platform.'); return;
+  }
+  if (!ecom) {
+    showErr('Please select your e-commerce platform.'); return;
+  }
+
+  const btn = document.getElementById('formSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name, email, brand, website: url, monthly_ad_spend: spend,
+        ad_platforms: platforms, ecommerce_platform: ecom,
+        _subject: `Captur Program application: ${name} (${brand})`
+      })
+    });
+    if (res.ok) {
+      ['f-name','f-email','f-brand','f-url'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('f-spend').selectedIndex = 0;
+      document.querySelectorAll('#checkPlatforms .check-item').forEach(i => i.classList.remove('selected'));
+      document.querySelectorAll('#radioPlatform .radio-item').forEach(i => i.classList.remove('selected'));
+      openSuccess();
+    } else {
+      showErr('Something went wrong. Please try again or email us directly.');
+    }
+  } catch {
+    showErr('Network error. Please check your connection and try again.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Submit my application';
+  }
+});
+</script>
+</body>
+</html>
