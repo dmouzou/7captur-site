@@ -1069,7 +1069,7 @@ html.dark footer{background: rgba(21,23,29,0.55) !important}
       <div class="roi-controls">
         <div>
           <div class="roi-control-label"><span>Monthly ad spend</span><span class="val" id="spendVal">$20,000</span></div>
-          <input type="range" min="5000" max="60000" step="500" value="20000" id="spendSlider" oninput="calcROI()">
+          <input type="range" min="5000" max="60000" step="500" value="20000" id="roiSpendSlider" oninput="calcROI()">
         </div>
         <div>
           <div class="roi-control-label"><span>Share of budget on underperforming ads</span><span class="val" id="lossVal">20%</span></div>
@@ -1208,7 +1208,7 @@ function toggleFaq(el){
 }
 
 function calcROI(){
-  const spend = parseInt(document.getElementById('spendSlider').value);
+  const spend = parseInt(document.getElementById('roiSpendSlider').value);
   const loss = parseInt(document.getElementById('lossSlider').value);
   document.getElementById('spendVal').textContent = '$' + spend.toLocaleString();
   document.getElementById('lossVal').textContent = loss + '%';
