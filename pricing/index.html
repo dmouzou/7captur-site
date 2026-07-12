@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Pricing | 7Captur</title>
+  <meta name="description" content="Transparent monthly retainer pricing for DTC brands. Starts at $59/mo. First 4 weekly reports free. No hidden costs.">
   <link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: light)">
   <link rel="icon" href="/favicon-dark.png"  media="(prefers-color-scheme: dark)">
   <link rel="shortcut icon" href="/favicon-dark.png">
@@ -12,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
 /* ============================================================
-   7CAPTUR — DESIGN TOKENS (shared)
+   7CAPTUR: DESIGN TOKENS (shared)
    ============================================================ */
 :root {
   --bg:           #fdf6ee;
@@ -304,27 +305,37 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   border:1px solid var(--line);margin:16px 0;
   background:var(--bg);
 }
+.spend-slider-wrap{padding:16px 16px 18px;border-bottom:1px solid var(--line)}
+.spend-slider-label{
+  display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:10px;
+}
+.spend-slider{width:100%;accent-color:var(--accent);cursor:pointer;display:block;margin-bottom:8px}
+.spend-slider-value{
+  font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink);font-weight:600;
+}
 .spend-tier-row{
-  display:grid;grid-template-columns:140px 1fr 52px;
+  display:grid;grid-template-columns:1fr 52px;
   gap:12px;align-items:center;padding:13px 16px;
   border-bottom:1px solid var(--line);
+  transition:background-color .2s ease,border-left-color .2s ease;
+  border-left:3px solid transparent;
 }
 .spend-tier-row:last-child{border-bottom:none}
+.spend-tier-row.is-active{
+  background:var(--accent-soft);border-left-color:var(--accent);
+}
 .spend-tier-info{display:flex;flex-direction:column;gap:3px}
 .spend-tier-name{
   font-family:'Inter Tight',sans-serif;font-weight:700;
-  font-size:13px;color:var(--ink);
+  font-size:13px;color:var(--ink);display:flex;align-items:center;gap:8px;
+}
+.spend-tier-row.is-active .spend-tier-name::after{
+  content:'Your tier';font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--accent);background:var(--bg);border:1px solid var(--accent-line);
+  padding:2px 7px;
 }
 .spend-tier-range{font-size:10px;color:var(--muted);letter-spacing:.03em}
-.spend-tier-bar-wrap{
-  height:8px;background:var(--bg3);
-  border:1px solid var(--line);overflow:hidden;
-}
-.spend-tier-bar{
-  height:100%;background:var(--accent);width:0;
-  transition:width 1s cubic-bezier(.16,1,.3,1);
-}
-.spend-tiers.tiers-animated .spend-tier-bar{width:var(--tw)}
 .spend-tier-price{
   font-family:'IBM Plex Mono',monospace;font-size:12px;
   color:var(--accent);font-weight:500;text-align:right;white-space:nowrap;
@@ -333,7 +344,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 
 
 /* ============================================================
-   DESIGN SYSTEM — SINGLE CLEAN BLOCK
+   DESIGN SYSTEM: SINGLE CLEAN BLOCK
    ============================================================ */
 
 /* Rounded corners: buttons */
@@ -393,7 +404,7 @@ nav a,.logo,.mobile-drawer a,.btn-primary,.btn-secondary{text-decoration:none}
 
 /* ── FIX PASS 3 ────────────────────────────────────────────────────────────── */
 
-/* 1. Nav underlines — !important to beat high-specificity a:not() rule */
+/* 1. Nav underlines, !important to beat high-specificity a:not() rule */
 nav a,.mobile-drawer a,.mobile-drawer .nav-cta,.nav-links a,.logo,footer .logo{text-decoration:none !important}
 
 /* 9. Theme toggle: compact emoji style */
@@ -444,7 +455,7 @@ html.dark .cta-band-inner{
 .cta-band p{font-size:15px;color:var(--body)}
 @media(max-width:760px){.cta-band-inner{padding:36px 28px}}
 
-/* 10. Section gradients: smooth blend top AND bottom — !important beats source */
+/* 10. Section gradients: smooth blend top AND bottom, !important beats source */
 .alt-bg{background:transparent !important}
 section.alt-bg,div.alt-bg{
   background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 18%,var(--bg2) 82%,var(--bg) 100%) !important
@@ -472,7 +483,7 @@ section.alt-bg,div.alt-bg{
 /* 3. Pricing ROI results inner grid: rounded */
 .roi-results{border-radius:8px !important;overflow:hidden !important}
 
-/* 4. CTA band: remove outer card shadow/radius — inner card only */
+/* 4. CTA band: remove outer card shadow/radius, inner card only */
 .cta-band{
   border-radius:0 !important;overflow:visible !important;
   box-shadow:none !important
@@ -591,16 +602,281 @@ html.dark .founder-logo-standalone{
   100%{transform:scale(2.8);opacity:0}
 }
 
-/* 5. ba-grid: remove outer card — just a layout wrapper */
+/* 5. ba-grid: remove outer card, just a layout wrapper */
 .ba-grid{
   box-shadow:none !important;
   border:none !important;
   background:transparent !important
 }
 
+
+/* ================================================================
+   LIQUID GLASS SYSTEM (Make.com style)
+   ================================================================ */
+
+/* Glass variables: light mode */
+:root{
+  --glass-bg:       rgba(255,255,255,0.52);
+  --glass-border:   rgba(255,255,255,0.78);
+  --glass-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 8px 32px rgba(0,0,0,.07),
+    0 2px 8px  rgba(0,0,0,.04);
+  --glass-blur:     blur(22px) saturate(160%);
+}
+
+/* Glass variables: dark mode */
+html.dark{
+  --glass-bg:       rgba(255,255,255,0.042);
+  --glass-border:   rgba(255,255,255,0.10);
+  --glass-shadow:
+    0 1px 0 rgba(255,255,255,0.07) inset,
+    0 8px 32px rgba(0,0,0,.38),
+    0 2px 8px  rgba(0,0,0,.22);
+  --glass-blur:     blur(22px) saturate(140%);
+}
+
+/* Ambient blobs fixed to viewport, glass refracts these */
+body::before{
+  content:'';position:fixed;
+  width:900px;height:900px;border-radius:50%;
+  background:radial-gradient(circle,rgba(143,206,58,.07) 0%,transparent 68%);
+  top:-220px;right:-200px;pointer-events:none;z-index:-1;
+}
+body::after{
+  content:'';position:fixed;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(216,177,74,.055) 0%,transparent 68%);
+  bottom:5%;left:-180px;pointer-events:none;z-index:-1;
+}
+html.dark body::before{
+  background:radial-gradient(circle,rgba(143,206,58,.09) 0%,transparent 68%);
+}
+html.dark body::after{
+  background:radial-gradient(circle,rgba(216,177,74,.07) 0%,transparent 68%);
+}
+
+/* Apply glass to all card-level containers */
+.spread-card,
+.sandbox,
+.sandbox-card,
+.ledger,
+.platform-logo-card,
+.pricing-grid,
+.price-card,
+.access-table,
+.wtl-cards,
+.wtl-card,
+.leak-calc,
+.ba-card,
+.cta-band-inner,
+.expect-list,
+.contact-form-wrap,
+.guarantee-box,
+.success-box,
+.addon-strip,
+.roi-wrap,
+.process-item,
+.faq-item,
+.proof-row,
+.icp-strip{
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* Ledger head: slightly more opaque to separate from rows */
+.ledger-head{
+  background: rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-bottom-color: var(--glass-border) !important;
+}
+html.dark .ledger-head{
+  background: rgba(255,255,255,0.06) !important;
+}
+
+/* Forms: glass */
+.form-input,
+.form-select,
+.form-textarea{
+  background: rgba(255,255,255,0.35) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-color: var(--glass-border) !important;
+}
+html.dark .form-input,
+html.dark .form-select,
+html.dark .form-textarea{
+  background: rgba(255,255,255,0.05) !important;
+}
+
+/* Nav: already has blur, refine to match system */
+nav{
+  background: rgba(253,246,238,0.72) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.6) !important;
+}
+html.dark nav{
+  background: rgba(21,23,29,0.72) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+}
+
+/* Mobile drawer: glass */
+.mobile-drawer{
+  background: rgba(249,246,241,0.88) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+}
+html.dark .mobile-drawer{
+  background: rgba(21,23,29,0.88) !important;
+}
+
+/* Tags / badges: subtle glass tint */
+.ledger-tag,
+.cycle-tag,
+.wtl-card-tag,
+.confidence,
+.platform-logo-badge,
+.limited-tag,
+.price-badge,
+.sandbox-badge,
+.icp-mark,
+.tech-tag{
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* Sandbox info tooltip: glass */
+.sandbox-tooltip{
+  background: rgba(20,19,15,0.82) !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+}
+html:not(.dark) .sandbox-tooltip{
+  background: rgba(255,255,255,0.88) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--glass-border) !important;
+}
+
+/* ----------------------------------------------------------------
+   GLASS EXTENSIONS, sitewide.
+   Completes the base glass block above: footer, buttons (with a
+   fixed nav-cta text-contrast issue, see comment below), generic
+   card-surface containers, trust pills, a third ambient blob, and
+   slightly rounder corners for a more "liquid" read.
+   ---------------------------------------------------------------- */
+.card-surface,
+.pricing-teaser-card,
+.trust-item,
+.insight-card,
+.newsletter-card{
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* A third, cooler-toned blob for depth + a slow drift animation:
+   Apple/Make.com glass reads best when the blur has something
+   colorful and moving to refract. */
+body::before{ animation: glassDrift1 26s ease-in-out infinite alternate; }
+body::after{  animation: glassDrift2 22s ease-in-out infinite alternate; }
+.glass-blob-3{
+  content:'';position:fixed;width:640px;height:640px;border-radius:50%;
+  background:radial-gradient(circle,rgba(80,150,220,.06) 0%,transparent 68%);
+  top:38%;left:38%;pointer-events:none;z-index:-1;
+  animation: glassDrift3 30s ease-in-out infinite alternate;
+}
+html.dark .glass-blob-3{background:radial-gradient(circle,rgba(90,170,240,.09) 0%,transparent 68%)}
+@keyframes glassDrift1{from{transform:translate(0,0)}to{transform:translate(-40px,30px)}}
+@keyframes glassDrift2{from{transform:translate(0,0)}to{transform:translate(30px,-40px)}}
+@keyframes glassDrift3{from{transform:translate(0,0) scale(1)}to{transform:translate(20px,20px) scale(1.08)}}
+@media(prefers-reduced-motion:reduce){
+  body::before,body::after,.glass-blob-3{animation:none !important}
+}
+
+/* Buttons: primary stays solid for conversion clarity (a known glass
+   pitfall is translucent CTAs losing contrast) but gets a glass-style
+   inner sheen. Secondary / nav-cta become true frosted capsules. */
+.btn-primary{
+  position:relative;overflow:hidden;border-radius:999px;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -6px rgba(63,107,0,.45);
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%);
+  pointer-events:none;
+}
+.btn-secondary,.nav-cta{
+  border-radius:999px !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+/* .nav-cta originally relied on a solid dark background (color:var(--bg),
+   a light color, by design), now that the background is a light glass
+   panel in both themes, the text needs to switch to var(--ink) in BOTH
+   modes or it goes invisible in light mode. This was the "Get your
+   report" button reading as blank. */
+.nav-cta{color:var(--ink) !important}
+
+/* Pricing card CTAs and the theme toggle were still the old 8px-radius
+   design system default while every other button had already moved to
+   the glass pill treatment above. Bringing them in line. */
+.price-cta-primary{
+  border-radius:999px !important;position:relative;overflow:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -6px rgba(63,107,0,.45);
+}
+.price-cta-primary::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%);
+  pointer-events:none;
+}
+.price-cta-secondary{
+  border-radius:999px !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+.theme-toggle{
+  border-radius:50% !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+  color: var(--ink) !important;
+}
+.theme-toggle:hover{border-color: var(--accent) !important}
+
+/* Footer: glass, matching nav */
+footer{
+  background: rgba(253,246,238,0.55) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  border-top: 1px solid var(--glass-border) !important;
+}
+html.dark footer{background: rgba(21,23,29,0.55) !important}
+
+/* Rounded corners throughout the glass surfaces read more "liquid" */
+.card-surface,.spread-card,.ledger,.pricing-teaser-card,.cta-band-inner,
+.insight-card,.newsletter-card{ border-radius:16px !important; }
+.ledger-head{ border-radius:16px 16px 0 0 !important; }
+.ledger-foot{ border-radius:0 0 16px 16px !important; }
+
 </style>
 </head>
 <body>
+<div class="glass-blob-3" aria-hidden="true"></div>
 
 <!-- NAV -->
 <nav>
@@ -611,6 +887,7 @@ html.dark .founder-logo-standalone{
       <li><a href="/pricing/" class="current">Pricing</a></li>
       <li><a href="/about/">About</a></li>
       <li><a href="/security/">Security &amp; Data</a></li>
+      <li><a href="/articles/">Articles</a></li>
     </ul>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
@@ -633,6 +910,7 @@ html.dark .founder-logo-standalone{
   <a href="/pricing/">Pricing</a>
   <a href="/about/">About</a>
   <a href="/security/">Security &amp; Data</a>
+  <a href="/articles/">Articles</a>
   <a href="/contact/" class="nav-cta">Get your report</a>
 </div>
 
@@ -640,7 +918,7 @@ html.dark .founder-logo-standalone{
 <header class="page-header">
   <div class="wrap">
     <div class="page-header-eyebrow"><span class="dot"></span> Pricing</div>
-    <h1>Start with a free 30-day audit, then move to a retainer that scales with your ad spend.</h1>
+    <h1>Start with 4 free weekly reports, then move to a retainer that scales with your ad spend.</h1>
     <p class="lede">The first 30 days are free, for a limited time. After that, pricing is tiered by your monthly ad spend, never by guesswork.</p>
   </div>
 </header>
@@ -655,14 +933,14 @@ html.dark .founder-logo-standalone{
         <div class="price-card-top">
           <div class="price-phase">Phase 1</div>
         </div>
-        <h3 class="price-name">30-Day Free Audit</h3>
+        <h3 class="price-name">30-Day Free Trial</h3>
         <div class="price-amount-row">
-          <span class="price-was">$499</span>
+          <span class="price-was">$49</span>
           <span class="price-amount">$0</span>
           <span class="price-period">today</span>
           <span class="price-limited-tag">Limited time</span>
         </div>
-        <div class="price-note">Normally $499. Free for the first 30 days, for a limited time only. <strong>Walk away with a full export and no obligation if it doesn't prove value.</strong></div>
+        <div class="price-note">Normally $49. Free for the first 30 days, for a limited time only. <strong>Walk away with a full export and no obligation if it doesn't prove value.</strong></div>
         <ul class="price-features">
           <li><span class="ck">✓</span> Pipeline configured for your stack</li>
           <li><span class="ck">✓</span> 1 store + 2 ad platforms via API</li>
@@ -681,49 +959,63 @@ html.dark .founder-logo-standalone{
         <h3 class="price-name">Monthly Retainer</h3>
         <div class="price-amount-row">
           <span style="font-size:14px;color:var(--muted);font-family:'IBM Plex Mono',monospace">from</span>
-          <span class="price-amount">$599</span>
+          <span class="price-amount">$59</span>
           <span class="price-period">/mo</span>
         </div>
         <div class="price-note">Zero contracts. Cancel anytime. <strong>Up to 3 platforms included.</strong></div>
 
-        <!-- Visual spend-tier bars -->
-        <div class="spend-tiers">
-          <div class="spend-tier-row">
+        <!-- Interactive spend-tier matcher -->
+        <div class="spend-tiers" id="spendTiers">
+          <div class="spend-slider-wrap">
+            <label for="spendSlider" class="spend-slider-label">Drag to your monthly ad spend</label>
+            <input type="range" id="spendSlider" class="spend-slider" min="5000" max="50000" step="1000" value="12000" aria-describedby="spendSliderValue">
+            <div class="spend-slider-value" id="spendSliderValue">$12,000/mo</div>
+          </div>
+          <div class="spend-tier-row" data-min="0" data-max="15000">
             <div class="spend-tier-info">
               <span class="spend-tier-name">Growth</span>
               <span class="spend-tier-range mono">under $15k/mo</span>
             </div>
-            <div class="spend-tier-bar-wrap">
-              <div class="spend-tier-bar" style="--tw:33%"></div>
-            </div>
-            <span class="spend-tier-price">$599</span>
+            <span class="spend-tier-price">$59</span>
           </div>
-          <div class="spend-tier-row">
+          <div class="spend-tier-row" data-min="15000" data-max="30000">
             <div class="spend-tier-info">
               <span class="spend-tier-name">Scale</span>
               <span class="spend-tier-range mono">$15k–$30k/mo</span>
             </div>
-            <div class="spend-tier-bar-wrap">
-              <div class="spend-tier-bar" style="--tw:60%"></div>
-            </div>
-            <span class="spend-tier-price">$799</span>
+            <span class="spend-tier-price">$79</span>
           </div>
-          <div class="spend-tier-row">
+          <div class="spend-tier-row" data-min="30000" data-max="999999999">
             <div class="spend-tier-info">
               <span class="spend-tier-name">Pro</span>
               <span class="spend-tier-range mono">$30k–$50k/mo</span>
             </div>
-            <div class="spend-tier-bar-wrap">
-              <div class="spend-tier-bar" style="--tw:88%"></div>
-            </div>
-            <span class="spend-tier-price">$1,199</span>
+            <span class="spend-tier-price">$119</span>
           </div>
         </div>
+        <script>
+        (function(){
+          var slider = document.getElementById('spendSlider');
+          var valueEl = document.getElementById('spendSliderValue');
+          var rows = document.querySelectorAll('#spendTiers .spend-tier-row');
+          function update(){
+            var v = parseInt(slider.value, 10);
+            valueEl.textContent = '$' + v.toLocaleString() + '/mo';
+            rows.forEach(function(row){
+              var min = parseInt(row.dataset.min, 10);
+              var max = parseInt(row.dataset.max, 10);
+              row.classList.toggle('is-active', v >= min && v <= max);
+            });
+          }
+          slider.addEventListener('input', update);
+          update();
+        })();
+        </script>
 
         <ul class="price-features" style="margin-top:16px">
           <li><span class="ck">✓</span> Continuous true ROAS calculation</li>
           <li><span class="ck">✓</span> Weekly execution · 30% cap · 24h rollback</li>
-          <li><span class="ck">✓</span> Monthly 1-hour strategy call with an expert media buyer</li>
+          <li><span class="ck">✓</span> Monthly 1-hour strategy call</li>
         </ul>
         <a href="/contact/" class="price-cta-primary">Get your report →</a>
       </div>
@@ -731,14 +1023,14 @@ html.dark .founder-logo-standalone{
       <!-- Phase 3 -->
       <div class="price-card">
         <div class="price-card-top">
-          <div class="price-phase">Phase 3 · Post-audit add-on</div>
+          <div class="price-phase">Phase 3 · Post-trial add-on</div>
         </div>
         <h3 class="price-name">Custom Engine</h3>
         <div class="price-amount-row">
-          <span class="price-amount">$1,999</span>
+          <span class="price-amount">$199</span>
           <span class="price-period">base /mo</span>
         </div>
-        <div class="price-note">$50k+ spend, custom LTV, subscriptions, or 4+ platforms. <strong>Post-audit only.</strong></div>
+        <div class="price-note">$50k+ spend, custom LTV, subscriptions, or 4+ platforms. <strong>After the trial only.</strong></div>
         <ul class="price-features">
           <li><span class="ck">✓</span> Bespoke execution logic</li>
           <li><span class="ck">✓</span> Advanced LTV &amp; subscription cohorts</li>
@@ -752,7 +1044,7 @@ html.dark .founder-logo-standalone{
     <!-- Maintenance addon -->
     <div class="addon-strip reveal">
       <div>
-        <h3>Maintenance Plan <span class="addon-amount">$299/mo</span></h3>
+        <h3>Maintenance Plan <span class="addon-amount">$29/mo</span></h3>
         <p>Cancel the retainer but keep the pipeline running. Covers API auth, server costs, and updates. <strong>Your logic and data are always yours.</strong></p>
       </div>
       <a href="/contact/" class="btn-secondary">Learn more →</a>
@@ -791,7 +1083,7 @@ html.dark .founder-logo-standalone{
         </div>
         <div class="roi-result is-key">
           <div class="roi-result-label">Net, vs. retainer fee at this spend tier</div>
-          <div class="roi-result-val" id="roiNet">+$1,201/mo</div>
+          <div class="roi-result-val" id="roiNet">+$1,921/mo</div>
         </div>
       </div>
       <p class="roi-disclaimer">Conservative estimate assuming 50% of identified waste is recoverable through approved decisions. Actual results depend on your store, ad mix, and which decisions you approve. No guarantee is implied.</p>
@@ -807,7 +1099,7 @@ html.dark .founder-logo-standalone{
 
     <div class="faq-list reveal">
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">What happens if the 30-day audit doesn't show enough value?</span><span class="faq-icon">+</span></div>
+        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">What happens if the 30-day trial doesn't show enough value?</span><span class="faq-icon">+</span></div>
         <div class="faq-a">You receive a written summary of decisions delivered and their estimated impact either way. If it isn't compelling, you walk away with a full data export and no further obligation.</div>
       </div>
       <div class="faq-item">
@@ -820,7 +1112,7 @@ html.dark .founder-logo-standalone{
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">What happens to my data and pipeline if I cancel?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a">You receive a full JSON export of your pipeline logic and a CSV export of your data. To keep the pipeline running automatically without the weekly analysis layer, switch to the $299/mo Maintenance Plan. Nothing is switched off without your knowledge.</div>
+        <div class="faq-a">You receive a full JSON export of your pipeline logic and a CSV export of your data. To keep the pipeline running automatically without the weekly analysis layer, switch to the $29/mo Maintenance Plan. Nothing is switched off without your knowledge.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Is any part of this automatic?</span><span class="faq-icon">+</span></div>
@@ -857,6 +1149,7 @@ html.dark .founder-logo-standalone{
           <li><a href="/how-it-works/">How it works</a></li>
           <li><a href="/pricing/">Pricing</a></li>
           <li><a href="/how-it-works/#platforms">Platforms</a></li>
+          <li><a href="/articles/">Articles</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -920,10 +1213,10 @@ function calcROI(){
   document.getElementById('spendVal').textContent = '$' + spend.toLocaleString();
   document.getElementById('lossVal').textContent = loss + '%';
   const waste = Math.round(spend * (loss / 100) * 0.5);
-  let fee = 599;
-  if (spend >= 15000 && spend < 30000) fee = 799;
-  else if (spend >= 30000 && spend < 50000) fee = 1199;
-  else if (spend >= 50000) fee = 1999;
+  let fee = 59;
+  if (spend >= 15000 && spend < 30000) fee = 79;
+  else if (spend >= 30000 && spend < 50000) fee = 119;
+  else if (spend >= 50000) fee = 199;
   const net = waste - fee;
   document.getElementById('roiWaste').textContent = '$' + waste.toLocaleString();
   const netEl = document.getElementById('roiNet');
