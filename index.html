@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>7Captur | Assisted Execution for E-Commerce Ad Spend</title>
+  <meta name="description" content="True ROAS calculation after COGS, returns, and fees. Weekly reports for Shopify and Meta ads brands spending $5k+/month.">
   <link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: light)">
   <link rel="icon" href="/favicon-dark.png"  media="(prefers-color-scheme: dark)">
   <link rel="shortcut icon" href="/favicon-dark.png">
@@ -12,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
 /* ============================================================
-   7CAPTUR — DESIGN TOKENS
+   7CAPTUR: DESIGN TOKENS
    Enterprise B2B direction: warm cream + deep institutional green.
    Two type families. Minimal motion. Ledger-style data presentation.
    ============================================================ */
@@ -119,6 +120,16 @@ h3{font-size:18px;line-height:1.3}
 .lede{font-size:1.0625rem;line-height:1.75;color:var(--body);max-width:600px}
 .lede.center{margin:0 auto}
 
+/* Accessible / SEO text: present in DOM and readable by crawlers & screen
+   readers, visually clipped for sighted users. NOT display:none (which
+   search engines may discount) and NOT a second <h1> (duplicate H1s are
+   a genuine SEO negative, not a positive), this is the standard safe
+   pattern for "extra" keyword context on a heading. */
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+
 /* ============================================================
    NAV
    ============================================================ */
@@ -175,7 +186,7 @@ html.dark nav{background:rgba(21,23,29,.92)}
 /* ============================================================
    HERO
    Single constrained column. The "Decision Ledger" signature
-   element sits below the headline — styled like a financial
+   element sits below the headline, styled like a financial
    statement, not a UI mockup with glow/shadow.
    ============================================================ */
 .hero{
@@ -233,7 +244,7 @@ html.dark .btn-primary{color:#0e1206}
 .hero-meta-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5}
 
 /* ============================================================
-   DECISION LEDGER — signature element
+   DECISION LEDGER: signature element
    Financial-statement styling: hairline rules, mono numerals,
    right-aligned figures, no shadows or gradients.
    ============================================================ */
@@ -301,7 +312,7 @@ html.dark .ledger-head{
 }
 
 /* ============================================================
-   LOGO / TRUST STRIP (no fake logos — stated positioning instead)
+   LOGO / TRUST STRIP (no fake logos, stated positioning instead)
    ============================================================ */
 .trust-strip{padding:32px 0;background:var(--bg2)}
 .trust-strip-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
@@ -353,7 +364,7 @@ html.dark .spread-row.is-loss{
 }
 
 /* ============================================================
-   MECHANISM SECTION — "How True ROAS is calculated"
+   MECHANISM SECTION: "How True ROAS is calculated"
    Bordered spec-sheet grid, not cards with shadows
    ============================================================ */
 .mech-grid{
@@ -376,7 +387,7 @@ html.dark .spread-row.is-loss{
 }
 
 /* ============================================================
-   CONTROL / SAFETY SECTION — three-up spec blocks
+   CONTROL / SAFETY SECTION: three-up spec blocks
    ============================================================ */
 .control-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
 .control-item{padding:30px 28px;position:relative}
@@ -475,7 +486,7 @@ footer{padding:56px 0 40px}
 }
 
 /* ============================================================
-   RESPONSIVE — sections
+   RESPONSIVE: sections
    ============================================================ */
 @media(max-width:900px){
   .wrap{padding:0 28px}
@@ -489,7 +500,7 @@ footer{padding:56px 0 40px}
 }
 
 /* ============================================================
-   MINIMAL MOTION — single fade-in on scroll, no choreography
+   MINIMAL MOTION: single fade-in on scroll, no choreography
    ============================================================ */
 .reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
 .reveal.visible{opacity:1;transform:none}
@@ -512,7 +523,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 
 
 /* ============================================================
-   DESIGN SYSTEM — SINGLE CLEAN BLOCK
+   DESIGN SYSTEM: SINGLE CLEAN BLOCK
    ============================================================ */
 
 /* Rounded corners: buttons */
@@ -572,7 +583,7 @@ nav a,.logo,.mobile-drawer a,.btn-primary,.btn-secondary{text-decoration:none}
 
 /* ── FIX PASS 3 ────────────────────────────────────────────────────────────── */
 
-/* 1. Nav underlines — !important to beat high-specificity a:not() rule */
+/* 1. Nav underlines, !important to beat high-specificity a:not() rule */
 nav a,.mobile-drawer a,.mobile-drawer .nav-cta,.nav-links a,.logo,footer .logo{text-decoration:none !important}
 
 /* 9. Theme toggle: compact emoji style */
@@ -623,7 +634,7 @@ html.dark .cta-band-inner{
 .cta-band p{font-size:15px;color:var(--body)}
 @media(max-width:760px){.cta-band-inner{padding:36px 28px}}
 
-/* 10. Section gradients: smooth blend top AND bottom — !important beats source */
+/* 10. Section gradients: smooth blend top AND bottom, !important beats source */
 .alt-bg{background:transparent !important}
 section.alt-bg,div.alt-bg{
   background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 18%,var(--bg2) 82%,var(--bg) 100%) !important
@@ -651,7 +662,7 @@ section.alt-bg,div.alt-bg{
 /* 3. Pricing ROI results inner grid: rounded */
 .roi-results{border-radius:8px !important;overflow:hidden !important}
 
-/* 4. CTA band: remove outer card shadow/radius — inner card only */
+/* 4. CTA band: remove outer card shadow/radius, inner card only */
 .cta-band{
   border-radius:0 !important;overflow:visible !important;
   box-shadow:none !important
@@ -770,16 +781,281 @@ html.dark .founder-logo-standalone{
   100%{transform:scale(2.8);opacity:0}
 }
 
-/* 5. ba-grid: remove outer card — just a layout wrapper */
+/* 5. ba-grid: remove outer card, just a layout wrapper */
 .ba-grid{
   box-shadow:none !important;
   border:none !important;
   background:transparent !important
 }
 
+
+/* ================================================================
+   LIQUID GLASS SYSTEM (Make.com style)
+   ================================================================ */
+
+/* Glass variables: light mode */
+:root{
+  --glass-bg:       rgba(255,255,255,0.52);
+  --glass-border:   rgba(255,255,255,0.78);
+  --glass-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 8px 32px rgba(0,0,0,.07),
+    0 2px 8px  rgba(0,0,0,.04);
+  --glass-blur:     blur(22px) saturate(160%);
+}
+
+/* Glass variables: dark mode */
+html.dark{
+  --glass-bg:       rgba(255,255,255,0.042);
+  --glass-border:   rgba(255,255,255,0.10);
+  --glass-shadow:
+    0 1px 0 rgba(255,255,255,0.07) inset,
+    0 8px 32px rgba(0,0,0,.38),
+    0 2px 8px  rgba(0,0,0,.22);
+  --glass-blur:     blur(22px) saturate(140%);
+}
+
+/* Ambient blobs fixed to viewport, glass refracts these */
+body::before{
+  content:'';position:fixed;
+  width:900px;height:900px;border-radius:50%;
+  background:radial-gradient(circle,rgba(143,206,58,.07) 0%,transparent 68%);
+  top:-220px;right:-200px;pointer-events:none;z-index:-1;
+}
+body::after{
+  content:'';position:fixed;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(216,177,74,.055) 0%,transparent 68%);
+  bottom:5%;left:-180px;pointer-events:none;z-index:-1;
+}
+html.dark body::before{
+  background:radial-gradient(circle,rgba(143,206,58,.09) 0%,transparent 68%);
+}
+html.dark body::after{
+  background:radial-gradient(circle,rgba(216,177,74,.07) 0%,transparent 68%);
+}
+
+/* Apply glass to all card-level containers */
+.spread-card,
+.sandbox,
+.sandbox-card,
+.ledger,
+.platform-logo-card,
+.pricing-grid,
+.price-card,
+.access-table,
+.wtl-cards,
+.wtl-card,
+.leak-calc,
+.ba-card,
+.cta-band-inner,
+.expect-list,
+.contact-form-wrap,
+.guarantee-box,
+.success-box,
+.addon-strip,
+.roi-wrap,
+.process-item,
+.faq-item,
+.proof-row,
+.icp-strip{
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* Ledger head: slightly more opaque to separate from rows */
+.ledger-head{
+  background: rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-bottom-color: var(--glass-border) !important;
+}
+html.dark .ledger-head{
+  background: rgba(255,255,255,0.06) !important;
+}
+
+/* Forms: glass */
+.form-input,
+.form-select,
+.form-textarea{
+  background: rgba(255,255,255,0.35) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-color: var(--glass-border) !important;
+}
+html.dark .form-input,
+html.dark .form-select,
+html.dark .form-textarea{
+  background: rgba(255,255,255,0.05) !important;
+}
+
+/* Nav: already has blur, refine to match system */
+nav{
+  background: rgba(253,246,238,0.72) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.6) !important;
+}
+html.dark nav{
+  background: rgba(21,23,29,0.72) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+}
+
+/* Mobile drawer: glass */
+.mobile-drawer{
+  background: rgba(249,246,241,0.88) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+}
+html.dark .mobile-drawer{
+  background: rgba(21,23,29,0.88) !important;
+}
+
+/* Tags / badges: subtle glass tint */
+.ledger-tag,
+.cycle-tag,
+.wtl-card-tag,
+.confidence,
+.platform-logo-badge,
+.limited-tag,
+.price-badge,
+.sandbox-badge,
+.icp-mark,
+.tech-tag{
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* Sandbox info tooltip: glass */
+.sandbox-tooltip{
+  background: rgba(20,19,15,0.82) !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+}
+html:not(.dark) .sandbox-tooltip{
+  background: rgba(255,255,255,0.88) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--glass-border) !important;
+}
+
+/* ----------------------------------------------------------------
+   GLASS EXTENSIONS, sitewide.
+   Completes the base glass block above: footer, buttons (with a
+   fixed nav-cta text-contrast issue, see comment below), generic
+   card-surface containers, trust pills, a third ambient blob, and
+   slightly rounder corners for a more "liquid" read.
+   ---------------------------------------------------------------- */
+.card-surface,
+.pricing-teaser-card,
+.trust-item,
+.insight-card,
+.newsletter-card{
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* A third, cooler-toned blob for depth + a slow drift animation:
+   Apple/Make.com glass reads best when the blur has something
+   colorful and moving to refract. */
+body::before{ animation: glassDrift1 26s ease-in-out infinite alternate; }
+body::after{  animation: glassDrift2 22s ease-in-out infinite alternate; }
+.glass-blob-3{
+  content:'';position:fixed;width:640px;height:640px;border-radius:50%;
+  background:radial-gradient(circle,rgba(80,150,220,.06) 0%,transparent 68%);
+  top:38%;left:38%;pointer-events:none;z-index:-1;
+  animation: glassDrift3 30s ease-in-out infinite alternate;
+}
+html.dark .glass-blob-3{background:radial-gradient(circle,rgba(90,170,240,.09) 0%,transparent 68%)}
+@keyframes glassDrift1{from{transform:translate(0,0)}to{transform:translate(-40px,30px)}}
+@keyframes glassDrift2{from{transform:translate(0,0)}to{transform:translate(30px,-40px)}}
+@keyframes glassDrift3{from{transform:translate(0,0) scale(1)}to{transform:translate(20px,20px) scale(1.08)}}
+@media(prefers-reduced-motion:reduce){
+  body::before,body::after,.glass-blob-3{animation:none !important}
+}
+
+/* Buttons: primary stays solid for conversion clarity (a known glass
+   pitfall is translucent CTAs losing contrast) but gets a glass-style
+   inner sheen. Secondary / nav-cta become true frosted capsules. */
+.btn-primary{
+  position:relative;overflow:hidden;border-radius:999px;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -6px rgba(63,107,0,.45);
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%);
+  pointer-events:none;
+}
+.btn-secondary,.nav-cta{
+  border-radius:999px !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+/* .nav-cta originally relied on a solid dark background (color:var(--bg),
+   a light color, by design), now that the background is a light glass
+   panel in both themes, the text needs to switch to var(--ink) in BOTH
+   modes or it goes invisible in light mode. This was the "Get your
+   report" button reading as blank. */
+.nav-cta{color:var(--ink) !important}
+
+/* Pricing card CTAs and the theme toggle were still the old 8px-radius
+   design system default while every other button had already moved to
+   the glass pill treatment above. Bringing them in line. */
+.price-cta-primary{
+  border-radius:999px !important;position:relative;overflow:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -6px rgba(63,107,0,.45);
+}
+.price-cta-primary::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%);
+  pointer-events:none;
+}
+.price-cta-secondary{
+  border-radius:999px !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+.theme-toggle{
+  border-radius:50% !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+  color: var(--ink) !important;
+}
+.theme-toggle:hover{border-color: var(--accent) !important}
+
+/* Footer: glass, matching nav */
+footer{
+  background: rgba(253,246,238,0.55) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  border-top: 1px solid var(--glass-border) !important;
+}
+html.dark footer{background: rgba(21,23,29,0.55) !important}
+
+/* Rounded corners throughout the glass surfaces read more "liquid" */
+.card-surface,.spread-card,.ledger,.pricing-teaser-card,.cta-band-inner,
+.insight-card,.newsletter-card{ border-radius:16px !important; }
+.ledger-head{ border-radius:16px 16px 0 0 !important; }
+.ledger-foot{ border-radius:0 0 16px 16px !important; }
+
 </style>
 </head>
 <body>
+<div class="glass-blob-3" aria-hidden="true"></div>
 
 <!-- ============================================================
      NAV
@@ -792,6 +1068,7 @@ html.dark .founder-logo-standalone{
       <li><a href="/pricing/">Pricing</a></li>
       <li><a href="/about/">About</a></li>
       <li><a href="/security/">Security &amp; Data</a></li>
+      <li><a href="/articles/">Articles</a></li>
     </ul>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
@@ -814,11 +1091,12 @@ html.dark .founder-logo-standalone{
   <a href="/pricing/">Pricing</a>
   <a href="/about/">About</a>
   <a href="/security/">Security &amp; Data</a>
+  <a href="/articles/">Articles</a>
   <a href="/contact/" class="nav-cta">Get your report</a>
 </div>
 
 <!-- ============================================================
-     PROCESS BAR — sticky, sits just under the fixed nav
+     PROCESS BAR: sticky, sits just under the fixed nav
      ============================================================ -->
 <style>
 .process-bar{
@@ -846,7 +1124,7 @@ html.dark .founder-logo-standalone{
   <div class="process-bar-inner">
     <div class="process-bar-step"><span>🔐</span><span>Connect API</span></div>
     <span class="process-bar-divider">→</span>
-    <div class="process-bar-step"><span>📊</span><span>7-Day Silent Audit</span></div>
+    <div class="process-bar-step"><span>📊</span><span>7-Day Silent Read</span></div>
     <span class="process-bar-divider">→</span>
     <div class="process-bar-step"><span>📋</span><span>Monday Report</span></div>
     <span class="process-bar-divider">→</span>
@@ -877,7 +1155,7 @@ html.dark .founder-logo-standalone{
   <div class="wrap">
     <div class="hero-top">
       <div class="hero-eyebrow"><span class="dot"></span> Assisted Execution for E-Commerce Ad Spend</div>
-      <h1>True profitability calculated weekly, with <span class="accent-word">execution proposed</span>, never automatic.</h1>
+      <h1><span class="sr-only">True ROAS Calculator &amp; Weekly Ad Spend Optimization for Shopify and Meta Ads Brands. </span>True profitability calculated weekly, with <span class="accent-word">execution proposed</span>, never automatic.</h1>
       <p class="hero-sub">Ad platforms report ROAS before returns, fees, and cost of goods. 7Captur recalculates it after, then proposes three specific budget actions every Monday, each with a confidence score and an exact dollar impact. <strong>You approve every change.</strong></p>
       <div class="hero-actions">
         <a href="/contact/" class="btn-primary">Get your report →</a>
@@ -901,6 +1179,253 @@ html.dark .founder-logo-standalone{
     </div>
   </div>
 </header>
+
+<!-- ============================================================
+     TODAY'S INSIGHT: pulls the latest LinkedIn post via
+     /assets/data/insight.json (written daily by a Make.com scenario;
+     see docs/MAKE-COM-SETUP.md for the full pipeline).
+     ============================================================ -->
+<style>
+.insight-section{padding:0 0 8px}
+.insight-card{
+  border:1px solid var(--line-strong);border-radius:16px;
+  padding:26px 30px;display:flex;gap:22px;align-items:flex-start;
+  position:relative;overflow:hidden;
+}
+.insight-badge{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  background:#0A66C2;display:flex;align-items:center;justify-content:center;
+}
+.insight-badge svg{width:20px;height:20px}
+.insight-body{flex:1;min-width:0}
+.insight-top-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.insight-eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:7px;
+}
+.insight-eyebrow .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:insightPulse 1.8s ease-in-out infinite}
+@keyframes insightPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.insight-date{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.insight-text{font-size:15px;color:var(--ink);line-height:1.6;margin-bottom:12px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.insight-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.insight-link{
+  font-family:'Inter Tight',sans-serif;font-weight:600;font-size:13.5px;color:var(--accent);
+  text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+}
+.insight-link:hover{text-decoration:underline}
+.insight-updated{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted)}
+.insight-media{margin-bottom:14px}
+.insight-media-img{width:100%;max-height:420px;object-fit:cover;border-radius:8px;display:block;border:1px solid var(--line-strong)}
+.insight-pdf-viewer{border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;background:var(--bg2)}
+.insight-pdf-canvas-wrap{display:flex;align-items:center;justify-content:center;padding:14px;min-height:220px;overflow:auto;background:var(--bg3)}
+.insight-pdf-canvas-wrap canvas{max-width:100%;height:auto;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.insight-pdf-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border-top:1px solid var(--line)}
+.insight-pdf-btn{
+  background:none;border:1px solid var(--line-strong);border-radius:6px;padding:7px 14px;cursor:pointer;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--body);transition:border-color .15s,color .15s;
+}
+.insight-pdf-btn:hover:not(:disabled){border-color:var(--ink);color:var(--ink)}
+.insight-pdf-btn:disabled{opacity:.4;cursor:default}
+.insight-pdf-page-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.insight-card.is-loading .insight-text{color:var(--muted)}
+.insight-card.is-loading .insight-text::after{content:'Loading today\'s post…'}
+.insight-card.is-loading .insight-text{display:block !important}
+@media(max-width:640px){
+  .insight-card{flex-direction:column;padding:22px}
+  .insight-foot{flex-direction:column;align-items:flex-start;gap:8px}
+}
+</style>
+<section class="insight-section">
+  <div class="wrap">
+        <div class="insight-card" id="insightCard">
+      <div class="insight-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.44-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45z"/></svg>
+      </div>
+      <div class="insight-body">
+        <div class="insight-top-row">
+          <span class="insight-eyebrow"><span class="live-dot"></span>Today's Insight, from LinkedIn</span>
+          <span class="insight-date" id="insightDate"></span>
+        </div>
+        <p class="insight-text" id="insightText">Loading today's post...</p>
+        <div class="insight-media" id="insightMedia" style="display:none"></div>
+        <div class="insight-foot">
+          <a href="https://www.linkedin.com/company/7captur" target="_blank" rel="noopener" class="insight-link" id="insightLink">View the full post on LinkedIn &rarr;</a>
+          <span class="insight-updated" id="insightUpdated"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var textEl = document.getElementById('insightText');
+  var dateEl = document.getElementById('insightDate');
+  var linkEl = document.getElementById('insightLink');
+  var updatedEl = document.getElementById('insightUpdated');
+  var mediaEl = document.getElementById('insightMedia');
+
+  var PDFJS_SRC = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
+  var PDFJS_WORKER = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+  var pdfjsLoadPromise = null;
+
+  function loadPdfJs(){
+    if (pdfjsLoadPromise) return pdfjsLoadPromise;
+    pdfjsLoadPromise = new Promise(function(resolve, reject){
+      if (window.pdfjsLib) { resolve(window.pdfjsLib); return; }
+      var s = document.createElement('script');
+      s.src = PDFJS_SRC;
+      s.onload = function(){
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+        resolve(window.pdfjsLib);
+      };
+      s.onerror = function(){ reject(new Error('pdf.js failed to load')); };
+      document.head.appendChild(s);
+    });
+    return pdfjsLoadPromise;
+  }
+
+  function renderImageMedia(url, alt){
+    mediaEl.style.display = 'block';
+    mediaEl.innerHTML = '';
+    var img = document.createElement('img');
+    img.className = 'insight-media-img';
+    img.src = url;
+    img.alt = alt || 'Image attached to the LinkedIn post';
+    img.loading = 'lazy';
+    mediaEl.appendChild(img);
+  }
+
+  function renderPdfMedia(url){
+    mediaEl.style.display = 'block';
+    mediaEl.innerHTML =
+      '<div class="insight-pdf-viewer">' +
+        '<div class="insight-pdf-canvas-wrap"><canvas id="insightPdfCanvas"></canvas></div>' +
+        '<div class="insight-pdf-nav">' +
+          '<button type="button" class="insight-pdf-btn" id="insightPdfPrev" disabled>&larr; Prev</button>' +
+          '<span class="insight-pdf-page-label" id="insightPdfLabel">Loading document...</span>' +
+          '<button type="button" class="insight-pdf-btn" id="insightPdfNext" disabled>Next &rarr;</button>' +
+        '</div>' +
+      '</div>';
+
+    var canvas = document.getElementById('insightPdfCanvas');
+    var ctx = canvas.getContext('2d');
+    var prevBtn = document.getElementById('insightPdfPrev');
+    var nextBtn = document.getElementById('insightPdfNext');
+    var label = document.getElementById('insightPdfLabel');
+    var pdfDoc = null;
+    var currentPage = 1;
+
+    function renderPage(num){
+      pdfDoc.getPage(num).then(function(page){
+        var viewport = page.getViewport({ scale: 1.4 });
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        page.render({ canvasContext: ctx, viewport: viewport });
+        label.textContent = 'Page ' + num + ' of ' + pdfDoc.numPages;
+        prevBtn.disabled = (num <= 1);
+        nextBtn.disabled = (num >= pdfDoc.numPages);
+      });
+    }
+
+    loadPdfJs()
+      .then(function(pdfjsLib){ return pdfjsLib.getDocument(url).promise; })
+      .then(function(doc){
+        pdfDoc = doc;
+        currentPage = 1;
+        renderPage(currentPage);
+      })
+      .catch(function(){
+        label.textContent = 'Could not load the attached document.';
+      });
+
+    prevBtn.addEventListener('click', function(){
+      if (currentPage > 1) { currentPage -= 1; renderPage(currentPage); }
+    });
+    nextBtn.addEventListener('click', function(){
+      if (pdfDoc && currentPage < pdfDoc.numPages) { currentPage += 1; renderPage(currentPage); }
+    });
+  }
+
+  fetch('/assets/data/insight.json', { cache: 'no-store' })
+    .then(function(r){ if(!r.ok) throw new Error('no insight.json'); return r.json(); })
+    .then(function(data){
+      if(!data || !data.text){ throw new Error('empty insight'); }
+      textEl.textContent = data.text;
+      if(data.url){ linkEl.href = data.url; }
+      if(data.postedAt){
+        var d = new Date(data.postedAt);
+        if(!isNaN(d)){ dateEl.textContent = d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
+      }
+      if(data.updatedAt){
+        var u = new Date(data.updatedAt);
+        if(!isNaN(u)){ updatedEl.textContent = 'Updated ' + u.toLocaleDateString('en-US',{month:'short',day:'numeric'}); }
+      }
+      if(data.media && data.media.type === 'image' && data.media.url){
+        renderImageMedia(data.media.url, data.media.alt);
+      } else if(data.media && data.media.type === 'pdf' && data.media.url){
+        renderPdfMedia(data.media.url);
+      }
+    })
+    .catch(function(){
+      textEl.textContent = "We post a new ad-spend insight on LinkedIn every day. Follow along for the latest one.";
+      dateEl.textContent = '';
+      updatedEl.textContent = '';
+    });
+})();
+</script>
+
+<!-- ============================================================
+     VIDEO OF THE WEEK: compact teaser only (full video lives on
+     /articles/, this is intentionally a single link, not an embed,
+     to keep the homepage from feeling crowded).
+     ============================================================ -->
+<style>
+.vow-teaser-wrap{padding:0 0 8px}
+.vow-teaser{
+  display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;
+  text-decoration:none;color:var(--body);font-size:13px;padding:10px 0;
+}
+.vow-teaser:hover{color:var(--ink)}
+.vow-teaser-icon{color:var(--accent);font-size:12px}
+.vow-teaser strong{color:var(--ink);font-weight:600}
+.vow-teaser-cta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.03em}
+</style>
+<div class="vow-teaser-wrap">
+  <div class="wrap">
+    <a href="#" id="vowTeaser" class="vow-teaser" style="display:none" target="_blank" rel="noopener">
+      <span class="vow-teaser-icon">&#9654;</span>
+      <span>Video of the week: <strong id="vowTeaserTitle"></strong></span>
+      <span class="vow-teaser-cta">Watch on YouTube &rarr;</span>
+    </a>
+  </div>
+</div>
+<script>
+(function(){
+  fetch('/assets/data/video.json', {cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('no video.json'); return r.json(); })
+    .then(function(data){
+      if(!data || !data.title) { return; }
+      var isFile = data.source === 'file' && data.filePath;
+      var isYoutube = (data.source === 'youtube' || !data.source) && data.youtubeId && data.youtubeId !== 'REPLACE_YOUTUBE_ID';
+      if(!isFile && !isYoutube){ return; }
+      var el = document.getElementById('vowTeaser');
+      var ctaEl = el.querySelector('.vow-teaser-cta');
+      document.getElementById('vowTeaserTitle').textContent = data.title || '';
+      if(isYoutube){
+        el.href = data.url || ('https://www.youtube.com/watch?v=' + data.youtubeId);
+        el.target = '_blank';
+        ctaEl.textContent = 'Watch on YouTube \u2192';
+      } else {
+        el.href = '/articles/#video-of-the-week';
+        el.removeAttribute('target');
+        ctaEl.textContent = 'Watch on the Articles page \u2192';
+      }
+      el.style.display = 'inline-flex';
+    })
+    .catch(function(){ /* stays hidden */ });
+})();
+</script>
 
 <!-- ============================================================
      ROAS LEAK CALCULATOR
@@ -1085,7 +1610,7 @@ html.dark .founder-logo-standalone{
 </section>
 
 <!-- ============================================================
-     DECISION LEDGER — signature element
+     DECISION LEDGER: signature element
      ============================================================ -->
 <section class="section-tight">
   <div class="wrap">
@@ -1152,7 +1677,7 @@ html.dark .founder-logo-standalone{
 </div>
 
 <!-- ============================================================
-     PROBLEM FRAMING — the platform ROAS gap
+     PROBLEM FRAMING: the platform ROAS gap
      ============================================================ -->
 <section class="section">
   <div class="wrap">
@@ -1224,7 +1749,7 @@ html.dark .founder-logo-standalone{
 </section>
 
 <!-- ============================================================
-     MECHANISM — how True ROAS is calculated
+     MECHANISM: how True ROAS is calculated
      ============================================================ -->
 <section class="section alt-bg section-border-t">
   <div class="wrap">
@@ -1262,7 +1787,7 @@ html.dark .founder-logo-standalone{
 </section>
 
 <!-- ============================================================
-     CONTROL & SAFETY — execution model
+     CONTROL & SAFETY: execution model
      ============================================================ -->
 <section class="section">
   <div class="wrap">
@@ -1295,14 +1820,14 @@ html.dark .founder-logo-standalone{
     <div class="pricing-teaser">
       <div>
         <div class="eyebrow">Engagement Structure</div>
-        <h2>Start with a free 30-day audit. Continue only if the numbers justify it.</h2>
+        <h2>Start with 4 free weekly reports. Continue only if the numbers justify it.</h2>
         <p class="lede" style="margin-bottom:32px">The first 30 days are free, for a limited time. At day 30, you receive a written summary of decisions delivered and approved, along with their estimated impact, and decide from there. If you continue, you move to the standard monthly retainer.</p>
         <a href="/pricing/" class="btn-secondary">View full pricing →</a>
       </div>
       <div class="pricing-teaser-card">
         <div class="phase-tag">Phase 1 · First 30 Days</div>
-        <div class="price-row"><span class="was">$499</span><span class="amount">$0</span><span class="period">today</span><span class="limited-tag">Limited time</span></div>
-        <div class="note">Normally $499. Free for the first 30 days, for a limited time only. <strong>If the 30-day summary doesn't justify continuing, you walk away with a full data export and no further obligation.</strong></div>
+        <div class="price-row"><span class="was">$49</span><span class="amount">$0</span><span class="period">today</span><span class="limited-tag">Limited time</span></div>
+        <div class="note">Normally $49. Free for the first 30 days, for a limited time only. <strong>If the 30-day summary doesn't justify continuing, you walk away with a full data export and no further obligation.</strong></div>
         <ul class="pricing-feature-list">
           <li><span class="ck">✓</span> Pipeline configured for your store and ad accounts</li>
           <li><span class="ck">✓</span> 1 store + 2 ad platforms connected via API</li>
@@ -1331,6 +1856,100 @@ html.dark .founder-logo-standalone{
 </div>
 
 <!-- ============================================================
+     NEWSLETTER SIGNUP
+     Mailchimp embedded form. ACTION_URL below is a placeholder;
+     see docs/MAILCHIMP-SETUP.md for how to get your real one and
+     drop it in. Until then this form is inert (won't submit anywhere
+     broken; the JS blocks submission and shows a friendly notice).
+     ============================================================ -->
+<style>
+.newsletter-section{padding:64px 0}
+.newsletter-card{
+  border:1px solid var(--line-strong);border-radius:16px;
+  padding:48px 56px;display:flex;justify-content:space-between;align-items:center;
+  gap:40px;flex-wrap:wrap;position:relative;overflow:hidden;
+}
+.newsletter-copy{max-width:480px}
+.newsletter-copy .eyebrow{margin-bottom:14px}
+.newsletter-copy h2{font-size:clamp(22px,2.6vw,30px);margin-bottom:10px}
+.newsletter-copy p{font-size:14.5px;color:var(--body);line-height:1.65}
+.newsletter-form{display:flex;flex-wrap:wrap;gap:0;min-width:340px;flex:0 0 auto}
+.newsletter-input{
+  flex:1;min-width:220px;background:rgba(255,255,255,0.35);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--glass-border);border-right:none;
+  border-radius:999px 0 0 999px;
+  padding:15px 20px;font-size:14px;color:var(--ink);font-family:'Inter',sans-serif;
+}
+html.dark .newsletter-input{background:rgba(255,255,255,0.05)}
+.newsletter-input:focus{outline:none;border-color:var(--accent)}
+.newsletter-submit{
+  background:var(--accent);color:#fff;border:none;cursor:pointer;
+  font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14px;
+  padding:0 26px;border-radius:0 999px 999px 0;white-space:nowrap;
+}
+html.dark .newsletter-submit{color:#0e1206}
+.newsletter-submit:hover{opacity:.88}
+.newsletter-note{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted);
+  margin-top:10px;width:100%;
+}
+.newsletter-status{font-size:13px;margin-top:10px;display:none;width:100%;flex-basis:100%}
+.newsletter-status.is-visible{display:block}
+.newsletter-status.is-error{color:var(--gold)}
+.newsletter-status.is-success{color:var(--accent)}
+/* honeypot, hidden from humans, catches basic bots */
+.nl-hp{position:absolute;left:-9999px;top:-9999px}
+@media(max-width:760px){
+  .newsletter-card{padding:36px 28px;flex-direction:column;align-items:flex-start}
+  .newsletter-form{width:100%}
+}
+</style>
+<section class="newsletter-section">
+  <div class="wrap">
+    <div class="newsletter-card">
+      <div class="newsletter-copy">
+        <div class="eyebrow">Stay Ahead of the ROAS Gap</div>
+        <h2>Sign up for our newsletter.</h2>
+        <p>One short email a week: a real ad-spend leak we found, and the fix. No fluff, no daily noise, just what mid-market Shopify and Meta Ads brands need to know.</p>
+      </div>
+      <div>
+        <form class="newsletter-form" id="newsletterForm"
+              action="https://7captur.us5.list-manage.com/subscribe/post?u=e666602be2ab1c85a17cb1b80&amp;id=2691f979b1&amp;f_id=0077c2e1f0"
+              method="post" target="_blank" novalidate>
+          <label for="nlEmail" class="sr-only">Email address</label>
+          <input type="email" name="EMAIL" id="nlEmail" class="newsletter-input" placeholder="you@yourstore.com" required>
+          <!-- Mailchimp honeypot field; name must stay exactly like this -->
+          <div class="nl-hp" aria-hidden="true">
+            <input type="text" name="b_e666602be2ab1c85a17cb1b80_2691f979b1" tabindex="-1" value="">
+          </div>
+          <button type="submit" class="newsletter-submit" id="nlSubmit">Subscribe →</button>
+          <div class="newsletter-note">No spam. One email a week. Unsubscribe anytime.</div>
+          <div class="newsletter-status" id="nlStatus"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var form = document.getElementById('newsletterForm');
+  var status = document.getElementById('nlStatus');
+  var PLACEHOLDER = form.action.indexOf('7CAPTUR_MAILCHIMP_DOMAIN') !== -1;
+  form.addEventListener('submit', function(e){
+    if(PLACEHOLDER){
+      e.preventDefault();
+      status.textContent = "Newsletter signup isn't connected yet. The Mailchimp form URL still needs to be added.";
+      status.className = 'newsletter-status is-visible is-error';
+    }
+    // Once the real Mailchimp action URL is in place, this submits
+    // as a normal form POST to Mailchimp (opens a Mailchimp confirmation
+    // tab); no further JS changes needed.
+  });
+})();
+</script>
+
+<!-- ============================================================
      FOOTER
      ============================================================ -->
 <footer>
@@ -1346,6 +1965,7 @@ html.dark .founder-logo-standalone{
           <li><a href="/how-it-works/">How it works</a></li>
           <li><a href="/pricing/">Pricing</a></li>
           <li><a href="/how-it-works/#platforms">Platforms</a></li>
+          <li><a href="/articles/">Articles</a></li>
         </ul>
       </div>
       <div class="footer-col">
