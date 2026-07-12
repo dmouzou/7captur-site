@@ -934,6 +934,7 @@ html.dark .mobile-drawer{
   background: rgba(20,19,15,0.82) !important;
   backdrop-filter: blur(16px) saturate(160%) !important;
   -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+  color: var(--ink) !important;
 }
 html:not(.dark) .sandbox-tooltip{
   background: rgba(255,255,255,0.88) !important;
@@ -1902,7 +1903,12 @@ html.dark .newsletter-submit{color:#0e1206}
 .nl-hp{position:absolute;left:-9999px;top:-9999px}
 @media(max-width:760px){
   .newsletter-card{padding:36px 28px;flex-direction:column;align-items:flex-start}
-  .newsletter-form{width:100%}
+  .newsletter-form{width:100%;min-width:0}
+}
+@media(max-width:520px){
+  .newsletter-form{flex-direction:column}
+  .newsletter-input{width:100%;min-width:0;border-radius:999px;border-right:1px solid var(--glass-border)}
+  .newsletter-submit{width:100%;border-radius:999px;padding:14px 26px}
 }
 </style>
 <section class="newsletter-section">
