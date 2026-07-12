@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Security & Data | 7Captur</title>
+  <meta name="description" content="Read-only API access only. No shared passwords. Your Shopify and ad account data is never stored beyond 90 days.">
   <link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: light)">
   <link rel="icon" href="/favicon-dark.png"  media="(prefers-color-scheme: dark)">
   <link rel="shortcut icon" href="/favicon-dark.png">
@@ -12,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
 /* ============================================================
-   7CAPTUR — DESIGN TOKENS (shared)
+   7CAPTUR: DESIGN TOKENS (shared)
    ============================================================ */
 :root {
   --bg:           #fdf6ee;
@@ -255,7 +256,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 
 
 /* ============================================================
-   DESIGN SYSTEM — SINGLE CLEAN BLOCK
+   DESIGN SYSTEM: SINGLE CLEAN BLOCK
    ============================================================ */
 
 /* Rounded corners: buttons */
@@ -315,7 +316,7 @@ nav a,.logo,.mobile-drawer a,.btn-primary,.btn-secondary{text-decoration:none}
 
 /* ── FIX PASS 3 ────────────────────────────────────────────────────────────── */
 
-/* 1. Nav underlines — !important to beat high-specificity a:not() rule */
+/* 1. Nav underlines, !important to beat high-specificity a:not() rule */
 nav a,.mobile-drawer a,.mobile-drawer .nav-cta,.nav-links a,.logo,footer .logo{text-decoration:none !important}
 
 /* 9. Theme toggle: compact emoji style */
@@ -366,7 +367,7 @@ html.dark .cta-band-inner{
 .cta-band p{font-size:15px;color:var(--body)}
 @media(max-width:760px){.cta-band-inner{padding:36px 28px}}
 
-/* 10. Section gradients: smooth blend top AND bottom — !important beats source */
+/* 10. Section gradients: smooth blend top AND bottom, !important beats source */
 .alt-bg{background:transparent !important}
 section.alt-bg,div.alt-bg{
   background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 18%,var(--bg2) 82%,var(--bg) 100%) !important
@@ -394,7 +395,7 @@ section.alt-bg,div.alt-bg{
 /* 3. Pricing ROI results inner grid: rounded */
 .roi-results{border-radius:8px !important;overflow:hidden !important}
 
-/* 4. CTA band: remove outer card shadow/radius — inner card only */
+/* 4. CTA band: remove outer card shadow/radius, inner card only */
 .cta-band{
   border-radius:0 !important;overflow:visible !important;
   box-shadow:none !important
@@ -513,16 +514,281 @@ html.dark .founder-logo-standalone{
   100%{transform:scale(2.8);opacity:0}
 }
 
-/* 5. ba-grid: remove outer card — just a layout wrapper */
+/* 5. ba-grid: remove outer card, just a layout wrapper */
 .ba-grid{
   box-shadow:none !important;
   border:none !important;
   background:transparent !important
 }
 
+
+/* ================================================================
+   LIQUID GLASS SYSTEM (Make.com style)
+   ================================================================ */
+
+/* Glass variables: light mode */
+:root{
+  --glass-bg:       rgba(255,255,255,0.52);
+  --glass-border:   rgba(255,255,255,0.78);
+  --glass-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 8px 32px rgba(0,0,0,.07),
+    0 2px 8px  rgba(0,0,0,.04);
+  --glass-blur:     blur(22px) saturate(160%);
+}
+
+/* Glass variables: dark mode */
+html.dark{
+  --glass-bg:       rgba(255,255,255,0.042);
+  --glass-border:   rgba(255,255,255,0.10);
+  --glass-shadow:
+    0 1px 0 rgba(255,255,255,0.07) inset,
+    0 8px 32px rgba(0,0,0,.38),
+    0 2px 8px  rgba(0,0,0,.22);
+  --glass-blur:     blur(22px) saturate(140%);
+}
+
+/* Ambient blobs fixed to viewport, glass refracts these */
+body::before{
+  content:'';position:fixed;
+  width:900px;height:900px;border-radius:50%;
+  background:radial-gradient(circle,rgba(143,206,58,.07) 0%,transparent 68%);
+  top:-220px;right:-200px;pointer-events:none;z-index:-1;
+}
+body::after{
+  content:'';position:fixed;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(216,177,74,.055) 0%,transparent 68%);
+  bottom:5%;left:-180px;pointer-events:none;z-index:-1;
+}
+html.dark body::before{
+  background:radial-gradient(circle,rgba(143,206,58,.09) 0%,transparent 68%);
+}
+html.dark body::after{
+  background:radial-gradient(circle,rgba(216,177,74,.07) 0%,transparent 68%);
+}
+
+/* Apply glass to all card-level containers */
+.spread-card,
+.sandbox,
+.sandbox-card,
+.ledger,
+.platform-logo-card,
+.pricing-grid,
+.price-card,
+.access-table,
+.wtl-cards,
+.wtl-card,
+.leak-calc,
+.ba-card,
+.cta-band-inner,
+.expect-list,
+.contact-form-wrap,
+.guarantee-box,
+.success-box,
+.addon-strip,
+.roi-wrap,
+.process-item,
+.faq-item,
+.proof-row,
+.icp-strip{
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* Ledger head: slightly more opaque to separate from rows */
+.ledger-head{
+  background: rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-bottom-color: var(--glass-border) !important;
+}
+html.dark .ledger-head{
+  background: rgba(255,255,255,0.06) !important;
+}
+
+/* Forms: glass */
+.form-input,
+.form-select,
+.form-textarea{
+  background: rgba(255,255,255,0.35) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-color: var(--glass-border) !important;
+}
+html.dark .form-input,
+html.dark .form-select,
+html.dark .form-textarea{
+  background: rgba(255,255,255,0.05) !important;
+}
+
+/* Nav: already has blur, refine to match system */
+nav{
+  background: rgba(253,246,238,0.72) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.6) !important;
+}
+html.dark nav{
+  background: rgba(21,23,29,0.72) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+}
+
+/* Mobile drawer: glass */
+.mobile-drawer{
+  background: rgba(249,246,241,0.88) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+}
+html.dark .mobile-drawer{
+  background: rgba(21,23,29,0.88) !important;
+}
+
+/* Tags / badges: subtle glass tint */
+.ledger-tag,
+.cycle-tag,
+.wtl-card-tag,
+.confidence,
+.platform-logo-badge,
+.limited-tag,
+.price-badge,
+.sandbox-badge,
+.icp-mark,
+.tech-tag{
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* Sandbox info tooltip: glass */
+.sandbox-tooltip{
+  background: rgba(20,19,15,0.82) !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+}
+html:not(.dark) .sandbox-tooltip{
+  background: rgba(255,255,255,0.88) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--glass-border) !important;
+}
+
+/* ----------------------------------------------------------------
+   GLASS EXTENSIONS, sitewide.
+   Completes the base glass block above: footer, buttons (with a
+   fixed nav-cta text-contrast issue, see comment below), generic
+   card-surface containers, trust pills, a third ambient blob, and
+   slightly rounder corners for a more "liquid" read.
+   ---------------------------------------------------------------- */
+.card-surface,
+.pricing-teaser-card,
+.trust-item,
+.insight-card,
+.newsletter-card{
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* A third, cooler-toned blob for depth + a slow drift animation:
+   Apple/Make.com glass reads best when the blur has something
+   colorful and moving to refract. */
+body::before{ animation: glassDrift1 26s ease-in-out infinite alternate; }
+body::after{  animation: glassDrift2 22s ease-in-out infinite alternate; }
+.glass-blob-3{
+  content:'';position:fixed;width:640px;height:640px;border-radius:50%;
+  background:radial-gradient(circle,rgba(80,150,220,.06) 0%,transparent 68%);
+  top:38%;left:38%;pointer-events:none;z-index:-1;
+  animation: glassDrift3 30s ease-in-out infinite alternate;
+}
+html.dark .glass-blob-3{background:radial-gradient(circle,rgba(90,170,240,.09) 0%,transparent 68%)}
+@keyframes glassDrift1{from{transform:translate(0,0)}to{transform:translate(-40px,30px)}}
+@keyframes glassDrift2{from{transform:translate(0,0)}to{transform:translate(30px,-40px)}}
+@keyframes glassDrift3{from{transform:translate(0,0) scale(1)}to{transform:translate(20px,20px) scale(1.08)}}
+@media(prefers-reduced-motion:reduce){
+  body::before,body::after,.glass-blob-3{animation:none !important}
+}
+
+/* Buttons: primary stays solid for conversion clarity (a known glass
+   pitfall is translucent CTAs losing contrast) but gets a glass-style
+   inner sheen. Secondary / nav-cta become true frosted capsules. */
+.btn-primary{
+  position:relative;overflow:hidden;border-radius:999px;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -6px rgba(63,107,0,.45);
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%);
+  pointer-events:none;
+}
+.btn-secondary,.nav-cta{
+  border-radius:999px !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+/* .nav-cta originally relied on a solid dark background (color:var(--bg),
+   a light color, by design), now that the background is a light glass
+   panel in both themes, the text needs to switch to var(--ink) in BOTH
+   modes or it goes invisible in light mode. This was the "Get your
+   report" button reading as blank. */
+.nav-cta{color:var(--ink) !important}
+
+/* Pricing card CTAs and the theme toggle were still the old 8px-radius
+   design system default while every other button had already moved to
+   the glass pill treatment above. Bringing them in line. */
+.price-cta-primary{
+  border-radius:999px !important;position:relative;overflow:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -6px rgba(63,107,0,.45);
+}
+.price-cta-primary::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%);
+  pointer-events:none;
+}
+.price-cta-secondary{
+  border-radius:999px !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+.theme-toggle{
+  border-radius:50% !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+  color: var(--ink) !important;
+}
+.theme-toggle:hover{border-color: var(--accent) !important}
+
+/* Footer: glass, matching nav */
+footer{
+  background: rgba(253,246,238,0.55) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  border-top: 1px solid var(--glass-border) !important;
+}
+html.dark footer{background: rgba(21,23,29,0.55) !important}
+
+/* Rounded corners throughout the glass surfaces read more "liquid" */
+.card-surface,.spread-card,.ledger,.pricing-teaser-card,.cta-band-inner,
+.insight-card,.newsletter-card{ border-radius:16px !important; }
+.ledger-head{ border-radius:16px 16px 0 0 !important; }
+.ledger-foot{ border-radius:0 0 16px 16px !important; }
+
 </style>
 </head>
 <body>
+<div class="glass-blob-3" aria-hidden="true"></div>
 
 <!-- NAV -->
 <nav>
@@ -533,6 +799,7 @@ html.dark .founder-logo-standalone{
       <li><a href="/pricing/">Pricing</a></li>
       <li><a href="/about/">About</a></li>
       <li><a href="/security/" class="current">Security &amp; Data</a></li>
+      <li><a href="/articles/">Articles</a></li>
     </ul>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
@@ -555,6 +822,7 @@ html.dark .founder-logo-standalone{
   <a href="/pricing/">Pricing</a>
   <a href="/about/">About</a>
   <a href="/security/">Security &amp; Data</a>
+  <a href="/articles/">Articles</a>
   <a href="/contact/" class="nav-cta">Get your report</a>
 </div>
 
@@ -642,7 +910,7 @@ html.dark .founder-logo-standalone{
   <div class="wrap">
     <div class="eyebrow">Ownership</div>
     <h2>You own the logic and the data. 7Captur maintains the infrastructure.</h2>
-    <p class="lede">If you cancel at any point, during the audit or afterward, you receive a JSON export of your pipeline configuration and a CSV export of your historical data. To keep the pipeline running automatically without the weekly analysis layer, the $299/mo Maintenance Plan covers API authentication, server costs, and platform updates.</p>
+    <p class="lede">If you cancel at any point, during the trial or afterward, you receive a JSON export of your pipeline configuration and a CSV export of your historical data. To keep the pipeline running automatically without the weekly analysis layer, the $29/mo Maintenance Plan covers API authentication, server costs, and platform updates.</p>
   </div>
 </section>
 
@@ -696,7 +964,7 @@ html.dark .founder-logo-standalone{
 <section class="legal-section" id="terms">
   <div class="wrap">
     <div class="eyebrow">Terms of Service</div>
-    <h2>The terms governing the audit, retainer, and execution model.</h2>
+    <h2>The terms governing the trial, retainer, and execution model.</h2>
     <div class="legal-layout reveal">
       <div class="legal-toc">
         <div class="legal-toc-label">On this page</div>
@@ -718,7 +986,7 @@ html.dark .founder-logo-standalone{
         <p>Approved decisions are capped at 30% of a campaign's current weekly budget, and can be rolled back within 24 hours of execution via the same report. <strong>You remain responsible for all approved actions and their financial outcomes.</strong></p>
 
         <h3 id="terms-billing">Billing and cancellation</h3>
-        <p>The 30-Day Free Audit is offered at no cost for a limited time. If you continue after the audit period, you move to the standard monthly retainer billed according to your ad spend tier, reviewed at the start of each billing cycle. There are no long-term contracts; the retainer can be cancelled at any time.</p>
+        <p>The 30-Day Free Trial is offered at no cost for a limited time. If you continue after the trial period, you move to the standard monthly retainer billed according to your ad spend tier, reviewed at the start of each billing cycle. There are no long-term contracts; the retainer can be cancelled at any time.</p>
 
         <h3 id="terms-ownership">Ownership on exit</h3>
         <p>You own your pipeline logic and your data. On cancellation, you receive a JSON export of your pipeline configuration and a CSV export of your historical data. To keep the pipeline executing automatically without the weekly analysis layer, you may transition to the Maintenance Plan.</p>
@@ -760,6 +1028,7 @@ html.dark .founder-logo-standalone{
           <li><a href="/how-it-works/">How it works</a></li>
           <li><a href="/pricing/">Pricing</a></li>
           <li><a href="/how-it-works/#platforms">Platforms</a></li>
+          <li><a href="/articles/">Articles</a></li>
         </ul>
       </div>
       <div class="footer-col">
