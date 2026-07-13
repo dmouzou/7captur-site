@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Get Your Report | 7Captur</title>
   <meta name="description" content="Book a 20-minute call using your real store and ad data. See your true ROAS gap before you commit to anything.">
+  <link rel="canonical" href="https://7captur.com/contact/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="7Captur">
+  <meta property="og:title" content="Get Your Report | 7Captur">
+  <meta property="og:description" content="Book a 20-minute call using your real store and ad data. See your true ROAS gap before you commit to anything.">
+  <meta property="og:url" content="https://7captur.com/contact/">
+  <meta property="og:image" content="https://7captur.com/assets/og/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Get Your Report | 7Captur">
+  <meta name="twitter:description" content="Book a 20-minute call using your real store and ad data. See your true ROAS gap before you commit to anything.">
+  <meta name="twitter:image" content="https://7captur.com/assets/og/og-default.png">
   <link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: light)">
   <link rel="icon" href="/favicon-dark.png"  media="(prefers-color-scheme: dark)">
   <link rel="shortcut icon" href="/favicon-dark.png">
@@ -688,6 +699,7 @@ html.dark .mobile-drawer{
   background: rgba(20,19,15,0.82) !important;
   backdrop-filter: blur(16px) saturate(160%) !important;
   -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+  color: var(--ink) !important;
 }
 html:not(.dark) .sandbox-tooltip{
   background: rgba(255,255,255,0.88) !important;
@@ -790,6 +802,19 @@ html.dark .glass-blob-3{background:radial-gradient(circle,rgba(90,170,240,.09) 0
   color: var(--ink) !important;
 }
 .theme-toggle:hover{border-color: var(--accent) !important}
+
+/* Contact page submit button ("Book my free demo") was still the old
+   solid 8px-radius button while every other primary CTA had moved to
+   the glass pill treatment. Bringing it in line. */
+.form-submit{
+  border-radius:999px !important;position:relative;overflow:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -6px rgba(63,107,0,.45);
+}
+.form-submit::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%);
+  pointer-events:none;
+}
 
 /* Footer: glass, matching nav */
 footer{
