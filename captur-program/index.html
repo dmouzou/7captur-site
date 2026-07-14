@@ -191,24 +191,15 @@ html:not(.dark) .hero::before {
 }
 
 .what-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
-  border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden;
-  margin-top: 40px; box-shadow: var(--shadow-md);
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+  margin-top: 40px;
 }
 @media(max-width:760px) { .what-grid { grid-template-columns: 1fr; } }
 
 .what-card {
   background: var(--card); padding: 32px 28px;
-  border-right: 1px solid var(--line-strong);
-  border-bottom: 1px solid var(--line-strong);
-}
-.what-card:nth-child(2n) { border-right: none; }
-.what-card:nth-last-child(-n+2) { border-bottom: none; }
-@media(max-width:760px) {
-  .what-card { border-right: none; }
-  .what-card:last-child { border-bottom: none; }
-  .what-card:nth-last-child(-n+2) { border-bottom: 1px solid var(--line-strong); }
-  .what-card:last-child { border-bottom: none; }
+  border: 1px solid var(--line-strong); border-radius: 8px;
+  box-shadow: var(--shadow-md);
 }
 .what-card-num {
   font-family: 'Inter Tight', sans-serif; font-weight: 800;
@@ -254,6 +245,7 @@ html:not(.dark) .selection-note {
 .sidebar-meta {
   font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--muted);
   letter-spacing: .04em; line-height: 1.9;
+  padding: 20px 24px; border-radius: 0;
 }
 .sidebar-meta span { color: var(--accent); }
 
@@ -339,6 +331,13 @@ html:not(.dark) .selection-note {
   padding: 16px 28px; border: none; cursor: pointer; width: 100%;
   letter-spacing: -.005em; transition: opacity .15s; border-radius: 8px;
   margin-top: 8px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 8px 20px -6px rgba(63,107,0,.45);
+}
+.form-submit::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,0) 55%);
+  pointer-events: none;
 }
 .form-submit:hover { opacity: .88; }
 .form-submit:disabled { opacity: .6; cursor: default; }
@@ -411,9 +410,244 @@ footer {
 .reveal.visible { opacity: 1; transform: none; }
 @media(prefers-reduced-motion:reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* ================================================================
+   LIQUID GLASS SYSTEM — Make.com style
+   ================================================================ */
+
+/* Glass variables: light mode */
+:root{
+  --glass-bg:       rgba(255,255,255,0.52);
+  --glass-border:   rgba(255,255,255,0.78);
+  --glass-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 8px 32px rgba(0,0,0,.07),
+    0 2px 8px  rgba(0,0,0,.04);
+  --glass-blur:     blur(22px) saturate(160%);
+}
+
+/* Glass variables: dark mode */
+html.dark{
+  --glass-bg:       rgba(255,255,255,0.042);
+  --glass-border:   rgba(255,255,255,0.10);
+  --glass-shadow:
+    0 1px 0 rgba(255,255,255,0.07) inset,
+    0 8px 32px rgba(0,0,0,.38),
+    0 2px 8px  rgba(0,0,0,.22);
+  --glass-blur:     blur(22px) saturate(140%);
+}
+
+/* Ambient blobs fixed to viewport — glass refracts these */
+body::before{
+  content:'';position:fixed;
+  width:900px;height:900px;border-radius:50%;
+  background:radial-gradient(circle,rgba(143,206,58,.07) 0%,transparent 68%);
+  top:-220px;right:-200px;pointer-events:none;z-index:-1;
+}
+body::after{
+  content:'';position:fixed;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(216,177,74,.055) 0%,transparent 68%);
+  bottom:5%;left:-180px;pointer-events:none;z-index:-1;
+}
+html.dark body::before{
+  background:radial-gradient(circle,rgba(143,206,58,.09) 0%,transparent 68%);
+}
+html.dark body::after{
+  background:radial-gradient(circle,rgba(216,177,74,.07) 0%,transparent 68%);
+}
+
+/* Apply glass to all card-level containers */
+.spread-card,
+.sandbox,
+.sandbox-card,
+.ledger,
+.platform-logo-card,
+.pricing-grid,
+.price-card,
+.access-table,
+.wtl-cards,
+.wtl-card,
+.leak-calc,
+.ba-card,
+.cta-band-inner,
+.expect-list,
+.contact-form-wrap,
+.guarantee-box,
+.success-box,
+.addon-strip,
+.roi-wrap,
+.process-item,
+.faq-item,
+.proof-row,
+.icp-strip{
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* Ledger head: slightly more opaque to separate from rows */
+.ledger-head{
+  background: rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-bottom-color: var(--glass-border) !important;
+}
+html.dark .ledger-head{
+  background: rgba(255,255,255,0.06) !important;
+}
+
+/* Forms: glass */
+.form-input,
+.form-select,
+.form-textarea{
+  background: rgba(255,255,255,0.35) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-color: var(--glass-border) !important;
+}
+html.dark .form-input,
+html.dark .form-select,
+html.dark .form-textarea{
+  background: rgba(255,255,255,0.05) !important;
+}
+
+/* Nav: already has blur, refine to match system */
+nav{
+  background: rgba(253,246,238,0.72) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.6) !important;
+}
+html.dark nav{
+  background: rgba(21,23,29,0.72) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+}
+
+/* Mobile drawer: glass */
+.mobile-drawer{
+  background: rgba(249,246,241,0.88) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+}
+html.dark .mobile-drawer{
+  background: rgba(21,23,29,0.88) !important;
+}
+
+/* Tags / badges: subtle glass tint */
+.ledger-tag,
+.cycle-tag,
+.wtl-card-tag,
+.confidence,
+.platform-logo-badge,
+.limited-tag,
+.price-badge,
+.sandbox-badge,
+.icp-mark,
+.tech-tag{
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* Sandbox info tooltip: glass */
+.sandbox-tooltip{
+  background: rgba(20,19,15,0.82) !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+}
+html:not(.dark) .sandbox-tooltip{
+  background: rgba(255,255,255,0.88) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--glass-border) !important;
+}
+
+/* ----------------------------------------------------------------
+   GLASS EXTENSIONS — homepage preview only.
+   The block above (pasted across every page already) missed a few
+   homepage-specific containers. Adding them here rather than
+   editing the shared block, so this stays homepage-scoped.
+   ---------------------------------------------------------------- */
+.card-surface,
+.pricing-teaser-card,
+.trust-item,
+.insight-card,
+.newsletter-card{
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* A third, cooler-toned blob for depth + a slow drift animation —
+   Apple/Make.com glass reads best when the blur has something
+   colorful and moving to refract. */
+body::before{ animation: glassDrift1 26s ease-in-out infinite alternate; }
+body::after{  animation: glassDrift2 22s ease-in-out infinite alternate; }
+.glass-blob-3{
+  content:'';position:fixed;width:640px;height:640px;border-radius:50%;
+  background:radial-gradient(circle,rgba(80,150,220,.06) 0%,transparent 68%);
+  top:38%;left:38%;pointer-events:none;z-index:-1;
+  animation: glassDrift3 30s ease-in-out infinite alternate;
+}
+html.dark .glass-blob-3{background:radial-gradient(circle,rgba(90,170,240,.09) 0%,transparent 68%)}
+@keyframes glassDrift1{from{transform:translate(0,0)}to{transform:translate(-40px,30px)}}
+@keyframes glassDrift2{from{transform:translate(0,0)}to{transform:translate(30px,-40px)}}
+@keyframes glassDrift3{from{transform:translate(0,0) scale(1)}to{transform:translate(20px,20px) scale(1.08)}}
+@media(prefers-reduced-motion:reduce){
+  body::before,body::after,.glass-blob-3{animation:none !important}
+}
+
+/* Buttons: primary stays solid for conversion clarity (a known glass
+   pitfall is translucent CTAs losing contrast) but gets a glass-style
+   inner sheen. Secondary / nav-cta become true frosted capsules. */
+.btn-primary{
+  position:relative;overflow:hidden;border-radius:999px;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -6px rgba(63,107,0,.45);
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%);
+  pointer-events:none;
+}
+.btn-secondary,.nav-cta{
+  border-radius:999px !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+html.dark .nav-cta{color:var(--ink) !important}
+
+/* Footer: glass, matching nav */
+footer{
+  background: rgba(253,246,238,0.55) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  border-top: 1px solid var(--glass-border) !important;
+}
+html.dark footer{background: rgba(21,23,29,0.55) !important}
+
+/* Page-specific glass targeting — actual containers used on this page */
+.what-card,
+.captur-form-wrap,
+.sidebar-meta{
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+.captur-form-wrap{ border-radius: 16px !important; }
+.what-card{ border-radius: 8px !important; }
+.sidebar-meta{ border-radius: 0 !important; }
+
 </style>
 </head>
 <body>
+<div class="glass-blob-3" aria-hidden="true"></div>
 
 <!-- SITE HEADER -->
 <header class="site-header">
@@ -440,7 +674,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 
     <div class="hero-limited">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      5 spots only, invite only
+      50 spots, invite only
     </div>
 
     <h1>Your brand was<br>personally selected.</h1>
@@ -672,13 +906,19 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-/* ---- Custom checkboxes ---- */
+/* ---- Custom checkboxes (mutually exclusive: Both already covers Meta+Google) ---- */
 document.querySelectorAll('#checkPlatforms .check-item').forEach(item => {
   item.addEventListener('click', (e) => {
     e.preventDefault();
-    item.classList.toggle('selected');
-    const inp = item.querySelector('input');
-    inp.checked = !inp.checked;
+    const wasSelected = item.classList.contains('selected');
+    document.querySelectorAll('#checkPlatforms .check-item').forEach(i => {
+      i.classList.remove('selected');
+      i.querySelector('input').checked = false;
+    });
+    if (!wasSelected) {
+      item.classList.add('selected');
+      item.querySelector('input').checked = true;
+    }
   });
 });
 
@@ -763,8 +1003,12 @@ document.getElementById('formSubmitBtn').addEventListener('click', async () => {
     if (res.ok) {
       ['f-name','f-email','f-brand','f-url'].forEach(id => document.getElementById(id).value = '');
       document.getElementById('f-spend').selectedIndex = 0;
-      document.querySelectorAll('#checkPlatforms .check-item').forEach(i => i.classList.remove('selected'));
-      document.querySelectorAll('#radioPlatform .radio-item').forEach(i => i.classList.remove('selected'));
+      document.querySelectorAll('#checkPlatforms .check-item').forEach(i => {
+        i.classList.remove('selected'); i.querySelector('input').checked = false;
+      });
+      document.querySelectorAll('#radioPlatform .radio-item').forEach(i => {
+        i.classList.remove('selected'); i.querySelector('input').checked = false;
+      });
       openSuccess();
     } else {
       showErr('Something went wrong. Please try again or email us directly.');
