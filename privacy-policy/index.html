@@ -1,1 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy | 7Captur</title>
+  <meta name="description" content="How 7Captur collects, uses, and retains information from demo requests and connected store and ad accounts.">
+  <link rel="canonical" href="https://7captur.com/privacy-policy/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="7Captur">
+  <meta property="og:title" content="Security & Data | 7Captur">
+  <meta property="og:description" content="How 7Captur collects, uses, and retains information from demo requests and connected store and ad accounts.">
+  <meta property="og:url" content="https://7captur.com/privacy-policy/">
+  <meta property="og:image" content="https://7captur.com/assets/og/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Security & Data | 7Captur">
+  <meta name="twitter:description" content="How 7Captur collects, uses, and retains information from demo requests and connected store and ad accounts.">
+  <meta name="twitter:image" content="https://7captur.com/assets/og/og-default.png">
+  <link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="/favicon-dark.png"  media="(prefers-color-scheme: dark)">
+  <link rel="shortcut icon" href="/favicon-dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   7CAPTUR: DESIGN TOKENS (shared)
+   ============================================================ */
+:root {
+  --bg:           #fdf6ee;
+  --bg2:          #f5ebe0;
+  --bg3:          #ecdfd2;
+  --line:         rgba(28,24,18,.10);
+  --line-strong:  rgba(28,24,18,.20);
+  --shadow-sm:    0 1px 4px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:    0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.05);
+  --shadow-lg:    0 8px 24px rgba(0,0,0,.10), 0 3px 8px rgba(0,0,0,.06);
+  --ink:          #1c1812;
+  --body:         #5c534a;
+  --muted:        #9a9088;
+  --accent:       #3f6b00;
+  --accent-soft:  #eaf0dd;
+  --accent-line:  rgba(63,107,0,.22);
+  --gold:         #8a6a00;
+  --gold-soft:    #f5eed9;
+  --red:          #a82020;
+  --red-soft:     #f7e8e6;
+  --card:         #f7f0e6;
+}
+html.dark {
+  --bg:           #15171d;
+  --bg2:          #1b1e26;
+  --bg3:          #232733;
+  --line:         rgba(255,255,255,.08);
+  --line-strong:  rgba(255,255,255,.16);
+  --shadow-sm:    0 1px 4px rgba(0,0,0,.25);
+  --shadow-md:    0 4px 12px rgba(0,0,0,.35);
+  --shadow-lg:    0 8px 24px rgba(0,0,0,.45);
+  --ink:          #f1ede4;
+  --body:         #aba39a;
+  --muted:        #6b6560;
+  --accent:       #8fce3a;
+  --accent-soft:  #1f2a14;
+  --accent-line:  rgba(143,206,58,.25);
+  --gold:         #d8b14a;
+  --gold-soft:    #2a2418;
+  --red:          #e2685f;
+  --red-soft:     #2a1c1b;
+  --card:         #1e2128;
+}
 
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);color:var(--body);font-family:'Inter',sans-serif;font-weight:400;
+  line-height:1.65;-webkit-font-smoothing:antialiased;transition:background-color .3s ease;
+}
+a{color:inherit}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 48px}
+.section{padding:104px 0}
+.section-tight{padding:72px 0}
+.section-border-t{border-top:none}
+.alt-bg{background:var(--bg2)}
+
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:18px;
+}
+.eyebrow::after{content:'';flex:0 0 40px;height:1px;background:var(--accent-line)}
+
+h1,h2,h3{font-family:'Inter Tight',sans-serif;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+h1{font-size:clamp(34px,4.2vw,52px);line-height:1.1;font-weight:800}
+h2{font-size:clamp(28px,3.2vw,42px);line-height:1.14;margin-bottom:18px}
+h3{font-size:18px;line-height:1.3}
+.lede{font-size:1.0625rem;line-height:1.75;color:var(--body);max-width:600px}
+
+/* ============================================================
+   NAV (shared)
+   ============================================================ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;
+  height:72px;border-bottom:1px solid var(--line);background:rgba(253,246,238,.92);backdrop-filter:blur(10px);
+  transition:background .3s ease,border-color .3s ease;
+}
+html.dark nav{background:rgba(21,23,29,.92)}
+.nav-inner{max-width:1180px;margin:0 auto;width:100%;padding:0 48px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.02em;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:11px}
+.logo-mark{width:22px;height:auto;color:var(--accent);flex-shrink:0}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:14px;font-weight:500;color:var(--body);text-decoration:none;transition:color .15s}
+.nav-links a:hover,.nav-links a.current{color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-cta{background:var(--ink);color:var(--bg);font-family:'Inter Tight',sans-serif;font-weight:600;font-size:13.5px;padding:11px 22px;text-decoration:none;letter-spacing:-.005em;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+.theme-toggle{background:none;border:1px solid var(--line-strong);color:var(--body);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;padding:8px 12px;cursor:pointer;transition:color .15s,border-color .15s}
+.theme-toggle:hover{color:var(--ink);border-color:var(--ink)}
+.nav-mobile-toggle{display:none;background:none;border:none;color:var(--ink);cursor:pointer;padding:6px}
+@media(max-width:900px){.nav-links{display:none}.nav-mobile-toggle{display:block}}
+
+.mobile-drawer{display:none;position:fixed;inset:0;z-index:300;background:var(--bg);padding:24px 28px;flex-direction:column}
+.mobile-drawer.open{display:flex}
+.mobile-drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;height:48px}
+.mobile-drawer a{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:20px;color:var(--ink);text-decoration:none;padding:18px 0;border-bottom:1px solid var(--line)}
+.mobile-drawer .nav-cta{margin-top:24px;text-align:center}
+.mobile-drawer-close{background:none;border:none;color:var(--ink);cursor:pointer;padding:6px}
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+.page-header{
+  padding:168px 0 64px;position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 60% at 85% 0%, rgba(63,107,0,.14), transparent 60%),
+    radial-gradient(ellipse 50% 45% at 15% 10%, rgba(138,106,0,.08), transparent 60%),
+    linear-gradient(180deg, var(--bg2) 0%, var(--bg) 55%);
+}
+html.dark .page-header::before{
+  background:
+    radial-gradient(ellipse 60% 60% at 85% 0%, rgba(143,206,58,.16), transparent 60%),
+    radial-gradient(ellipse 50% 45% at 15% 10%, rgba(216,177,74,.10), transparent 60%),
+    linear-gradient(180deg, var(--bg2) 0%, var(--bg) 55%);
+}
+.page-header > .wrap{position:relative;z-index:1}
+.page-header-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;display:flex;align-items:center;gap:10px}
+.page-header-eyebrow .dot{width:6px;height:6px;background:var(--accent);border-radius:50%}
+.page-header h1{margin-bottom:20px}
+.page-header .lede{font-size:1.125rem}
+@media(max-width:900px){.page-header{padding:140px 0 48px}}
+
+/* ============================================================
+   ACCESS TABLE
+   ============================================================ */
+.access-table{border:1px solid var(--line-strong);margin-top:48px}
+.access-row{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.6fr;gap:24px;padding:20px 28px;align-items:start}
+.access-row:last-child{border-bottom:none}
+.access-row.is-head{
+  background:var(--bg2);font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+}
+.access-row.is-key{
+  background:
+    radial-gradient(ellipse 100% 100% at 100% 50%, rgba(63,107,0,.07), transparent 70%);
+}
+html.dark .access-row.is-key{
+  background:
+    radial-gradient(ellipse 100% 100% at 100% 50%, rgba(143,206,58,.09), transparent 70%);
+}
+.access-row .platform-name{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14.5px;color:var(--ink)}
+.access-row .access-detail{font-size:13px;color:var(--body);line-height:1.6}
+.access-scope{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.access-scope.is-write{color:var(--gold)}
+.access-scope.is-read{color:var(--accent)}
+@media(max-width:900px){
+  .access-row{grid-template-columns:1fr;gap:6px}
+  .access-row.is-head{display:none}
+}
+
+/* ============================================================
+   DATA LIFECYCLE LIST
+   ============================================================ */
+.lifecycle-list{margin-top:48px}
+.lifecycle-row{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:26px 28px}
+.lifecycle-row:last-child{border-bottom:none}
+.lifecycle-row.is-key{
+  background:
+    radial-gradient(ellipse 90% 100% at 100% 50%, rgba(63,107,0,.07), transparent 70%);
+}
+html.dark .lifecycle-row.is-key{
+  background:
+    radial-gradient(ellipse 90% 100% at 100% 50%, rgba(143,206,58,.09), transparent 70%);
+}
+.lifecycle-label{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.lifecycle-row p{font-size:13.5px;color:var(--body);line-height:1.7;max-width:600px}
+@media(max-width:760px){.lifecycle-row{grid-template-columns:1fr;gap:8px}}
+
+/* ============================================================
+   LEGAL / POLICY LAYOUT
+   ============================================================ */
+.legal-section{padding:96px 0;border-top:1px solid var(--line);scroll-margin-top:90px}
+.legal-layout{display:grid;grid-template-columns:220px 1fr;gap:64px;align-items:start}
+.legal-toc{position:sticky;top:104px;border-left:2px solid var(--line-strong);padding-left:20px}
+.legal-toc-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.legal-toc a{display:block;font-size:13px;color:var(--body);text-decoration:none;padding:6px 0;transition:color .15s}
+.legal-toc a:hover{color:var(--ink)}
+.legal-body h3{font-size:16px;margin:32px 0 10px}
+.legal-body h3:first-child{margin-top:0}
+.legal-body p{font-size:14px;color:var(--body);line-height:1.75;margin-bottom:14px;max-width:680px}
+.legal-body p strong{color:var(--ink)}
+.legal-body ul{margin:0 0 14px 22px;max-width:680px}
+.legal-body li{font-size:14px;color:var(--body);line-height:1.75;margin-bottom:6px}
+.legal-body a{color:var(--accent);text-decoration:none}
+.legal-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:28px;letter-spacing:.04em}
+@media(max-width:900px){
+  .legal-layout{grid-template-columns:1fr;gap:32px}
+  .legal-toc{position:static;border-left:none;padding-left:0;border-top:1px solid var(--line-strong);padding-top:16px}
+  .legal-toc-label{margin-top:0}
+}
+/* ============================================================
+   CTA BAND + FOOTER (shared)
+   ============================================================ */
+.cta-band{
+  
+  background:
+    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(63,107,0,.10), transparent 70%),
+    var(--bg2);
+}
+html.dark .cta-band{
+  background:
+    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(143,206,58,.12), transparent 70%),
+    var(--bg2);
+}
+.cta-band .wrap{padding:72px 48px;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
+.cta-band h2{margin-bottom:8px;font-size:clamp(24px,2.8vw,34px)}
+.cta-band p{font-size:15px;color:var(--body)}
+.btn-primary{background:var(--accent);color:#fff;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14.5px;padding:15px 30px;text-decoration:none;letter-spacing:-.005em;display:inline-flex;align-items:center;gap:8px;transition:opacity .15s}
+html.dark .btn-primary{color:#0e1206}
+.btn-primary:hover{opacity:.88}
+.btn-secondary{color:var(--ink);font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14.5px;padding:15px 28px;text-decoration:none;border:1px solid var(--line-strong);display:inline-flex;align-items:center;gap:8px;transition:border-color .15s,color .15s}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+footer{padding:56px 0 40px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand .logo{margin-bottom:14px}
+.footer-brand p{font-size:13.5px;color:var(--muted);line-height:1.7;max-width:280px}
+.footer-col h4{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col a{font-size:14px;color:var(--body);text-decoration:none;transition:color .15s}
+.footer-col a:hover{color:var(--ink)}
+.footer-bottom{padding-top:28px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-copy{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none}
+.footer-legal a:hover{color:var(--ink)}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:36px}.footer-brand{grid-column:1/-1}}
+@media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
+
+@media(max-width:900px){.wrap{padding:0 28px}.nav-inner{padding:0 28px}.section{padding:72px 0}}
+
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+
+/* ============================================================
+   DESIGN SYSTEM: SINGLE CLEAN BLOCK
+   ============================================================ */
+
+/* Rounded corners: buttons */
+.btn-primary,.btn-secondary,.nav-cta,
+.sandbox-trigger,.sandbox-approve,.sandbox-dismiss,
+.price-cta-primary,.price-cta-secondary,.theme-toggle{border-radius:8px}
+
+/* Rounded corners: tags and badges */
+.ledger-tag,.cycle-tag,.wtl-card-tag,.confidence,
+.platform-logo-badge,.limited-tag,.price-badge,
+.sandbox-badge,.sandbox-result-note,.delta-up,.delta-down,
+.hero-eyebrow-tag,.icp-mark{border-radius:8px}
+
+/* Rounded corners + overflow clipping on all card containers */
+.ledger,.spread-card,.sandbox,.platform-logo-card,.pricing-grid,
+.access-table,.wtl-cards,.roi-wrap,.leak-calc,.ba-grid,
+.cta-band,.faq-list,.principles-grid,.proof-list,.lifecycle-list{
+  border-radius:8px;overflow:hidden
+}
+
+/* Shadow elevation */
+.ledger,.sandbox,.pricing-grid,.access-table{box-shadow:var(--shadow-lg)}
+.spread-card,.wtl-cards,.leak-calc,.ba-grid{box-shadow:var(--shadow-md)}
+.platform-logo-card,.cta-band,.price-card{box-shadow:var(--shadow-sm)}
+
+/* Section color transitions: gradient not hard cut */
+.alt-bg{background:transparent}
+section.alt-bg,div.alt-bg{
+  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)
+}
+.trust-strip{
+  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg2) 55%,var(--bg) 100%)
+}
+
+/* No section dividers */
+.section-border-t{border-top:none}
+.hero{border-bottom:none}
+.page-header{border-bottom:none}
+.trust-strip{border-bottom:none}
+.process-bar{border-bottom:none}
+.footer-bottom{border-top:none}
+
+/* Nav: no underlines anywhere in nav or mobile drawer */
+nav a,.logo,.nav-cta,.mobile-drawer a,.mobile-drawer .nav-cta{text-decoration:none}
+
+/* Mobile drawer: clean CTA button text visibility */
+.mobile-drawer .nav-cta{color:#fff;border-bottom:none;display:block}
+html.dark .mobile-drawer .nav-cta{color:#0e1206}
+
+/* Body links: underline, excluding nav and buttons */
+a:not(.nav-cta):not(.btn-primary):not(.btn-secondary):not(.price-cta-primary):not(.price-cta-secondary):not(.logo):not(.sandbox-approve):not(.sandbox-dismiss):not(.sandbox-info-btn){
+  text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px
+}
+nav a,.logo,.mobile-drawer a,.btn-primary,.btn-secondary{text-decoration:none}
+.footer-col a,.ledger-foot a{text-decoration:underline;text-underline-offset:3px}
+
+
+/* ── FIX PASS 3 ────────────────────────────────────────────────────────────── */
+
+/* 1. Nav underlines, !important to beat high-specificity a:not() rule */
+nav a,.mobile-drawer a,.mobile-drawer .nav-cta,.nav-links a,.logo,footer .logo{text-decoration:none !important}
+
+/* 9. Theme toggle: compact emoji style */
+.theme-toggle{font-size:16px;padding:6px 8px;line-height:1;border-radius:8px;min-width:0;letter-spacing:0}
+.mobile-drawer-head{gap:16px}
+
+/* 2. Founder mark: no border, elevated shadow */
+.founder-mark{border:none !important;box-shadow:0 12px 40px rgba(0,0,0,.18),0 4px 12px rgba(0,0,0,.10) !important}
+html.dark .founder-mark{box-shadow:0 12px 40px rgba(0,0,0,.55),0 4px 12px rgba(0,0,0,.35) !important}
+.founder-mark svg{width:80px !important;height:80px !important}
+
+/* 3. Fit section: no outer border */
+.icp-strip{border:none !important;padding:0 !important}
+
+/* 5. Pipeline: no outer border, tags + num badges rounded */
+.wtl-cards{border:none !important}
+.wtl-card-tag{border-radius:8px !important}
+.wtl-num{border-radius:50% !important;box-shadow:var(--shadow-sm)}
+
+/* 6. Platforms: no outer border, individual cards with gaps */
+.platform-logo-grid{border:none !important;gap:16px !important}
+.platform-logo-card{border:1px solid var(--line-strong) !important;border-radius:8px !important;border-right:1px solid var(--line-strong) !important}
+
+/* 7. Pricing: addon-strip + roi-wrap rounded */
+.addon-strip{border-radius:8px !important}
+.roi-wrap{border-radius:8px !important}
+
+/* 8. Contact: outer containers rounded */
+.expect-list{border-radius:8px !important;overflow:hidden}
+.contact-form-wrap{border-radius:8px !important}
+.guarantee-box{border-radius:8px !important}
+.success-box{border-radius:8px !important}
+.form-input,.form-textarea{border-radius:6px !important}
+
+/* 4. CTA band: consistent gradient card across all pages */
+.cta-band-inner{
+  border:1px solid var(--line-strong);border-radius:10px;
+  padding:56px 64px;
+  display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;
+  background:radial-gradient(ellipse 60% 120% at 90% 50%,rgba(63,107,0,.10),transparent 70%),var(--card);
+  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(63,107,0,.18)
+}
+html.dark .cta-band-inner{
+  background:radial-gradient(ellipse 60% 120% at 90% 50%,rgba(143,206,58,.12),transparent 70%),var(--card);
+  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(143,206,58,.15)
+}
+.cta-band h2{margin-bottom:8px;font-size:clamp(24px,2.8vw,34px)}
+.cta-band p{font-size:15px;color:var(--body)}
+@media(max-width:760px){.cta-band-inner{padding:36px 28px}}
+
+/* 10. Section gradients: smooth blend top AND bottom, !important beats source */
+.alt-bg{background:transparent !important}
+section.alt-bg,div.alt-bg{
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 18%,var(--bg2) 82%,var(--bg) 100%) !important
+}
+.trust-strip{
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 15%,var(--bg2) 70%,var(--bg) 100%) !important;
+  border-bottom:none !important
+}
+
+
+/* ── ROUND 4 FIXES ─────────────────────────────────────────────────────────── */
+
+/* 1. Theme toggle: SVG-sized, no text */
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;padding:0;font-size:0;
+  border-radius:8px;margin-left:16px
+}
+.theme-toggle svg{display:block}
+
+/* 2. Pipeline: icon-wrap and tech-tag rounded */
+.process-icon-wrap{border-radius:8px !important}
+.tech-tag{border-radius:8px !important}
+
+/* 3. Pricing ROI results inner grid: rounded */
+.roi-results{border-radius:8px !important;overflow:hidden !important}
+
+/* 4. CTA band: remove outer card shadow/radius, inner card only */
+.cta-band{
+  border-radius:0 !important;overflow:visible !important;
+  box-shadow:none !important
+}
+
+/* 5. Process bar: semi-transparent, no visible borders, blends with nav */
+.process-bar{
+  background:rgba(253,246,238,.72);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:none !important;
+  border-top:none !important
+}
+html.dark .process-bar{
+  background:rgba(21,23,29,.72)
+}
+/* Also remove nav bottom border so nav+processbar merge cleanly */
+nav{border-bottom:none !important}
+
+
+/* Hero background logos */
+.hero-bg-logo{
+  position:absolute;z-index:0;pointer-events:none;
+  opacity:.07;color:var(--ink)
+}
+html.dark .hero-bg-logo{opacity:.09}
+@media(max-width:900px){.hero-bg-logo{display:none}}
+
+
+
+/* ── ROUND 5 FIXES ─────────────────────────────────────────────────────────── */
+
+/* 2. CTA band: remove border-top/bottom hard lines on all pages */
+.cta-band{border-top:none !important;border-bottom:none !important}
+
+/* 3. Pipeline process-grid: rounded corners + overflow:hidden to clip children */
+.process-grid{border-radius:8px !important;overflow:hidden !important}
+
+/* 4. Contact page: form-submit button and select fields rounded */
+.form-submit{border-radius:8px !important}
+.form-select{border-radius:8px !important}
+
+/* 5. Founder logo standalone */
+.founder-logo-standalone{
+  width:120px;height:auto;display:block;
+  color:var(--ink);
+  filter:drop-shadow(0 10px 28px rgba(0,0,0,.14)) drop-shadow(0 3px 8px rgba(0,0,0,.09));
+  margin-bottom:0
+}
+html.dark .founder-logo-standalone{
+  filter:drop-shadow(0 10px 28px rgba(0,0,0,.55)) drop-shadow(0 3px 8px rgba(0,0,0,.30))
+}
+
+/* 6. Hero background logos: image-based, more visible */
+.hero-bg-logo{
+  position:absolute;z-index:0;pointer-events:none;
+  opacity:.16;mix-blend-mode:multiply;object-fit:contain
+}
+html.dark .hero-bg-logo{opacity:.15;mix-blend-mode:screen}
+@media(max-width:900px){.hero-bg-logo{display:none}}
+
+/* Platform logo icon: image-based */
+.platform-logo-icon img{
+  width:40px;height:40px;object-fit:contain;display:block
+}
+
+
+/* ── ROUND 6 FIXES ─────────────────────────────────────────────────────────── */
+
+/* 1. CTA band: force correct gradient border (accent-line glow) on all pages */
+.cta-band-inner{
+  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(63,107,0,.20) !important;
+  background:
+    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(63,107,0,.10), transparent 70%),
+    var(--card) !important
+}
+html.dark .cta-band-inner{
+  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(143,206,58,.18) !important;
+  background:
+    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(143,206,58,.12), transparent 70%),
+    var(--card) !important
+}
+
+/* 2. Founder logo: elevated, larger */
+.founder-logo-standalone{
+  width:160px !important;
+  filter:
+    drop-shadow(0 0 18px rgba(143,206,58,.22))
+    drop-shadow(0 14px 36px rgba(0,0,0,.20))
+    drop-shadow(0 4px 10px rgba(0,0,0,.12)) !important
+}
+html.dark .founder-logo-standalone{
+  filter:
+    drop-shadow(0 0 22px rgba(143,206,58,.35))
+    drop-shadow(0 14px 36px rgba(0,0,0,.65))
+    drop-shadow(0 4px 10px rgba(0,0,0,.40)) !important
+}
+
+/* 3. Spend-tiers: rounded corners */
+.spend-tiers{border-radius:8px !important;overflow:hidden !important}
+
+/* 4. Green dot: pulse / bip animation */
+.dot{position:relative;overflow:visible}
+.dot::before{
+  content:'';
+  position:absolute;
+  inset:-3px;
+  border-radius:50%;
+  background:var(--accent);
+  opacity:0;
+  animation:dot-bip 2.4s ease-out infinite
+}
+@keyframes dot-bip{
+  0%{transform:scale(1);opacity:.7}
+  60%{transform:scale(2.8);opacity:0}
+  100%{transform:scale(2.8);opacity:0}
+}
+
+/* 5. ba-grid: remove outer card, just a layout wrapper */
+.ba-grid{
+  box-shadow:none !important;
+  border:none !important;
+  background:transparent !important
+}
+
+
+/* ================================================================
+   LIQUID GLASS SYSTEM (Make.com style)
+   ================================================================ */
+
+/* Glass variables: light mode */
+:root{
+  --glass-bg:       rgba(255,255,255,0.52);
+  --glass-border:   rgba(255,255,255,0.78);
+  --glass-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 8px 32px rgba(0,0,0,.07),
+    0 2px 8px  rgba(0,0,0,.04);
+  --glass-blur:     blur(22px) saturate(160%);
+}
+
+/* Glass variables: dark mode */
+html.dark{
+  --glass-bg:       rgba(255,255,255,0.042);
+  --glass-border:   rgba(255,255,255,0.10);
+  --glass-shadow:
+    0 1px 0 rgba(255,255,255,0.07) inset,
+    0 8px 32px rgba(0,0,0,.38),
+    0 2px 8px  rgba(0,0,0,.22);
+  --glass-blur:     blur(22px) saturate(140%);
+}
+
+/* Ambient blobs fixed to viewport, glass refracts these */
+body::before{
+  content:'';position:fixed;
+  width:900px;height:900px;border-radius:50%;
+  background:radial-gradient(circle,rgba(143,206,58,.07) 0%,transparent 68%);
+  top:-220px;right:-200px;pointer-events:none;z-index:-1;
+}
+body::after{
+  content:'';position:fixed;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(216,177,74,.055) 0%,transparent 68%);
+  bottom:5%;left:-180px;pointer-events:none;z-index:-1;
+}
+html.dark body::before{
+  background:radial-gradient(circle,rgba(143,206,58,.09) 0%,transparent 68%);
+}
+html.dark body::after{
+  background:radial-gradient(circle,rgba(216,177,74,.07) 0%,transparent 68%);
+}
+
+/* Apply glass to all card-level containers */
+.spread-card,
+.sandbox,
+.sandbox-card,
+.ledger,
+.platform-logo-card,
+.pricing-grid,
+.price-card,
+.access-table,
+.wtl-cards,
+.wtl-card,
+.leak-calc,
+.ba-card,
+.cta-band-inner,
+.expect-list,
+.contact-form-wrap,
+.guarantee-box,
+.success-box,
+.addon-strip,
+.roi-wrap,
+.process-item,
+.faq-item,
+.proof-row,
+.icp-strip{
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* Ledger head: slightly more opaque to separate from rows */
+.ledger-head{
+  background: rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-bottom-color: var(--glass-border) !important;
+}
+html.dark .ledger-head{
+  background: rgba(255,255,255,0.06) !important;
+}
+
+/* Forms: glass */
+.form-input,
+.form-select,
+.form-textarea{
+  background: rgba(255,255,255,0.35) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-color: var(--glass-border) !important;
+}
+html.dark .form-input,
+html.dark .form-select,
+html.dark .form-textarea{
+  background: rgba(255,255,255,0.05) !important;
+}
+
+/* Nav: already has blur, refine to match system */
+nav{
+  background: rgba(253,246,238,0.72) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.6) !important;
+}
+html.dark nav{
+  background: rgba(21,23,29,0.72) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+}
+
+/* Mobile drawer: glass */
+.mobile-drawer{
+  background: rgba(249,246,241,0.88) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+}
+html.dark .mobile-drawer{
+  background: rgba(21,23,29,0.88) !important;
+}
+
+/* Tags / badges: subtle glass tint */
+.ledger-tag,
+.cycle-tag,
+.wtl-card-tag,
+.confidence,
+.platform-logo-badge,
+.limited-tag,
+.price-badge,
+.sandbox-badge,
+.icp-mark,
+.tech-tag{
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* Sandbox info tooltip: glass */
+.sandbox-tooltip{
+  background: rgba(20,19,15,0.82) !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+  color: var(--ink) !important;
+}
+html:not(.dark) .sandbox-tooltip{
+  background: rgba(255,255,255,0.88) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--glass-border) !important;
+}
+
+/* ----------------------------------------------------------------
+   GLASS EXTENSIONS, sitewide.
+   Completes the base glass block above: footer, buttons (with a
+   fixed nav-cta text-contrast issue, see comment below), generic
+   card-surface containers, trust pills, a third ambient blob, and
+   slightly rounder corners for a more "liquid" read.
+   ---------------------------------------------------------------- */
+.card-surface,
+.pricing-teaser-card,
+.trust-item,
+.insight-card,
+.newsletter-card{
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* A third, cooler-toned blob for depth + a slow drift animation:
+   Apple/Make.com glass reads best when the blur has something
+   colorful and moving to refract. */
+body::before{ animation: glassDrift1 26s ease-in-out infinite alternate; }
+body::after{  animation: glassDrift2 22s ease-in-out infinite alternate; }
+.glass-blob-3{
+  content:'';position:fixed;width:640px;height:640px;border-radius:50%;
+  background:radial-gradient(circle,rgba(80,150,220,.06) 0%,transparent 68%);
+  top:38%;left:38%;pointer-events:none;z-index:-1;
+  animation: glassDrift3 30s ease-in-out infinite alternate;
+}
+html.dark .glass-blob-3{background:radial-gradient(circle,rgba(90,170,240,.09) 0%,transparent 68%)}
+@keyframes glassDrift1{from{transform:translate(0,0)}to{transform:translate(-40px,30px)}}
+@keyframes glassDrift2{from{transform:translate(0,0)}to{transform:translate(30px,-40px)}}
+@keyframes glassDrift3{from{transform:translate(0,0) scale(1)}to{transform:translate(20px,20px) scale(1.08)}}
+@media(prefers-reduced-motion:reduce){
+  body::before,body::after,.glass-blob-3{animation:none !important}
+}
+
+/* Buttons: primary stays solid for conversion clarity (a known glass
+   pitfall is translucent CTAs losing contrast) but gets a glass-style
+   inner sheen. Secondary / nav-cta become true frosted capsules. */
+.btn-primary{
+  position:relative;overflow:hidden;border-radius:999px;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -6px rgba(63,107,0,.45);
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%);
+  pointer-events:none;
+}
+.btn-secondary,.nav-cta{
+  border-radius:999px !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+/* .nav-cta originally relied on a solid dark background (color:var(--bg),
+   a light color, by design), now that the background is a light glass
+   panel in both themes, the text needs to switch to var(--ink) in BOTH
+   modes or it goes invisible in light mode. This was the "Get your
+   report" button reading as blank. */
+.nav-cta{color:var(--ink) !important}
+
+/* Pricing card CTAs and the theme toggle were still the old 8px-radius
+   design system default while every other button had already moved to
+   the glass pill treatment above. Bringing them in line. */
+.price-cta-primary{
+  border-radius:999px !important;position:relative;overflow:hidden;
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -6px rgba(63,107,0,.45);
+}
+.price-cta-primary::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%);
+  pointer-events:none;
+}
+.price-cta-secondary{
+  border-radius:999px !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+.theme-toggle{
+  border-radius:50% !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+  color: var(--ink) !important;
+}
+.theme-toggle:hover{border-color: var(--accent) !important}
+
+/* Footer: glass, matching nav */
+footer{
+  background: rgba(253,246,238,0.55) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  border-top: 1px solid var(--glass-border) !important;
+}
+html.dark footer{background: rgba(21,23,29,0.55) !important}
+
+/* Rounded corners throughout the glass surfaces read more "liquid" */
+.card-surface,.spread-card,.ledger,.pricing-teaser-card,.cta-band-inner,
+.insight-card,.newsletter-card{ border-radius:16px !important; }
+.ledger-head{ border-radius:16px 16px 0 0 !important; }
+.ledger-foot{ border-radius:0 0 16px 16px !important; }
+
+</style>
+</head>
+<body>
+<div class="glass-blob-3" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
+    <ul class="nav-links">
+      <li><a href="/how-it-works/">How it works</a></li>
+      <li><a href="/pricing/">Pricing</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/security/" class="current">Security &amp; Data</a></li>
+      <li><a href="/articles/">Articles</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+      <a href="/contact/" class="nav-cta">Get your report</a>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Menu" id="mobileMenuBtn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="mobile-drawer-head">
+    <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
+    <button class="mobile-drawer-close" id="mobileDrawerClose" aria-label="Close menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <a href="/how-it-works/">How it works</a>
+  <a href="/pricing/">Pricing</a>
+  <a href="/about/">About</a>
+  <a href="/security/">Security &amp; Data</a>
+  <a href="/articles/">Articles</a>
+  <a href="/contact/" class="nav-cta">Get your report</a>
+</div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="wrap">
+    <div class="page-header-eyebrow"><span class="dot"></span> Legal</div>
+    <h1>Privacy Policy</h1>
+    <p class="lede">How information is collected, used, and retained. For the technical detail on what's connected and why, see <a href="/security/">Security &amp; Data</a>.</p>
+  </div>
+</header>
+
+<section class="legal-section" id="privacy">
+  <div class="wrap">
+    <div class="legal-layout reveal">
+      <div class="legal-toc">
+        <div class="legal-toc-label">On this page</div>
+        <a href="#privacy-who">Who we are</a>
+        <a href="#privacy-collect">What we collect</a>
+        <a href="#privacy-use">How we use it</a>
+        <a href="#privacy-storage">Storage and security</a>
+        <a href="#privacy-rights">Your rights</a>
+        <a href="#privacy-cookies">Cookies</a>
+      </div>
+      <div class="legal-body">
+        <p class="legal-meta">Last updated: June 2026</p>
+
+        <h3 id="privacy-who">Who we are</h3>
+        <p>7Captur is a decision-intelligence service for e-commerce store owners. We are the data controller for information you provide through this site and through onboarding. For any privacy questions, contact <a href="mailto:privacy@7captur.com">privacy@7captur.com</a>.</p>
+
+        <h3 id="privacy-collect">What we collect</h3>
+        <p>When you submit a demo request, we collect your name, email address, store URL, e-commerce platform, and any information you share in the free-text field describing your current data challenges.</p>
+        <p>When onboarded as a client, we connect to your store platform, ad accounts, and email tools via their official APIs, accessing only the scopes described on the <a href="/security/">Security &amp; Data page</a>.</p>
+
+        <h3 id="privacy-use">How we use it</h3>
+        <ul>
+          <li>To respond to your demo request and schedule a call</li>
+          <li>To configure and run your weekly Assisted Execution report</li>
+          <li>To improve the accuracy of the underlying calculation over time</li>
+          <li>We do not sell, rent, or share your data with third parties for marketing purposes, ever</li>
+        </ul>
+
+        <h3 id="privacy-storage">Storage and security</h3>
+        <p>Data is encrypted in transit and at rest. Contact form submissions are retained for up to 12 months. Client store data is retained only while your engagement is active, and deleted within 30 days of termination upon request. Full detail on what's connected, how it's encrypted, and when it's deleted lives on the <a href="/security/">Security &amp; Data page</a>, this section just covers the legal basics.</p>
+
+        <h3 id="privacy-rights">Your rights</h3>
+        <p>You have the right to access, correct, or delete the personal data we hold about you, and to withdraw consent at any time. To exercise any of these rights, email <a href="mailto:privacy@7captur.com">privacy@7captur.com</a>.</p>
+
+        <h3 id="privacy-cookies">Cookies</h3>
+        <p>This website uses no tracking cookies, third-party analytics scripts, or advertising pixels of any kind.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="wrap">
+    <div class="cta-band-inner">
+      <div>
+        <h2>Questions about how your data is handled?</h2>
+        <p>Happy to walk through the exact API scopes before you connect anything.</p>
+      </div>
+      <a href="/contact/" class="btn-primary">Get your report →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
+        <p>Assisted execution for e-commerce ad spend.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="/how-it-works/">How it works</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/how-it-works/#platforms">Platforms</a></li>
+          <li><a href="/articles/">Articles</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/security/">Security &amp; data</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get started</h4>
+        <ul>
+          <li><a href="/contact/">Get your report</a></li>
+          <li><a href="/pricing/">View pricing</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 7Captur</div>
+      <div class="footer-legal">
+        <a href="/privacy-policy/">Privacy policy</a>
+        <a href="/terms-of-service/">Terms of service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+function setTheme(t){
+  root.classList.toggle('dark', t === 'dark');
+  toggle.innerHTML = t === 'dark' ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>` : `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+  try { localStorage.setItem('theme', t); } catch(e) {}
+}
+let saved = 'light';
+try { saved = localStorage.getItem('theme') || 'light'; } catch(e) {}
+setTheme(saved);
+toggle.addEventListener('click', () => setTheme(root.classList.contains('dark') ? 'light' : 'dark'));
+
+const drawer = document.getElementById('mobileDrawer');
+document.getElementById('mobileMenuBtn').addEventListener('click', () => drawer.classList.add('open'));
+document.getElementById('mobileDrawerClose').addEventListener('click', () => drawer.classList.remove('open'));
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
