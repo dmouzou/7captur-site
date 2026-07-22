@@ -1225,6 +1225,53 @@ html.dark .newsletter-submit{color:#0e1206}
 
   </div>
 </section>
+<style>
+.vow-teaser-wrap-article{padding:8px 0 4px}
+.vow-teaser{
+  display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;
+  text-decoration:none;color:var(--body);font-size:13px;padding:10px 0;
+}
+.vow-teaser:hover{color:var(--ink)}
+.vow-teaser-icon{color:var(--accent);font-size:12px}
+.vow-teaser strong{color:var(--ink);font-weight:600}
+.vow-teaser-cta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.03em}
+</style>
+<div class="vow-teaser-wrap-article">
+  <div class="wrap">
+    <a href="#" id="vowTeaser" class="vow-teaser" style="display:none" target="_blank" rel="noopener">
+      <span class="vow-teaser-icon">&#9654;</span>
+      <span>Video of the week: <strong id="vowTeaserTitle"></strong></span>
+      <span class="vow-teaser-cta">Watch on YouTube &rarr;</span>
+    </a>
+  </div>
+</div>
+<script>
+(function(){
+  fetch('/assets/data/video.json', {cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('no video.json'); return r.json(); })
+    .then(function(data){
+      if(!data || !data.title) { return; }
+      var isFile = data.source === 'file' && data.filePath;
+      var isYoutube = (data.source === 'youtube' || !data.source) && data.youtubeId && data.youtubeId !== 'REPLACE_YOUTUBE_ID';
+      if(!isFile && !isYoutube){ return; }
+      var el = document.getElementById('vowTeaser');
+      var ctaEl = el.querySelector('.vow-teaser-cta');
+      document.getElementById('vowTeaserTitle').textContent = data.title || '';
+      if(isYoutube){
+        el.href = data.url || ('https://www.youtube.com/watch?v=' + data.youtubeId);
+        el.target = '_blank';
+        ctaEl.textContent = 'Watch on YouTube \u2192';
+      } else {
+        el.href = '/articles/#video-of-the-week';
+        el.removeAttribute('target');
+        ctaEl.textContent = 'Watch on the Articles page \u2192';
+      }
+      el.style.display = 'inline-flex';
+    })
+    .catch(function(){ /* stays hidden */ });
+})();
+</script>
+
 <section class="newsletter-section">
   <div class="wrap">
     <div class="newsletter-card">
@@ -1285,13 +1332,12 @@ html.dark .newsletter-submit{color:#0e1206}
         <ul>
           <li><a href="/about/">About</a></li>
           <li><a href="/security/">Security &amp; data</a></li>
-          <li><a href="/contact/">Get your report</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Get started</h4>
         <ul>
-          <li><a href="/contact/">Book a walkthrough</a></li>
+          <li><a href="/contact/">Get your report</a></li>
           <li><a href="/pricing/">View pricing</a></li>
         </ul>
       </div>
@@ -1299,8 +1345,8 @@ html.dark .newsletter-submit{color:#0e1206}
     <div class="footer-bottom">
       <div class="footer-copy">© 2026 7Captur</div>
       <div class="footer-legal">
-        <a href="/security/#privacy">Privacy policy</a>
-        <a href="/security/#terms">Terms of service</a>
+        <a href="/privacy-policy/">Privacy policy</a>
+        <a href="/terms-of-service/">Terms of service</a>
       </div>
     </div>
   </div>
