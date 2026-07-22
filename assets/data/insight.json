@@ -6,8 +6,7 @@
   "postId": "example-placeholder-0001",
   "hashtags": ["ROAS", "Ecommerce", "PaidMedia"],
   "media": {
-    "type": "image",
-    "url": "assets/data/media/2026-07-22.png",
-    "alt": "28% Median Meta ROAS decline from Q1 to Q2 2026"
+    "type": "",
+    "url": ""
   }
 }
