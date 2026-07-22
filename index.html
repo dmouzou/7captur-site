@@ -4,17 +4,17 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>7Captur | Assisted Execution for E-Commerce Ad Spend</title>
-  <meta name="description" content="True ROAS calculation after COGS, returns, and fees. Weekly reports for Shopify and Meta ads brands spending $5k+/month.">
+  <meta name="description" content="Every week, 7Captur shows what your Shopify and Meta ad spend actually earns after real costs, then proposes what to change. You approve every decision.">
   <link rel="canonical" href="https://7captur.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="7Captur">
   <meta property="og:title" content="7Captur | Assisted Execution for E-Commerce Ad Spend">
-  <meta property="og:description" content="True ROAS calculation after COGS, returns, and fees. Weekly reports for Shopify and Meta ads brands spending $5k+/month.">
+  <meta property="og:description" content="Every week, 7Captur shows what your Shopify and Meta ad spend actually earns after real costs, then proposes what to change. You approve every decision.">
   <meta property="og:url" content="https://7captur.com/">
   <meta property="og:image" content="https://7captur.com/assets/og/og-default.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="7Captur | Assisted Execution for E-Commerce Ad Spend">
-  <meta name="twitter:description" content="True ROAS calculation after COGS, returns, and fees. Weekly reports for Shopify and Meta ads brands spending $5k+/month.">
+  <meta name="twitter:description" content="Every week, 7Captur shows what your Shopify and Meta ad spend actually earns after real costs, then proposes what to change. You approve every decision.">
   <meta name="twitter:image" content="https://7captur.com/assets/og/og-default.png">
   <link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: light)">
   <link rel="icon" href="/favicon-dark.png"  media="(prefers-color-scheme: dark)">
@@ -1108,43 +1108,6 @@ html.dark footer{background: rgba(21,23,29,0.55) !important}
 </div>
 
 <!-- ============================================================
-     PROCESS BAR: sticky, sits just under the fixed nav
-     ============================================================ -->
-<style>
-.process-bar{
-  position:sticky;top:72px;z-index:150;
-  background:var(--bg);border-bottom:1px solid var(--line);
-}
-.process-bar-inner{
-  max-width:1180px;margin:0 auto;padding:10px 48px;
-  display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;
-}
-.process-bar-step{
-  display:flex;align-items:center;gap:6px;
-  font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink);
-  white-space:nowrap;border:1px solid var(--line-strong);background:var(--card);
-  border-radius:999px;padding:6px 13px;
-}
-.process-bar-step.is-active{color:var(--accent);border-color:var(--accent-line)}
-.process-bar-divider{color:var(--muted);margin:0 10px;font-size:12px}
-@media(max-width:900px){
-  .process-bar-inner{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;padding:10px 28px}
-  .process-bar-divider{margin:0 8px}
-}
-</style>
-<div class="process-bar">
-  <div class="process-bar-inner">
-    <div class="process-bar-step"><span>🔐</span><span>Connect API</span></div>
-    <span class="process-bar-divider">→</span>
-    <div class="process-bar-step"><span>📊</span><span>7-Day Silent Read</span></div>
-    <span class="process-bar-divider">→</span>
-    <div class="process-bar-step"><span>📋</span><span>Monday Report</span></div>
-    <span class="process-bar-divider">→</span>
-    <div class="process-bar-step is-active"><span>✅</span><span>You Approve &amp; Execute</span></div>
-  </div>
-</div>
-
-<!-- ============================================================
      HERO
      ============================================================ -->
 <header class="hero">
@@ -1167,30 +1130,305 @@ html.dark footer{background: rgba(21,23,29,0.55) !important}
   <div class="wrap">
     <div class="hero-top">
       <div class="hero-eyebrow"><span class="dot"></span> Assisted Execution for E-Commerce Ad Spend</div>
-      <h1><span class="sr-only">True ROAS Calculator &amp; Weekly Ad Spend Optimization for Shopify and Meta Ads Brands. </span>True profitability calculated weekly, with <span class="accent-word">execution proposed</span>, never automatic.</h1>
-      <p class="hero-sub">Ad platforms report ROAS before returns, fees, and cost of goods. 7Captur recalculates it after, then proposes three specific budget actions every Monday, each with a confidence score and an exact dollar impact. <strong>You approve every change.</strong></p>
+      <h1>Skip the dashboard. Turn your numbers into <span class="accent-word">decisions</span>.</h1>
+      <p class="hero-sub">Most founders can't say for sure whether their ad spend is working. Platforms report a number before returns, fees, and cost of goods are taken out, so it looks better than it really is. 7Captur recalculates it after those costs, then proposes three specific budget actions every Monday. <strong>You approve every change.</strong></p>
       <div class="hero-actions">
         <a href="/contact/" class="btn-primary">Get your report →</a>
         <a href="/how-it-works/" class="btn-secondary">See how it works</a>
       </div>
     </div>
+  </div>
+</header>
 
-    <div class="hero-meta-row">
-      <div class="hero-meta-item">
-        <span class="hero-meta-num">3</span>
-        <span class="hero-meta-label mono">Decisions delivered each Monday, before 9am</span>
+<!-- ============================================================
+     THE GAP, EXPLAINED ONCE, PLAINLY
+     ============================================================ -->
+<style>
+.gap-section{padding:56px 0 8px}
+.gap-text{font-size:1.0625rem;line-height:1.8;color:var(--body);max-width:760px}
+.gap-text strong{color:var(--ink);font-weight:600}
+</style>
+<section class="gap-section">
+  <div class="wrap">
+    <div class="eyebrow">The Gap</div>
+    <p class="gap-text">Meta and Google report ROAS the moment someone buys. That number leaves three things out. <strong>Cost of goods</strong>, what it actually cost you to make or source the product. <strong>Returns</strong>, sales that get refunded weeks later. <strong>Fees</strong>, what payment processing and fulfilment take off the top. Once those are subtracted, a campaign that looked profitable can be break-even or losing money. 7Captur does that subtraction every week and tells you which campaigns are which.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     ROAS LEAK CALCULATOR
+     ============================================================ -->
+<style>
+.leak-calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.leak-calc-inputs{padding:40px}
+.leak-calc-results{padding:40px}
+.leak-slider{margin-bottom:26px}
+.leak-slider:last-child{margin-bottom:0}
+.leak-slider-label{
+  display:flex;justify-content:space-between;
+  font-size:13.5px;color:var(--body);
+  margin-bottom:10px;
+}
+.leak-slider-label .val{font-family:'IBM Plex Mono',monospace;color:var(--ink);font-size:13px}
+.leak-slider input[type="range"]{
+  width:100%;height:3px;border-radius:2px;background:var(--line-strong);
+  outline:none;-webkit-appearance:none;
+}
+.leak-slider input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:15px;height:15px;border-radius:50%;
+  background:var(--accent);cursor:pointer;box-shadow:0 0 0 4px var(--accent-soft);
+}
+.leak-slider input[type="range"]::-moz-range-thumb{
+  width:15px;height:15px;border-radius:50%;background:var(--accent);cursor:pointer;border:none;
+}
+.leak-result-row{padding:16px 0;border-bottom:1px solid var(--line-strong)}
+.leak-result-row:last-of-type{border-bottom:none}
+.leak-result-row .label{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.leak-result-row .value{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:24px;color:var(--muted);display:block;margin-top:4px}
+.leak-result-row.is-true .value{color:var(--ink)}
+.leak-result-row.is-leak .value{color:var(--gold);font-size:38px;margin-top:6px}
+.leak-disclaimer{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6}
+@media(max-width:900px){
+  .leak-calc-grid{grid-template-columns:1fr;gap:20px}
+  .leak-calc-inputs,.leak-calc-results{padding:28px 24px}
+}
+</style>
+
+<section class="section-tight" id="gap-calc">
+  <div class="wrap">
+    <div class="eyebrow">See it yourself</div>
+    <h2>Reported vs. true. Move the sliders to match your store.</h2>
+    <p class="lede" style="margin-bottom:40px">This runs the same math as your weekly report: the number your ad platform shows you, next to what's left after cost of goods, returns, and fees.</p>
+
+    <div class="leak-calc-grid">
+      <div class="card-surface leak-calc-inputs">
+        <div class="leak-slider">
+          <div class="leak-slider-label"><span>Monthly ad spend</span><span class="val num" id="lc-spend-val">$20,000</span></div>
+          <input type="range" id="lc-spend" min="1000" max="100000" step="500" value="20000">
+        </div>
+        <div class="leak-slider">
+          <div class="leak-slider-label"><span>Average COGS</span><span class="val num" id="lc-cogs-val">35%</span></div>
+          <input type="range" id="lc-cogs" min="0" max="80" step="1" value="35">
+        </div>
+        <div class="leak-slider">
+          <div class="leak-slider-label"><span>Return rate</span><span class="val num" id="lc-returns-val">12%</span></div>
+          <input type="range" id="lc-returns" min="0" max="40" step="1" value="12">
+        </div>
+        <div class="leak-slider">
+          <div class="leak-slider-label"><span>Payment processor fee</span><span class="val num" id="lc-fees-val">2.9%</span></div>
+          <input type="range" id="lc-fees" min="0" max="5" step="0.1" value="2.9">
+        </div>
       </div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-num">30%</span>
-        <span class="hero-meta-label mono">Maximum budget change per approved decision</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-num">24h</span>
-        <span class="hero-meta-label mono">Rollback window on every executed change</span>
+
+      <div class="card-surface accent-glow leak-calc-results">
+        <div class="leak-result-row">
+          <span class="label">Reported ROAS (platform view)</span>
+          <span class="value num" id="lc-reported">3.20×</span>
+        </div>
+        <div class="leak-result-row is-true">
+          <span class="label">True ROAS (after COGS, returns, fees)</span>
+          <span class="value num" id="lc-true">1.84×</span>
+        </div>
+        <div class="leak-result-row is-leak">
+          <span class="label">Annual profit leak</span>
+          <span class="value num" id="lc-leak">$163,200</span>
+        </div>
+        <p class="leak-disclaimer">This estimator assumes a 3.2× platform-reported ROAS baseline to show the mechanism. Your real report uses your account's actual numbers.</p>
       </div>
     </div>
   </div>
-</header>
+</section>
+
+<script>
+(function() {
+  const spend = document.getElementById('lc-spend');
+  const cogs = document.getElementById('lc-cogs');
+  const returns = document.getElementById('lc-returns');
+  const fees = document.getElementById('lc-fees');
+  const spendVal = document.getElementById('lc-spend-val');
+  const cogsVal = document.getElementById('lc-cogs-val');
+  const returnsVal = document.getElementById('lc-returns-val');
+  const feesVal = document.getElementById('lc-fees-val');
+  const reportedOut = document.getElementById('lc-reported');
+  const trueOut = document.getElementById('lc-true');
+  const leakOut = document.getElementById('lc-leak');
+  const REPORTED_ROAS = 3.2;
+
+  function fmtCurrency(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+
+  function calculate() {
+    const s = parseFloat(spend.value);
+    const c = parseFloat(cogs.value) / 100;
+    const r = parseFloat(returns.value) / 100;
+    const f = parseFloat(fees.value) / 100;
+
+    spendVal.textContent = fmtCurrency(s);
+    cogsVal.textContent = cogs.value + '%';
+    returnsVal.textContent = returns.value + '%';
+    feesVal.textContent = parseFloat(fees.value).toFixed(1) + '%';
+
+    const reportedRevenue = s * REPORTED_ROAS;
+    const afterReturns = reportedRevenue * (1 - r);
+    const afterCogs = afterReturns * (1 - c);
+    const afterFees = afterCogs * (1 - f);
+    const trueRoas = afterFees / s;
+
+    reportedOut.textContent = REPORTED_ROAS.toFixed(2) + '×';
+    trueOut.textContent = trueRoas.toFixed(2) + '×';
+    leakOut.textContent = fmtCurrency((reportedRevenue - afterFees) * 12);
+  }
+
+  [spend, cogs, returns, fees].forEach(el => el.addEventListener('input', calculate));
+  calculate();
+})();
+</script>
+
+<!-- ============================================================
+     WHAT HAPPENS NEXT: the loop
+     ============================================================ -->
+<style>
+.loop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.loop-item{padding:28px}
+.loop-item-num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.08em;margin-bottom:14px}
+.loop-item h3{margin-bottom:8px}
+.loop-item p{font-size:13.5px;color:var(--body);line-height:1.65}
+.loop-item p a{color:var(--accent)}
+@media(max-width:900px){.loop-grid{grid-template-columns:1fr}}
+</style>
+<section class="section-tight section-border-t">
+  <div class="wrap">
+    <div class="eyebrow">What Happens Next</div>
+    <h2>The loop, in three steps.</h2>
+    <p class="lede">Every week runs the same way. Nothing here changes without you.</p>
+    <div class="loop-grid">
+      <div class="loop-item card-surface">
+        <div class="loop-item-num">STEP 01</div>
+        <h3>Your report lands Monday</h3>
+        <p>Real ad spend, cost of goods, returns, and fees, recalculated into three specific budget decisions.</p>
+      </div>
+      <div class="loop-item card-surface">
+        <div class="loop-item-num">STEP 02</div>
+        <h3>You approve or dismiss</h3>
+        <p>Each decision needs your explicit approval before anything happens. Dismiss and nothing changes.</p>
+      </div>
+      <div class="loop-item card-surface">
+        <div class="loop-item-num">STEP 03</div>
+        <h3>Capped and reversible</h3>
+        <p>Approved changes are capped and can be rolled back. <a href="/security/">Full detail on the safety limits →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DECISION LEDGER: signature element
+     ============================================================ -->
+<section class="section-tight">
+  <div class="wrap">
+    <div class="ledger">
+      <div class="ledger-head">
+        <div class="ledger-head-left">
+          <strong>Sample Weekly Report, Illustrative Store</strong>
+          Week 22 · Shopify · Meta Ads
+        </div>
+        <div class="ledger-head-right">
+          <div>
+            <div class="ledger-kpi-label">Revenue</div>
+            <div class="ledger-kpi-val">$14,200<span class="delta-up">↑ 12% w/w</span></div>
+          </div>
+          <div>
+            <div class="ledger-kpi-label">Net margin</div>
+            <div class="ledger-kpi-val">4.1%<span class="delta-down">↓ 2.1 pts</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="ledger-rows">
+        <div class="ledger-row">
+          <div class="ledger-row-num">01</div>
+          <div class="ledger-row-body">
+            <h4>Pause "Summer Collection" <span class="ledger-tag tag-warn">True ROAS 0.9×</span></h4>
+          </div>
+          <div class="ledger-row-impact"><span class="impact-label">If approved</span>+$412 / wk</div>
+        </div>
+        <div class="ledger-row">
+          <div class="ledger-row-num">02</div>
+          <div class="ledger-row-body">
+            <h4>Scale "Bestsellers Retarget" <span class="ledger-tag tag-action">True ROAS 2.4×</span></h4>
+          </div>
+          <div class="ledger-row-impact"><span class="impact-label">If approved</span>+$310 / wk</div>
+        </div>
+        <div class="ledger-row">
+          <div class="ledger-row-num">03</div>
+          <div class="ledger-row-body">
+            <h4>Margin drop traced to payment processing <span class="ledger-tag tag-info">No ad change required</span></h4>
+          </div>
+          <div class="ledger-row-impact"><span class="impact-label">If approved</span>+$180 / mo</div>
+        </div>
+      </div>
+      <div class="ledger-foot">
+        <span>Illustrative report based on the 7Captur reporting format. Figures are representative, not from a live account.</span>
+        <a href="/how-it-works/#demo" style="color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:12.5px;text-decoration:none;white-space:nowrap">Try the live sandbox →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     POSITIONING STRIP (replaces fake client logos)
+     ============================================================ -->
+<div class="trust-strip" id="built-for">
+  <div class="wrap trust-strip-inner">
+    <div class="trust-label">Built for</div>
+    <div class="trust-items">
+      <span class="trust-item"><span class="dot"></span>Multi-market Shopify &amp; WooCommerce brands</span>
+      <span class="trust-item"><span class="dot"></span>$5k+/mo on Meta or Google Ads</span>
+      <span class="trust-item"><span class="dot"></span>DTC-first, founder or marketing-led teams</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PRICING TEASER
+     ============================================================ -->
+<section class="section alt-bg section-border-t">
+  <div class="wrap">
+    <div class="pricing-teaser">
+      <div>
+        <div class="eyebrow">Engagement Structure</div>
+        <h2>Start with 4 free weekly reports. Continue only if the numbers justify it.</h2>
+        <p class="lede" style="margin-bottom:32px">The first 30 days are free, for a limited time. At day 30, you receive a written summary of decisions delivered and approved, along with their estimated impact, and decide from there. If you continue, you move to the standard monthly retainer.</p>
+        <a href="/pricing/" class="btn-secondary">View full pricing →</a>
+      </div>
+      <div class="pricing-teaser-card">
+        <div class="phase-tag">Phase 1 · First 30 Days</div>
+        <div class="price-row"><span class="was">$49</span><span class="amount">$0</span><span class="period">today</span><span class="limited-tag">Limited time</span></div>
+        <div class="note">Normally $49. Free for the first 30 days, for a limited time only. <strong>If the 30-day summary doesn't justify continuing, you walk away with a full data export and no further obligation.</strong></div>
+        <ul class="pricing-feature-list">
+          <li><span class="ck">✓</span> Pipeline configured for your store and ad accounts</li>
+          <li><span class="ck">✓</span> 1 store + 2 ad platforms connected via API</li>
+          <li><span class="ck">✓</span> 4 weekly reports with approve/dismiss execution</li>
+          <li><span class="ck">✓</span> 30-day written ROI summary</li>
+        </ul>
+        <a href="/contact/" class="btn-primary" style="width:100%;justify-content:center">Get your report →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA BAND
+     ============================================================ -->
+<div class="cta-band">
+  <div class="wrap">
+    <div class="cta-band-inner">
+      <div>
+        <h2>See your numbers before you commit to anything.</h2>
+        <p>A 20-minute call, using your real store and ad account data. No pitch deck.</p>
+      </div>
+      <a href="/contact/" class="btn-primary">Get your report →</a>
+    </div>
+  </div>
+</div>
 
 <!-- ============================================================
      TODAY'S INSIGHT: pulls the latest LinkedIn post via
@@ -1439,433 +1677,6 @@ html.dark footer{background: rgba(21,23,29,0.55) !important}
 })();
 </script>
 
-<!-- ============================================================
-     ROAS LEAK CALCULATOR
-     ============================================================ -->
-<style>
-.leak-calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
-.leak-calc-inputs{padding:40px}
-.leak-calc-results{padding:40px}
-.leak-slider{margin-bottom:26px}
-.leak-slider:last-child{margin-bottom:0}
-.leak-slider-label{
-  display:flex;justify-content:space-between;
-  font-size:13.5px;color:var(--body);
-  margin-bottom:10px;
-}
-.leak-slider-label .val{font-family:'IBM Plex Mono',monospace;color:var(--ink);font-size:13px}
-.leak-slider input[type="range"]{
-  width:100%;height:3px;border-radius:2px;background:var(--line-strong);
-  outline:none;-webkit-appearance:none;
-}
-.leak-slider input[type="range"]::-webkit-slider-thumb{
-  -webkit-appearance:none;width:15px;height:15px;border-radius:50%;
-  background:var(--accent);cursor:pointer;box-shadow:0 0 0 4px var(--accent-soft);
-}
-.leak-slider input[type="range"]::-moz-range-thumb{
-  width:15px;height:15px;border-radius:50%;background:var(--accent);cursor:pointer;border:none;
-}
-.leak-result-row{padding:16px 0;border-bottom:1px solid var(--line-strong)}
-.leak-result-row:last-of-type{border-bottom:none}
-.leak-result-row .label{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
-.leak-result-row .value{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:24px;color:var(--muted);display:block;margin-top:4px}
-.leak-result-row.is-true .value{color:var(--ink)}
-.leak-result-row.is-leak .value{color:var(--gold);font-size:38px;margin-top:6px}
-.leak-disclaimer{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6}
-@media(max-width:900px){
-  .leak-calc-grid{grid-template-columns:1fr;gap:20px}
-  .leak-calc-inputs,.leak-calc-results{padding:28px 24px}
-}
-</style>
-
-<section class="section-tight">
-  <div class="wrap">
-    <div class="eyebrow">Try it yourself</div>
-    <h2>See your own leak, before you book anything.</h2>
-    <p class="lede" style="margin-bottom:40px">Move the sliders to match your store. This runs the same calculation used in every weekly report.</p>
-
-    <div class="leak-calc-grid">
-      <div class="card-surface leak-calc-inputs">
-        <div class="leak-slider">
-          <div class="leak-slider-label"><span>Monthly ad spend</span><span class="val num" id="lc-spend-val">$20,000</span></div>
-          <input type="range" id="lc-spend" min="1000" max="100000" step="500" value="20000">
-        </div>
-        <div class="leak-slider">
-          <div class="leak-slider-label"><span>Average COGS</span><span class="val num" id="lc-cogs-val">35%</span></div>
-          <input type="range" id="lc-cogs" min="0" max="80" step="1" value="35">
-        </div>
-        <div class="leak-slider">
-          <div class="leak-slider-label"><span>Return rate</span><span class="val num" id="lc-returns-val">12%</span></div>
-          <input type="range" id="lc-returns" min="0" max="40" step="1" value="12">
-        </div>
-        <div class="leak-slider">
-          <div class="leak-slider-label"><span>Payment processor fee</span><span class="val num" id="lc-fees-val">2.9%</span></div>
-          <input type="range" id="lc-fees" min="0" max="5" step="0.1" value="2.9">
-        </div>
-      </div>
-
-      <div class="card-surface accent-glow leak-calc-results">
-        <div class="leak-result-row">
-          <span class="label">Reported ROAS (platform view)</span>
-          <span class="value num" id="lc-reported">3.20×</span>
-        </div>
-        <div class="leak-result-row is-true">
-          <span class="label">True ROAS (after COGS, returns, fees)</span>
-          <span class="value num" id="lc-true">1.84×</span>
-        </div>
-        <div class="leak-result-row is-leak">
-          <span class="label">Annual profit leak</span>
-          <span class="value num" id="lc-leak">$163,200</span>
-        </div>
-        <p class="leak-disclaimer">Illustrative calculation assuming a 3.2× platform-reported ROAS baseline. Your actual reported ROAS varies by account; this tool shows the mechanism, not a quote.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script>
-(function() {
-  const spend = document.getElementById('lc-spend');
-  const cogs = document.getElementById('lc-cogs');
-  const returns = document.getElementById('lc-returns');
-  const fees = document.getElementById('lc-fees');
-  const spendVal = document.getElementById('lc-spend-val');
-  const cogsVal = document.getElementById('lc-cogs-val');
-  const returnsVal = document.getElementById('lc-returns-val');
-  const feesVal = document.getElementById('lc-fees-val');
-  const reportedOut = document.getElementById('lc-reported');
-  const trueOut = document.getElementById('lc-true');
-  const leakOut = document.getElementById('lc-leak');
-  const REPORTED_ROAS = 3.2;
-
-  function fmtCurrency(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
-
-  function calculate() {
-    const s = parseFloat(spend.value);
-    const c = parseFloat(cogs.value) / 100;
-    const r = parseFloat(returns.value) / 100;
-    const f = parseFloat(fees.value) / 100;
-
-    spendVal.textContent = fmtCurrency(s);
-    cogsVal.textContent = cogs.value + '%';
-    returnsVal.textContent = returns.value + '%';
-    feesVal.textContent = parseFloat(fees.value).toFixed(1) + '%';
-
-    const reportedRevenue = s * REPORTED_ROAS;
-    const afterReturns = reportedRevenue * (1 - r);
-    const afterCogs = afterReturns * (1 - c);
-    const afterFees = afterCogs * (1 - f);
-    const trueRoas = afterFees / s;
-
-    reportedOut.textContent = REPORTED_ROAS.toFixed(2) + '×';
-    trueOut.textContent = trueRoas.toFixed(2) + '×';
-    leakOut.textContent = fmtCurrency((reportedRevenue - afterFees) * 12);
-  }
-
-  [spend, cogs, returns, fees].forEach(el => el.addEventListener('input', calculate));
-  calculate();
-})();
-</script>
-
-<!-- ============================================================
-     BEFORE/AFTER VISUAL PANELS
-     ============================================================ -->
-<style>
-.ba-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-.ba-card{padding:26px}
-.ba-card .eyebrow{margin-bottom:14px}
-.ba-roas{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:36px;margin-bottom:4px}
-.ba-roas.is-muted{color:var(--muted)}
-.ba-roas.is-accent{color:var(--accent)}
-.ba-roas-label{font-size:13px;color:var(--muted);margin-bottom:16px}
-.ba-card h4{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:15px;color:var(--ink);line-height:1.4}
-.ba-action-list{list-style:none;display:flex;flex-direction:column;gap:13px}
-.ba-action-item{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:var(--body)}
-.ba-action-item .check{color:var(--accent);flex-shrink:0;margin-top:1px}
-.ba-action-item .impact{font-family:'IBM Plex Mono',monospace;color:var(--accent);font-weight:500;margin-left:auto;white-space:nowrap}
-.ba-caption{text-align:center;font-size:12px;color:var(--muted);margin-top:20px}
-@media(max-width:900px){ .ba-grid{grid-template-columns:1fr} }
-</style>
-
-<section class="section-tight section-border-t">
-  <div class="wrap">
-    <div class="eyebrow">Same campaign, three views</div>
-    <h2 style="margin-bottom:36px">What the dashboard hides.</h2>
-
-    <div class="ba-grid">
-      <div class="card-surface ba-card">
-        <div class="eyebrow">Platform says</div>
-        <div class="ba-roas num is-muted">3.2×</div>
-        <div class="ba-roas-label">Reported ROAS, "Bestsellers Retarget"</div>
-        <h4>Looks profitable on Meta's dashboard.</h4>
-      </div>
-
-      <div class="card-surface accent-glow ba-card">
-        <div class="eyebrow">True cost adjusted</div>
-        <div class="ba-roas num is-accent">1.9×</div>
-        <div class="ba-roas-label">After COGS, returns, and processing fees</div>
-        <h4>Still profitable, but less than half the picture you started with.</h4>
-      </div>
-
-      <div class="card-surface ba-card">
-        <div class="eyebrow">Our 3 actions</div>
-        <ul class="ba-action-list">
-          <li class="ba-action-item"><span class="check">✓</span><span>Scale this campaign 20%</span><span class="impact">+$200/wk</span></li>
-          <li class="ba-action-item"><span class="check">✓</span><span>Pause the lookalike adjacent set</span><span class="impact">-$150/wk</span></li>
-          <li class="ba-action-item"><span class="check">✓</span><span>Shift budget to top SKU ad group</span><span class="impact">+$90/wk</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <p class="ba-caption">Illustrative example. Every action in a real report requires your approval before execution.</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     DECISION LEDGER: signature element
-     ============================================================ -->
-<section class="section-tight">
-  <div class="wrap">
-    <div class="ledger">
-      <div class="ledger-head">
-        <div class="ledger-head-left">
-          <strong>Sample Weekly Report, Illustrative Store</strong>
-          Week 22 · Shopify · Meta Ads
-        </div>
-        <div class="ledger-head-right">
-          <div>
-            <div class="ledger-kpi-label">Revenue</div>
-            <div class="ledger-kpi-val">$14,200<span class="delta-up">↑ 12% w/w</span></div>
-          </div>
-          <div>
-            <div class="ledger-kpi-label">Net margin</div>
-            <div class="ledger-kpi-val">4.1%<span class="delta-down">↓ 2.1 pts</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="ledger-rows">
-        <div class="ledger-row">
-          <div class="ledger-row-num">01</div>
-          <div class="ledger-row-body">
-            <h4>Pause "Summer Collection" <span class="ledger-tag tag-warn">True ROAS 0.9×</span></h4>
-          </div>
-          <div class="ledger-row-impact"><span class="impact-label">If approved</span>+$412 / wk</div>
-        </div>
-        <div class="ledger-row">
-          <div class="ledger-row-num">02</div>
-          <div class="ledger-row-body">
-            <h4>Scale "Bestsellers Retarget" <span class="ledger-tag tag-action">True ROAS 2.4×</span></h4>
-          </div>
-          <div class="ledger-row-impact"><span class="impact-label">If approved</span>+$310 / wk</div>
-        </div>
-        <div class="ledger-row">
-          <div class="ledger-row-num">03</div>
-          <div class="ledger-row-body">
-            <h4>Margin drop traced to payment processing <span class="ledger-tag tag-info">No ad change required</span></h4>
-          </div>
-          <div class="ledger-row-impact"><span class="impact-label">If approved</span>+$180 / mo</div>
-        </div>
-      </div>
-      <div class="ledger-foot">
-        <span>Illustrative report based on the 7Captur reporting format. Figures are representative, not from a live account.</span>
-        <a href="/how-it-works/#demo" style="color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:12.5px;text-decoration:none;white-space:nowrap">Try the live sandbox →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     POSITIONING STRIP (replaces fake client logos)
-     ============================================================ -->
-<div class="trust-strip">
-  <div class="wrap trust-strip-inner">
-    <div class="trust-label">Built for</div>
-    <div class="trust-items">
-      <span class="trust-item"><span class="dot"></span>Multi-market Shopify &amp; WooCommerce brands</span>
-      <span class="trust-item"><span class="dot"></span>$5k+/mo on Meta or Google Ads</span>
-      <span class="trust-item"><span class="dot"></span>DTC-first, founder or marketing-led teams</span>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================
-     PROBLEM FRAMING: the platform ROAS gap
-     ============================================================ -->
-<section class="section">
-  <div class="wrap">
-    <div class="problem-grid">
-      <div>
-        <div class="eyebrow">The Reporting Gap</div>
-        <h2>The number your ad platform shows you isn't the number that matters.</h2>
-        <p class="lede">Meta and Google report return on ad spend based on attributed revenue at the moment of purchase. They don't know your cost of goods. They don't know your return rate. They don't know your payment processing tier. 7Captur recalculates the figure with all three.</p>
-
-        <div class="problem-list">
-          <div class="problem-item">
-            <div class="problem-num">01</div>
-            <div>
-              <h4>Cost of goods is applied per SKU</h4>
-              <p>Margin varies by product. A campaign selling a high-margin SKU and a low-margin SKU at the same reported ROAS can have very different true profitability.</p>
-            </div>
-          </div>
-          <div class="problem-item">
-            <div class="problem-num">02</div>
-            <div>
-              <h4>Returns are factored on a 30-day lag</h4>
-              <p>A sale that looks profitable today can be a loss once the return window closes. 7Captur applies a return-rate adjustment and discloses the lag explicitly in every report.</p>
-            </div>
-          </div>
-          <div class="problem-item">
-            <div class="problem-num">03</div>
-            <div>
-              <h4>Platform fees are reconciled monthly</h4>
-              <p>Payment processing tiers, fulfilment costs, and plan-level fees are blended into the margin calculation, so a "performance" problem that's actually a billing problem gets correctly identified.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div class="spread-card">
-          <div class="spread-card-head">
-            <div class="eyebrow">Reported vs. True</div>
-            <h3>Same campaign, three platforms</h3>
-          </div>
-          <div class="spread-row is-loss">
-            <div class="spread-row-label">Campaign #4182, Summer Collection</div>
-            <div class="spread-row-vals">
-              <div class="spread-val"><div class="spread-val-num">1.8×</div><div class="spread-val-label">Reported</div></div>
-              <div class="spread-val"><div class="spread-val-num is-true">0.9×</div><div class="spread-val-label">True ROAS</div></div>
-            </div>
-          </div>
-          <div class="spread-row">
-            <div class="spread-row-label">Campaign #4178, Bestsellers Retarget</div>
-            <div class="spread-row-vals">
-              <div class="spread-val"><div class="spread-val-num">2.6×</div><div class="spread-val-label">Reported</div></div>
-              <div class="spread-val"><div class="spread-val-num">2.4×</div><div class="spread-val-label">True ROAS</div></div>
-            </div>
-          </div>
-          <div class="spread-row is-loss">
-            <div class="spread-row-label">Campaign #4165, New Arrivals Broad</div>
-            <div class="spread-row-vals">
-              <div class="spread-val"><div class="spread-val-num">1.4×</div><div class="spread-val-label">Reported</div></div>
-              <div class="spread-val"><div class="spread-val-num is-true">0.96×</div><div class="spread-val-label">True ROAS</div></div>
-            </div>
-          </div>
-          <div class="spread-card-foot">
-            Two of three campaigns are break-even or losing money after cost of goods, fees, and returns, despite all three reporting a "profitable" ROAS on-platform. <strong>This is the gap 7Captur is built to close.</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     MECHANISM: how True ROAS is calculated
-     ============================================================ -->
-<section class="section alt-bg section-border-t">
-  <div class="wrap">
-    <div class="eyebrow">The Calculation</div>
-    <h2>True ROAS, broken down.</h2>
-    <p class="lede">Four inputs are blended into a single weekly figure per campaign. Each is disclosed in the report, and nothing is a black box.</p>
-
-    <div class="mech-grid">
-      <div class="mech-item card-surface">
-        <div class="mech-item-num">INPUT 01</div>
-        <h3>Attributed revenue</h3>
-        <p>Pulled directly from Meta and Google Ads via API, using the same attribution window your platform already reports.</p>
-        <div class="mech-item-formula">Source: Ad platform API<br>Refresh: Weekly</div>
-      </div>
-      <div class="mech-item card-surface">
-        <div class="mech-item-num">INPUT 02</div>
-        <h3>Cost of goods</h3>
-        <p>SKU-level COGS, supplied during onboarding and blended against the order mix attributed to each campaign.</p>
-        <div class="mech-item-formula">Source: Client-provided<br>Refresh: On request</div>
-      </div>
-      <div class="mech-item card-surface">
-        <div class="mech-item-num">INPUT 03</div>
-        <h3>Return rate</h3>
-        <p>Pulled from Shopify or WooCommerce order data. Applied on a 30-day lag, with the lag explicitly noted against any affected decision.</p>
-        <div class="mech-item-formula">Source: Store API<br>Lag: 30 days, disclosed</div>
-      </div>
-      <div class="mech-item card-surface">
-        <div class="mech-item-num">INPUT 04</div>
-        <h3>Platform &amp; processing fees</h3>
-        <p>Payment processing tier and fulfilment fees are reconciled monthly and attributed proportionally across active campaigns.</p>
-        <div class="mech-item-formula">Source: Store billing data<br>Refresh: Monthly</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     CONTROL & SAFETY: execution model
-     ============================================================ -->
-<section class="section">
-  <div class="wrap">
-    <div class="eyebrow">Execution Model</div>
-    <h2>Every recommendation is proposed. Nothing executes without approval.</h2>
-    <p class="lede">7Captur is an assisted execution layer, not an autonomous one. The system identifies the decision and prepares the API call, but a person approves it before anything changes.</p>
-
-    <div class="control-grid">
-      <div class="control-item card-surface">
-        <div class="icon-row"><h3>Explicit approval</h3><span class="spec-tag">Required</span></div>
-        <p>Each decision in the weekly report includes an "Approve" and a "Dismiss" action. Dismissing makes no API call and changes nothing. No decision executes on a timer or by default.</p>
-      </div>
-      <div class="control-item is-key card-surface accent-glow">
-        <div class="icon-row"><h3>30% budget cap</h3><span class="spec-tag">Hard limit</span></div>
-        <p>A single approved decision cannot move more than 30% of a campaign's current weekly budget. This limit is enforced in the execution logic, not just stated as a policy.</p>
-      </div>
-      <div class="control-item card-surface">
-        <div class="icon-row"><h3>24-hour rollback</h3><span class="spec-tag">Always available</span></div>
-        <p>Every executed change can be reversed within 24 hours via the same report, without needing to log into the ad platform directly.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     PRICING TEASER
-     ============================================================ -->
-<section class="section alt-bg section-border-t">
-  <div class="wrap">
-    <div class="pricing-teaser">
-      <div>
-        <div class="eyebrow">Engagement Structure</div>
-        <h2>Start with 4 free weekly reports. Continue only if the numbers justify it.</h2>
-        <p class="lede" style="margin-bottom:32px">The first 30 days are free, for a limited time. At day 30, you receive a written summary of decisions delivered and approved, along with their estimated impact, and decide from there. If you continue, you move to the standard monthly retainer.</p>
-        <a href="/pricing/" class="btn-secondary">View full pricing →</a>
-      </div>
-      <div class="pricing-teaser-card">
-        <div class="phase-tag">Phase 1 · First 30 Days</div>
-        <div class="price-row"><span class="was">$49</span><span class="amount">$0</span><span class="period">today</span><span class="limited-tag">Limited time</span></div>
-        <div class="note">Normally $49. Free for the first 30 days, for a limited time only. <strong>If the 30-day summary doesn't justify continuing, you walk away with a full data export and no further obligation.</strong></div>
-        <ul class="pricing-feature-list">
-          <li><span class="ck">✓</span> Pipeline configured for your store and ad accounts</li>
-          <li><span class="ck">✓</span> 1 store + 2 ad platforms connected via API</li>
-          <li><span class="ck">✓</span> 4 weekly reports with approve/dismiss execution</li>
-          <li><span class="ck">✓</span> 30-day written ROI summary</li>
-        </ul>
-        <a href="/contact/" class="btn-primary" style="width:100%;justify-content:center">Get your report →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     CTA BAND
-     ============================================================ -->
-<div class="cta-band">
-  <div class="wrap">
-    <div class="cta-band-inner">
-      <div>
-        <h2>See your numbers before you commit to anything.</h2>
-        <p>A 20-minute call, using your real store and ad account data. No pitch deck.</p>
-      </div>
-      <a href="/contact/" class="btn-primary">Get your report →</a>
-    </div>
-  </div>
-</div>
 
 <!-- ============================================================
      NEWSLETTER SIGNUP
@@ -1990,13 +1801,12 @@ html.dark .newsletter-submit{color:#0e1206}
         <ul>
           <li><a href="/about/">About</a></li>
           <li><a href="/security/">Security &amp; data</a></li>
-          <li><a href="/contact/">Get your report</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Get started</h4>
         <ul>
-          <li><a href="/contact/">Book a walkthrough</a></li>
+          <li><a href="/contact/">Get your report</a></li>
           <li><a href="/pricing/">View pricing</a></li>
         </ul>
       </div>
@@ -2004,8 +1814,8 @@ html.dark .newsletter-submit{color:#0e1206}
     <div class="footer-bottom">
       <div class="footer-copy">© 2026 7Captur</div>
       <div class="footer-legal">
-        <a href="/security/#privacy">Privacy policy</a>
-        <a href="/security/#terms">Terms of service</a>
+        <a href="/privacy-policy/">Privacy policy</a>
+        <a href="/terms-of-service/">Terms of service</a>
       </div>
     </div>
   </div>
