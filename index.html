@@ -4,17 +4,17 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script>try{if(localStorage.getItem('theme')!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}</script>
-<title>7Captur | True ROAS and weekly budget decisions for Shopify and Meta</title>
+<title>7Captur | The decision system for e-commerce ad spend</title>
 <meta name="description" content="Connect Shopify and Meta. 7Captur recalculates ROAS after returns, cost of goods and fees, then sends three budget decisions every Monday. You approve each one. Start free.">
 <link rel="canonical" href="https://7captur.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="7Captur">
-<meta property="og:title" content="7Captur | True ROAS and weekly budget decisions for Shopify and Meta">
+<meta property="og:title" content="7Captur | The decision system for e-commerce ad spend">
 <meta property="og:description" content="Connect Shopify and Meta. 7Captur recalculates ROAS after returns, cost of goods and fees, then sends three budget decisions every Monday. Start free.">
 <meta property="og:url" content="https://7captur.com/">
 <meta property="og:image" content="https://7captur.com/assets/og/og-default.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="7Captur | True ROAS and weekly budget decisions for Shopify and Meta">
+<meta name="twitter:title" content="7Captur | The decision system for e-commerce ad spend">
 <meta name="twitter:description" content="Connect Shopify and Meta. 7Captur recalculates ROAS after returns, cost of goods and fees, then sends three budget decisions every Monday. Start free.">
 <meta name="twitter:image" content="https://7captur.com/assets/og/og-default.png">
 <link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: light)">
@@ -65,75 +65,31 @@
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <h1>Skip the dashboard. Turn your ad numbers into decisions.</h1>
-      <p class="hero-sub">7Captur connects to Shopify and Meta, recalculates ROAS after returns, cost of goods and fees, and sends you three budget decisions every Monday. You approve each one.</p>
+      <h1>The decision system for <span style="white-space:nowrap">e-commerce</span> ad spend.</h1>
+      <p class="hero-sub">7Captur recalculates your ROAS after returns, cost of goods and fees, then sends three budget decisions every Monday. You approve each one.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="https://app.7captur.com/signup">Start free trial</a>
-        <a class="btn btn-ghost" href="#calculator">See your true ROAS</a>
+        <a class="btn btn-ghost" href="#report">See a sample report</a>
       </div>
       <p class="hero-fine">Every account starts with a 30-day Starter trial. After that you keep the free plan or pick a paid one.</p>
     </div>
 
-    <div class="app" role="group" aria-label="Sample Monday report">
-      <div class="app-bar">
-        <strong>Monday report</strong><span>Week 43, Shopify and Meta</span>
-        <span class="app-pill">Sample data</span>
+    <div class="scene" id="scene" role="img" aria-label="Illustration: Meta reports 3.20x ROAS. Returns, cost of goods and fees are subtracted, leaving a true ROAS of 1.78x.">
+      <div class="iso" aria-hidden="true">
+        <div class="slab slab-true"  style="--n:0"></div>
+        <div class="slab slab-fees"  style="--n:1"></div>
+        <div class="slab slab-cogs"  style="--n:2"></div>
+        <div class="slab slab-ret"   style="--n:3"></div>
+        <div class="slab slab-rep"   style="--n:4"></div>
       </div>
-      <div class="app-body">
-        <div class="roas-top">
-          <div>
-            <div class="roas-label">True ROAS</div>
-            <div class="roas-value" id="heroTrue">1.78×</div>
-          </div>
-          <div class="roas-reported">Meta reports <s class="num">3.20×</s></div>
-        </div>
-        <div class="stack" id="heroStack" role="img" aria-label="Of each reported dollar, 55 cents is kept after returns, cost of goods and fees">
-          <i class="s-keep"></i><i class="s-fees"></i><i class="s-cogs"></i><i class="s-ret"></i>
-        </div>
-        <div class="stack-legend">
-          <span style="--c:var(--accent-fill)">Kept 55%</span>
-          <span style="--c:var(--red)">Returns 12%</span>
-          <span style="--c:var(--muted)">Cost of goods 31%</span>
-          <span style="--c:var(--gold)">Fees 2%</span>
-        </div>
-
-        <div class="decisions">
-          <div class="decision">
-            <div>
-              <h4>Pause "Summer Collection"</h4>
-              <div class="decision-meta"><span class="tag tag-bad num">True ROAS 0.9×</span> · saves about $412 a week</div>
-            </div>
-            <div class="decision-actions">
-              <button class="btn btn-primary btn-sm" type="button" data-act="approve">Approve</button>
-              <button class="btn btn-ghost btn-sm" type="button" data-act="dismiss">Dismiss</button>
-            </div>
-            <div class="decision-state"></div>
-          </div>
-          <div class="decision">
-            <div>
-              <h4>Scale "Bestsellers Retarget"</h4>
-              <div class="decision-meta"><span class="tag tag-good num">True ROAS 2.4×</span> · adds about $310 a week</div>
-            </div>
-            <div class="decision-actions">
-              <button class="btn btn-primary btn-sm" type="button" data-act="approve">Approve</button>
-              <button class="btn btn-ghost btn-sm" type="button" data-act="dismiss">Dismiss</button>
-            </div>
-            <div class="decision-state"></div>
-          </div>
-          <div class="decision">
-            <div>
-              <h4>Margin drop traced to payment processing</h4>
-              <div class="decision-meta"><span class="tag tag-info">No ad change needed</span> · worth about $180 a month</div>
-            </div>
-            <div class="decision-actions">
-              <button class="btn btn-primary btn-sm" type="button" data-act="approve">Acknowledge</button>
-              <button class="btn btn-ghost btn-sm" type="button" data-act="dismiss">Dismiss</button>
-            </div>
-            <div class="decision-state"></div>
-          </div>
-        </div>
-      </div>
-      <div class="app-foot">Illustrative store, not a live account. Nothing changes until you approve.</div>
+      <ul class="scene-labels" aria-hidden="true">
+        <li style="--n:4"><i style="--c:var(--ink)"></i><span>Meta reports</span><b class="num">3.20×</b></li>
+        <li style="--n:3"><i style="--c:var(--red)"></i><span>Returns</span><b class="num">−12%</b></li>
+        <li style="--n:2"><i style="--c:var(--muted)"></i><span>Cost of goods</span><b class="num">−35%</b></li>
+        <li style="--n:1"><i style="--c:var(--gold)"></i><span>Fees</span><b class="num">−2.9%</b></li>
+        <li style="--n:0" class="is-true"><i style="--c:var(--accent-fill)"></i><span>True ROAS</span><b class="num">1.78×</b></li>
+      </ul>
+      <div class="scene-chip" aria-hidden="true"><span class="chip-dot"></span>3 decisions ready<small>Monday 8:55</small></div>
     </div>
   </div>
 
@@ -148,26 +104,78 @@
   </div>
 </header>
 
-<!-- THE GAP + CALCULATOR -->
-<section class="section" id="calculator">
-  <div class="wrap">
-    <p class="kicker">The gap</p>
-    <h2>Meta reports revenue. You keep what is left.</h2>
-    <p class="lede">Ad platforms report ROAS the moment someone buys. Refunds land weeks later, and cost of goods and fees never show up. Set your own numbers and see the difference.</p>
+<!-- MONDAY REPORT -->
+<section class="section" id="report">
+  <div class="wrap report-grid">
+    <div class="report-copy">
+      <h2>A Monday report that ends in decisions.</h2>
+      <p class="lede">Ad platforms report ROAS the moment someone buys. Refunds land weeks later, and cost of goods and fees never show up. 7Captur subtracts them and tells you what to do about it.</p>
+      <ul class="plain-list">
+        <li>Decisions ranked by what each one is worth</li>
+        <li>True ROAS shown next to every campaign</li>
+        <li>Dismiss anything and your account stays as it is</li>
+      </ul>
+    </div>
+    <div class="app" role="group" aria-label="Sample Monday report">
+  <div class="app-bar">
+    <strong>Monday report</strong><span>Week 43, Shopify and Meta</span>
+    <span class="app-pill">Sample data</span>
+  </div>
+  <div class="app-body">
+    <div class="roas-top">
+      <div>
+        <div class="roas-label">True ROAS</div>
+        <div class="roas-value" id="heroTrue">1.78×</div>
+      </div>
+      <div class="roas-reported">Meta reports <s class="num">3.20×</s></div>
+    </div>
+    <div class="stack" id="heroStack" role="img" aria-label="Of each reported dollar, 55 cents is kept after returns, cost of goods and fees">
+      <i class="s-keep"></i><i class="s-fees"></i><i class="s-cogs"></i><i class="s-ret"></i>
+    </div>
+    <div class="stack-legend">
+      <span style="--c:var(--accent-fill)">Kept 55%</span>
+      <span style="--c:var(--red)">Returns 12%</span>
+      <span style="--c:var(--muted)">Cost of goods 31%</span>
+      <span style="--c:var(--gold)">Fees 2%</span>
+    </div>
 
-    <div class="calc">
-      <div class="panel">
-        <div class="slider"><div class="slider-label"><span>Monthly ad spend</span><span class="val num" id="lc-spend-val">$20,000</span></div><input type="range" id="lc-spend" min="1000" max="100000" step="500" value="20000" aria-label="Monthly ad spend"></div>
-        <div class="slider"><div class="slider-label"><span>Average cost of goods</span><span class="val num" id="lc-cogs-val">35%</span></div><input type="range" id="lc-cogs" min="0" max="80" step="1" value="35" aria-label="Average cost of goods"></div>
-        <div class="slider"><div class="slider-label"><span>Return rate</span><span class="val num" id="lc-returns-val">12%</span></div><input type="range" id="lc-returns" min="0" max="40" step="1" value="12" aria-label="Return rate"></div>
-        <div class="slider"><div class="slider-label"><span>Payment processor fee</span><span class="val num" id="lc-fees-val">2.9%</span></div><input type="range" id="lc-fees" min="0" max="5" step="0.1" value="2.9" aria-label="Payment processor fee"></div>
+    <div class="decisions">
+      <div class="decision">
+        <div>
+          <h4>Pause "Summer Collection"</h4>
+          <div class="decision-meta"><span class="tag tag-bad num">True ROAS 0.9×</span> · saves about $412 a week</div>
+        </div>
+        <div class="decision-actions">
+          <button class="btn btn-primary btn-sm" type="button" data-act="approve">Approve</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-act="dismiss">Dismiss</button>
+        </div>
+        <div class="decision-state"></div>
       </div>
-      <div class="panel is-lit">
-        <div class="result"><span class="label">Reported ROAS, platform view</span><span class="value num" id="lc-reported">3.20×</span></div>
-        <div class="result is-true"><span class="label">True ROAS, after returns, cost of goods and fees</span><span class="value num" id="lc-true">1.78×</span></div>
-        <div class="result is-leak"><span class="label">Annual gap between reported and true</span><span class="value num" id="lc-leak">$341,444</span></div>
-        <p class="calc-note">Assumes a 3.2× platform-reported ROAS to show the mechanism. Your report uses your account's actual numbers.</p>
+      <div class="decision">
+        <div>
+          <h4>Scale "Bestsellers Retarget"</h4>
+          <div class="decision-meta"><span class="tag tag-good num">True ROAS 2.4×</span> · adds about $310 a week</div>
+        </div>
+        <div class="decision-actions">
+          <button class="btn btn-primary btn-sm" type="button" data-act="approve">Approve</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-act="dismiss">Dismiss</button>
+        </div>
+        <div class="decision-state"></div>
       </div>
+      <div class="decision">
+        <div>
+          <h4>Margin drop traced to payment processing</h4>
+          <div class="decision-meta"><span class="tag tag-info">No ad change needed</span> · worth about $180 a month</div>
+        </div>
+        <div class="decision-actions">
+          <button class="btn btn-primary btn-sm" type="button" data-act="approve">Acknowledge</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-act="dismiss">Dismiss</button>
+        </div>
+        <div class="decision-state"></div>
+      </div>
+    </div>
+  </div>
+  <div class="app-foot">Illustrative store, not a live account. Nothing changes until you approve.</div>
     </div>
   </div>
 </section>
@@ -212,12 +220,12 @@
       <div class="plan is-lit">
         <div class="plan-name">Paid <span class="plan-badge">30-day trial</span></div>
         <div class="bands" role="group" aria-label="Monthly ad spend">
-          <button type="button" aria-pressed="true" data-price="49" data-sub="Under $15k a month in ad spend">&lt; $15k</button>
+          <button type="button" aria-pressed="true" data-price="59" data-sub="Under $15k a month in ad spend">&lt; $15k</button>
           <button type="button" aria-pressed="false" data-price="79" data-sub="$15k to $30k a month in ad spend">$15–30k</button>
           <button type="button" aria-pressed="false" data-price="119" data-sub="$30k to $50k a month in ad spend">$30–50k</button>
-          <button type="button" aria-pressed="false" data-price="" data-sub="Over $50k a month. Custom logic, priority support.">$50k+</button>
+          <button type="button" aria-pressed="false" data-price="" data-sub="Over $50k a month. Custom logic and priority support.">$50k+</button>
         </div>
-        <div class="plan-price" id="paidPrice">$49<small>a month</small></div>
+        <div class="plan-price" id="paidPrice">$59<small>a month</small></div>
         <p class="plan-sub" id="paidSub">Under $15k a month in ad spend</p>
         <ul>
           <li>All three decisions every Monday</li>
@@ -661,7 +669,24 @@ html.dark .newsletter-submit{color:#0e1206}
   d.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ d.classList.remove('open'); }); });
 })();
 
-// Hero: one load-time reveal of the true-ROAS stack, then approve/dismiss on the sample decisions
+// Hero scene: slabs separate once on load, tilt follows the pointer
+(function(){
+  var scene = document.getElementById('scene');
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ scene.classList.add('is-in'); }); });
+  if (still) return;
+  var hero = document.querySelector('.hero');
+  hero.addEventListener('pointermove', function(e){
+    var r = scene.getBoundingClientRect();
+    var x = (e.clientX - (r.left + r.width/2)) / window.innerWidth;
+    var y = (e.clientY - (r.top + r.height/2)) / window.innerHeight;
+    scene.style.setProperty('--tz', (x * 14).toFixed(2) + 'deg');
+    scene.style.setProperty('--tx', (y * -8).toFixed(2) + 'deg');
+  });
+  hero.addEventListener('pointerleave', function(){ scene.style.setProperty('--tz','0deg'); scene.style.setProperty('--tx','0deg'); });
+})();
+
+// Report: one load-time reveal of the true-ROAS stack, then approve/dismiss on the sample decisions
 (function(){
   var stack = document.getElementById('heroStack');
   requestAnimationFrame(function(){ requestAnimationFrame(function(){ stack.classList.add('is-in'); }); });
@@ -674,27 +699,6 @@ html.dark .newsletter-submit{color:#0e1206}
       });
     });
   });
-})();
-
-// Calculator (same formula as before)
-(function(){
-  var $ = function(id){ return document.getElementById(id); };
-  var spend=$('lc-spend'), cogs=$('lc-cogs'), returns=$('lc-returns'), fees=$('lc-fees');
-  var REPORTED = 3.2;
-  function money(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
-  function run(){
-    var s=parseFloat(spend.value), c=parseFloat(cogs.value)/100, r=parseFloat(returns.value)/100, f=parseFloat(fees.value)/100;
-    $('lc-spend-val').textContent = money(s);
-    $('lc-cogs-val').textContent = cogs.value + '%';
-    $('lc-returns-val').textContent = returns.value + '%';
-    $('lc-fees-val').textContent = parseFloat(fees.value).toFixed(1) + '%';
-    var rev = s*REPORTED, kept = rev*(1-r)*(1-c)*(1-f);
-    $('lc-reported').textContent = REPORTED.toFixed(2) + '×';
-    $('lc-true').textContent = (kept/s).toFixed(2) + '×';
-    $('lc-leak').textContent = money((rev-kept)*12);
-  }
-  [spend,cogs,returns,fees].forEach(function(el){ el.addEventListener('input', run); });
-  run();
 })();
 
 // Pricing bands
