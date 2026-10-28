@@ -3,1432 +3,251 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>7Captur | Assisted Execution for E-Commerce Ad Spend</title>
-  <meta name="description" content="Every week, 7Captur shows what your Shopify and Meta ad spend actually earns after real costs, then proposes what to change. You approve every decision.">
-  <link rel="canonical" href="https://7captur.com/">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="7Captur">
-  <meta property="og:title" content="7Captur | Assisted Execution for E-Commerce Ad Spend">
-  <meta property="og:description" content="Every week, 7Captur shows what your Shopify and Meta ad spend actually earns after real costs, then proposes what to change. You approve every decision.">
-  <meta property="og:url" content="https://7captur.com/">
-  <meta property="og:image" content="https://7captur.com/assets/og/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="7Captur | Assisted Execution for E-Commerce Ad Spend">
-  <meta name="twitter:description" content="Every week, 7Captur shows what your Shopify and Meta ad spend actually earns after real costs, then proposes what to change. You approve every decision.">
-  <meta name="twitter:image" content="https://7captur.com/assets/og/og-default.png">
-  <link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: light)">
-  <link rel="icon" href="/favicon-dark.png"  media="(prefers-color-scheme: dark)">
-  <link rel="shortcut icon" href="/favicon-dark.png">
+<script>try{if(localStorage.getItem('theme')!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}</script>
+<title>7Captur | True ROAS and weekly budget decisions for Shopify and Meta</title>
+<meta name="description" content="Connect Shopify and Meta. 7Captur recalculates ROAS after returns, cost of goods and fees, then sends three budget decisions every Monday. You approve each one. Start free.">
+<link rel="canonical" href="https://7captur.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="7Captur">
+<meta property="og:title" content="7Captur | True ROAS and weekly budget decisions for Shopify and Meta">
+<meta property="og:description" content="Connect Shopify and Meta. 7Captur recalculates ROAS after returns, cost of goods and fees, then sends three budget decisions every Monday. Start free.">
+<meta property="og:url" content="https://7captur.com/">
+<meta property="og:image" content="https://7captur.com/assets/og/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="7Captur | True ROAS and weekly budget decisions for Shopify and Meta">
+<meta name="twitter:description" content="Connect Shopify and Meta. 7Captur recalculates ROAS after returns, cost of goods and fees, then sends three budget decisions every Monday. Start free.">
+<meta name="twitter:image" content="https://7captur.com/assets/og/og-default.png">
+<link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+<link rel="icon" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="shortcut icon" href="/favicon-dark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<style>
-/* ============================================================
-   7CAPTUR: DESIGN TOKENS
-   Enterprise B2B direction: warm cream + deep institutional green.
-   Two type families. Minimal motion. Ledger-style data presentation.
-   ============================================================ */
-:root {
-  --bg:           #fdf6ee;
-  --bg2:          #f5ebe0;
-  --bg3:          #ecdfd2;
-  --line:         rgba(28,24,18,.10);
-  --line-strong:  rgba(28,24,18,.20);
-  --shadow-sm:    0 1px 4px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-  --shadow-md:    0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.05);
-  --shadow-lg:    0 8px 24px rgba(0,0,0,.10), 0 3px 8px rgba(0,0,0,.06);
-  --ink:          #1c1812;
-  --body:         #5c534a;
-  --muted:        #9a9088;
-  --accent:       #3f6b00;
-  --accent-soft:  #eaf0dd;
-  --accent-line:  rgba(63,107,0,.22);
-  --gold:         #8a6a00;
-  --gold-soft:    #f5eed9;
-  --red:          #a82020;
-  --red-soft:     #f7e8e6;
-  --card:         #f7f0e6;
-}
-
-html.dark {
-  --bg:           #15171d;
-  --bg2:          #1b1e26;
-  --bg3:          #232733;
-  --line:         rgba(255,255,255,.08);
-  --line-strong:  rgba(255,255,255,.16);
-  --shadow-sm:    0 1px 4px rgba(0,0,0,.25);
-  --shadow-md:    0 4px 12px rgba(0,0,0,.35);
-  --shadow-lg:    0 8px 24px rgba(0,0,0,.45);
-  --ink:          #f1ede4;
-  --body:         #aba39a;
-  --muted:        #6b6560;
-  --accent:       #8fce3a;
-  --accent-soft:  #1f2a14;
-  --accent-line:  rgba(143,206,58,.25);
-  --gold:         #d8b14a;
-  --gold-soft:    #2a2418;
-  --red:          #e2685f;
-  --red-soft:     #2a1c1b;
-  --card:         #1e2128;
-}
-
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-body{
-  background:var(--bg);
-  color:var(--body);
-  font-family:'Inter',sans-serif;
-  font-weight:400;
-  line-height:1.65;
-  -webkit-font-smoothing:antialiased;
-  transition:background-color .3s ease;
-}
-a{color:inherit}
-.mono{font-family:'IBM Plex Mono',monospace}
-
-/* ============================================================
-   LAYOUT PRIMITIVES
-   ============================================================ */
-.wrap{max-width:1180px;margin:0 auto;padding:0 48px}
-.num{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
-.card-surface{
-  border:1px solid var(--line-strong);background:var(--card);
-  border-radius:10px;
-}
-.accent-glow{
-  position:relative;
-  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(63,107,0,.18);
-}
-html.dark .accent-glow{box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(143,206,58,.22)}
-.section{padding:104px 0}
-.section-tight{padding:72px 0}
-.section-border-t{border-top:none}
-.alt-bg{background:var(--bg2)}
-
-.eyebrow{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:11px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--accent);
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:18px;
-}
-.eyebrow::after{content:'';flex:0 0 40px;height:1px;background:var(--accent-line)}
-
-h1,h2,h3{
-  font-family:'Inter Tight',sans-serif;
-  font-weight:700;
-  letter-spacing:-.02em;
-  color:var(--ink);
-}
-h1{font-size:clamp(36px,4.6vw,58px);line-height:1.08;font-weight:800}
-h2{font-size:clamp(28px,3.2vw,42px);line-height:1.14;margin-bottom:18px}
-h3{font-size:18px;line-height:1.3}
-
-.lede{font-size:1.0625rem;line-height:1.75;color:var(--body);max-width:600px}
-.lede.center{margin:0 auto}
-
-/* Accessible / SEO text: present in DOM and readable by crawlers & screen
-   readers, visually clipped for sighted users. NOT display:none (which
-   search engines may discount) and NOT a second <h1> (duplicate H1s are
-   a genuine SEO negative, not a positive), this is the standard safe
-   pattern for "extra" keyword context on a heading. */
-.sr-only{
-  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
-  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
-}
-
-/* ============================================================
-   NAV
-   ============================================================ */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  height:72px;border-bottom:1px solid var(--line);
-  background:rgba(253,246,238,.92);backdrop-filter:blur(10px);
-  transition:background .3s ease,border-color .3s ease;
-}
-html.dark nav{background:rgba(21,23,29,.92)}
-.nav-inner{max-width:1180px;margin:0 auto;width:100%;padding:0 48px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.02em;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:9px}
-.logo-mark{width:22px;height:auto;color:var(--accent);flex-shrink:0}
-.logo{gap:11px}
-.nav-links{display:flex;gap:36px;list-style:none}
-.nav-links a{font-size:14px;font-weight:500;color:var(--body);text-decoration:none;transition:color .15s}
-.nav-links a:hover,.nav-links a.current{color:var(--ink)}
-.nav-right{display:flex;align-items:center;gap:18px}
-.nav-cta{
-  background:var(--ink);color:var(--bg);
-  font-family:'Inter Tight',sans-serif;font-weight:600;font-size:13.5px;
-  padding:11px 22px;text-decoration:none;letter-spacing:-.005em;
-  transition:opacity .15s;
-}
-.nav-cta:hover{opacity:.85}
-.theme-toggle{
-  background:none;border:1px solid var(--line-strong);color:var(--body);
-  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;
-  padding:8px 12px;cursor:pointer;transition:color .15s,border-color .15s;
-}
-.theme-toggle:hover{color:var(--ink);border-color:var(--ink)}
-.nav-mobile-toggle{display:none;background:none;border:none;color:var(--ink);cursor:pointer;padding:6px}
-
-@media(max-width:900px){
-  .nav-links{display:none}
-  .nav-mobile-toggle{display:block}
-}
-
-/* Mobile nav drawer */
-.mobile-drawer{
-  display:none;position:fixed;inset:0;z-index:300;
-  background:var(--bg);padding:24px 28px;flex-direction:column;
-}
-.mobile-drawer.open{display:flex}
-.mobile-drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;height:48px}
-.mobile-drawer a{
-  font-family:'Inter Tight',sans-serif;font-weight:600;font-size:20px;color:var(--ink);
-  text-decoration:none;padding:18px 0;
-}
-.mobile-drawer .nav-cta{margin-top:24px;text-align:center}
-.mobile-drawer-close{background:none;border:none;color:var(--ink);cursor:pointer;padding:6px}
-
-/* ============================================================
-   HERO
-   Single constrained column. The "Decision Ledger" signature
-   element sits below the headline, styled like a financial
-   statement, not a UI mockup with glow/shadow.
-   ============================================================ */
-.hero{
-  padding:168px 0 88px;
-  position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 60% 50% at 85% 0%, rgba(63,107,0,.14), transparent 60%),
-    radial-gradient(ellipse 50% 45% at 15% 10%, rgba(138,106,0,.08), transparent 60%),
-    linear-gradient(180deg, var(--bg2) 0%, var(--bg) 55%);
-}
-html.dark .hero::before{
-  background:
-    radial-gradient(ellipse 60% 50% at 85% 0%, rgba(143,206,58,.16), transparent 60%),
-    radial-gradient(ellipse 50% 45% at 15% 10%, rgba(216,177,74,.10), transparent 60%),
-    linear-gradient(180deg, var(--bg2) 0%, var(--bg) 55%);
-}
-.hero > .wrap{position:relative;z-index:1}
-.hero-top{max-width:760px;margin-bottom:64px}
-.hero-eyebrow{
-  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--muted);margin-bottom:22px;
-  display:flex;align-items:center;gap:10px;
-}
-.hero-eyebrow .dot{width:6px;height:6px;background:var(--accent);border-radius:50%}
-.hero h1{margin-bottom:24px}
-.hero h1 .accent-word{color:var(--accent)}
-.hero-sub{font-size:1.1875rem;line-height:1.7;color:var(--body);max-width:620px;margin-bottom:36px}
-.hero-sub strong{color:var(--ink);font-weight:600}
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px}
-.btn-primary{
-  background:var(--accent);color:#fff;
-  font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14.5px;
-  padding:15px 30px;text-decoration:none;letter-spacing:-.005em;
-  display:inline-flex;align-items:center;gap:8px;transition:opacity .15s;
-}
-html.dark .btn-primary{color:#0e1206}
-.btn-primary:hover{opacity:.88}
-.btn-secondary{
-  color:var(--ink);font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14.5px;
-  padding:15px 28px;text-decoration:none;border:1px solid var(--line-strong);
-  display:inline-flex;align-items:center;gap:8px;transition:border-color .15s,color .15s;
-}
-.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
-
-.hero-meta-row{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  border-top:1px solid var(--line);padding-top:28px;max-width:680px;
-}
-.hero-meta-item{padding-right:24px}
-.hero-meta-item + .hero-meta-item{border-left:1px solid var(--line);padding-left:24px}
-.hero-meta-num{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:24px;color:var(--ink);letter-spacing:-.02em;display:block}
-.hero-meta-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5}
-
-/* ============================================================
-   DECISION LEDGER: signature element
-   Financial-statement styling: hairline rules, mono numerals,
-   right-aligned figures, no shadows or gradients.
-   ============================================================ */
-.ledger{border:1px solid var(--line-strong);border-radius:10px;overflow:hidden}
-.ledger-head{
-  display:flex;justify-content:space-between;align-items:flex-end;
-  padding:22px 28px;border-bottom:1px solid var(--line-strong);gap:24px;flex-wrap:wrap;
-  background:
-    radial-gradient(ellipse 70% 100% at 100% 0%, rgba(63,107,0,.10), transparent 70%),
-    var(--bg2);
-}
-html.dark .ledger-head{
-  background:
-    radial-gradient(ellipse 70% 100% at 100% 0%, rgba(143,206,58,.12), transparent 70%),
-    var(--bg2);
-}
-.ledger-head-left{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.ledger-head-left strong{color:var(--ink);font-size:14px;letter-spacing:0;text-transform:none;font-family:'Inter Tight',sans-serif;font-weight:700;display:block;margin-bottom:4px}
-.ledger-head-right{display:flex;gap:32px;text-align:right}
-.ledger-kpi-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.ledger-kpi-val{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:20px;color:var(--ink);font-variant-numeric:tabular-nums}
-.ledger-kpi-val .delta-up{color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;margin-left:6px}
-.ledger-kpi-val .delta-down{color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;margin-left:6px}
-
-.ledger-rows{display:flex;flex-direction:column}
-.ledger-row{
-  display:grid;grid-template-columns:32px 1fr auto;gap:24px;
-  padding:24px 28px;border-bottom:1px solid var(--line);align-items:start;
-}
-.ledger-row:last-child{border-bottom:none}
-.ledger-row-num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);padding-top:3px}
-.ledger-row-body h4{
-  font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15.5px;
-  color:var(--ink);margin-bottom:6px;line-height:1.4;
-}
-.ledger-row-body p{font-size:13.5px;color:var(--body);line-height:1.65;max-width:480px}
-.ledger-row-body .confidence{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);margin-top:8px;display:block}
-.ledger-tag{
-  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
-  padding:3px 9px;border:1px solid;white-space:nowrap;
-}
-.tag-warn{color:var(--red);border-color:var(--red-soft);background:var(--red-soft)}
-.tag-action{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
-.tag-info{color:var(--gold);border-color:var(--gold-soft);background:var(--gold-soft)}
-.ledger-row-impact{
-  text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;
-  color:var(--accent);font-weight:500;white-space:nowrap;padding-top:3px;
-}
-.ledger-row-impact .impact-label{display:block;color:var(--muted);font-size:10px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
-
-.ledger-foot{
-  padding:16px 28px;border-top:1px solid var(--line-strong);background:var(--bg2);
-  font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);
-  display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;line-height:1.6;
-}
-
-@media(max-width:760px){
-  .ledger-row{grid-template-columns:1fr;gap:10px}
-  .ledger-row-num{display:none}
-  .ledger-row-impact{text-align:left;padding-top:0}
-  .ledger-head-right{gap:20px}
-  .hero-meta-row{grid-template-columns:1fr}
-  .hero-meta-item{border-left:none!important;padding-left:0!important;border-top:1px solid var(--line);padding-top:18px;padding-right:0}
-  .hero-meta-item:first-child{border-top:none;padding-top:0}
-}
-
-/* ============================================================
-   LOGO / TRUST STRIP (no fake logos, stated positioning instead)
-   ============================================================ */
-.trust-strip{padding:32px 0;background:var(--bg2)}
-.trust-strip-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
-.trust-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.trust-items{display:flex;gap:10px;flex-wrap:wrap}
-.trust-item{
-  font-size:13px;color:var(--ink);display:flex;align-items:center;
-  border:1px solid var(--line-strong);background:var(--card);
-  border-radius:999px;padding:7px 15px;
-}
-.trust-item .dot{display:none}
-
-/* ============================================================
-   PROBLEM / FRAMING SECTION
-   Two-column: framing copy + a single comparison block
-   ============================================================ */
-.problem-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:start}
-.problem-list{display:flex;flex-direction:column;margin-top:32px}
-.problem-item{display:flex;gap:18px;padding:20px 0;border-top:none}
-.problem-item:first-child{border-top:none}
-.problem-num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);padding-top:2px;min-width:24px}
-.problem-item h4{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:15px;color:var(--ink);margin-bottom:4px}
-.problem-item p{font-size:14px;color:var(--body);line-height:1.65}
-
-.spread-card{border:1px solid var(--line-strong);background:var(--card);border-radius:10px;overflow:hidden}
-.spread-card-head{padding:22px 26px;border-bottom:1px solid var(--line-strong)}
-.spread-card-head .eyebrow{margin-bottom:8px}
-.spread-row{display:flex;justify-content:space-between;align-items:center;padding:18px 26px;border-bottom:1px solid var(--line);position:relative}
-.spread-row:last-child{border-bottom:none}
-.spread-row.is-loss{
-  background:
-    radial-gradient(ellipse 50% 100% at 100% 50%, rgba(168,32,32,.07), transparent 75%);
-}
-html.dark .spread-row.is-loss{
-  background:
-    radial-gradient(ellipse 50% 100% at 100% 50%, rgba(226,104,95,.10), transparent 75%);
-}
-.spread-row-label{font-size:14px;color:var(--body)}
-.spread-row-vals{display:flex;gap:28px;align-items:center}
-.spread-val{text-align:right}
-.spread-val-num{font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:500;color:var(--ink)}
-.spread-val-num.is-true{color:var(--red)}
-.spread-val-label{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
-.spread-card-foot{padding:18px 26px;background:var(--bg2);border-top:1px solid var(--line-strong);font-size:13px;color:var(--body);line-height:1.6}
-.spread-card-foot strong{color:var(--ink)}
-
-@media(max-width:900px){
-  .problem-grid{grid-template-columns:1fr;gap:48px}
-}
-
-/* ============================================================
-   MECHANISM SECTION: "How True ROAS is calculated"
-   Bordered spec-sheet grid, not cards with shadows
-   ============================================================ */
-.mech-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:16px;margin-top:48px;
-}
-.mech-item{padding:28px;position:relative}
-.mech-item-num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.08em;margin-bottom:18px}
-.mech-item h3{margin-bottom:10px;font-size:16px}
-.mech-item p{font-size:13.5px;color:var(--body);line-height:1.65}
-.mech-item-formula{
-  margin-top:16px;padding-top:16px;border-top:1px solid var(--line);
-  font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);line-height:1.7;
-}
-@media(max-width:900px){
-  .mech-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:560px){
-  .mech-grid{grid-template-columns:1fr}
-}
-
-/* ============================================================
-   CONTROL / SAFETY SECTION: three-up spec blocks
-   ============================================================ */
-.control-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
-.control-item{padding:30px 28px;position:relative}
-.control-item.is-key{
-  background:
-    radial-gradient(ellipse 90% 100% at 50% 0%, rgba(63,107,0,.09), transparent 70%),
-    var(--card);
-}
-html.dark .control-item.is-key{
-  background:
-    radial-gradient(ellipse 90% 100% at 50% 0%, rgba(143,206,58,.11), transparent 70%),
-    var(--card);
-}
-.control-item.is-key .spec-tag{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
-.control-item .icon-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
-.control-item .spec-tag{
-  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--muted);border:1px solid var(--line-strong);padding:3px 9px;border-radius:4px;
-}
-.control-item h3{margin-bottom:10px}
-.control-item p{font-size:13.5px;line-height:1.65;color:var(--body)}
-@media(max-width:900px){.control-grid{grid-template-columns:1fr}}
-
-/* ============================================================
-   PRICING TEASER
-   ============================================================ */
-.pricing-teaser{display:grid;grid-template-columns:1.3fr 1fr;gap:72px;align-items:center}
-.pricing-teaser-card{
-  border:1px solid var(--line-strong);padding:36px;position:relative;border-radius:10px;
-  background:
-    radial-gradient(ellipse 100% 60% at 100% 0%, rgba(63,107,0,.08), transparent 65%),
-    var(--card);
-}
-html.dark .pricing-teaser-card{
-  background:
-    radial-gradient(ellipse 100% 60% at 100% 0%, rgba(143,206,58,.10), transparent 65%),
-    var(--card);
-}
-.pricing-teaser-card .phase-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
-.pricing-teaser-card .amount{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:40px;color:var(--ink);font-variant-numeric:tabular-nums}
-.pricing-teaser-card .period{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);margin-left:6px}
-.pricing-teaser-card .was{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:22px;color:var(--muted);text-decoration:line-through;margin-right:10px}
-.pricing-teaser-card .price-row{display:flex;align-items:baseline;flex-wrap:wrap}
-.pricing-teaser-card .limited-tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--red);background:var(--red-soft);padding:4px 9px;border-radius:3px;margin-left:10px}
-.pricing-teaser-card .note{font-size:14px;color:var(--body);margin:14px 0 24px;line-height:1.65;padding-bottom:24px;border-bottom:1px solid var(--line)}
-.pricing-teaser-card .note strong{color:var(--accent)}
-.pricing-feature-list{list-style:none;margin-bottom:28px}
-.pricing-feature-list li{display:flex;gap:10px;font-size:14px;color:var(--body);padding:7px 0}
-.pricing-feature-list li .ck{color:var(--accent);flex-shrink:0;font-weight:600}
-@media(max-width:900px){.pricing-teaser{grid-template-columns:1fr;gap:40px}}
-
-/* ============================================================
-   CTA BAND
-   ============================================================ */
-.cta-band{padding:72px 0}
-.cta-band-inner{
-  border:1px solid var(--line-strong);border-radius:10px;
-  padding:56px 64px;
-  display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;
-  background:
-    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(63,107,0,.10), transparent 70%),
-    var(--card);
-  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(63,107,0,.18);
-}
-html.dark .cta-band-inner{
-  background:
-    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(143,206,58,.12), transparent 70%),
-    var(--card);
-  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(143,206,58,.22);
-}
-.cta-band h2{margin-bottom:8px;font-size:clamp(24px,2.8vw,34px)}
-.cta-band p{font-size:15px;color:var(--body)}
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-footer{padding:56px 0 40px}
-.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
-.footer-brand .logo{margin-bottom:14px}
-.footer-brand p{font-size:13.5px;color:var(--muted);line-height:1.7;max-width:280px}
-.footer-col h4{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
-.footer-col a{font-size:14px;color:var(--body);text-decoration:none;transition:color .15s}
-.footer-col a:hover{color:var(--ink)}
-.footer-bottom{padding-top:28px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.footer-copy{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
-.footer-legal{display:flex;gap:24px}
-.footer-legal a{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none}
-.footer-legal a:hover{color:var(--ink)}
-@media(max-width:900px){
-  .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
-  .footer-brand{grid-column:1/-1}
-}
-@media(max-width:560px){
-  .footer-grid{grid-template-columns:1fr}
-}
-
-/* ============================================================
-   RESPONSIVE: sections
-   ============================================================ */
-@media(max-width:900px){
-  .wrap{padding:0 28px}
-  .nav-inner{padding:0 28px}
-  .hero{padding:140px 0 64px}
-  .section{padding:72px 0}
-}
-@media(max-width:560px){
-  .hero-actions{flex-direction:column}
-  .btn-primary,.btn-secondary{justify-content:center}
-}
-
-/* ============================================================
-   MINIMAL MOTION: single fade-in on scroll, no choreography
-   ============================================================ */
-.reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
-.reveal.visible{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
-}
-
-/* Ledger rows: one orchestrated sequential fade on load only */
-.ledger-row{opacity:0;animation:ledgerIn .5s ease forwards}
-.ledger-row:nth-child(1){animation-delay:.1s}
-.ledger-row:nth-child(2){animation-delay:.25s}
-.ledger-row:nth-child(3){animation-delay:.4s}
-@keyframes ledgerIn{to{opacity:1}}
-@media(prefers-reduced-motion:reduce){
-  .ledger-row{opacity:1;animation:none}
-}
-
-/* Focus visibility */
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-
-
-/* ============================================================
-   DESIGN SYSTEM: SINGLE CLEAN BLOCK
-   ============================================================ */
-
-/* Rounded corners: buttons */
-.btn-primary,.btn-secondary,.nav-cta,
-.sandbox-trigger,.sandbox-approve,.sandbox-dismiss,
-.price-cta-primary,.price-cta-secondary,.theme-toggle{border-radius:8px}
-
-/* Rounded corners: tags and badges */
-.ledger-tag,.cycle-tag,.wtl-card-tag,.confidence,
-.platform-logo-badge,.limited-tag,.price-badge,
-.sandbox-badge,.sandbox-result-note,.delta-up,.delta-down,
-.hero-eyebrow-tag,.icp-mark{border-radius:8px}
-
-/* Rounded corners + overflow clipping on all card containers */
-.ledger,.spread-card,.sandbox,.platform-logo-card,.pricing-grid,
-.access-table,.wtl-cards,.roi-wrap,.leak-calc,.ba-grid,
-.cta-band,.faq-list,.principles-grid,.proof-list,.lifecycle-list{
-  border-radius:8px;overflow:hidden
-}
-
-/* Shadow elevation */
-.ledger,.sandbox,.pricing-grid,.access-table{box-shadow:var(--shadow-lg)}
-.spread-card,.wtl-cards,.leak-calc,.ba-grid{box-shadow:var(--shadow-md)}
-.platform-logo-card,.cta-band,.price-card{box-shadow:var(--shadow-sm)}
-
-/* Section color transitions: gradient not hard cut */
-.alt-bg{background:transparent}
-section.alt-bg,div.alt-bg{
-  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)
-}
-.trust-strip{
-  background:linear-gradient(180deg,var(--bg2) 0%,var(--bg2) 55%,var(--bg) 100%)
-}
-
-/* No section dividers */
-.section-border-t{border-top:none}
-.hero{border-bottom:none}
-.page-header{border-bottom:none}
-.trust-strip{border-bottom:none}
-.process-bar{border-bottom:none}
-.footer-bottom{border-top:none}
-
-/* Nav: no underlines anywhere in nav or mobile drawer */
-nav a,.logo,.nav-cta,.mobile-drawer a,.mobile-drawer .nav-cta{text-decoration:none}
-
-/* Mobile drawer: clean CTA button text visibility */
-.mobile-drawer .nav-cta{color:#fff;border-bottom:none;display:block}
-html.dark .mobile-drawer .nav-cta{color:#0e1206}
-
-/* Body links: underline, excluding nav and buttons */
-a:not(.nav-cta):not(.btn-primary):not(.btn-secondary):not(.price-cta-primary):not(.price-cta-secondary):not(.logo):not(.sandbox-approve):not(.sandbox-dismiss):not(.sandbox-info-btn){
-  text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px
-}
-nav a,.logo,.mobile-drawer a,.btn-primary,.btn-secondary{text-decoration:none}
-.footer-col a,.ledger-foot a{text-decoration:underline;text-underline-offset:3px}
-
-
-/* ── FIX PASS 3 ────────────────────────────────────────────────────────────── */
-
-/* 1. Nav underlines, !important to beat high-specificity a:not() rule */
-nav a,.mobile-drawer a,.mobile-drawer .nav-cta,.nav-links a,.logo,footer .logo{text-decoration:none !important}
-
-/* 9. Theme toggle: compact emoji style */
-.theme-toggle{font-size:16px;padding:6px 8px;line-height:1;border-radius:8px;min-width:0;letter-spacing:0}
-.mobile-drawer-head{gap:16px}
-
-/* 2. Founder mark: no border, elevated shadow */
-.founder-mark{border:none !important;box-shadow:0 12px 40px rgba(0,0,0,.18),0 4px 12px rgba(0,0,0,.10) !important}
-html.dark .founder-mark{box-shadow:0 12px 40px rgba(0,0,0,.55),0 4px 12px rgba(0,0,0,.35) !important}
-.founder-mark svg{width:80px !important;height:80px !important}
-
-/* 3. Fit section: no outer border */
-.icp-strip{border:none !important;padding:0 !important}
-
-/* 5. Pipeline: no outer border, tags + num badges rounded */
-.wtl-cards{border:none !important}
-.wtl-card-tag{border-radius:8px !important}
-.wtl-num{border-radius:50% !important;box-shadow:var(--shadow-sm)}
-
-/* 6. Platforms: no outer border, individual cards with gaps */
-.platform-logo-grid{border:none !important;gap:16px !important}
-.platform-logo-card{border:1px solid var(--line-strong) !important;border-radius:8px !important;border-right:1px solid var(--line-strong) !important}
-
-/* 7. Pricing: addon-strip + roi-wrap rounded */
-.addon-strip{border-radius:8px !important}
-.roi-wrap{border-radius:8px !important}
-
-/* 8. Contact: outer containers rounded */
-.expect-list{border-radius:8px !important;overflow:hidden}
-.contact-form-wrap{border-radius:8px !important}
-.guarantee-box{border-radius:8px !important}
-.success-box{border-radius:8px !important}
-.form-input,.form-textarea{border-radius:6px !important}
-
-/* 4. CTA band: consistent gradient card across all pages */
-.cta-band-inner{
-  border:1px solid var(--line-strong);border-radius:10px;
-  padding:56px 64px;
-  display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;
-  background:radial-gradient(ellipse 60% 120% at 90% 50%,rgba(63,107,0,.10),transparent 70%),var(--card);
-  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(63,107,0,.18)
-}
-html.dark .cta-band-inner{
-  background:radial-gradient(ellipse 60% 120% at 90% 50%,rgba(143,206,58,.12),transparent 70%),var(--card);
-  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(143,206,58,.15)
-}
-.cta-band h2{margin-bottom:8px;font-size:clamp(24px,2.8vw,34px)}
-.cta-band p{font-size:15px;color:var(--body)}
-@media(max-width:760px){.cta-band-inner{padding:36px 28px}}
-
-/* 10. Section gradients: smooth blend top AND bottom, !important beats source */
-.alt-bg{background:transparent !important}
-section.alt-bg,div.alt-bg{
-  background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 18%,var(--bg2) 82%,var(--bg) 100%) !important
-}
-.trust-strip{
-  background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 15%,var(--bg2) 70%,var(--bg) 100%) !important;
-  border-bottom:none !important
-}
-
-
-/* ── ROUND 4 FIXES ─────────────────────────────────────────────────────────── */
-
-/* 1. Theme toggle: SVG-sized, no text */
-.theme-toggle{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:36px;height:36px;padding:0;font-size:0;
-  border-radius:8px;margin-left:16px
-}
-.theme-toggle svg{display:block}
-
-/* 2. Pipeline: icon-wrap and tech-tag rounded */
-.process-icon-wrap{border-radius:8px !important}
-.tech-tag{border-radius:8px !important}
-
-/* 3. Pricing ROI results inner grid: rounded */
-.roi-results{border-radius:8px !important;overflow:hidden !important}
-
-/* 4. CTA band: remove outer card shadow/radius, inner card only */
-.cta-band{
-  border-radius:0 !important;overflow:visible !important;
-  box-shadow:none !important
-}
-
-/* 5. Process bar: semi-transparent, no visible borders, blends with nav */
-.process-bar{
-  background:rgba(253,246,238,.72);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  border-bottom:none !important;
-  border-top:none !important
-}
-html.dark .process-bar{
-  background:rgba(21,23,29,.72)
-}
-/* Also remove nav bottom border so nav+processbar merge cleanly */
-nav{border-bottom:none !important}
-
-
-/* Hero background logos */
-.hero-bg-logo{
-  position:absolute;z-index:0;pointer-events:none;
-  opacity:.07;color:var(--ink)
-}
-html.dark .hero-bg-logo{opacity:.09}
-@media(max-width:900px){.hero-bg-logo{display:none}}
-
-
-
-/* ── ROUND 5 FIXES ─────────────────────────────────────────────────────────── */
-
-/* 2. CTA band: remove border-top/bottom hard lines on all pages */
-.cta-band{border-top:none !important;border-bottom:none !important}
-
-/* 3. Pipeline process-grid: rounded corners + overflow:hidden to clip children */
-.process-grid{border-radius:8px !important;overflow:hidden !important}
-
-/* 4. Contact page: form-submit button and select fields rounded */
-.form-submit{border-radius:8px !important}
-.form-select{border-radius:8px !important}
-
-/* 5. Founder logo standalone */
-.founder-logo-standalone{
-  width:120px;height:auto;display:block;
-  color:var(--ink);
-  filter:drop-shadow(0 10px 28px rgba(0,0,0,.14)) drop-shadow(0 3px 8px rgba(0,0,0,.09));
-  margin-bottom:0
-}
-html.dark .founder-logo-standalone{
-  filter:drop-shadow(0 10px 28px rgba(0,0,0,.55)) drop-shadow(0 3px 8px rgba(0,0,0,.30))
-}
-
-/* 6. Hero background logos: image-based, more visible */
-.hero-bg-logo{
-  position:absolute;z-index:0;pointer-events:none;
-  opacity:.16;mix-blend-mode:multiply;object-fit:contain
-}
-html.dark .hero-bg-logo{opacity:.15;mix-blend-mode:screen}
-@media(max-width:900px){.hero-bg-logo{display:none}}
-
-/* Platform logo icon: image-based */
-.platform-logo-icon img{
-  width:40px;height:40px;object-fit:contain;display:block
-}
-
-
-/* ── ROUND 6 FIXES ─────────────────────────────────────────────────────────── */
-
-/* 1. CTA band: force correct gradient border (accent-line glow) on all pages */
-.cta-band-inner{
-  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(63,107,0,.20) !important;
-  background:
-    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(63,107,0,.10), transparent 70%),
-    var(--card) !important
-}
-html.dark .cta-band-inner{
-  box-shadow:0 0 0 1px var(--accent-line),0 8px 28px -8px rgba(143,206,58,.18) !important;
-  background:
-    radial-gradient(ellipse 60% 120% at 90% 50%, rgba(143,206,58,.12), transparent 70%),
-    var(--card) !important
-}
-
-/* 2. Founder logo: elevated, larger */
-.founder-logo-standalone{
-  width:160px !important;
-  filter:
-    drop-shadow(0 0 18px rgba(143,206,58,.22))
-    drop-shadow(0 14px 36px rgba(0,0,0,.20))
-    drop-shadow(0 4px 10px rgba(0,0,0,.12)) !important
-}
-html.dark .founder-logo-standalone{
-  filter:
-    drop-shadow(0 0 22px rgba(143,206,58,.35))
-    drop-shadow(0 14px 36px rgba(0,0,0,.65))
-    drop-shadow(0 4px 10px rgba(0,0,0,.40)) !important
-}
-
-/* 3. Spend-tiers: rounded corners */
-.spend-tiers{border-radius:8px !important;overflow:hidden !important}
-
-/* 4. Green dot: pulse / bip animation */
-.dot{position:relative;overflow:visible}
-.dot::before{
-  content:'';
-  position:absolute;
-  inset:-3px;
-  border-radius:50%;
-  background:var(--accent);
-  opacity:0;
-  animation:dot-bip 2.4s ease-out infinite
-}
-@keyframes dot-bip{
-  0%{transform:scale(1);opacity:.7}
-  60%{transform:scale(2.8);opacity:0}
-  100%{transform:scale(2.8);opacity:0}
-}
-
-/* 5. ba-grid: remove outer card, just a layout wrapper */
-.ba-grid{
-  box-shadow:none !important;
-  border:none !important;
-  background:transparent !important
-}
-
-
-/* ================================================================
-   LIQUID GLASS SYSTEM (Make.com style)
-   ================================================================ */
-
-/* Glass variables: light mode */
-:root{
-  --glass-bg:       rgba(255,255,255,0.52);
-  --glass-border:   rgba(255,255,255,0.78);
-  --glass-shadow:
-    0 1px 0 rgba(255,255,255,0.9) inset,
-    0 8px 32px rgba(0,0,0,.07),
-    0 2px 8px  rgba(0,0,0,.04);
-  --glass-blur:     blur(22px) saturate(160%);
-}
-
-/* Glass variables: dark mode */
-html.dark{
-  --glass-bg:       rgba(255,255,255,0.042);
-  --glass-border:   rgba(255,255,255,0.10);
-  --glass-shadow:
-    0 1px 0 rgba(255,255,255,0.07) inset,
-    0 8px 32px rgba(0,0,0,.38),
-    0 2px 8px  rgba(0,0,0,.22);
-  --glass-blur:     blur(22px) saturate(140%);
-}
-
-/* Ambient blobs fixed to viewport, glass refracts these */
-body::before{
-  content:'';position:fixed;
-  width:900px;height:900px;border-radius:50%;
-  background:radial-gradient(circle,rgba(143,206,58,.07) 0%,transparent 68%);
-  top:-220px;right:-200px;pointer-events:none;z-index:-1;
-}
-body::after{
-  content:'';position:fixed;
-  width:700px;height:700px;border-radius:50%;
-  background:radial-gradient(circle,rgba(216,177,74,.055) 0%,transparent 68%);
-  bottom:5%;left:-180px;pointer-events:none;z-index:-1;
-}
-html.dark body::before{
-  background:radial-gradient(circle,rgba(143,206,58,.09) 0%,transparent 68%);
-}
-html.dark body::after{
-  background:radial-gradient(circle,rgba(216,177,74,.07) 0%,transparent 68%);
-}
-
-/* Apply glass to all card-level containers */
-.spread-card,
-.sandbox,
-.sandbox-card,
-.ledger,
-.platform-logo-card,
-.pricing-grid,
-.price-card,
-.access-table,
-.wtl-cards,
-.wtl-card,
-.leak-calc,
-.ba-card,
-.cta-band-inner,
-.expect-list,
-.contact-form-wrap,
-.guarantee-box,
-.success-box,
-.addon-strip,
-.roi-wrap,
-.process-item,
-.faq-item,
-.proof-row,
-.icp-strip{
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow) !important;
-}
-
-/* Ledger head: slightly more opaque to separate from rows */
-.ledger-head{
-  background: rgba(255,255,255,0.08) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border-bottom-color: var(--glass-border) !important;
-}
-html.dark .ledger-head{
-  background: rgba(255,255,255,0.06) !important;
-}
-
-/* Forms: glass */
-.form-input,
-.form-select,
-.form-textarea{
-  background: rgba(255,255,255,0.35) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border-color: var(--glass-border) !important;
-}
-html.dark .form-input,
-html.dark .form-select,
-html.dark .form-textarea{
-  background: rgba(255,255,255,0.05) !important;
-}
-
-/* Nav: already has blur, refine to match system */
-nav{
-  background: rgba(253,246,238,0.72) !important;
-  backdrop-filter: blur(24px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-  border-bottom: 1px solid rgba(255,255,255,0.6) !important;
-}
-html.dark nav{
-  background: rgba(21,23,29,0.72) !important;
-  border-bottom: 1px solid rgba(255,255,255,0.07) !important;
-}
-
-/* Mobile drawer: glass */
-.mobile-drawer{
-  background: rgba(249,246,241,0.88) !important;
-  backdrop-filter: blur(28px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-}
-html.dark .mobile-drawer{
-  background: rgba(21,23,29,0.88) !important;
-}
-
-/* Tags / badges: subtle glass tint */
-.ledger-tag,
-.cycle-tag,
-.wtl-card-tag,
-.confidence,
-.platform-logo-badge,
-.limited-tag,
-.price-badge,
-.sandbox-badge,
-.icp-mark,
-.tech-tag{
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-}
-
-/* Sandbox info tooltip: glass */
-.sandbox-tooltip{
-  background: rgba(20,19,15,0.82) !important;
-  backdrop-filter: blur(16px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
-  color: var(--ink) !important;
-}
-html:not(.dark) .sandbox-tooltip{
-  background: rgba(255,255,255,0.88) !important;
-  color: var(--ink) !important;
-  border: 1px solid var(--glass-border) !important;
-}
-
-/* ----------------------------------------------------------------
-   GLASS EXTENSIONS, sitewide.
-   Completes the base glass block above: footer, buttons (with a
-   fixed nav-cta text-contrast issue, see comment below), generic
-   card-surface containers, trust pills, a third ambient blob, and
-   slightly rounder corners for a more "liquid" read.
-   ---------------------------------------------------------------- */
-.card-surface,
-.pricing-teaser-card,
-.trust-item,
-.insight-card,
-.newsletter-card{
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow) !important;
-}
-
-/* A third, cooler-toned blob for depth + a slow drift animation:
-   Apple/Make.com glass reads best when the blur has something
-   colorful and moving to refract. */
-body::before{ animation: glassDrift1 26s ease-in-out infinite alternate; }
-body::after{  animation: glassDrift2 22s ease-in-out infinite alternate; }
-.glass-blob-3{
-  content:'';position:fixed;width:640px;height:640px;border-radius:50%;
-  background:radial-gradient(circle,rgba(80,150,220,.06) 0%,transparent 68%);
-  top:38%;left:38%;pointer-events:none;z-index:-1;
-  animation: glassDrift3 30s ease-in-out infinite alternate;
-}
-html.dark .glass-blob-3{background:radial-gradient(circle,rgba(90,170,240,.09) 0%,transparent 68%)}
-@keyframes glassDrift1{from{transform:translate(0,0)}to{transform:translate(-40px,30px)}}
-@keyframes glassDrift2{from{transform:translate(0,0)}to{transform:translate(30px,-40px)}}
-@keyframes glassDrift3{from{transform:translate(0,0) scale(1)}to{transform:translate(20px,20px) scale(1.08)}}
-@media(prefers-reduced-motion:reduce){
-  body::before,body::after,.glass-blob-3{animation:none !important}
-}
-
-/* Buttons: primary stays solid for conversion clarity (a known glass
-   pitfall is translucent CTAs losing contrast) but gets a glass-style
-   inner sheen. Secondary / nav-cta become true frosted capsules. */
-.btn-primary{
-  position:relative;overflow:hidden;border-radius:999px;
-  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -6px rgba(63,107,0,.45);
-}
-.btn-primary::after{
-  content:'';position:absolute;inset:0;border-radius:inherit;
-  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%);
-  pointer-events:none;
-}
-.btn-secondary,.nav-cta{
-  border-radius:999px !important;
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow) !important;
-}
-/* .nav-cta originally relied on a solid dark background (color:var(--bg),
-   a light color, by design), now that the background is a light glass
-   panel in both themes, the text needs to switch to var(--ink) in BOTH
-   modes or it goes invisible in light mode. This was the "Get your
-   report" button reading as blank. */
-.nav-cta{color:var(--ink) !important}
-
-/* Pricing card CTAs and the theme toggle were still the old 8px-radius
-   design system default while every other button had already moved to
-   the glass pill treatment above. Bringing them in line. */
-.price-cta-primary{
-  border-radius:999px !important;position:relative;overflow:hidden;
-  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 8px 20px -6px rgba(63,107,0,.45);
-}
-.price-cta-primary::after{
-  content:'';position:absolute;inset:0;border-radius:inherit;
-  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%);
-  pointer-events:none;
-}
-.price-cta-secondary{
-  border-radius:999px !important;
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow) !important;
-}
-.theme-toggle{
-  border-radius:50% !important;
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow) !important;
-  color: var(--ink) !important;
-}
-.theme-toggle:hover{border-color: var(--accent) !important}
-
-/* Footer: glass, matching nav */
-footer{
-  background: rgba(253,246,238,0.55) !important;
-  backdrop-filter: blur(20px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
-  border-top: 1px solid var(--glass-border) !important;
-}
-html.dark footer{background: rgba(21,23,29,0.55) !important}
-
-/* Rounded corners throughout the glass surfaces read more "liquid" */
-.card-surface,.spread-card,.ledger,.pricing-teaser-card,.cta-band-inner,
-.insight-card,.newsletter-card{ border-radius:16px !important; }
-.ledger-head{ border-radius:16px 16px 0 0 !important; }
-.ledger-foot{ border-radius:0 0 16px 16px !important; }
-
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/css/site.css" />
 </head>
 <body>
-<div class="glass-blob-3" aria-hidden="true"></div>
 
-<!-- ============================================================
-     NAV
-     ============================================================ -->
-<nav>
+<nav class="nav" aria-label="Main">
   <div class="nav-inner">
     <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
     <ul class="nav-links">
       <li><a href="/how-it-works/">How it works</a></li>
       <li><a href="/pricing/">Pricing</a></li>
-      <li><a href="/about/">About</a></li>
-      <li><a href="/security/">Security &amp; Data</a></li>
+      <li><a href="/security/">Security</a></li>
       <li><a href="/articles/">Articles</a></li>
+      <li><a href="/about/">About</a></li>
     </ul>
     <div class="nav-right">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
-      <a href="/contact/" class="nav-cta">Get your report</a>
+      <a class="nav-login" href="https://app.7captur.com/login">Log in</a>
+      <a class="btn btn-primary btn-sm" href="https://app.7captur.com/signup">Start free trial</a>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle theme"></button>
+      <button class="icon-btn nav-menu-btn" id="menuBtn" type="button" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
     </div>
-    <button class="nav-mobile-toggle" aria-label="Menu" id="mobileMenuBtn">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-    </button>
   </div>
 </nav>
 
-<div class="mobile-drawer" id="mobileDrawer">
-  <div class="mobile-drawer-head">
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
     <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
-    <button class="mobile-drawer-close" id="mobileDrawerClose" aria-label="Close menu">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
-    </button>
+    <button class="icon-btn" id="drawerClose" type="button" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
   </div>
   <a href="/how-it-works/">How it works</a>
   <a href="/pricing/">Pricing</a>
-  <a href="/about/">About</a>
-  <a href="/security/">Security &amp; Data</a>
+  <a href="/security/">Security</a>
   <a href="/articles/">Articles</a>
-  <a href="/contact/" class="nav-cta">Get your report</a>
+  <a href="/about/">About</a>
+  <a href="https://app.7captur.com/login">Log in</a>
+  <a class="btn btn-primary" href="https://app.7captur.com/signup">Start free trial</a>
 </div>
 
-<!-- ============================================================
-     HERO
-     ============================================================ -->
+<main>
+<!-- HERO -->
 <header class="hero">
-<!-- Hero background logos -->
-<img class="hero-bg-logo" src="/assets/logos/shopify.svg" alt=""
-  style="top:10%;right:6%;width:100px;height:100px;transform:rotate(10deg)">
-<img class="hero-bg-logo" src="/assets/logos/meta.svg" alt=""
-  style="top:42%;right:20%;width:120px;height:60px;transform:rotate(-4deg)">
-<img class="hero-bg-logo" src="/assets/logos/woocommerce.svg" alt=""
-  style="top:62%;right:5%;width:90px;height:90px;transform:rotate(8deg)">
-<img class="hero-bg-logo" src="/assets/logos/Klaviyo.png" alt=""
-  style="top:20%;right:28%;width:70px;height:70px;transform:rotate(-12deg)">
-<svg class="hero-bg-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-  style="top:76%;right:22%;width:88px;height:88px;transform:rotate(6deg);opacity:.18">
-  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-</svg>
-  <div class="wrap">
-    <div class="hero-top">
-      <div class="hero-eyebrow"><span class="dot"></span> Assisted Execution for E-Commerce Ad Spend</div>
-      <h1>Skip the dashboard. Turn your numbers into <span class="accent-word">decisions</span>.</h1>
-      <p class="hero-sub">Most founders can't say for sure whether their ad spend is working. Platforms report a number before returns, fees, and cost of goods are taken out, so it looks better than it really is. 7Captur recalculates it after those costs, then proposes three specific budget actions every Monday. <strong>You approve every change.</strong></p>
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Skip the dashboard. Turn your ad numbers into decisions.</h1>
+      <p class="hero-sub">7Captur connects to Shopify and Meta, recalculates ROAS after returns, cost of goods and fees, and sends you three budget decisions every Monday. You approve each one.</p>
       <div class="hero-actions">
-        <a href="/contact/" class="btn-primary">Get your report →</a>
-        <a href="/how-it-works/" class="btn-secondary">See how it works</a>
+        <a class="btn btn-primary" href="https://app.7captur.com/signup">Start free trial</a>
+        <a class="btn btn-ghost" href="#calculator">See your true ROAS</a>
       </div>
+      <p class="hero-fine">Every account starts with a 30-day Starter trial. After that you keep the free plan or pick a paid one.</p>
+    </div>
+
+    <div class="app" role="group" aria-label="Sample Monday report">
+      <div class="app-bar">
+        <strong>Monday report</strong><span>Week 43, Shopify and Meta</span>
+        <span class="app-pill">Sample data</span>
+      </div>
+      <div class="app-body">
+        <div class="roas-top">
+          <div>
+            <div class="roas-label">True ROAS</div>
+            <div class="roas-value" id="heroTrue">1.78×</div>
+          </div>
+          <div class="roas-reported">Meta reports <s class="num">3.20×</s></div>
+        </div>
+        <div class="stack" id="heroStack" role="img" aria-label="Of each reported dollar, 55 cents is kept after returns, cost of goods and fees">
+          <i class="s-keep"></i><i class="s-fees"></i><i class="s-cogs"></i><i class="s-ret"></i>
+        </div>
+        <div class="stack-legend">
+          <span style="--c:var(--accent-fill)">Kept 55%</span>
+          <span style="--c:var(--red)">Returns 12%</span>
+          <span style="--c:var(--muted)">Cost of goods 31%</span>
+          <span style="--c:var(--gold)">Fees 2%</span>
+        </div>
+
+        <div class="decisions">
+          <div class="decision">
+            <div>
+              <h4>Pause "Summer Collection"</h4>
+              <div class="decision-meta"><span class="tag tag-bad num">True ROAS 0.9×</span> · saves about $412 a week</div>
+            </div>
+            <div class="decision-actions">
+              <button class="btn btn-primary btn-sm" type="button" data-act="approve">Approve</button>
+              <button class="btn btn-ghost btn-sm" type="button" data-act="dismiss">Dismiss</button>
+            </div>
+            <div class="decision-state"></div>
+          </div>
+          <div class="decision">
+            <div>
+              <h4>Scale "Bestsellers Retarget"</h4>
+              <div class="decision-meta"><span class="tag tag-good num">True ROAS 2.4×</span> · adds about $310 a week</div>
+            </div>
+            <div class="decision-actions">
+              <button class="btn btn-primary btn-sm" type="button" data-act="approve">Approve</button>
+              <button class="btn btn-ghost btn-sm" type="button" data-act="dismiss">Dismiss</button>
+            </div>
+            <div class="decision-state"></div>
+          </div>
+          <div class="decision">
+            <div>
+              <h4>Margin drop traced to payment processing</h4>
+              <div class="decision-meta"><span class="tag tag-info">No ad change needed</span> · worth about $180 a month</div>
+            </div>
+            <div class="decision-actions">
+              <button class="btn btn-primary btn-sm" type="button" data-act="approve">Acknowledge</button>
+              <button class="btn btn-ghost btn-sm" type="button" data-act="dismiss">Dismiss</button>
+            </div>
+            <div class="decision-state"></div>
+          </div>
+        </div>
+      </div>
+      <div class="app-foot">Illustrative store, not a live account. Nothing changes until you approve.</div>
+    </div>
+  </div>
+
+  <div class="wrap connects">
+    <div class="connects-row">
+      <span class="connects-label">Connects to</span>
+      <span class="connect"><img src="/assets/logos/shopify.svg" alt="" width="24" height="24">Shopify</span>
+      <span class="connect"><img src="/assets/logos/meta.svg" alt="" width="24" height="24">Meta Ads</span>
+      <span class="connect is-soon">Google Ads <small>Soon</small></span>
+      <span class="connect is-soon">WooCommerce <small>Soon</small></span>
     </div>
   </div>
 </header>
 
-<!-- ============================================================
-     THE GAP, EXPLAINED ONCE, PLAINLY
-     ============================================================ -->
-<style>
-.gap-section{padding:56px 0 8px}
-.gap-text{font-size:1.0625rem;line-height:1.8;color:var(--body);max-width:760px}
-.gap-text strong{color:var(--ink);font-weight:600}
-</style>
-<section class="gap-section">
+<!-- THE GAP + CALCULATOR -->
+<section class="section" id="calculator">
   <div class="wrap">
-    <div class="eyebrow">The Gap</div>
-    <p class="gap-text">Meta and Google report ROAS the moment someone buys. That number leaves three things out. <strong>Cost of goods</strong>, what it actually cost you to make or source the product. <strong>Returns</strong>, sales that get refunded weeks later. <strong>Fees</strong>, what payment processing and fulfilment take off the top. Once those are subtracted, a campaign that looked profitable can be break-even or losing money. 7Captur does that subtraction every week and tells you which campaigns are which.</p>
-  </div>
-</section>
+    <p class="kicker">The gap</p>
+    <h2>Meta reports revenue. You keep what is left.</h2>
+    <p class="lede">Ad platforms report ROAS the moment someone buys. Refunds land weeks later, and cost of goods and fees never show up. Set your own numbers and see the difference.</p>
 
-<!-- ============================================================
-     ROAS LEAK CALCULATOR
-     ============================================================ -->
-<style>
-.leak-calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
-.leak-calc-inputs{padding:40px}
-.leak-calc-results{padding:40px}
-.leak-slider{margin-bottom:26px}
-.leak-slider:last-child{margin-bottom:0}
-.leak-slider-label{
-  display:flex;justify-content:space-between;
-  font-size:13.5px;color:var(--body);
-  margin-bottom:10px;
-}
-.leak-slider-label .val{font-family:'IBM Plex Mono',monospace;color:var(--ink);font-size:13px}
-.leak-slider input[type="range"]{
-  width:100%;height:3px;border-radius:2px;background:var(--line-strong);
-  outline:none;-webkit-appearance:none;
-}
-.leak-slider input[type="range"]::-webkit-slider-thumb{
-  -webkit-appearance:none;width:15px;height:15px;border-radius:50%;
-  background:var(--accent);cursor:pointer;box-shadow:0 0 0 4px var(--accent-soft);
-}
-.leak-slider input[type="range"]::-moz-range-thumb{
-  width:15px;height:15px;border-radius:50%;background:var(--accent);cursor:pointer;border:none;
-}
-.leak-result-row{padding:16px 0;border-bottom:1px solid var(--line-strong)}
-.leak-result-row:last-of-type{border-bottom:none}
-.leak-result-row .label{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
-.leak-result-row .value{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:24px;color:var(--muted);display:block;margin-top:4px}
-.leak-result-row.is-true .value{color:var(--ink)}
-.leak-result-row.is-leak .value{color:var(--gold);font-size:38px;margin-top:6px}
-.leak-disclaimer{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6}
-@media(max-width:900px){
-  .leak-calc-grid{grid-template-columns:1fr;gap:20px}
-  .leak-calc-inputs,.leak-calc-results{padding:28px 24px}
-}
-</style>
-
-<section class="section-tight" id="gap-calc">
-  <div class="wrap">
-    <div class="eyebrow">See it yourself</div>
-    <h2>Reported vs. true. Move the sliders to match your store.</h2>
-    <p class="lede" style="margin-bottom:40px">This runs the same math as your weekly report: the number your ad platform shows you, next to what's left after cost of goods, returns, and fees.</p>
-
-    <div class="leak-calc-grid">
-      <div class="card-surface leak-calc-inputs">
-        <div class="leak-slider">
-          <div class="leak-slider-label"><span>Monthly ad spend</span><span class="val num" id="lc-spend-val">$20,000</span></div>
-          <input type="range" id="lc-spend" min="1000" max="100000" step="500" value="20000">
-        </div>
-        <div class="leak-slider">
-          <div class="leak-slider-label"><span>Average COGS</span><span class="val num" id="lc-cogs-val">35%</span></div>
-          <input type="range" id="lc-cogs" min="0" max="80" step="1" value="35">
-        </div>
-        <div class="leak-slider">
-          <div class="leak-slider-label"><span>Return rate</span><span class="val num" id="lc-returns-val">12%</span></div>
-          <input type="range" id="lc-returns" min="0" max="40" step="1" value="12">
-        </div>
-        <div class="leak-slider">
-          <div class="leak-slider-label"><span>Payment processor fee</span><span class="val num" id="lc-fees-val">2.9%</span></div>
-          <input type="range" id="lc-fees" min="0" max="5" step="0.1" value="2.9">
-        </div>
+    <div class="calc">
+      <div class="panel">
+        <div class="slider"><div class="slider-label"><span>Monthly ad spend</span><span class="val num" id="lc-spend-val">$20,000</span></div><input type="range" id="lc-spend" min="1000" max="100000" step="500" value="20000" aria-label="Monthly ad spend"></div>
+        <div class="slider"><div class="slider-label"><span>Average cost of goods</span><span class="val num" id="lc-cogs-val">35%</span></div><input type="range" id="lc-cogs" min="0" max="80" step="1" value="35" aria-label="Average cost of goods"></div>
+        <div class="slider"><div class="slider-label"><span>Return rate</span><span class="val num" id="lc-returns-val">12%</span></div><input type="range" id="lc-returns" min="0" max="40" step="1" value="12" aria-label="Return rate"></div>
+        <div class="slider"><div class="slider-label"><span>Payment processor fee</span><span class="val num" id="lc-fees-val">2.9%</span></div><input type="range" id="lc-fees" min="0" max="5" step="0.1" value="2.9" aria-label="Payment processor fee"></div>
       </div>
-
-      <div class="card-surface accent-glow leak-calc-results">
-        <div class="leak-result-row">
-          <span class="label">Reported ROAS (platform view)</span>
-          <span class="value num" id="lc-reported">3.20×</span>
-        </div>
-        <div class="leak-result-row is-true">
-          <span class="label">True ROAS (after COGS, returns, fees)</span>
-          <span class="value num" id="lc-true">1.84×</span>
-        </div>
-        <div class="leak-result-row is-leak">
-          <span class="label">Annual profit leak</span>
-          <span class="value num" id="lc-leak">$163,200</span>
-        </div>
-        <p class="leak-disclaimer">This estimator assumes a 3.2× platform-reported ROAS baseline to show the mechanism. Your real report uses your account's actual numbers.</p>
+      <div class="panel is-lit">
+        <div class="result"><span class="label">Reported ROAS, platform view</span><span class="value num" id="lc-reported">3.20×</span></div>
+        <div class="result is-true"><span class="label">True ROAS, after returns, cost of goods and fees</span><span class="value num" id="lc-true">1.78×</span></div>
+        <div class="result is-leak"><span class="label">Annual gap between reported and true</span><span class="value num" id="lc-leak">$341,444</span></div>
+        <p class="calc-note">Assumes a 3.2× platform-reported ROAS to show the mechanism. Your report uses your account's actual numbers.</p>
       </div>
     </div>
   </div>
 </section>
 
-<script>
-(function() {
-  const spend = document.getElementById('lc-spend');
-  const cogs = document.getElementById('lc-cogs');
-  const returns = document.getElementById('lc-returns');
-  const fees = document.getElementById('lc-fees');
-  const spendVal = document.getElementById('lc-spend-val');
-  const cogsVal = document.getElementById('lc-cogs-val');
-  const returnsVal = document.getElementById('lc-returns-val');
-  const feesVal = document.getElementById('lc-fees-val');
-  const reportedOut = document.getElementById('lc-reported');
-  const trueOut = document.getElementById('lc-true');
-  const leakOut = document.getElementById('lc-leak');
-  const REPORTED_ROAS = 3.2;
-
-  function fmtCurrency(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
-
-  function calculate() {
-    const s = parseFloat(spend.value);
-    const c = parseFloat(cogs.value) / 100;
-    const r = parseFloat(returns.value) / 100;
-    const f = parseFloat(fees.value) / 100;
-
-    spendVal.textContent = fmtCurrency(s);
-    cogsVal.textContent = cogs.value + '%';
-    returnsVal.textContent = returns.value + '%';
-    feesVal.textContent = parseFloat(fees.value).toFixed(1) + '%';
-
-    const reportedRevenue = s * REPORTED_ROAS;
-    const afterReturns = reportedRevenue * (1 - r);
-    const afterCogs = afterReturns * (1 - c);
-    const afterFees = afterCogs * (1 - f);
-    const trueRoas = afterFees / s;
-
-    reportedOut.textContent = REPORTED_ROAS.toFixed(2) + '×';
-    trueOut.textContent = trueRoas.toFixed(2) + '×';
-    leakOut.textContent = fmtCurrency((reportedRevenue - afterFees) * 12);
-  }
-
-  [spend, cogs, returns, fees].forEach(el => el.addEventListener('input', calculate));
-  calculate();
-})();
-</script>
-
-<!-- ============================================================
-     WHAT HAPPENS NEXT: the loop
-     ============================================================ -->
-<style>
-.loop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
-.loop-item{padding:28px}
-.loop-item-num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.08em;margin-bottom:14px}
-.loop-item h3{margin-bottom:8px}
-.loop-item p{font-size:13.5px;color:var(--body);line-height:1.65}
-.loop-item p a{color:var(--accent)}
-@media(max-width:900px){.loop-grid{grid-template-columns:1fr}}
-</style>
-<section class="section-tight section-border-t">
+<!-- HOW IT WORKS -->
+<section class="section" style="padding-top:0">
   <div class="wrap">
-    <div class="eyebrow">What Happens Next</div>
-    <h2>The loop, in three steps.</h2>
-    <p class="lede">Every week runs the same way. Nothing here changes without you.</p>
-    <div class="loop-grid">
-      <div class="loop-item card-surface">
-        <div class="loop-item-num">STEP 01</div>
-        <h3>Your report lands Monday</h3>
-        <p>Real ad spend, cost of goods, returns, and fees, recalculated into three specific budget decisions.</p>
-      </div>
-      <div class="loop-item card-surface">
-        <div class="loop-item-num">STEP 02</div>
-        <h3>You approve or dismiss</h3>
-        <p>Each decision needs your explicit approval before anything happens. Dismiss and nothing changes.</p>
-      </div>
-      <div class="loop-item card-surface">
-        <div class="loop-item-num">STEP 03</div>
-        <h3>Capped and reversible</h3>
-        <p>Approved changes are capped and can be rolled back. <a href="/security/">Full detail on the safety limits →</a></p>
-      </div>
+    <p class="kicker">How it works</p>
+    <h2>Connect once. Decide every Monday.</h2>
+    <div class="steps">
+      <div class="step"><h3>Connect your store and ads</h3><p>Link Shopify and Meta in a few clicks. Product costs come from Shopify, or you enter them by hand.</p></div>
+      <div class="step"><h3>Get three decisions on Monday</h3><p>Each week we recalculate true ROAS per campaign and send the three moves worth making, with the expected impact of each.</p></div>
+      <div class="step"><h3>Approve or dismiss</h3><p>Nothing changes without your approval. Dismiss a decision and your account stays exactly as it is.</p></div>
     </div>
+    <div class="rails"><span><b>30%</b> maximum budget change per decision</span><span><b>24 hours</b> to roll an approved change back</span><span><a href="/security/">Read the safety rules</a></span></div>
   </div>
 </section>
 
-<!-- ============================================================
-     DECISION LEDGER: signature element
-     ============================================================ -->
-<section class="section-tight">
+<!-- PRICING -->
+<section class="section" id="pricing" style="padding-top:0">
   <div class="wrap">
-    <div class="ledger">
-      <div class="ledger-head">
-        <div class="ledger-head-left">
-          <strong>Sample Weekly Report, Illustrative Store</strong>
-          Week 22 · Shopify · Meta Ads
-        </div>
-        <div class="ledger-head-right">
-          <div>
-            <div class="ledger-kpi-label">Revenue</div>
-            <div class="ledger-kpi-val">$14,200<span class="delta-up">↑ 12% w/w</span></div>
-          </div>
-          <div>
-            <div class="ledger-kpi-label">Net margin</div>
-            <div class="ledger-kpi-val">4.1%<span class="delta-down">↓ 2.1 pts</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="ledger-rows">
-        <div class="ledger-row">
-          <div class="ledger-row-num">01</div>
-          <div class="ledger-row-body">
-            <h4>Pause "Summer Collection" <span class="ledger-tag tag-warn">True ROAS 0.9×</span></h4>
-          </div>
-          <div class="ledger-row-impact"><span class="impact-label">If approved</span>+$412 / wk</div>
-        </div>
-        <div class="ledger-row">
-          <div class="ledger-row-num">02</div>
-          <div class="ledger-row-body">
-            <h4>Scale "Bestsellers Retarget" <span class="ledger-tag tag-action">True ROAS 2.4×</span></h4>
-          </div>
-          <div class="ledger-row-impact"><span class="impact-label">If approved</span>+$310 / wk</div>
-        </div>
-        <div class="ledger-row">
-          <div class="ledger-row-num">03</div>
-          <div class="ledger-row-body">
-            <h4>Margin drop traced to payment processing <span class="ledger-tag tag-info">No ad change required</span></h4>
-          </div>
-          <div class="ledger-row-impact"><span class="impact-label">If approved</span>+$180 / mo</div>
-        </div>
-      </div>
-      <div class="ledger-foot">
-        <span>Illustrative report based on the 7Captur reporting format. Figures are representative, not from a live account.</span>
-        <a href="/how-it-works/#demo" style="color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:12.5px;text-decoration:none;white-space:nowrap">Try the live sandbox →</a>
-      </div>
-    </div>
-  </div>
-</section>
+    <p class="kicker">Pricing</p>
+    <h2>Start free. Pay when the decisions earn it.</h2>
+    <p class="lede">Paid plans scale with your monthly ad spend. No contracts, cancel anytime.</p>
 
-<!-- ============================================================
-     POSITIONING STRIP (replaces fake client logos)
-     ============================================================ -->
-<div class="trust-strip" id="built-for">
-  <div class="wrap trust-strip-inner">
-    <div class="trust-label">Built for</div>
-    <div class="trust-items">
-      <span class="trust-item"><span class="dot"></span>Multi-market Shopify &amp; WooCommerce brands</span>
-      <span class="trust-item"><span class="dot"></span>$5k+/mo on Meta or Google Ads</span>
-      <span class="trust-item"><span class="dot"></span>DTC-first, founder or marketing-led teams</span>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================
-     PRICING TEASER
-     ============================================================ -->
-<section class="section alt-bg section-border-t">
-  <div class="wrap">
-    <div class="pricing-teaser">
-      <div>
-        <div class="eyebrow">Engagement Structure</div>
-        <h2>Start with 4 free weekly reports. Continue only if the numbers justify it.</h2>
-        <p class="lede" style="margin-bottom:32px">The first 30 days are free, for a limited time. At day 30, you receive a written summary of decisions delivered and approved, along with their estimated impact, and decide from there. If you continue, you move to the standard monthly retainer.</p>
-        <a href="/pricing/" class="btn-secondary">View full pricing →</a>
-      </div>
-      <div class="pricing-teaser-card">
-        <div class="phase-tag">Phase 1 · First 30 Days</div>
-        <div class="price-row"><span class="was">$49</span><span class="amount">$0</span><span class="period">today</span><span class="limited-tag">Limited time</span></div>
-        <div class="note">Normally $49. Free for the first 30 days, for a limited time only. <strong>If the 30-day summary doesn't justify continuing, you walk away with a full data export and no further obligation.</strong></div>
-        <ul class="pricing-feature-list">
-          <li><span class="ck">✓</span> Pipeline configured for your store and ad accounts</li>
-          <li><span class="ck">✓</span> 1 store + 2 ad platforms connected via API</li>
-          <li><span class="ck">✓</span> 4 weekly reports with approve/dismiss execution</li>
-          <li><span class="ck">✓</span> 30-day written ROI summary</li>
+    <div class="plans">
+      <div class="plan">
+        <div class="plan-name">Free</div>
+        <div class="plan-price">$0<small>forever</small></div>
+        <p class="plan-sub">See what your ad spend really earns.</p>
+        <ul>
+          <li>1 store and 1 ad platform</li>
+          <li>Weekly true ROAS and annual gap</li>
+          <li>Manual cost-of-goods entry</li>
+          <li>Your top decision each Monday</li>
+          <li>30 days of history</li>
+          <li class="is-off">The other two decisions stay locked</li>
         </ul>
-        <a href="/contact/" class="btn-primary" style="width:100%;justify-content:center">Get your report →</a>
+        <a class="btn btn-ghost btn-block" href="https://app.7captur.com/signup">Create free account</a>
+      </div>
+
+      <div class="plan is-lit">
+        <div class="plan-name">Paid <span class="plan-badge">30-day trial</span></div>
+        <div class="bands" role="group" aria-label="Monthly ad spend">
+          <button type="button" aria-pressed="true" data-price="49" data-sub="Under $15k a month in ad spend">&lt; $15k</button>
+          <button type="button" aria-pressed="false" data-price="79" data-sub="$15k to $30k a month in ad spend">$15–30k</button>
+          <button type="button" aria-pressed="false" data-price="119" data-sub="$30k to $50k a month in ad spend">$30–50k</button>
+          <button type="button" aria-pressed="false" data-price="" data-sub="Over $50k a month. Custom logic, priority support.">$50k+</button>
+        </div>
+        <div class="plan-price" id="paidPrice">$49<small>a month</small></div>
+        <p class="plan-sub" id="paidSub">Under $15k a month in ad spend</p>
+        <ul>
+          <li>All three decisions every Monday</li>
+          <li>Approve or dismiss, delivered by email</li>
+          <li>Up to 3 ad platforms and a 12-month history</li>
+          <li>Monthly strategy call</li>
+          <li>Approved changes pushed to Meta, capped at 30% <span class="soon">Soon</span></li>
+        </ul>
+        <a class="btn btn-primary btn-block" id="paidCta" href="https://app.7captur.com/signup">Start 30-day trial</a>
       </div>
     </div>
+    <p class="plans-note">Every new account starts on a 30-day Starter trial, then moves to Free unless you choose a paid plan. <a href="/pricing/">Full pricing details</a></p>
   </div>
 </section>
 
-<!-- ============================================================
-     CTA BAND
-     ============================================================ -->
-<div class="cta-band">
+<!-- FAQ -->
+<section class="section" style="padding-top:0">
   <div class="wrap">
-    <div class="cta-band-inner">
-      <div>
-        <h2>See your numbers before you commit to anything.</h2>
-        <p>A 20-minute call, using your real store and ad account data. No pitch deck.</p>
-      </div>
-      <a href="/contact/" class="btn-primary">Get your report →</a>
+    <p class="kicker">Questions</p>
+    <h2>What people ask first.</h2>
+    <div class="faq">
+      <details><summary>What is true ROAS?</summary><p>Reported revenue after returns, cost of goods and payment fees, divided by ad spend. It tells you what each ad dollar leaves you with, not what it brought through the door.</p></details>
+      <details><summary>What does 7Captur connect to?</summary><p>Shopify and Meta Ads today. Google Ads and WooCommerce are next. If you cannot connect an account yet, you can upload an export instead.</p></details>
+      <details><summary>Will it change my ad account without asking?</summary><p>No. Every decision needs your approval, and a dismissed decision changes nothing.</p></details>
+      <details><summary>Do I have to enter my costs?</summary><p>Product costs sync from Shopify when they are set there. If not, enter an average cost-of-goods percentage and refine it later.</p></details>
+      <details><summary>What happens when the 30-day trial ends?</summary><p>Your account moves to the Free plan and keeps your data. You are only charged if you pick a paid plan.</p></details>
+      <details><summary>Is my data safe?</summary><p>We only request the access the product needs, and you can disconnect at any time. The details are on the <a href="/security/">security page</a>.</p></details>
     </div>
   </div>
-</div>
+</section>
 
 <!-- ============================================================
      TODAY'S INSIGHT: pulls the latest LinkedIn post via
@@ -1678,6 +497,8 @@ html.dark footer{background: rgba(21,23,29,0.55) !important}
 </script>
 
 
+
+
 <!-- ============================================================
      NEWSLETTER SIGNUP
      Mailchimp embedded form. ACTION_URL below is a placeholder;
@@ -1737,8 +558,8 @@ html.dark .newsletter-submit{color:#0e1206}
   <div class="wrap">
     <div class="newsletter-card">
       <div class="newsletter-copy">
-        <div class="eyebrow">Stay Ahead of the ROAS Gap</div>
-        <h2>Sign up for our newsletter.</h2>
+        <p class="kicker">Newsletter</p>
+        <h2>One real ad-spend leak a week.</h2>
         <p>One short email a week: a real ad-spend leak we found, and the fix. No fluff, no daily noise, just what mid-market Shopify and Meta Ads brands need to know.</p>
       </div>
       <div>
@@ -1751,7 +572,7 @@ html.dark .newsletter-submit{color:#0e1206}
           <div class="nl-hp" aria-hidden="true">
             <input type="text" name="b_e666602be2ab1c85a17cb1b80_2691f979b1" tabindex="-1" value="">
           </div>
-          <button type="submit" class="newsletter-submit" id="nlSubmit">Subscribe →</button>
+          <button type="submit" class="newsletter-submit" id="nlSubmit">Subscribe</button>
           <div class="newsletter-note">No spam. One email a week. Unsubscribe anytime.</div>
           <div class="newsletter-status" id="nlStatus"></div>
         </form>
@@ -1777,46 +598,35 @@ html.dark .newsletter-submit{color:#0e1206}
 })();
 </script>
 
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
-<footer>
+
+
+<div class="cta">
+  <div class="wrap">
+    <div class="cta-card">
+      <div>
+        <h2>Find out what your ad spend really earns.</h2>
+        <p>Connect your store and see your true ROAS this week.</p>
+      </div>
+      <a class="btn btn-primary" href="https://app.7captur.com/signup">Start free trial</a>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer class="footer">
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="logo"><svg class="logo-mark" viewBox="99 121 301 257" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor"/></svg>7Captur</a>
-        <p>Assisted execution for e-commerce ad spend.</p>
+        <p>True ROAS and weekly budget decisions for e-commerce ad spend.</p>
       </div>
-      <div class="footer-col">
-        <h4>Product</h4>
-        <ul>
-          <li><a href="/how-it-works/">How it works</a></li>
-          <li><a href="/pricing/">Pricing</a></li>
-          <li><a href="/how-it-works/#platforms">Platforms</a></li>
-          <li><a href="/articles/">Articles</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="/about/">About</a></li>
-          <li><a href="/security/">Security &amp; data</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Get started</h4>
-        <ul>
-          <li><a href="/contact/">Get your report</a></li>
-          <li><a href="/pricing/">View pricing</a></li>
-        </ul>
-      </div>
+      <div><h4>Product</h4><ul><li><a href="/how-it-works/">How it works</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/articles/">Articles</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="/about/">About</a></li><li><a href="/security/">Security</a></li><li><a href="/contact/">Contact</a></li></ul></div>
+      <div><h4>Account</h4><ul><li><a href="https://app.7captur.com/login">Log in</a></li><li><a href="https://app.7captur.com/signup">Start free trial</a></li></ul></div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 7Captur</div>
-      <div class="footer-legal">
-        <a href="/privacy-policy/">Privacy policy</a>
-        <a href="/terms-of-service/">Terms of service</a>
-      </div>
+      <span>© 2026 7Captur</span>
+      <span><a href="/privacy-policy/">Privacy policy</a><a href="/terms-of-service/">Terms of service</a></span>
     </div>
   </div>
 </footer>
@@ -1824,36 +634,83 @@ html.dark .newsletter-submit{color:#0e1206}
 <script>
 // GitHub Pages deep-link redirect handler
 (function(){
-  const redirect = sessionStorage.getItem('redirect');
-  if (redirect && redirect !== '/') {
-    sessionStorage.removeItem('redirect');
-    window.history.replaceState(null, '', redirect);
-  }
+  var redirect = null;
+  try { redirect = sessionStorage.getItem('redirect'); } catch(e) {}
+  if (redirect && redirect !== '/') { try { sessionStorage.removeItem('redirect'); } catch(e) {} history.replaceState(null, '', redirect); }
 })();
 
-// Theme toggle
-const root = document.documentElement;
-const toggle = document.getElementById('themeToggle');
-function setTheme(t){
-  root.classList.toggle('dark', t === 'dark');
-  toggle.innerHTML = t === 'dark' ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>` : `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
-  try { localStorage.setItem('theme', t); } catch(e) {}
-}
-let saved = 'light';
-try { saved = localStorage.getItem('theme') || 'light'; } catch(e) {}
-setTheme(saved);
-toggle.addEventListener('click', () => setTheme(root.classList.contains('dark') ? 'light' : 'dark'));
+// Theme
+(function(){
+  var root = document.documentElement, btn = document.getElementById('themeToggle');
+  var moon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  var sun = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  function paint(){ btn.innerHTML = root.classList.contains('dark') ? sun : moon; }
+  btn.addEventListener('click', function(){
+    root.classList.toggle('dark');
+    try { localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light'); } catch(e) {}
+    paint();
+  });
+  paint();
+})();
 
 // Mobile drawer
-const drawer = document.getElementById('mobileDrawer');
-document.getElementById('mobileMenuBtn').addEventListener('click', () => drawer.classList.add('open'));
-document.getElementById('mobileDrawerClose').addEventListener('click', () => drawer.classList.remove('open'));
+(function(){
+  var d = document.getElementById('drawer');
+  document.getElementById('menuBtn').addEventListener('click', function(){ d.classList.add('open'); });
+  document.getElementById('drawerClose').addEventListener('click', function(){ d.classList.remove('open'); });
+  d.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ d.classList.remove('open'); }); });
+})();
 
-// Minimal scroll reveal
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+// Hero: one load-time reveal of the true-ROAS stack, then approve/dismiss on the sample decisions
+(function(){
+  var stack = document.getElementById('heroStack');
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ stack.classList.add('is-in'); }); });
+  document.querySelectorAll('.decision').forEach(function(row){
+    row.querySelectorAll('[data-act]').forEach(function(b){
+      b.addEventListener('click', function(){
+        var approved = b.getAttribute('data-act') === 'approve';
+        row.classList.add(approved ? 'is-approved' : 'is-dismissed');
+        row.querySelector('.decision-state').textContent = approved ? 'Approved. You can roll it back for 24 hours.' : 'Dismissed. Nothing changed.';
+      });
+    });
+  });
+})();
+
+// Calculator (same formula as before)
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var spend=$('lc-spend'), cogs=$('lc-cogs'), returns=$('lc-returns'), fees=$('lc-fees');
+  var REPORTED = 3.2;
+  function money(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+  function run(){
+    var s=parseFloat(spend.value), c=parseFloat(cogs.value)/100, r=parseFloat(returns.value)/100, f=parseFloat(fees.value)/100;
+    $('lc-spend-val').textContent = money(s);
+    $('lc-cogs-val').textContent = cogs.value + '%';
+    $('lc-returns-val').textContent = returns.value + '%';
+    $('lc-fees-val').textContent = parseFloat(fees.value).toFixed(1) + '%';
+    var rev = s*REPORTED, kept = rev*(1-r)*(1-c)*(1-f);
+    $('lc-reported').textContent = REPORTED.toFixed(2) + '×';
+    $('lc-true').textContent = (kept/s).toFixed(2) + '×';
+    $('lc-leak').textContent = money((rev-kept)*12);
+  }
+  [spend,cogs,returns,fees].forEach(function(el){ el.addEventListener('input', run); });
+  run();
+})();
+
+// Pricing bands
+(function(){
+  var price=document.getElementById('paidPrice'), sub=document.getElementById('paidSub'), cta=document.getElementById('paidCta');
+  var btns=document.querySelectorAll('.bands button');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      btns.forEach(function(o){ o.setAttribute('aria-pressed', o===b ? 'true' : 'false'); });
+      var p=b.getAttribute('data-price');
+      sub.textContent=b.getAttribute('data-sub');
+      if(p){ price.innerHTML='$'+p+'<small>a month</small>'; cta.textContent='Start 30-day trial'; cta.href='https://app.7captur.com/signup'; }
+      else { price.innerHTML='Custom<small>from $199 a month</small>'; cta.textContent='Talk to us'; cta.href='/contact/'; }
+    });
+  });
+})();
 </script>
 </body>
 </html>
