@@ -62,23 +62,25 @@
 </div>
 
 
+
 <main>
 
 <header class="page-head">
   <div class="wrap">
-    <h1>Talk to us.</h1>
+    <h1>Get in touch.</h1>
     <p class="lede">Questions about plans, a custom setup, or what 7Captur can see in your accounts? Send a note and we reply within 24 hours.</p>
   </div>
 </header>
 
 <section class="section section-flush" style="padding-bottom:96px">
   <div class="wrap contact-grid">
-    <div class="prose">
-      <h3>Want to try it first?</h3>
-      <p>You do not need to talk to anyone to start. Create an account, connect your store and you get a 30-day Starter trial.</p>
-      <p><a class="btn btn-primary" href="https://app.7captur.com/signup" style="text-decoration:none;color:var(--on-accent)">Start free trial</a></p>
-      <h3 style="margin-top:12px">Better for this form</h3>
-      <p>Custom plans for $50k+ in monthly spend, four or more platforms, or subscription and LTV logic. A platform we do not support yet. Security or data questions before you connect.</p>
+    <div>
+      <div class="expect">
+        <div class="expect-item"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>Response time</b><span>We reply within 24 hours.</span></div>
+        <div class="expect-item"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 21l1.8-5A8 8 0 1 1 21 12z"/></svg></span><b>Good reasons to write</b><span>Custom plans for $50k+ in monthly spend, four or more platforms, or subscription and LTV logic. A platform we do not support yet. Security or data questions before you connect.</span></div>
+        <div class="expect-item"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/></svg></span><b>Want to try it first?</b><span>You do not need to talk to anyone to start. Create an account, connect your store and you get a 30-day Starter trial.</span></div>
+      </div>
+      <p style="margin-top:24px"><a class="btn btn-primary" href="https://app.7captur.com/signup">Start free trial</a></p>
     </div>
 
     <div class="panel">
@@ -95,6 +97,7 @@
           <input class="hp" type="text" name="_gotcha" id="f-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="field wide"><div class="form-msg" id="formMsg" role="status" aria-live="polite"></div></div>
           <div class="field wide"><button class="btn btn-primary" type="submit" id="formSubmitBtn">Send message</button></div>
+          <div class="field wide"><p class="fine" style="margin:0">We reply within 24 hours. Your message is used only to answer you.</p></div>
         </div>
       </form>
     </div>
@@ -138,7 +141,6 @@
   document.getElementById('drawerClose').addEventListener('click', function(){ d.classList.remove('open'); });
   d.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ d.classList.remove('open'); }); });
 })();
-
 (function(){
   var ENDPOINT = 'https://formspree.io/f/xkoqapnn';
   var form = document.getElementById('contactForm'), msg = document.getElementById('formMsg'), btn = document.getElementById('formSubmitBtn');
@@ -161,7 +163,6 @@
     } catch (err) { say('The message was not sent. Check your connection and try again.', 'is-error'); }
     finally { btn.disabled = false; btn.textContent = 'Send message'; }
   });
-})();
-</script>
+})();</script>
 </body>
 </html>
