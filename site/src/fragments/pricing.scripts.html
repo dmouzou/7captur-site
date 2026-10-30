@@ -1,0 +1,42 @@
+<script>
+(function(){
+  var annual = false;
+  var slider = document.getElementById('spendSlider'), val = document.getElementById('spendSliderValue');
+  var rows = document.querySelectorAll('#spendTiers .tier');
+  var priceEl = document.getElementById('paidPrice'), noteEl = document.getElementById('paidNote'), cta = document.getElementById('paidCta');
+  var bill = document.querySelectorAll('[data-billing]');
+  function money(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+  function render(){
+    var v = parseInt(slider.value, 10);
+    val.textContent = money(v);
+    var active = null;
+    rows.forEach(function(r){ var on = v >= +r.dataset.min && v <= +r.dataset.max; r.classList.toggle('is-active', on); if (on) active = r; });
+    if (!active) {
+      priceEl.innerHTML = '<small class="pre">from</small>$199<small>a month</small>';
+      noteEl.textContent = 'Custom setup for $50k+ in monthly spend.'; cta.textContent = 'Talk to us'; cta.href = '/contact/'; return;
+    }
+    var p = +active.dataset.price, shown = annual ? Math.round(p * 0.8) : p;
+    priceEl.innerHTML = '$' + shown + '<small>a month</small>';
+    noteEl.textContent = annual ? 'Billed ' + money(p * 12 * 0.8) + ' a year. You save 20%.' : 'Billed monthly. Cancel anytime.';
+    cta.textContent = 'Start 30-day trial'; cta.href = 'https://app.7captur.com/signup';
+  }
+  bill.forEach(function(b){ b.addEventListener('click', function(){ annual = b.getAttribute('data-billing') === 'annual'; bill.forEach(function(o){ o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); render(); }); });
+  slider.addEventListener('input', render); render();
+})();
+(function(){
+  var sp = document.getElementById('roiSpendSlider'), ls = document.getElementById('lossSlider');
+  function run(){
+    var spend = parseInt(sp.value, 10), loss = parseInt(ls.value, 10);
+    document.getElementById('spendVal').textContent = '$' + spend.toLocaleString('en-US');
+    document.getElementById('lossVal').textContent = loss + '%';
+    var waste = Math.round(spend * (loss / 100) * 0.5);
+    var fee = 59; if (spend >= 15000 && spend < 30000) fee = 79; else if (spend >= 30000 && spend < 50000) fee = 119; else if (spend >= 50000) fee = 199;
+    var net = waste - fee;
+    document.getElementById('roiWaste').textContent = '$' + waste.toLocaleString('en-US');
+    var n = document.getElementById('roiNet');
+    n.textContent = (net >= 0 ? '+' : '−') + '$' + Math.abs(net).toLocaleString('en-US') + '/mo';
+    n.style.color = net >= 0 ? 'var(--accent)' : 'var(--red)';
+  }
+  sp.addEventListener('input', run); ls.addEventListener('input', run); run();
+})();
+</script>

@@ -1,0 +1,9 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import head from "../../fragments/security.head.html?raw";
+import main from "../../fragments/security.main.html?raw";
+import scripts from "../../fragments/security.scripts.html?raw";
+---
+<Layout head={head} current="/security/" scripts={scripts}>
+  <Fragment set:html={main} />
+</Layout>

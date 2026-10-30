@@ -1,0 +1,9 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import head from "../../../fragments/articles__why-your-meta-roas-is-lying-to-you.head.html?raw";
+import main from "../../../fragments/articles__why-your-meta-roas-is-lying-to-you.main.html?raw";
+import scripts from "../../../fragments/articles__why-your-meta-roas-is-lying-to-you.scripts.html?raw";
+---
+<Layout head={head} current="/articles/why-your-meta-roas-is-lying-to-you/" scripts={scripts}>
+  <Fragment set:html={main} />
+</Layout>

@@ -1,0 +1,16 @@
+<script>
+(function(){
+  var gen = document.getElementById('sbGenerate'), empty = document.getElementById('sbEmpty'), list = document.getElementById('sbList');
+  function reset(){ list.querySelectorAll('.decision').forEach(function(d){ d.classList.remove('is-approved','is-dismissed'); d.querySelector('.decision-state').textContent = ''; }); }
+  gen.addEventListener('click', function(){ reset(); empty.hidden = true; list.hidden = false; gen.textContent = 'Generate again'; });
+  list.querySelectorAll('.decision').forEach(function(row){
+    row.querySelectorAll('[data-act]').forEach(function(b){
+      b.addEventListener('click', function(){
+        var ok = b.getAttribute('data-act') === 'approve';
+        row.classList.add(ok ? 'is-approved' : 'is-dismissed');
+        row.querySelector('.decision-state').textContent = ok ? 'Approved in the simulation. A live report would give you 24 hours to roll it back.' : 'Dismissed. Nothing changed.';
+      });
+    });
+  });
+})();
+</script>

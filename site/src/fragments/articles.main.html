@@ -1,0 +1,426 @@
+<main>
+
+<header class="page-head is-wide">
+  <div class="wrap">
+    <h1>Notes on true profitability for people who run ad spend.</h1>
+    <p class="lede">The mechanics of true ROAS, return-rate lag, cost-of-goods margin and approval-based execution, explained plainly. No fabricated case studies.</p>
+  </div>
+</header>
+<!-- ============================================================
+     TODAY'S INSIGHT: pulls the latest LinkedIn post via
+     /assets/data/insight.json (written daily by a Make.com scenario;
+     see docs/MAKE-COM-SETUP.md for the full pipeline).
+     ============================================================ -->
+<style>
+.insight-section{padding:0 0 8px}
+.insight-card{
+  border:1px solid var(--line-strong);border-radius:16px;
+  padding:26px 30px;display:flex;gap:22px;align-items:flex-start;
+  position:relative;overflow:hidden;
+}
+.insight-badge{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  background:#0A66C2;display:flex;align-items:center;justify-content:center;
+}
+.insight-badge svg{width:20px;height:20px}
+.insight-body{flex:1;min-width:0}
+.insight-top-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.insight-eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:7px;
+}
+.insight-eyebrow .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:insightPulse 1.8s ease-in-out infinite}
+@keyframes insightPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.insight-date{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.insight-text{font-size:15px;color:var(--ink);line-height:1.6;margin-bottom:12px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.insight-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.insight-link{
+  font-family:'Inter Tight',sans-serif;font-weight:600;font-size:13.5px;color:var(--accent);
+  text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+}
+.insight-link:hover{text-decoration:underline}
+.insight-updated{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted)}
+.insight-media{margin-bottom:14px}
+.insight-media-img{width:100%;max-height:420px;object-fit:cover;border-radius:8px;display:block;border:1px solid var(--line-strong)}
+.insight-pdf-viewer{border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;background:var(--bg2)}
+.insight-pdf-canvas-wrap{display:flex;align-items:center;justify-content:center;padding:14px;min-height:220px;overflow:auto;background:var(--bg3)}
+.insight-pdf-canvas-wrap canvas{max-width:100%;height:auto;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.insight-pdf-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border-top:1px solid var(--line)}
+.insight-pdf-btn{
+  background:none;border:1px solid var(--line-strong);border-radius:6px;padding:7px 14px;cursor:pointer;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--body);transition:border-color .15s,color .15s;
+}
+.insight-pdf-btn:hover:not(:disabled){border-color:var(--ink);color:var(--ink)}
+.insight-pdf-btn:disabled{opacity:.4;cursor:default}
+.insight-pdf-page-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.insight-card.is-loading .insight-text{color:var(--muted)}
+.insight-card.is-loading .insight-text::after{content:'Loading today\'s post…'}
+.insight-card.is-loading .insight-text{display:block !important}
+@media(max-width:640px){
+  .insight-card{flex-direction:column;padding:22px}
+  .insight-foot{flex-direction:column;align-items:flex-start;gap:8px}
+}
+</style>
+<section class="insight-section">
+  <div class="wrap">
+        <div class="insight-card" id="insightCard">
+      <div class="insight-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.44-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45z"/></svg>
+      </div>
+      <div class="insight-body">
+        <div class="insight-top-row">
+          <span class="insight-eyebrow"><span class="live-dot"></span>Today's Insight, from LinkedIn</span>
+          <span class="insight-date" id="insightDate"></span>
+        </div>
+        <p class="insight-text" id="insightText">Loading today's post...</p>
+        <div class="insight-media" id="insightMedia" style="display:none"></div>
+        <div class="insight-foot">
+          <a href="https://www.linkedin.com/company/7captur" target="_blank" rel="noopener" class="insight-link" id="insightLink">View the full post on LinkedIn &rarr;</a>
+          <span class="insight-updated" id="insightUpdated"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var textEl = document.getElementById('insightText');
+  var dateEl = document.getElementById('insightDate');
+  var linkEl = document.getElementById('insightLink');
+  var updatedEl = document.getElementById('insightUpdated');
+  var mediaEl = document.getElementById('insightMedia');
+
+  var PDFJS_SRC = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
+  var PDFJS_WORKER = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+  var pdfjsLoadPromise = null;
+
+  function loadPdfJs(){
+    if (pdfjsLoadPromise) return pdfjsLoadPromise;
+    pdfjsLoadPromise = new Promise(function(resolve, reject){
+      if (window.pdfjsLib) { resolve(window.pdfjsLib); return; }
+      var s = document.createElement('script');
+      s.src = PDFJS_SRC;
+      s.onload = function(){
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+        resolve(window.pdfjsLib);
+      };
+      s.onerror = function(){ reject(new Error('pdf.js failed to load')); };
+      document.head.appendChild(s);
+    });
+    return pdfjsLoadPromise;
+  }
+
+  function renderImageMedia(url, alt){
+    mediaEl.style.display = 'block';
+    mediaEl.innerHTML = '';
+    var img = document.createElement('img');
+    img.className = 'insight-media-img';
+    img.src = url;
+    img.alt = alt || 'Image attached to the LinkedIn post';
+    img.loading = 'lazy';
+    mediaEl.appendChild(img);
+  }
+
+  function renderPdfMedia(url){
+    mediaEl.style.display = 'block';
+    mediaEl.innerHTML =
+      '<div class="insight-pdf-viewer">' +
+        '<div class="insight-pdf-canvas-wrap"><canvas id="insightPdfCanvas"></canvas></div>' +
+        '<div class="insight-pdf-nav">' +
+          '<button type="button" class="insight-pdf-btn" id="insightPdfPrev" disabled>&larr; Prev</button>' +
+          '<span class="insight-pdf-page-label" id="insightPdfLabel">Loading document...</span>' +
+          '<button type="button" class="insight-pdf-btn" id="insightPdfNext" disabled>Next &rarr;</button>' +
+        '</div>' +
+      '</div>';
+
+    var canvas = document.getElementById('insightPdfCanvas');
+    var ctx = canvas.getContext('2d');
+    var prevBtn = document.getElementById('insightPdfPrev');
+    var nextBtn = document.getElementById('insightPdfNext');
+    var label = document.getElementById('insightPdfLabel');
+    var pdfDoc = null;
+    var currentPage = 1;
+
+    function renderPage(num){
+      pdfDoc.getPage(num).then(function(page){
+        var viewport = page.getViewport({ scale: 1.4 });
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        page.render({ canvasContext: ctx, viewport: viewport });
+        label.textContent = 'Page ' + num + ' of ' + pdfDoc.numPages;
+        prevBtn.disabled = (num <= 1);
+        nextBtn.disabled = (num >= pdfDoc.numPages);
+      });
+    }
+
+    loadPdfJs()
+      .then(function(pdfjsLib){ return pdfjsLib.getDocument(url).promise; })
+      .then(function(doc){
+        pdfDoc = doc;
+        currentPage = 1;
+        renderPage(currentPage);
+      })
+      .catch(function(){
+        label.textContent = 'Could not load the attached document.';
+      });
+
+    prevBtn.addEventListener('click', function(){
+      if (currentPage > 1) { currentPage -= 1; renderPage(currentPage); }
+    });
+    nextBtn.addEventListener('click', function(){
+      if (pdfDoc && currentPage < pdfDoc.numPages) { currentPage += 1; renderPage(currentPage); }
+    });
+  }
+
+  fetch('/assets/data/insight.json', { cache: 'no-store' })
+    .then(function(r){ if(!r.ok) throw new Error('no insight.json'); return r.json(); })
+    .then(function(data){
+      if(!data || !data.text){ throw new Error('empty insight'); }
+      textEl.textContent = data.text;
+      if(data.url){ linkEl.href = data.url; }
+      if(data.postedAt){
+        var d = new Date(data.postedAt);
+        if(!isNaN(d)){ dateEl.textContent = d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
+      }
+      if(data.updatedAt){
+        var u = new Date(data.updatedAt);
+        if(!isNaN(u)){ updatedEl.textContent = 'Updated ' + u.toLocaleDateString('en-US',{month:'short',day:'numeric'}); }
+      }
+      if(data.media && data.media.type === 'image' && data.media.url){
+        renderImageMedia(data.media.url, data.media.alt);
+      } else if(data.media && data.media.type === 'pdf' && data.media.url){
+        renderPdfMedia(data.media.url);
+      }
+    })
+    .catch(function(){
+      textEl.textContent = "We post a new ad-spend insight on LinkedIn every day. Follow along for the latest one.";
+      dateEl.textContent = '';
+      updatedEl.textContent = '';
+    });
+})();
+</script>
+
+<!-- ============================================================
+     VIDEO OF THE WEEK: compact teaser only (full video lives on
+     /articles/, this is intentionally a single link, not an embed,
+     to keep the homepage from feeling crowded).
+     ============================================================ -->
+<style>
+.vow-teaser-wrap{padding:0 0 8px}
+.vow-teaser{
+  display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;
+  text-decoration:none;color:var(--body);font-size:13px;padding:10px 0;
+}
+.vow-teaser:hover{color:var(--ink)}
+.vow-teaser-icon{color:var(--accent);font-size:12px}
+.vow-teaser strong{color:var(--ink);font-weight:600}
+.vow-teaser-cta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.03em}
+</style>
+<div class="vow-teaser-wrap">
+  <div class="wrap">
+    <a href="#" id="vowTeaser" class="vow-teaser" style="display:none" target="_blank" rel="noopener">
+      <span class="vow-teaser-icon">&#9654;</span>
+      <span>Video of the week: <strong id="vowTeaserTitle"></strong></span>
+      <span class="vow-teaser-cta">Watch on YouTube &rarr;</span>
+    </a>
+  </div>
+</div>
+<script>
+(function(){
+  fetch('/assets/data/video.json', {cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('no video.json'); return r.json(); })
+    .then(function(data){
+      if(!data || !data.title) { return; }
+      var isFile = data.source === 'file' && data.filePath;
+      var isYoutube = (data.source === 'youtube' || !data.source) && data.youtubeId && data.youtubeId !== 'REPLACE_YOUTUBE_ID';
+      if(!isFile && !isYoutube){ return; }
+      var el = document.getElementById('vowTeaser');
+      var ctaEl = el.querySelector('.vow-teaser-cta');
+      document.getElementById('vowTeaserTitle').textContent = data.title || '';
+      if(isYoutube){
+        el.href = data.url || ('https://www.youtube.com/watch?v=' + data.youtubeId);
+        el.target = '_blank';
+        ctaEl.textContent = 'Watch on YouTube \u2192';
+      } else {
+        el.href = '/articles/#video-of-the-week';
+        el.removeAttribute('target');
+        ctaEl.textContent = 'Watch on the Articles page \u2192';
+      }
+      el.style.display = 'inline-flex';
+    })
+    .catch(function(){ /* stays hidden */ });
+})();
+</script>
+
+
+
+
+
+<section class="vow-section" id="video-of-the-week">
+  <div class="wrap">
+    <div class="vow-card" id="vowCard" style="display:none">
+      <div class="vow-eyebrow">Video of the week</div>
+      <h2 class="vow-title" id="vowTitle"></h2>
+      <div class="vow-embed-wrap" id="vowEmbedWrap"><iframe id="vowIframe" src="" title="Video of the week" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <p class="vow-desc" id="vowDesc"></p>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  fetch('/assets/data/video.json', {cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('no video.json'); return r.json(); })
+    .then(function(data){
+      if(!data || !data.title){ return; }
+      var isFile = data.source === 'file' && data.filePath;
+      var isYoutube = (data.source === 'youtube' || !data.source) && data.youtubeId && data.youtubeId !== 'REPLACE_YOUTUBE_ID';
+      if(!isFile && !isYoutube){ return; }
+
+      document.getElementById('vowTitle').textContent = data.title || '';
+      var wrap = document.getElementById('vowEmbedWrap');
+
+      if(isYoutube){
+        wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + data.youtubeId + '" title="Video of the Week" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+      } else {
+        var posterAttr = data.poster ? (' poster="' + data.poster + '"') : '';
+        wrap.innerHTML = '<video controls preload="metadata"' + posterAttr + ' style="position:absolute;top:0;left:0;width:100%;height:100%;background:#000"><source src="' + data.filePath + '">Your browser does not support embedded video. <a href="' + data.filePath + '">Download the video instead.</a></video>';
+      }
+
+      if(data.description){ document.getElementById('vowDesc').textContent = data.description; }
+      document.getElementById('vowCard').style.display = 'block';
+    })
+    .catch(function(){ /* stays hidden, no error shown */ });
+})();
+</script>
+<section class="section" style="padding-top:8px">
+  <div class="wrap art-layout">
+    <aside class="art-side">
+      <div class="search"><label class="sr-only" for="artSearch">Search articles</label><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input class="input" id="artSearch" type="search" placeholder="Search articles"></div>
+      <div class="topics"><h4>Topics</h4><button class="topic" type="button" aria-pressed="true" data-topic="">All articles</button><button class="topic" type="button" aria-pressed="false" data-topic="True ROAS">True ROAS</button><button class="topic" type="button" aria-pressed="false" data-topic="Returns and Data Lag">Returns &amp; Data Lag</button><button class="topic" type="button" aria-pressed="false" data-topic="COGS and Margin">COGS &amp; Margin</button><button class="topic" type="button" aria-pressed="false" data-topic="Execution Model">Execution Model</button><button class="topic" type="button" aria-pressed="false" data-topic="Decision Cadence">Decision Cadence</button><button class="topic" type="button" aria-pressed="false" data-topic="Attribution">Attribution</button></div>
+    </aside>
+    <div>
+      <div class="article-grid" id="artGrid" style="margin-top:0">
+<a href="/articles/why-your-meta-roas-is-lying-to-you/" class="article-card" data-topic="True ROAS"><div class="thumb"><svg viewBox="0 0 200 92" aria-hidden="true"><path d="M10 28h180" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="4 4"/><path d="M10 30c30 4 50-6 90-2s60 0 90-3" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="2" stroke-dasharray="5 4"/><path d="M10 64c30 2 50-4 90-1s60 0 90-2" fill="none" stroke="var(--accent)" stroke-width="2.5"/></svg></div><span class="tag-pill">True ROAS</span><h3>What Is True ROAS? Why Meta &amp; Google Ad ROAS Is Misleading</h3><p>Platform-reported ROAS ignores COGS, returns, and fees. Here&#x27;s what true ROAS actually measures, why the gap forms, and a worked example for e-commerce brands.</p><div class="article-card-foot"><span>7Captur Team</span><span>6 min read</span></div></a>
+<a href="/articles/the-30-day-return-lag-problem/" class="article-card" data-topic="Returns and Data Lag"><div class="thumb"><svg viewBox="0 0 200 92" aria-hidden="true"><path d="M14 74h172" stroke="currentColor" stroke-opacity=".25"/><path d="M14 70C50 66 80 50 110 34s56-12 76-10" fill="none" stroke="var(--accent)" stroke-width="2.5"/><path d="M110 34v40" stroke="currentColor" stroke-opacity=".3" stroke-dasharray="3 3"/></svg></div><span class="tag-pill">Returns &amp; Data Lag</span><h3>The 30-Day Return Lag Problem in E-Commerce Ad Spend</h3><p>Real-time ROAS is calculated before return data exists. Here&#x27;s how the return-rate lag distorts ad budget decisions, and how to disclose and bound the uncertainty.</p><div class="article-card-foot"><span>7Captur Team</span><span>6 min read</span></div></a>
+<a href="/articles/cogs-adjusted-profitability/" class="article-card" data-topic="COGS and Margin"><div class="thumb"><svg viewBox="0 0 200 92" aria-hidden="true"><g fill="var(--accent)" fill-opacity=".85"><rect x="30" y="30" width="22" height="44" rx="3"/><rect x="66" y="44" width="22" height="30" rx="3"/><rect x="102" y="20" width="22" height="54" rx="3"/><rect x="138" y="52" width="22" height="22" rx="3"/></g><path d="M14 74h172" stroke="currentColor" stroke-opacity=".25"/></svg></div><span class="tag-pill">COGS &amp; Margin</span><h3>COGS-Adjusted Ad Profitability for DTC Brands</h3><p>Store-wide average COGS hides which campaigns are actually profitable. Here&#x27;s why SKU-level, COGS-adjusted profitability is the metric that should drive ad budget.</p><div class="article-card-foot"><span>7Captur Team</span><span>5 min read</span></div></a>
+<a href="/articles/assisted-execution-vs-full-automation/" class="article-card" data-topic="Execution Model"><div class="thumb"><svg viewBox="0 0 200 92" aria-hidden="true"><rect x="40" y="26" width="120" height="40" rx="10" fill="none" stroke="currentColor" stroke-opacity=".4"/><path d="M78 46l12 12 28-26" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="tag-pill">Execution Model</span><h3>Assisted Execution vs. Full Automation for Ad Spend</h3><p>Why fully autonomous ad budget tools are a harder sell than they look, and what &#x27;assisted execution&#x27; (approval, budget caps, rollback) actually means in practice.</p><div class="article-card-foot"><span>7Captur Team</span><span>6 min read</span></div></a>
+<a href="/articles/real-time-vs-weekly-ad-optimization/" class="article-card" data-topic="Decision Cadence"><div class="thumb"><svg viewBox="0 0 200 92" aria-hidden="true"><circle cx="100" cy="46" r="26" fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="2"/><path d="M100 28v18l12 8" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/></svg></div><span class="tag-pill">Decision Cadence</span><h3>Real-Time vs Weekly Ad Optimization for E-Commerce</h3><p>Real-time ad tools react instantly to numbers that are not finished yet. Here is why a weekly decision cadence, not real-time automation, fits how ad-spend data actually arrives.</p><div class="article-card-foot"><span>7Captur Team</span><span>5 min read</span></div></a>
+<a href="/articles/attribution-double-counting/" class="article-card" data-topic="Attribution"><div class="thumb"><svg viewBox="0 0 200 92" aria-hidden="true"><circle cx="82" cy="46" r="24" fill="var(--accent)" fill-opacity=".3" stroke="var(--accent)" stroke-width="2"/><circle cx="118" cy="46" r="24" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="2"/></svg></div><span class="tag-pill">Attribution</span><h3>Attribution Double-Counting: Meta vs Klaviyo Revenue</h3><p>Meta and Klaviyo both claim credit for the same orders. Here is how attribution double-counting inflates ROAS and distorts ad budget decisions, and how to deduplicate it.</p><div class="article-card-foot"><span>7Captur Team</span><span>6 min read</span></div></a>
+      </div>
+      <p class="fine" id="artEmpty" hidden>No articles match. Try another search or topic.</p>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var q=document.getElementById('artSearch'),cards=[].slice.call(document.querySelectorAll('#artGrid .article-card')),btns=[].slice.call(document.querySelectorAll('.topic')),empty=document.getElementById('artEmpty'),topic='';
+  function run(){var t=q.value.trim().toLowerCase(),n=0;cards.forEach(function(c){var ok=(!topic||c.dataset.topic===topic)&&(!t||c.textContent.toLowerCase().indexOf(t)>-1);c.hidden=!ok;if(ok)n++;});empty.hidden=n>0;}
+  q.addEventListener('input',run);
+  btns.forEach(function(b){b.addEventListener('click',function(){topic=b.dataset.topic;btns.forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});run();});});
+})();
+</script>
+<!-- ============================================================
+     NEWSLETTER SIGNUP
+     Mailchimp embedded form. ACTION_URL below is a placeholder;
+     see docs/MAILCHIMP-SETUP.md for how to get your real one and
+     drop it in. Until then this form is inert (won't submit anywhere
+     broken; the JS blocks submission and shows a friendly notice).
+     ============================================================ -->
+<style>
+.newsletter-section{padding:64px 0}
+.newsletter-card{
+  border:1px solid var(--line-strong);border-radius:16px;
+  padding:48px 56px;display:flex;justify-content:space-between;align-items:center;
+  gap:40px;flex-wrap:wrap;position:relative;overflow:hidden;
+}
+.newsletter-copy{max-width:480px}
+.newsletter-copy .eyebrow{margin-bottom:14px}
+.newsletter-copy h2{font-size:clamp(22px,2.6vw,30px);margin-bottom:10px}
+.newsletter-copy p{font-size:14.5px;color:var(--body);line-height:1.65}
+.newsletter-form{display:flex;flex-wrap:wrap;gap:0;min-width:340px;flex:0 0 auto}
+.newsletter-input{
+  flex:1;min-width:220px;background:rgba(255,255,255,0.35);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--glass-border);border-right:none;
+  border-radius:999px 0 0 999px;
+  padding:15px 20px;font-size:14px;color:var(--ink);font-family:'Inter',sans-serif;
+}
+html.dark .newsletter-input{background:rgba(255,255,255,0.05)}
+.newsletter-input:focus{outline:none;border-color:var(--accent)}
+.newsletter-submit{
+  background:var(--accent);color:#fff;border:none;cursor:pointer;
+  font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14px;
+  padding:0 26px;border-radius:0 999px 999px 0;white-space:nowrap;
+}
+html.dark .newsletter-submit{color:#0e1206}
+.newsletter-submit:hover{opacity:.88}
+.newsletter-note{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted);
+  margin-top:10px;width:100%;
+}
+.newsletter-status{font-size:13px;margin-top:10px;display:none;width:100%;flex-basis:100%}
+.newsletter-status.is-visible{display:block}
+.newsletter-status.is-error{color:var(--gold)}
+.newsletter-status.is-success{color:var(--accent)}
+/* honeypot, hidden from humans, catches basic bots */
+.nl-hp{position:absolute;left:-9999px;top:-9999px}
+@media(max-width:760px){
+  .newsletter-card{padding:36px 28px;flex-direction:column;align-items:flex-start}
+  .newsletter-form{width:100%;min-width:0}
+}
+@media(max-width:520px){
+  .newsletter-form{flex-direction:column}
+  .newsletter-input{width:100%;min-width:0;border-radius:999px;border-right:1px solid var(--glass-border)}
+  .newsletter-submit{width:100%;border-radius:999px;padding:14px 26px}
+}
+</style>
+<section class="newsletter-section">
+  <div class="wrap">
+    <div class="newsletter-card">
+      <div class="newsletter-copy">
+        <p class="kicker">Newsletter</p>
+        <h2>One real ad-spend leak a week.</h2>
+        <p>One short email a week: a real ad-spend leak we found, and the fix. No fluff, no daily noise, just what mid-market Shopify and Meta Ads brands need to know.</p>
+      </div>
+      <div>
+        <form class="newsletter-form" id="newsletterForm"
+              action="https://7captur.us5.list-manage.com/subscribe/post?u=e666602be2ab1c85a17cb1b80&amp;id=2691f979b1&amp;f_id=0077c2e1f0"
+              method="post" target="_blank" novalidate>
+          <label for="nlEmail" class="sr-only">Email address</label>
+          <input type="email" name="EMAIL" id="nlEmail" class="newsletter-input" placeholder="you@yourstore.com" required>
+          <!-- Mailchimp honeypot field; name must stay exactly like this -->
+          <div class="nl-hp" aria-hidden="true">
+            <input type="text" name="b_e666602be2ab1c85a17cb1b80_2691f979b1" tabindex="-1" value="">
+          </div>
+          <button type="submit" class="newsletter-submit" id="nlSubmit">Subscribe</button>
+          <div class="newsletter-note">No spam. One email a week. Unsubscribe anytime.</div>
+          <div class="newsletter-status" id="nlStatus"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var form = document.getElementById('newsletterForm');
+  var status = document.getElementById('nlStatus');
+  var PLACEHOLDER = form.action.indexOf('7CAPTUR_MAILCHIMP_DOMAIN') !== -1;
+  form.addEventListener('submit', function(e){
+    if(PLACEHOLDER){
+      e.preventDefault();
+      status.textContent = "Newsletter signup isn't connected yet. The Mailchimp form URL still needs to be added.";
+      status.className = 'newsletter-status is-visible is-error';
+    }
+    // Once the real Mailchimp action URL is in place, this submits
+    // as a normal form POST to Mailchimp (opens a Mailchimp confirmation
+    // tab); no further JS changes needed.
+  });
+})();
+</script>
+
+
+
+
+
+</main>

@@ -1,0 +1,19 @@
+{
+  "name": "7captur-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.7.4",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "astro": "^5.18.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

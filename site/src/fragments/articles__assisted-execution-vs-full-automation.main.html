@@ -1,0 +1,306 @@
+<main>
+
+<header class="page-head is-wide" style="padding-bottom:8px">
+  <div class="wrap">
+    <span class="tag-pill">Execution Model</span>
+    <h1 style="max-width:24ch">Assisted Execution vs. Full Automation: Why Human Approval Still Matters for Ad Spend</h1>
+    <div class="article-meta"><span>July 8, 2026</span><span>6 min read</span><span>7Captur Team</span></div>
+  </div>
+</header>
+<section class="section" style="padding-top:48px;padding-bottom:40px">
+  <div class="wrap">
+    <div class="article-body">
+<p>There's a version of every ad-optimization tool that promises to "set it and forget it": connect your accounts, let the algorithm take over, and stop thinking about budgets entirely. For a lot of categories, that pitch is genuinely appealing. For ad spend specifically, it's worth being skeptical of, and the reason has less to do with trust in AI and more to do with the structure of the data itself.</p>
+
+<h2>The core problem: the best data arrives late</h2>
+
+<p>As covered in <a href="/articles/the-30-day-return-lag-problem/">a related piece on return-rate lag</a>, the most important input to a genuinely accurate ad-spend decision, whether an order actually stayed sold, isn't available at the moment the decision needs to be made. Any fully autonomous system, no matter how good the model behind it, is making the same bet a human would: acting on the best available estimate, knowing that estimate will keep shifting for weeks.</p>
+
+<p>That's not a reason to avoid automation-assisted decisions. It's a reason to be deliberate about <em>where in the loop a human sits</em>, and how much authority the system has to act before that human sees it.</p>
+
+<h2>What "assisted execution" means, specifically</h2>
+
+<p>Assisted execution is a narrower claim than full automation. The system does the analysis, prepares the exact change it would make, and quantifies the expected impact, but a person approves or dismisses it before any API call touches the ad account. Three concrete mechanisms make this more than a slogan:</p>
+
+<ul>
+  <li><strong>Explicit approval, every time.</strong> Each decision ships with an "Approve" and a "Dismiss" action. Dismissing makes no API call and changes nothing. There's no default timer that executes a recommendation if it's ignored.</li>
+  <li><strong>A hard budget cap.</strong> No single approved decision can move more than 30% of a campaign's current weekly budget, regardless of how confident the underlying model is. Confidence isn't a substitute for a ceiling.</li>
+  <li><strong>A rollback window.</strong> Every executed change can be reversed within 24 hours, without needing to go find the setting inside Meta or Google's own interface.</li>
+</ul>
+
+<div class="article-callout">
+  <span class="callout-label">The distinction that actually matters</span>
+  <p>The difference between "assisted" and "autonomous" isn't how smart the underlying analysis is; it's whether a specific dollar-denominated action gets executed against your ad account without a human looking at it first.</p>
+</div>
+
+<h2>Where full automation makes sense (and where it doesn't)</h2>
+
+<p>Full automation is a reasonable choice for high-frequency, low-stakes, easily-reversible actions: bid adjustments within a tight band, creative rotation, budget pacing within a day. It's a much harder case to make for decisions that are infrequent, high-stakes, and built on data, like return rate, that's known to still be incomplete at decision time. Pausing a campaign, or scaling one by 20–30%, is exactly that second category: consequential enough, and uncertain enough, that removing the human step doesn't save meaningful time but does remove the one checkpoint that catches a bad call before it costs money.</p>
+
+<div class="article-stat-row">
+  <div class="article-stat"><span class="num">3</span><span class="lbl">Decisions delivered per week, each requiring individual approval</span></div>
+  <div class="article-stat"><span class="num">30%</span><span class="lbl">Maximum budget change enforced per approved decision</span></div>
+  <div class="article-stat"><span class="num">24h</span><span class="lbl">Rollback window on every executed change</span></div>
+</div>
+
+<h2>The honest tradeoff</h2>
+
+<p>Assisted execution is slower than full automation by design. A decision sits in an inbox until someone clicks something, rather than executing the moment a threshold is crossed. That's a real cost, not a hidden benefit. The bet is that for budget-level decisions specifically, the few minutes it takes to read three plain-English recommendations and approve or dismiss them is worth trading for the ability to catch the recommendation that's wrong before it's expensive, especially in a data environment where "wrong" often isn't visible for another 30 days.</p>
+<div class="article-cta-box"><h3>See what a proposed-not-automatic decision actually looks like.</h3><p>Connect your store and see your true ROAS this week. Every account starts with a 30-day trial.</p><a class="btn btn-primary" href="https://app.7captur.com/signup" style="text-decoration:none;color:var(--on-accent)">Start free trial</a></div>
+    </div>
+    <div class="article-footer-nav"><a href="/articles/cogs-adjusted-profitability/">← COGS-Adjusted Profitability: The One Metric Every DTC Brand Should Track Weekly</a><a href="/articles/real-time-vs-weekly-ad-optimization/">Why Real-Time Ad Optimization Is a Trap for E-Commerce Brands →</a></div>
+  </div>
+</section>
+<!-- ============================================================
+     TODAY'S INSIGHT: pulls the latest LinkedIn post via
+     /assets/data/insight.json (written daily by a Make.com scenario;
+     see docs/MAKE-COM-SETUP.md for the full pipeline).
+     ============================================================ -->
+<style>
+.insight-section{padding:0 0 8px}
+.insight-card{
+  border:1px solid var(--line-strong);border-radius:16px;
+  padding:26px 30px;display:flex;gap:22px;align-items:flex-start;
+  position:relative;overflow:hidden;
+}
+.insight-badge{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  background:#0A66C2;display:flex;align-items:center;justify-content:center;
+}
+.insight-badge svg{width:20px;height:20px}
+.insight-body{flex:1;min-width:0}
+.insight-top-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.insight-eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:7px;
+}
+.insight-eyebrow .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:insightPulse 1.8s ease-in-out infinite}
+@keyframes insightPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.insight-date{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.insight-text{font-size:15px;color:var(--ink);line-height:1.6;margin-bottom:12px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.insight-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.insight-link{
+  font-family:'Inter Tight',sans-serif;font-weight:600;font-size:13.5px;color:var(--accent);
+  text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+}
+.insight-link:hover{text-decoration:underline}
+.insight-updated{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted)}
+.insight-media{margin-bottom:14px}
+.insight-media-img{width:100%;max-height:420px;object-fit:cover;border-radius:8px;display:block;border:1px solid var(--line-strong)}
+.insight-pdf-viewer{border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;background:var(--bg2)}
+.insight-pdf-canvas-wrap{display:flex;align-items:center;justify-content:center;padding:14px;min-height:220px;overflow:auto;background:var(--bg3)}
+.insight-pdf-canvas-wrap canvas{max-width:100%;height:auto;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.insight-pdf-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border-top:1px solid var(--line)}
+.insight-pdf-btn{
+  background:none;border:1px solid var(--line-strong);border-radius:6px;padding:7px 14px;cursor:pointer;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--body);transition:border-color .15s,color .15s;
+}
+.insight-pdf-btn:hover:not(:disabled){border-color:var(--ink);color:var(--ink)}
+.insight-pdf-btn:disabled{opacity:.4;cursor:default}
+.insight-pdf-page-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.insight-card.is-loading .insight-text{color:var(--muted)}
+.insight-card.is-loading .insight-text::after{content:'Loading today\'s post…'}
+.insight-card.is-loading .insight-text{display:block !important}
+@media(max-width:640px){
+  .insight-card{flex-direction:column;padding:22px}
+  .insight-foot{flex-direction:column;align-items:flex-start;gap:8px}
+}
+</style>
+<section class="insight-section">
+  <div class="wrap">
+        <div class="insight-card" id="insightCard">
+      <div class="insight-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.44-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45z"/></svg>
+      </div>
+      <div class="insight-body">
+        <div class="insight-top-row">
+          <span class="insight-eyebrow"><span class="live-dot"></span>Today's Insight, from LinkedIn</span>
+          <span class="insight-date" id="insightDate"></span>
+        </div>
+        <p class="insight-text" id="insightText">Loading today's post...</p>
+        <div class="insight-media" id="insightMedia" style="display:none"></div>
+        <div class="insight-foot">
+          <a href="https://www.linkedin.com/company/7captur" target="_blank" rel="noopener" class="insight-link" id="insightLink">View the full post on LinkedIn &rarr;</a>
+          <span class="insight-updated" id="insightUpdated"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var textEl = document.getElementById('insightText');
+  var dateEl = document.getElementById('insightDate');
+  var linkEl = document.getElementById('insightLink');
+  var updatedEl = document.getElementById('insightUpdated');
+  var mediaEl = document.getElementById('insightMedia');
+
+  var PDFJS_SRC = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
+  var PDFJS_WORKER = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+  var pdfjsLoadPromise = null;
+
+  function loadPdfJs(){
+    if (pdfjsLoadPromise) return pdfjsLoadPromise;
+    pdfjsLoadPromise = new Promise(function(resolve, reject){
+      if (window.pdfjsLib) { resolve(window.pdfjsLib); return; }
+      var s = document.createElement('script');
+      s.src = PDFJS_SRC;
+      s.onload = function(){
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+        resolve(window.pdfjsLib);
+      };
+      s.onerror = function(){ reject(new Error('pdf.js failed to load')); };
+      document.head.appendChild(s);
+    });
+    return pdfjsLoadPromise;
+  }
+
+  function renderImageMedia(url, alt){
+    mediaEl.style.display = 'block';
+    mediaEl.innerHTML = '';
+    var img = document.createElement('img');
+    img.className = 'insight-media-img';
+    img.src = url;
+    img.alt = alt || 'Image attached to the LinkedIn post';
+    img.loading = 'lazy';
+    mediaEl.appendChild(img);
+  }
+
+  function renderPdfMedia(url){
+    mediaEl.style.display = 'block';
+    mediaEl.innerHTML =
+      '<div class="insight-pdf-viewer">' +
+        '<div class="insight-pdf-canvas-wrap"><canvas id="insightPdfCanvas"></canvas></div>' +
+        '<div class="insight-pdf-nav">' +
+          '<button type="button" class="insight-pdf-btn" id="insightPdfPrev" disabled>&larr; Prev</button>' +
+          '<span class="insight-pdf-page-label" id="insightPdfLabel">Loading document...</span>' +
+          '<button type="button" class="insight-pdf-btn" id="insightPdfNext" disabled>Next &rarr;</button>' +
+        '</div>' +
+      '</div>';
+
+    var canvas = document.getElementById('insightPdfCanvas');
+    var ctx = canvas.getContext('2d');
+    var prevBtn = document.getElementById('insightPdfPrev');
+    var nextBtn = document.getElementById('insightPdfNext');
+    var label = document.getElementById('insightPdfLabel');
+    var pdfDoc = null;
+    var currentPage = 1;
+
+    function renderPage(num){
+      pdfDoc.getPage(num).then(function(page){
+        var viewport = page.getViewport({ scale: 1.4 });
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        page.render({ canvasContext: ctx, viewport: viewport });
+        label.textContent = 'Page ' + num + ' of ' + pdfDoc.numPages;
+        prevBtn.disabled = (num <= 1);
+        nextBtn.disabled = (num >= pdfDoc.numPages);
+      });
+    }
+
+    loadPdfJs()
+      .then(function(pdfjsLib){ return pdfjsLib.getDocument(url).promise; })
+      .then(function(doc){
+        pdfDoc = doc;
+        currentPage = 1;
+        renderPage(currentPage);
+      })
+      .catch(function(){
+        label.textContent = 'Could not load the attached document.';
+      });
+
+    prevBtn.addEventListener('click', function(){
+      if (currentPage > 1) { currentPage -= 1; renderPage(currentPage); }
+    });
+    nextBtn.addEventListener('click', function(){
+      if (pdfDoc && currentPage < pdfDoc.numPages) { currentPage += 1; renderPage(currentPage); }
+    });
+  }
+
+  fetch('/assets/data/insight.json', { cache: 'no-store' })
+    .then(function(r){ if(!r.ok) throw new Error('no insight.json'); return r.json(); })
+    .then(function(data){
+      if(!data || !data.text){ throw new Error('empty insight'); }
+      textEl.textContent = data.text;
+      if(data.url){ linkEl.href = data.url; }
+      if(data.postedAt){
+        var d = new Date(data.postedAt);
+        if(!isNaN(d)){ dateEl.textContent = d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
+      }
+      if(data.updatedAt){
+        var u = new Date(data.updatedAt);
+        if(!isNaN(u)){ updatedEl.textContent = 'Updated ' + u.toLocaleDateString('en-US',{month:'short',day:'numeric'}); }
+      }
+      if(data.media && data.media.type === 'image' && data.media.url){
+        renderImageMedia(data.media.url, data.media.alt);
+      } else if(data.media && data.media.type === 'pdf' && data.media.url){
+        renderPdfMedia(data.media.url);
+      }
+    })
+    .catch(function(){
+      textEl.textContent = "We post a new ad-spend insight on LinkedIn every day. Follow along for the latest one.";
+      dateEl.textContent = '';
+      updatedEl.textContent = '';
+    });
+})();
+</script>
+
+<!-- ============================================================
+     VIDEO OF THE WEEK: compact teaser only (full video lives on
+     /articles/, this is intentionally a single link, not an embed,
+     to keep the homepage from feeling crowded).
+     ============================================================ -->
+<style>
+.vow-teaser-wrap{padding:0 0 8px}
+.vow-teaser{
+  display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;
+  text-decoration:none;color:var(--body);font-size:13px;padding:10px 0;
+}
+.vow-teaser:hover{color:var(--ink)}
+.vow-teaser-icon{color:var(--accent);font-size:12px}
+.vow-teaser strong{color:var(--ink);font-weight:600}
+.vow-teaser-cta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.03em}
+</style>
+<div class="vow-teaser-wrap">
+  <div class="wrap">
+    <a href="#" id="vowTeaser" class="vow-teaser" style="display:none" target="_blank" rel="noopener">
+      <span class="vow-teaser-icon">&#9654;</span>
+      <span>Video of the week: <strong id="vowTeaserTitle"></strong></span>
+      <span class="vow-teaser-cta">Watch on YouTube &rarr;</span>
+    </a>
+  </div>
+</div>
+<script>
+(function(){
+  fetch('/assets/data/video.json', {cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('no video.json'); return r.json(); })
+    .then(function(data){
+      if(!data || !data.title) { return; }
+      var isFile = data.source === 'file' && data.filePath;
+      var isYoutube = (data.source === 'youtube' || !data.source) && data.youtubeId && data.youtubeId !== 'REPLACE_YOUTUBE_ID';
+      if(!isFile && !isYoutube){ return; }
+      var el = document.getElementById('vowTeaser');
+      var ctaEl = el.querySelector('.vow-teaser-cta');
+      document.getElementById('vowTeaserTitle').textContent = data.title || '';
+      if(isYoutube){
+        el.href = data.url || ('https://www.youtube.com/watch?v=' + data.youtubeId);
+        el.target = '_blank';
+        ctaEl.textContent = 'Watch on YouTube \u2192';
+      } else {
+        el.href = '/articles/#video-of-the-week';
+        el.removeAttribute('target');
+        ctaEl.textContent = 'Watch on the Articles page \u2192';
+      }
+      el.style.display = 'inline-flex';
+    })
+    .catch(function(){ /* stays hidden */ });
+})();
+</script>
+
+
+
+
+
+
+</main>

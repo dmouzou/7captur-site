@@ -1,0 +1,21 @@
+---
+import Logo from "./Logo.astro";
+import { CTA, LOGIN } from "../data/site";
+---
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><Logo />7Captur</a>
+        <p>True ROAS and weekly budget decisions for e-commerce ad spend.</p>
+      </div>
+      <div><h4>Product</h4><ul><li><a href="/how-it-works/">How it works</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/articles/">Articles</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="/about/">About</a></li><li><a href="/security/">Security</a></li><li><a href="/contact/">Contact</a></li></ul></div>
+      <div><h4>Account</h4><ul><li><a href={LOGIN.href}>{LOGIN.label}</a></li><li><a href={CTA.href}>{CTA.label}</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 7Captur</span>
+      <span><a href="/privacy-policy/">Privacy policy</a><a href="/terms-of-service/">Terms of service</a></span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,9 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import head from "../../fragments/privacy-policy.head.html?raw";
+import main from "../../fragments/privacy-policy.main.html?raw";
+import scripts from "../../fragments/privacy-policy.scripts.html?raw";
+---
+<Layout head={head} current="/privacy-policy/" scripts={scripts}>
+  <Fragment set:html={main} />
+</Layout>

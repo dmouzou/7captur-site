@@ -1,0 +1,310 @@
+<main>
+
+<header class="page-head is-wide" style="padding-bottom:8px">
+  <div class="wrap">
+    <span class="tag-pill">COGS &amp; Margin</span>
+    <h1 style="max-width:24ch">COGS-Adjusted Profitability: The One Metric Every DTC Brand Should Track Weekly</h1>
+    <div class="article-meta"><span>July 8, 2026</span><span>5 min read</span><span>7Captur Team</span></div>
+  </div>
+</header>
+<section class="section" style="padding-top:48px;padding-bottom:40px">
+  <div class="wrap">
+    <div class="article-body">
+<p>Most e-commerce reporting stacks are very good at answering "how much did we sell?" and noticeably worse at answering "how much did we make?" Revenue, orders, sessions, and ROAS are all easy to pull from a dashboard. Margin (actual, per-campaign, per-SKU margin) usually isn't sitting anywhere as a single number. It has to be built.</p>
+
+<p>That gap is where a lot of ad budget gets misallocated. Two campaigns can report near-identical ROAS while representing very different underlying profitability, simply because they're selling different products at different margins.</p>
+
+<h2>Why store-wide average COGS isn't good enough</h2>
+
+<p>The simplest way to approximate margin is to apply one blended cost-of-goods percentage across the whole store (say, "COGS is roughly 35% of revenue") and use that everywhere. It's better than nothing, but it hides exactly the variation that matters for ad decisions:</p>
+
+<ul>
+  <li>A hero SKU with strong margins can make a mediocre-ROAS campaign genuinely profitable.</li>
+  <li>A low-margin, high-volume SKU can make a strong-ROAS campaign barely break even.</li>
+  <li>A campaign selling a <em>mix</em> of both will show one blended ROAS number that describes neither product accurately.</li>
+</ul>
+
+<p>SKU-level COGS, blended against the actual order mix each campaign is driving, is the only way to see which of these situations you're actually in.</p>
+
+<div class="article-callout">
+  <span class="callout-label">A pattern that shows up constantly</span>
+  <p>Two campaigns reporting the same 2.0× ROAS on Meta can have true, COGS-adjusted profitability that differs by a full turn or more, one built almost entirely on a high-margin bestseller, the other spread across lower-margin SKUs with thinner unit economics.</p>
+</div>
+
+<h2>What "COGS-adjusted" profitability actually requires</h2>
+
+<p>Building this number properly means bringing together data that normally lives in separate systems:</p>
+
+<div class="article-stat-row">
+  <div class="article-stat"><span class="num">01</span><span class="lbl">Per-SKU cost of goods, supplied once and refreshed as it changes</span></div>
+  <div class="article-stat"><span class="num">02</span><span class="lbl">Order-level attribution from the ad platform, mapped back to the SKUs actually sold</span></div>
+  <div class="article-stat"><span class="num">03</span><span class="lbl">Return rate and processing fees, reconciled against the same order set</span></div>
+</div>
+
+<p>None of these three, alone, tells the full story. COGS without attribution just tells you your average margin. Attribution without COGS just tells you volume. It's the combination, cost applied to the specific products a specific campaign actually sold, that produces a number worth making a budget decision on.</p>
+
+<h2>Why "weekly" is the right cadence</h2>
+
+<p>Margin doesn't need to be recalculated in real time; cost structures and return patterns don't move that fast, and reacting to daily noise tends to produce worse decisions, not better ones. But letting it go stale for a full quarter is just as risky, since ad mix, promotions, and product cost changes accumulate quietly in between. A weekly refresh is frequent enough to catch a real shift (a supplier cost increase, a new SKU entering the mix, a return-rate spike on one product) before it's had a chance to compound across several weeks of budget decisions, without generating so much noise that every report looks urgent.</p>
+
+<h2>Turning the number into a decision, not just a dashboard</h2>
+
+<p>A COGS-adjusted profitability figure is only useful if it changes what happens next. On its own, a dashboard number is something to glance at; a decision, like "scale this campaign," "pause this one," or "this margin drop is a fee issue, not a performance issue," is something to act on. That's the difference between reporting and assisted execution: the number gets translated into a specific, dollar-quantified recommendation, with a confidence score, that someone approves or dismisses.</p>
+<div class="article-cta-box"><h3>Find out what your campaigns actually earn after COGS.</h3><p>Connect your store and see your true ROAS this week. Every account starts with a 30-day trial.</p><a class="btn btn-primary" href="https://app.7captur.com/signup" style="text-decoration:none;color:var(--on-accent)">Start free trial</a></div>
+    </div>
+    <div class="article-footer-nav"><a href="/articles/the-30-day-return-lag-problem/">← The 30-Day Return Lag: Why Your Ad Spend Decisions Are Based on Incomplete Data</a><a href="/articles/assisted-execution-vs-full-automation/">Assisted Execution vs. Full Automation: Why Human Approval Still Matters for Ad Spend →</a></div>
+  </div>
+</section>
+<!-- ============================================================
+     TODAY'S INSIGHT: pulls the latest LinkedIn post via
+     /assets/data/insight.json (written daily by a Make.com scenario;
+     see docs/MAKE-COM-SETUP.md for the full pipeline).
+     ============================================================ -->
+<style>
+.insight-section{padding:0 0 8px}
+.insight-card{
+  border:1px solid var(--line-strong);border-radius:16px;
+  padding:26px 30px;display:flex;gap:22px;align-items:flex-start;
+  position:relative;overflow:hidden;
+}
+.insight-badge{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  background:#0A66C2;display:flex;align-items:center;justify-content:center;
+}
+.insight-badge svg{width:20px;height:20px}
+.insight-body{flex:1;min-width:0}
+.insight-top-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.insight-eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:7px;
+}
+.insight-eyebrow .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:insightPulse 1.8s ease-in-out infinite}
+@keyframes insightPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.insight-date{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.insight-text{font-size:15px;color:var(--ink);line-height:1.6;margin-bottom:12px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.insight-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.insight-link{
+  font-family:'Inter Tight',sans-serif;font-weight:600;font-size:13.5px;color:var(--accent);
+  text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+}
+.insight-link:hover{text-decoration:underline}
+.insight-updated{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted)}
+.insight-media{margin-bottom:14px}
+.insight-media-img{width:100%;max-height:420px;object-fit:cover;border-radius:8px;display:block;border:1px solid var(--line-strong)}
+.insight-pdf-viewer{border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;background:var(--bg2)}
+.insight-pdf-canvas-wrap{display:flex;align-items:center;justify-content:center;padding:14px;min-height:220px;overflow:auto;background:var(--bg3)}
+.insight-pdf-canvas-wrap canvas{max-width:100%;height:auto;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.insight-pdf-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border-top:1px solid var(--line)}
+.insight-pdf-btn{
+  background:none;border:1px solid var(--line-strong);border-radius:6px;padding:7px 14px;cursor:pointer;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--body);transition:border-color .15s,color .15s;
+}
+.insight-pdf-btn:hover:not(:disabled){border-color:var(--ink);color:var(--ink)}
+.insight-pdf-btn:disabled{opacity:.4;cursor:default}
+.insight-pdf-page-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.insight-card.is-loading .insight-text{color:var(--muted)}
+.insight-card.is-loading .insight-text::after{content:'Loading today\'s post…'}
+.insight-card.is-loading .insight-text{display:block !important}
+@media(max-width:640px){
+  .insight-card{flex-direction:column;padding:22px}
+  .insight-foot{flex-direction:column;align-items:flex-start;gap:8px}
+}
+</style>
+<section class="insight-section">
+  <div class="wrap">
+        <div class="insight-card" id="insightCard">
+      <div class="insight-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.44-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45z"/></svg>
+      </div>
+      <div class="insight-body">
+        <div class="insight-top-row">
+          <span class="insight-eyebrow"><span class="live-dot"></span>Today's Insight, from LinkedIn</span>
+          <span class="insight-date" id="insightDate"></span>
+        </div>
+        <p class="insight-text" id="insightText">Loading today's post...</p>
+        <div class="insight-media" id="insightMedia" style="display:none"></div>
+        <div class="insight-foot">
+          <a href="https://www.linkedin.com/company/7captur" target="_blank" rel="noopener" class="insight-link" id="insightLink">View the full post on LinkedIn &rarr;</a>
+          <span class="insight-updated" id="insightUpdated"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var textEl = document.getElementById('insightText');
+  var dateEl = document.getElementById('insightDate');
+  var linkEl = document.getElementById('insightLink');
+  var updatedEl = document.getElementById('insightUpdated');
+  var mediaEl = document.getElementById('insightMedia');
+
+  var PDFJS_SRC = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
+  var PDFJS_WORKER = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+  var pdfjsLoadPromise = null;
+
+  function loadPdfJs(){
+    if (pdfjsLoadPromise) return pdfjsLoadPromise;
+    pdfjsLoadPromise = new Promise(function(resolve, reject){
+      if (window.pdfjsLib) { resolve(window.pdfjsLib); return; }
+      var s = document.createElement('script');
+      s.src = PDFJS_SRC;
+      s.onload = function(){
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+        resolve(window.pdfjsLib);
+      };
+      s.onerror = function(){ reject(new Error('pdf.js failed to load')); };
+      document.head.appendChild(s);
+    });
+    return pdfjsLoadPromise;
+  }
+
+  function renderImageMedia(url, alt){
+    mediaEl.style.display = 'block';
+    mediaEl.innerHTML = '';
+    var img = document.createElement('img');
+    img.className = 'insight-media-img';
+    img.src = url;
+    img.alt = alt || 'Image attached to the LinkedIn post';
+    img.loading = 'lazy';
+    mediaEl.appendChild(img);
+  }
+
+  function renderPdfMedia(url){
+    mediaEl.style.display = 'block';
+    mediaEl.innerHTML =
+      '<div class="insight-pdf-viewer">' +
+        '<div class="insight-pdf-canvas-wrap"><canvas id="insightPdfCanvas"></canvas></div>' +
+        '<div class="insight-pdf-nav">' +
+          '<button type="button" class="insight-pdf-btn" id="insightPdfPrev" disabled>&larr; Prev</button>' +
+          '<span class="insight-pdf-page-label" id="insightPdfLabel">Loading document...</span>' +
+          '<button type="button" class="insight-pdf-btn" id="insightPdfNext" disabled>Next &rarr;</button>' +
+        '</div>' +
+      '</div>';
+
+    var canvas = document.getElementById('insightPdfCanvas');
+    var ctx = canvas.getContext('2d');
+    var prevBtn = document.getElementById('insightPdfPrev');
+    var nextBtn = document.getElementById('insightPdfNext');
+    var label = document.getElementById('insightPdfLabel');
+    var pdfDoc = null;
+    var currentPage = 1;
+
+    function renderPage(num){
+      pdfDoc.getPage(num).then(function(page){
+        var viewport = page.getViewport({ scale: 1.4 });
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        page.render({ canvasContext: ctx, viewport: viewport });
+        label.textContent = 'Page ' + num + ' of ' + pdfDoc.numPages;
+        prevBtn.disabled = (num <= 1);
+        nextBtn.disabled = (num >= pdfDoc.numPages);
+      });
+    }
+
+    loadPdfJs()
+      .then(function(pdfjsLib){ return pdfjsLib.getDocument(url).promise; })
+      .then(function(doc){
+        pdfDoc = doc;
+        currentPage = 1;
+        renderPage(currentPage);
+      })
+      .catch(function(){
+        label.textContent = 'Could not load the attached document.';
+      });
+
+    prevBtn.addEventListener('click', function(){
+      if (currentPage > 1) { currentPage -= 1; renderPage(currentPage); }
+    });
+    nextBtn.addEventListener('click', function(){
+      if (pdfDoc && currentPage < pdfDoc.numPages) { currentPage += 1; renderPage(currentPage); }
+    });
+  }
+
+  fetch('/assets/data/insight.json', { cache: 'no-store' })
+    .then(function(r){ if(!r.ok) throw new Error('no insight.json'); return r.json(); })
+    .then(function(data){
+      if(!data || !data.text){ throw new Error('empty insight'); }
+      textEl.textContent = data.text;
+      if(data.url){ linkEl.href = data.url; }
+      if(data.postedAt){
+        var d = new Date(data.postedAt);
+        if(!isNaN(d)){ dateEl.textContent = d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
+      }
+      if(data.updatedAt){
+        var u = new Date(data.updatedAt);
+        if(!isNaN(u)){ updatedEl.textContent = 'Updated ' + u.toLocaleDateString('en-US',{month:'short',day:'numeric'}); }
+      }
+      if(data.media && data.media.type === 'image' && data.media.url){
+        renderImageMedia(data.media.url, data.media.alt);
+      } else if(data.media && data.media.type === 'pdf' && data.media.url){
+        renderPdfMedia(data.media.url);
+      }
+    })
+    .catch(function(){
+      textEl.textContent = "We post a new ad-spend insight on LinkedIn every day. Follow along for the latest one.";
+      dateEl.textContent = '';
+      updatedEl.textContent = '';
+    });
+})();
+</script>
+
+<!-- ============================================================
+     VIDEO OF THE WEEK: compact teaser only (full video lives on
+     /articles/, this is intentionally a single link, not an embed,
+     to keep the homepage from feeling crowded).
+     ============================================================ -->
+<style>
+.vow-teaser-wrap{padding:0 0 8px}
+.vow-teaser{
+  display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;
+  text-decoration:none;color:var(--body);font-size:13px;padding:10px 0;
+}
+.vow-teaser:hover{color:var(--ink)}
+.vow-teaser-icon{color:var(--accent);font-size:12px}
+.vow-teaser strong{color:var(--ink);font-weight:600}
+.vow-teaser-cta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.03em}
+</style>
+<div class="vow-teaser-wrap">
+  <div class="wrap">
+    <a href="#" id="vowTeaser" class="vow-teaser" style="display:none" target="_blank" rel="noopener">
+      <span class="vow-teaser-icon">&#9654;</span>
+      <span>Video of the week: <strong id="vowTeaserTitle"></strong></span>
+      <span class="vow-teaser-cta">Watch on YouTube &rarr;</span>
+    </a>
+  </div>
+</div>
+<script>
+(function(){
+  fetch('/assets/data/video.json', {cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('no video.json'); return r.json(); })
+    .then(function(data){
+      if(!data || !data.title) { return; }
+      var isFile = data.source === 'file' && data.filePath;
+      var isYoutube = (data.source === 'youtube' || !data.source) && data.youtubeId && data.youtubeId !== 'REPLACE_YOUTUBE_ID';
+      if(!isFile && !isYoutube){ return; }
+      var el = document.getElementById('vowTeaser');
+      var ctaEl = el.querySelector('.vow-teaser-cta');
+      document.getElementById('vowTeaserTitle').textContent = data.title || '';
+      if(isYoutube){
+        el.href = data.url || ('https://www.youtube.com/watch?v=' + data.youtubeId);
+        el.target = '_blank';
+        ctaEl.textContent = 'Watch on YouTube \u2192';
+      } else {
+        el.href = '/articles/#video-of-the-week';
+        el.removeAttribute('target');
+        ctaEl.textContent = 'Watch on the Articles page \u2192';
+      }
+      el.style.display = 'inline-flex';
+    })
+    .catch(function(){ /* stays hidden */ });
+})();
+</script>
+
+
+
+
+
+
+</main>

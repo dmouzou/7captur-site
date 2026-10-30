@@ -1,0 +1,24 @@
+<script>
+(function(){
+  var ENDPOINT = 'https://formspree.io/f/xkoqapnn';
+  var form = document.getElementById('contactForm'), msg = document.getElementById('formMsg'), btn = document.getElementById('formSubmitBtn');
+  function say(t, kind){ msg.textContent = t; msg.className = 'form-msg ' + (kind || ''); }
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var v = function(id){ return document.getElementById(id).value.trim(); };
+    var name = v('f-name'), email = v('f-email'), store = v('f-store'), platform = v('f-platform'), spend = v('f-spend'), message = v('f-message');
+    if (v('f-hp')) return;
+    if (!name || !email) { say('Enter your name and email address.', 'is-error'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { say('Enter a valid email address, like jane@yourstore.com.', 'is-error'); return; }
+    if (!message) { say('Tell us how we can help.', 'is-error'); return; }
+    btn.disabled = true; btn.textContent = 'Sending';
+    say('');
+    try {
+      var res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, store: store, platform: platform, spend: spend, message: message, _subject: 'New message from ' + name + (store ? ' (' + store + ')' : '') }) });
+      if (res.ok) { form.reset(); say('Message sent. We reply within 24 hours.', 'is-ok'); }
+      else { say('The message was not sent. Try again in a moment.', 'is-error'); }
+    } catch (err) { say('The message was not sent. Check your connection and try again.', 'is-error'); }
+    finally { btn.disabled = false; btn.textContent = 'Send message'; }
+  });
+})();</script>

@@ -1,0 +1,9 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import head from "../../fragments/contact.head.html?raw";
+import main from "../../fragments/contact.main.html?raw";
+import scripts from "../../fragments/contact.scripts.html?raw";
+---
+<Layout head={head} current="/contact/" scripts={scripts}>
+  <Fragment set:html={main} />
+</Layout>

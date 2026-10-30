@@ -1,0 +1,9 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import head from "../../fragments/terms-of-service.head.html?raw";
+import main from "../../fragments/terms-of-service.main.html?raw";
+import scripts from "../../fragments/terms-of-service.scripts.html?raw";
+---
+<Layout head={head} current="/terms-of-service/" scripts={scripts}>
+  <Fragment set:html={main} />
+</Layout>

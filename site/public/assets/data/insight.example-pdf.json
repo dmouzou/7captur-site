@@ -1,0 +1,13 @@
+{
+  "text": "Example post text goes here.",
+  "url": "https://www.linkedin.com/feed/update/urn:li:activity:XXXXXXXXXXXXXXXXXXX/",
+  "postedAt": "2026-07-15T09:00:00Z",
+  "updatedAt": "2026-07-15T09:05:00Z",
+  "postId": "2026-07-15",
+  "hashtags": ["ROAS", "Ecommerce"],
+  "media": {
+    "type": "pdf",
+    "url": "/assets/data/media/2026-07-15.pdf",
+    "alt": ""
+  }
+}
