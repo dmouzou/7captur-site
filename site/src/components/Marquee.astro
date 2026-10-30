@@ -1,0 +1,13 @@
+---
+import { INTEGRATIONS, stateLabel } from "../data/integrations";
+const items = INTEGRATIONS.map((i) => ({ name: i.name.replace("Instagram, Facebook and TikTok posts", "Social posts").replace("WhatsApp, DMs, phone and in-person", "WhatsApp and DMs"), s: stateLabel(i) }));
+---
+<div class="marquee" aria-label="Channels and tools 7Captur works with">
+  <div class="marquee-track">
+    {[0, 1].map((n) => (
+      <ul aria-hidden={n === 1 ? "true" : undefined}>
+        {items.map((i) => <li><b>{i.name}</b><span class={`badge ${i.s.cls}`}>{i.s.text}</span></li>)}
+      </ul>
+    ))}
+  </div>
+</div>

@@ -1,15 +1,28 @@
 ---
 import Logo from "./Logo.astro";
-import { NAV, CTA, LOGIN } from "../data/site";
+import { NAV, MEGA, CTA, LOGIN } from "../data/site";
 const { current = "" } = Astro.props;
 const menuIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7h18M3 12h18M3 17h18"/></svg>';
 const closeIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+const chev = '<svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg>';
+const here = (h) => current === h || (h !== "/" && current.startsWith(h));
 ---
 <nav class="nav" aria-label="Main">
   <div class="nav-inner">
     <a href="/" class="logo"><Logo />7Captur</a>
     <ul class="nav-links">
-      {NAV.map((n) => <li><a href={n.href} aria-current={current === n.href || (n.href !== "/" && current.startsWith(n.href)) ? "page" : undefined}>{n.label}</a></li>)}
+      {MEGA.map((m) => m.items ? (
+        <li class="has-mega">
+          <button type="button" class="mega-btn" aria-expanded="false" aria-haspopup="true"><span>{m.label}</span><Fragment set:html={chev} /></button>
+          <div class="mega" hidden>
+            <ul>
+              {m.items.map((it) => <li><a href={it.href}><b>{it.title}</b><span>{it.text}</span></a></li>)}
+            </ul>
+          </div>
+        </li>
+      ) : (
+        <li><a href={m.href} aria-current={here(m.href) ? "page" : undefined}>{m.label}</a></li>
+      ))}
     </ul>
     <div class="nav-right">
       <a class="nav-login" href={LOGIN.href}>{LOGIN.label}</a>
@@ -29,3 +42,21 @@ const closeIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" s
   <a href={LOGIN.href}>{LOGIN.label}</a>
   <a class="btn btn-primary" href={CTA.href}>{CTA.label}</a>
 </div>
+
+<script is:inline>
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.has-mega'));
+  function closeAll(except){items.forEach(function(li){if(li===except)return;var b=li.querySelector('.mega-btn');b.setAttribute('aria-expanded','false');li.querySelector('.mega').hidden=true;});}
+  items.forEach(function(li){
+    var b=li.querySelector('.mega-btn'),p=li.querySelector('.mega'),t;
+    function open(){closeAll(li);b.setAttribute('aria-expanded','true');p.hidden=false;}
+    function close(){b.setAttribute('aria-expanded','false');p.hidden=true;}
+    b.addEventListener('click',function(){var hov=window.matchMedia('(hover:hover)').matches;if(b.getAttribute('aria-expanded')==='true'&&!hov)close();else open();});
+    li.addEventListener('mouseenter',function(){clearTimeout(t);if(window.matchMedia('(hover:hover)').matches)open();});
+    li.addEventListener('mouseleave',function(){if(window.matchMedia('(hover:hover)').matches)t=setTimeout(close,120);});
+    li.addEventListener('focusout',function(e){if(!li.contains(e.relatedTarget))close();});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll();});
+  document.addEventListener('click',function(e){if(!e.target.closest('.has-mega'))closeAll();});
+})();
+</script>

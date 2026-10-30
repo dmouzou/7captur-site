@@ -1,0 +1,11 @@
+<script is:inline>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('[data-reveal]'));
+  if(!els.length) return;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('is-in')});return;}
+  document.documentElement.classList.add('js-reveal');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -10% 0px',threshold:.08});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
