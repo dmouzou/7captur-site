@@ -1,0 +1,8 @@
+---
+import { CTA } from "../data/site";
+const { title, text, fine = "Free plan, no card needed. Nothing changes in your ad accounts.", label = CTA.label, href = CTA.href } = Astro.props;
+---
+<div class="cta"><div class="wrap"><div class="cta-card">
+  <div><h2>{title}</h2><p>{text}</p></div>
+  <div><a class="btn btn-primary" href={href}>{label}</a><p class="cta-fine">{fine}</p></div>
+</div></div></div>

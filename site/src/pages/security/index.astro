@@ -1,9 +1,63 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import head from "../../fragments/security.head.html?raw";
-import main from "../../fragments/security.main.html?raw";
-import scripts from "../../fragments/security.scripts.html?raw";
+import PageHead from "../../components/PageHead.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { INTEGRATIONS, stateLabel } from "../../data/integrations";
+const direct = INTEGRATIONS.filter((i) => i.state === "direct");
 ---
-<Layout head={head} current="/security/" scripts={scripts}>
-  <Fragment set:html={main} />
+<Layout
+  title="Security and data | 7Captur"
+  description="Read-only connections, encrypted credentials, no changes to your ad accounts, and the ability to export or delete your data at any time."
+  path="/security/" current="/security/">
+<main>
+<PageHead wide title="Your data stays yours. Access stays narrow." lede={'7Captur reads data and gives recommendations. It does not change your ads, budgets, store or posts. Legal terms are in the <a href="/privacy-policy/">Privacy Policy</a> and <a href="/terms-of-service/">Terms of Service</a>.'} />
+
+<section class="section section-flush" style="padding-bottom:72px">
+  <div class="wrap">
+    <p class="kicker">Connections and permissions</p>
+    <h2>What each direct connection can do.</h2>
+    <p class="lede">Each connection is authorized through the platform's own login and can be revoked from our Connections page or from the platform's settings at any time. There is no scraping and no shared logins.</p>
+    <div class="table-wrap" style="margin-top:24px" tabindex="0" role="region" aria-label="Direct connections and permissions">
+      <table>
+        <thead><tr><th>Connection</th><th>What we read</th><th>Access</th><th>Status</th></tr></thead>
+        <tbody>
+          {direct.map((i) => { const s = stateLabel(i); return <tr><td>{i.name}</td><td>{i.what.replace(", read-only", "")}</td><td>Read-only</td><td><span class={`badge ${s.cls}`}>{s.text}</span></td></tr>; })}
+          <tr><td>Meta Ads, TikTok Ads</td><td>Nothing directly. You upload an export file.</td><td>None</td><td><span class="badge badge-live">Import supported</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fine">7Captur does not create, edit, pause or delete anything in your ad or store accounts. Approving or dismissing a recommendation only records your choice in 7Captur.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Handling</p>
+    <h2>How your data is handled.</h2>
+    <div class="facts">
+      <div class="fact"><h3>In transit and at rest</h3><p>Connections use TLS. Data is encrypted at rest by our cloud provider.</p></div>
+      <div class="fact"><h3>Credentials</h3><p>Connection tokens are encrypted on the server and never sent to your browser, shown in the interface or written to logs.</p></div>
+      <div class="fact"><h3>Separate workspaces</h3><p>Every account's data is isolated. The rules that enforce this run on the server, not in your browser.</p></div>
+      <div class="fact"><h3>Minimal personal data</h3><p>We do not ask for customer names, emails or addresses. Store connections read order totals and refunds, not customer details.</p></div>
+      <div class="fact"><h3>AI processing</h3><p>We use an AI service to write plain-language explanations. We send it the summary needed for your recommendation, and the numbers themselves are calculated by our own code, not by the AI. Uploaded images are read for values you then confirm.</p></div>
+      <div class="fact"><h3>Support access</h3><p>Our team cannot sign in as you. Support views are limited, logged, and never show your credentials or payment details.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Control</p>
+    <h2>Export, disconnect and delete.</h2>
+    <div class="facts">
+      <div class="fact"><h3>Export</h3><p>Download your records and recommendations as CSV or JSON at any time from Settings.</p></div>
+      <div class="fact"><h3>Disconnect</h3><p>Disconnecting stops syncing and deletes our stored access token. Data already synced stays, labelled as connected data, until you delete it.</p></div>
+      <div class="fact"><h3>Delete your account</h3><p>Request deletion from Settings. There is a 14-day waiting period you can cancel. After that your workspace, records and connections are permanently deleted and any paid subscription is stopped. Billing records are kept by our payment provider as the law requires.</p></div>
+      <div class="fact"><h3>Payments</h3><p>Payments are handled by our payment provider. We never see or store your card details.</p></div>
+    </div>
+  </div>
+</section>
+
+<CtaBand title="Questions about access or data handling?" text="Ask before you connect anything. We reply as soon as we can." fine="" label="Contact us" href="/contact/" />
+</main>
 </Layout>

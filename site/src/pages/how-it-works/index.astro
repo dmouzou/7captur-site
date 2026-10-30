@@ -1,9 +1,88 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import head from "../../fragments/how-it-works.head.html?raw";
-import main from "../../fragments/how-it-works.main.html?raw";
-import scripts from "../../fragments/how-it-works.scripts.html?raw";
+import PageHead from "../../components/PageHead.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import IntegrationGrid from "../../components/IntegrationGrid.astro";
+import Faq from "../../components/Faq.astro";
+
+const faq = [
+  { q: "What if my data is incomplete or messy?", a: "That is expected. 7Captur works with what you give it, flags what is missing or does not line up, and tells you which single input would improve the next decision most." },
+  { q: "What does an evidence label mean?", a: "It tells you where a number came from: entered by you, imported from a file, extracted from a screenshot (and confirmed by you), connected directly, estimated, or unknown. We never present an estimate as a measured fact." },
+  { q: "Can 7Captur tell me which post made a sale?", a: "Only when the link is recorded. If you tell us an order came from a post, it is shown as reported by you. If the source is unknown, the sale still counts in your business totals but is not credited to a post." },
+];
 ---
-<Layout head={head} current="/how-it-works/" scripts={scripts}>
-  <Fragment set:html={main} />
+<Layout
+  title="How it works | 7Captur"
+  description="Set a goal, add the data you have, get an evidence-based recommendation, choose whether to act, and learn from the result. No website required."
+  path="/how-it-works/" current="/how-it-works/">
+<main>
+<PageHead wide title="From the data you have to a clear next step." lede="Setup takes a few minutes. You do not need a website, a store or an ad account. Add more later and the guidance gets sharper." />
+
+<section class="section section-flush" style="padding-bottom:72px">
+  <div class="wrap">
+    <div class="five">
+      <div class="five-item"><h3>Set a goal</h3><span class="when">Once, in a minute</span><p>Tell us what you want: more enquiries, more orders, better content, less wasted spend or more profit. Add your business type, currency and how customers buy.</p></div>
+      <div class="five-item"><h3>Add what you have</h3><span class="when">Type, import or connect</span><p>Enter posts, promotions, enquiries, sales and costs, import a CSV, upload a screenshot, or connect a supported source. Screenshot values are shown for you to check before they are saved.</p></div>
+      <div class="five-item"><h3>Get a recommendation</h3><span class="when">When you ask</span><p>One concrete action, why it is suggested, what we do not know and what to measure next.</p></div>
+      <div class="five-item"><h3>You choose</h3><span class="when">Your call</span><p>Mark it to try, dismiss it or come back later. 7Captur never changes your ads, budgets or posts.</p></div>
+      <div class="five-item"><h3>Learn from the result</h3><span class="when">Optional</span><p>Record what happened. A weekly summary shows what changed and where to focus next.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Honest by design</p>
+    <h2>The advice matches your evidence.</h2>
+    <p class="lede">The same engine runs on every plan. It picks its mode from the data in front of it, not from what you pay.</p>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Evidence modes">
+      <table>
+        <thead><tr><th>Mode</th><th>When</th><th>What it can suggest</th><th>What it will not claim</th></tr></thead>
+        <tbody>
+          <tr><td>Explore</td><td>Mostly views, reach and engagement</td><td>A small test, comparing content, recording enquiries</td><td>Return, profit or that a post caused sales</td></tr>
+          <tr><td>Improve</td><td>Some enquiries or orders, plus spend</td><td>Comparing cost per enquiry or order, improving follow-up</td><td>Profitability without costs</td></tr>
+          <tr><td>Optimize</td><td>Reliable spend, revenue, refunds and costs over comparable periods</td><td>Return after declared costs, cautious budget suggestions for you to consider</td><td>Guaranteed future results</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fine">Missing costs are treated as unknown, never as zero. Records in different currencies are not mixed.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Example</p>
+    <h2>What a recommendation looks like.</h2>
+    <p class="lede">An illustrative social seller with no website. Not a real customer.</p>
+    <div class="dash hero-card" style="max-width:760px;margin-top:28px">
+      <div class="dash-top"><strong>Your next move</strong><span class="badge badge-sample">Illustrative example</span></div>
+      <p class="move">Run a small, time-limited test on the video that generated more enquiries per dollar spent, and record which enquiries become confirmed orders. Do not substantially increase the budget yet.</p>
+      <h5>Why</h5><p>In the data entered, this video generated more enquiries relative to promotion spend than the comparison post. This is an early signal for the goal of increasing enquiries.</p>
+      <h5>What we do not know</h5><p>Enquiries are not consistently linked to confirmed orders, so we cannot say which post generated more revenue or profit.</p>
+      <h5>What to measure next</h5><p>Spend, enquiries, qualified enquiries if available, and confirmed orders over the same test window.</p>
+      <div class="tags"><span>Mode: Improve, partial evidence</span><span>Values entered by you</span><span>Sales attribution unknown</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="platforms" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Connections and imports</p>
+    <h2>Direct where it exists. Import or manual everywhere else.</h2>
+    <p class="lede">Direct connections are read-only and use each platform's own login. You can disconnect at any time and keep working with imports and manual entry.</p>
+    <IntegrationGrid />
+    <p class="fine">Need another platform? <a href="/contact/">Tell us which one</a>.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Questions</p>
+    <h2>How it behaves with real data.</h2>
+    <Faq items={faq} />
+  </div>
+</section>
+
+<CtaBand title="Try it with the data you already have." text="Add a few posts, a promotion and your enquiries to get your first recommendation." />
+</main>
 </Layout>

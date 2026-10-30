@@ -1,9 +1,117 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import head from "../../fragments/pricing.head.html?raw";
-import main from "../../fragments/pricing.main.html?raw";
-import scripts from "../../fragments/pricing.scripts.html?raw";
+import PageHead from "../../components/PageHead.astro";
+import Faq from "../../components/Faq.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import ProPlan from "../../components/ProPlan.tsx";
+import plans from "../../data/plans.json";
+import { CTA } from "../../data/site";
+
+const P = plans.plans as Record<string, { priceMonthly?: number }>;
+const faq = [
+  { q: "Is the Free plan really free?", a: "Yes. Free is permanent and needs no card. There is no trial that expires. You can stay on Free as long as you like." },
+  { q: "What does a paid plan change?", a: "Paid plans give you more room: a larger weekly recommendation allowance, more import capacity, longer history and, on Pro, more connected platforms. The recommendation engine is the same on every plan. What you can conclude depends on your evidence, not your plan." },
+  { q: "What counts as a connected platform?", a: "A direct, read-only connection to a store or ad account, such as Shopify or Google Ads. Typing in data, importing a spreadsheet or uploading a screenshot does not use a connection." },
+  { q: "How is my Pro price decided?", a: "By your monthly ad spend across the platforms you use. Spend we can read from connected accounts is used when available. If you enter it yourself, it is labelled as reported by you. The Growth band is under $15,000 a month, Scale is $15,000 to $30,000, and Pro is $30,000 to $50,000." },
+  { q: "What if my spend changes and my band changes?", a: "We tell you before it happens. A new band applies from your next billing date, never silently in the middle of a cycle. If you think the band is wrong, contact us and we will review it." },
+  { q: "When do weekly limits reset?", a: "Every Monday in your business time zone. Viewing, rereading and exporting recommendations you already have never uses your allowance, and a recommendation that fails to generate is not counted." },
+  { q: "What happens if I upgrade or downgrade?", a: "Upgrades take effect straight away and are charged pro rata. Downgrades change your allowance immediately and the new price applies from your next billing date. Nothing is deleted. If a lower plan allows fewer connections, you choose which stay active." },
+  { q: "What happens if a payment fails?", a: "We tell you and give you a grace period to fix it. After that, paid-only features are limited. Your history and records are kept." },
+  { q: "What happens if I cancel?", a: "You keep your plan until the end of the period you paid for, then move to Free. Your data stays, and you can export it any time." },
+  { q: "Which currency am I charged in, and are taxes included?", a: "Prices are in US dollars per month. Taxes are shown at checkout where they apply. Each business can still work in its own currency inside the app." },
+  { q: "What is Custom?", a: "A plan for tailored inputs, higher volume, more connected platforms and agreed support, from $199 a month. Scope is set in writing before we start. <a href=\"/contact/\">Talk to us</a>." },
+];
 ---
-<Layout head={head} current="/pricing/" scripts={scripts}>
-  <Fragment set:html={main} />
+<Layout
+  title="Pricing | 7Captur"
+  description="Start free and stay free. Paid plans add recommendation capacity, imports, history and connected platforms. Pro is priced by monthly ad spend."
+  path="/pricing/" current="/pricing/">
+<main>
+<PageHead title="Start free. Pay when you need more room." lede="Every plan uses the same recommendation engine. Plans differ in capacity, history and connected platforms, not in how well we reason. Billed monthly. Cancel anytime." />
+
+<section class="section section-flush" style="padding-bottom:40px">
+  <div class="wrap">
+    <div class="plans-grid">
+      <div class="plan">
+        <div class="plan-name">Free</div>
+        <div class="plan-price">$0<small>forever</small></div>
+        <p class="plan-sub">Start with what you have.</p>
+        <ul>
+          <li>Manual entry for posts, promotions, enquiries, sales and costs</li>
+          <li>CSV and screenshot import</li>
+          <li>Recommendations every week</li>
+          <li>Weekly summary</li>
+          <li>Basic history</li>
+          <li>One direct connection, optional</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href={CTA.href}>Start free</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">${P.starter.priceMonthly}<small>a month</small></div>
+        <p class="plan-sub">For regular marketing.</p>
+        <ul>
+          <li>Everything in Free</li>
+          <li>More recommendations each week</li>
+          <li>More import capacity</li>
+          <li>Longer history</li>
+          <li>One direct connection</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href={CTA.href}>Start free</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Growth</div>
+        <div class="plan-price">${P.growth.priceMonthly}<small>a month</small></div>
+        <p class="plan-sub">For growing businesses.</p>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>A larger weekly allowance</li>
+          <li>More records, imports and history</li>
+          <li>One direct connection</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href={CTA.href}>Start free</a>
+      </div>
+      <ProPlan client:load signupUrl={CTA.href} />
+    </div>
+    <div class="custom-strip">
+      <div><h3>Need more, or a tailored setup?</h3><p>Custom starts at <b class="num">$199</b> a month. It covers tailored inputs, higher volume, four or more connected platforms, agreed workflows and support. Scope is agreed in writing.</p></div>
+      <a class="btn btn-ghost" href="/contact/">Talk to us</a>
+    </div>
+    <p class="disclaimer">Prices are in US dollars, billed monthly. Taxes are shown at checkout where they apply. You upgrade, downgrade or cancel any time. Recommendations are decision support, not a guarantee of sales, savings or profit.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:40px">
+  <div class="wrap">
+    <p class="kicker">Compare</p>
+    <h2>What each plan includes.</h2>
+    <div class="table-wrap cmp" tabindex="0" role="region" aria-label="Plan comparison">
+      <table>
+        <thead><tr><th>Feature</th><th>Free</th><th>Starter</th><th>Growth</th><th>Pro</th><th>Custom</th></tr></thead>
+        <tbody>
+          <tr><td>Same recommendation engine</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>Manual entry, CSV and screenshot import</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>Weekly summary</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>Recommendation allowance</td><td>Basic</td><td>Higher</td><td>Higher</td><td>Highest</td><td>Agreed</td></tr>
+          <tr><td>Import capacity</td><td>Basic</td><td>More</td><td>More</td><td>Most</td><td>Agreed</td></tr>
+          <tr><td>History</td><td>Basic</td><td>Longer</td><td>Longer</td><td>Longest</td><td>Agreed</td></tr>
+          <tr><td>Direct connections</td><td>1</td><td>1</td><td>1</td><td>Up to 3</td><td>4 or more</td></tr>
+          <tr><td>Price</td><td>$0</td><td>${P.starter.priceMonthly}</td><td>${P.growth.priceMonthly}</td><td>$59, $79 or $119</td><td>From $199</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fine">Pro bands by monthly ad spend: under $15,000 is $59, $15,000 to $30,000 is $79, $30,000 to $50,000 is $119. Above $50,000, Custom is usually a better fit.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Questions</p>
+    <h2>Pricing, in detail.</h2>
+    <Faq items={faq} />
+  </div>
+</section>
+
+<CtaBand title="Start free and see what your data says." text="Add what you have today. Upgrade only if you need more room." />
+</main>
 </Layout>

@@ -1,9 +1,55 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import head from "../../fragments/terms-of-service.head.html?raw";
-import main from "../../fragments/terms-of-service.main.html?raw";
-import scripts from "../../fragments/terms-of-service.scripts.html?raw";
 ---
-<Layout head={head} current="/terms-of-service/" scripts={scripts}>
-  <Fragment set:html={main} />
+<Layout
+  title="Terms of Service | 7Captur"
+  description="The terms for using 7Captur: decision support, plans and billing, Pro price bands, your data, and liability."
+  path="/terms-of-service/" current="/terms-of-service/">
+<main>
+<header class="page-head"><div class="wrap"><h1>Terms of Service</h1><p class="lede">The terms for using 7Captur, including plans, billing and what the service does and does not do.</p></div></header>
+<section class="section section-flush" style="padding-top:48px">
+  <div class="wrap">
+    <div class="legal-layout">
+      <div class="legal-toc">
+        <div class="legal-toc-label">On this page</div>
+        <a href="#t-service">The service</a>
+        <a href="#t-decision">Decision support only</a>
+        <a href="#t-plans">Plans and billing</a>
+        <a href="#t-bands">Pro price bands</a>
+        <a href="#t-data">Your data and exit</a>
+        <a href="#t-use">Acceptable use</a>
+        <a href="#t-liability">Limitation of liability</a>
+        <a href="#t-third">Third-party availability</a>
+      </div>
+      <div class="legal-body">
+        <p class="legal-meta">Last updated: October 2026</p>
+
+        <h3 id="t-service">The service</h3>
+        <p>7Captur helps you understand your marketing results and decide what to do next. You enter, import or connect data, and we calculate figures and generate recommendations and weekly summaries from it.</p>
+
+        <h3 id="t-decision">Decision support only</h3>
+        <p>7Captur does not create, change, pause or delete anything in your ad accounts, store or social accounts. Recommendations are suggestions based on the data you provide. They are not guarantees of sales, savings or profit, and their quality depends on your data. You decide whether to act and you are responsible for your own decisions and their financial outcomes.</p>
+
+        <h3 id="t-plans">Plans and billing</h3>
+        <p>The Free plan is permanent and has no time limit. Paid plans are billed monthly in US dollars through our payment provider, Paddle. Taxes are shown at checkout where they apply. You can upgrade, downgrade or cancel at any time. Upgrades take effect immediately and are charged pro rata. Downgrades change your allowance immediately, and the new price applies from your next billing date. On cancellation you keep your paid plan until the end of the period you paid for, then move to Free. If a payment fails we notify you and allow a grace period before paid features are limited. Your data is not deleted because of a failed payment. For refunds, contact us and we will review each request.</p>
+
+        <h3 id="t-bands">Pro price bands</h3>
+        <p>Pro is priced by monthly ad spend: under $15,000 is $59, $15,000 to $30,000 is $79, and $30,000 to $50,000 is $119. Spend is measured from connected accounts where available, otherwise from the figure you report. We notify you before a band change, and it applies from your next billing date. At $50,000 or more we suggest Custom. If you disagree with a band, contact us.</p>
+
+        <h3 id="t-data">Your data and exit</h3>
+        <p>You own your data. You can export it at any time and request deletion as described in the Privacy Policy. We may use aggregate or de-identified information to improve the service.</p>
+
+        <h3 id="t-use">Acceptable use</h3>
+        <p>Use 7Captur lawfully and only with data you have the right to use. Do not attempt to bypass usage limits, access other accounts, or interfere with the service. We may suspend accounts that breach these terms or put the service or others at risk.</p>
+
+        <h3 id="t-liability">Limitation of liability</h3>
+        <p>To the maximum extent permitted by law, 7Captur is not liable for indirect, incidental or consequential damages arising from your use of the service or from decisions you make based on it. Liability is limited to the amount you paid in the three months before the claim.</p>
+
+        <h3 id="t-third">Third-party availability</h3>
+        <p>The service depends on third-party platforms and providers, including Shopify, Google, our payment provider and our AI provider. We are not responsible for interruptions caused by their rate limits, changes or outages. You can always continue with manual entry and file imports.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 </Layout>

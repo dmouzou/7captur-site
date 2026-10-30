@@ -5,6 +5,8 @@ import react from "@astrojs/react";
 export default defineConfig({
   site: "https://7captur.com",
   trailingSlash: "always",
+  // Removed because it described ad execution, which the product does not do.
+  redirects: { "/articles/assisted-execution-vs-full-automation/": "/articles/" },
   build: { format: "directory" },
   integrations: [react()],
 });

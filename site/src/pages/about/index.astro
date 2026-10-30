@@ -1,9 +1,37 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import head from "../../fragments/about.head.html?raw";
-import main from "../../fragments/about.main.html?raw";
-import scripts from "../../fragments/about.scripts.html?raw";
+import PageHead from "../../components/PageHead.astro";
+import CtaBand from "../../components/CtaBand.astro";
 ---
-<Layout head={head} current="/about/" scripts={scripts}>
-  <Fragment set:html={main} />
+<Layout
+  title="About | 7Captur"
+  description="7Captur helps people who market a product or service understand what is working and decide what to do next, without pretending to know what the data cannot prove."
+  path="/about/" current="/about/">
+<main>
+<PageHead wide title="Clear next steps, without pretending to know more than the data shows." lede="7Captur is a small, focused team building decision support for people who market a product or service." />
+
+<section class="section section-flush" style="padding-bottom:72px">
+  <div class="wrap">
+    <div class="prose">
+      <p>Most marketing tools show you numbers. Few help you decide what to do next, and fewer still are honest about what the numbers cannot prove. A post with thousands of likes may have sold nothing. A platform may report a sale that a refund later erases.</p>
+      <p>7Captur starts from the data you actually have, whether that is a list of posts in a notebook or a connected store and ad account. It gives one clear next step, explains why, says what it does not know, and tells you what to record next.</p>
+      <p>You make the decision. 7Captur does not change your ads, budgets or posts.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Principles</p>
+    <h2>The rules that do not change with account size.</h2>
+    <div class="principles">
+      <div class="principle"><h3>Evidence first</h3><p>We match our advice to your evidence and label where every number came from.</p></div>
+      <div class="principle"><h3>Honest about unknowns</h3><p>Missing data is called missing, never guessed as zero. We never promise results.</p></div>
+      <div class="principle"><h3>Your control</h3><p>You decide whether to act. You can export or delete your data at any time. See the <a href="/security/">security page</a>.</p></div>
+    </div>
+  </div>
+</section>
+
+<CtaBand title="See what your data says." text="Start free with whatever you have today." />
+</main>
 </Layout>

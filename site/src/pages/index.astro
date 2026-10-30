@@ -1,9 +1,148 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import head from "../fragments/home.head.html?raw";
-import main from "../fragments/home.main.html?raw";
-import scripts from "../fragments/home.scripts.html?raw";
+import Faq from "../components/Faq.astro";
+import CtaBand from "../components/CtaBand.astro";
+import IntegrationGrid from "../components/IntegrationGrid.astro";
+import insight from "../fragments/insight.html?raw";
+import { CTA } from "../data/site";
+
+const faq = [
+  { q: "Do I need a website or an ad account?", a: "No. You can start by typing in your posts, promotions, enquiries, sales and costs, importing a spreadsheet, or uploading a screenshot. Connecting a store or ad account is optional." },
+  { q: "What does 7Captur actually tell me?", a: "One clear next step, why it is suggested, what the data cannot tell us, and what to record next. When the evidence is thin, it says so and suggests a small test instead of guessing." },
+  { q: "Will it change my ads or posts?", a: "No. 7Captur only reads data and gives you recommendations. You decide whether to act, and you make any change yourself in your own accounts." },
+  { q: "What if I do not know my costs?", a: "Missing costs are treated as unknown, never as zero. You still get guidance, but 7Captur will not claim profit or return after costs until you provide the costs it needs." },
+  { q: "Can I use it if customers order through DMs or WhatsApp?", a: "Yes. Log enquiries and sales by hand. Sales that cannot be tied to a post or promotion still count toward your business totals, and they are labelled as unknown source." },
+  { q: "Can I bring in Meta or Google ad data?", a: "Yes. Import an Ads Manager export, or connect Google Ads directly where available. Every number is labelled by where it came from: entered by you, imported, extracted from a screenshot, or connected." },
+  { q: "Which currencies are supported?", a: "Each business picks its own currency, and original amounts are kept. Records in a different currency are left out of comparisons, with a warning, rather than silently mixed." },
+  { q: "Is my data safe?", a: "We ask for the narrowest access that works, store connection credentials encrypted, and let you disconnect, export or delete at any time. See the <a href=\"/security/\">security page</a>." },
+];
 ---
-<Layout head={head} current="/" scripts={scripts}>
-  <Fragment set:html={main} />
+<Layout
+  title="7Captur | Know what's working. Decide what to do next."
+  description="7Captur turns your marketing activity into clear, evidence-based next steps, from social posts and messages to paid ads and e-commerce sales. Start with the data you have."
+  path="/" current="/">
+<main>
+
+<header class="hero">
+  <div class="wrap hero-grid is-product">
+    <div>
+      <h1>Know what's working. Decide what to do next.</h1>
+      <p class="hero-sub">7Captur turns your marketing activity into clear, evidence-based next steps, from social posts and messages to paid ads and e-commerce sales. Start with the data you have. Add more as your business grows.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={CTA.href}>{CTA.label}</a>
+        <a class="btn btn-ghost" href="/how-it-works/">See how it works</a>
+      </div>
+      <div class="trust-row">
+        <span>Free plan, no card needed</span>
+        <span>No website required</span>
+        <span>Nothing changes in your ad accounts</span>
+      </div>
+    </div>
+
+    <div class="dash hero-card" role="group" aria-label="Example recommendation">
+      <div class="dash-top"><strong>Your next move</strong><span class="badge badge-sample">Illustrative example</span></div>
+      <p class="move">Run a small, time-limited test on the video that brought more enquiries per dollar spent. Do not raise the budget yet.</p>
+      <h5>Why</h5>
+      <p>In the data entered, this video produced more enquiries for each dollar of promotion than the comparison post. That is an early signal for your goal of more enquiries.</p>
+      <h5>What we do not know</h5>
+      <p>Enquiries are not yet linked to confirmed orders, so we cannot say which post earned more revenue or profit.</p>
+      <h5>What to record next</h5>
+      <p>Spend, enquiries and confirmed orders over the same test window.</p>
+      <div class="tags"><span>Evidence: partial</span><span>Source: entered by you</span><span>Sales attribution: unknown</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <p class="kicker">Evidence first</p>
+    <h2>Your data decides what we can say.</h2>
+    <p class="lede">Likes do not prove sales. 7Captur matches its advice to the evidence you have, and tells you plainly what more data would unlock.</p>
+    <div class="ladder">
+      <div class="rung"><h3>Attention</h3><p>Views, reach, likes and comments.</p><span class="can">Good for testing which content to repeat. Not proof of sales.</span></div>
+      <div class="rung"><h3>Enquiries and orders</h3><p>Messages, calls, bookings, orders and what you spent to get them.</p><span class="can">Good for comparing cost per enquiry or order when the numbers line up.</span></div>
+      <div class="rung"><h3>Revenue and costs</h3><p>Sales, refunds, product costs, fees and ad spend.</p><span class="can">Needed before we talk about return after costs or suggest a budget change.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Who it is for</p>
+    <h2>Useful before your data is perfect.</h2>
+    <div class="caps">
+      <div class="cap"><h3>Social-first sellers</h3><p>Sell through Instagram, TikTok, WhatsApp or DMs with no website. Track posts, promotions, enquiries and orders by hand and see what is bringing people in.</p></div>
+      <div class="cap"><h3>Resellers and marketplace sellers</h3><p>Record what you spend and what sells, then compare content and promotions without needing store software.</p></div>
+      <div class="cap"><h3>Services and local businesses</h3><p>Count calls, bookings and visits as outcomes. Learn which posts and promotions bring real enquiries.</p></div>
+      <div class="cap"><h3>Growing e-commerce brands</h3><p>Connect your store and ads where available, add returns and costs, and see performance after the costs you declare. These users get deeper calculations because they provide deeper data.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">What you get</p>
+    <h2>One decision engine, whatever your setup.</h2>
+    <div class="facts">
+      <div class="fact"><h3>Posts and promotions</h3><p>Track organic posts and paid promotions side by side, with spend, results and links between them.</p></div>
+      <div class="fact"><h3>Enquiries, orders and costs</h3><p>Log what came in and what it cost. Aggregate entries are fine if you cannot record every sale.</p></div>
+      <div class="fact"><h3>CSV and screenshot import</h3><p>Bring in a spreadsheet or an Ads Manager export. Screenshot values are shown for your review before anything is saved.</p></div>
+      <div class="fact"><h3>Evidence labels</h3><p>Every number shows where it came from: entered, imported, screenshot, connected, estimated or unknown.</p></div>
+      <div class="fact"><h3>Recommendations you can question</h3><p>Each one explains the action, the reasoning, what is unknown and what to measure next.</p></div>
+      <div class="fact"><h3>A weekly summary</h3><p>What changed, what you tried, what is missing and where to focus next. It never invents advice to fill space.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">How it works</p>
+    <h2>From goal to next step.</h2>
+    <div class="five">
+      <div class="five-item"><h3>Set a goal</h3><span class="when">Once</span><p>Enquiries, orders, testing content, less waste or profit.</p></div>
+      <div class="five-item"><h3>Add what you have</h3><span class="when">Type, import or connect</span><p>Start small. Add more when it helps.</p></div>
+      <div class="five-item"><h3>Get a recommendation</h3><span class="when">When you ask</span><p>One clear action with the evidence behind it.</p></div>
+      <div class="five-item"><h3>You choose</h3><span class="when">Your call</span><p>Mark it to try, dismiss it or come back later.</p></div>
+      <div class="five-item"><h3>Learn</h3><span class="when">Optional</span><p>Record what happened so the next step is better informed.</p></div>
+    </div>
+    <p class="fine"><a href="/how-it-works/">Read the details</a></p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Two example journeys</p>
+    <h2>Same engine, different data.</h2>
+    <p class="lede">Both examples are illustrative, not real customers.</p>
+    <div class="cols-2">
+      <div class="cap"><h3>A social seller with no website</h3><p>She sells cosmetics through Instagram DMs. She enters two weeks of post metrics, promotion spend and enquiry counts. 7Captur suggests a small test of the video with the best enquiries per dollar, says it cannot yet tell which post earned revenue, and asks her to record confirmed orders.</p></div>
+      <div class="cap"><h3>An e-commerce brand with store and ads</h3><p>He connects his store, brings in ad spend and adds product costs and fees. With reliable inputs, 7Captur compares return after declared costs and may suggest holding or cautiously adjusting a budget. He decides, and makes any change himself.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Connections</p>
+    <h2>Connect when it helps. Import or type when it does not.</h2>
+    <p class="lede">A channel listed here is not always a direct connection. We label exactly what is supported.</p>
+    <IntegrationGrid />
+    <p class="fine">Direct connections are read-only. <a href="/security/">Read the security details</a>.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Questions</p>
+    <h2>What people ask first.</h2>
+    <Faq items={faq} />
+    <p class="fine">Something else? <a href="/contact/">Ask us directly</a>.</p>
+  </div>
+</section>
+
+<Fragment set:html={insight} />
+
+<CtaBand title="Find out what your marketing is really doing." text="Start free with the data you already have." />
+
+</main>
 </Layout>

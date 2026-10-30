@@ -1,0 +1,9 @@
+---
+const { title, lede, wide = false } = Astro.props;
+---
+<header class={wide ? "page-head is-wide" : "page-head"}>
+  <div class="wrap">
+    <h1>{title}</h1>
+    {lede && <p class="lede" set:html={lede} />}
+  </div>
+</header>

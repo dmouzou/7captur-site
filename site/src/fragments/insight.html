@@ -1,56 +1,3 @@
-<main>
-
-<header class="page-head is-wide" style="padding-bottom:8px">
-  <div class="wrap">
-    <span class="tag-pill">Execution Model</span>
-    <h1 style="max-width:24ch">Assisted Execution vs. Full Automation: Why Human Approval Still Matters for Ad Spend</h1>
-    <div class="article-meta"><span>July 8, 2026</span><span>6 min read</span><span>7Captur Team</span></div>
-  </div>
-</header>
-<section class="section" style="padding-top:48px;padding-bottom:40px">
-  <div class="wrap">
-    <div class="article-body">
-<p>There's a version of every ad-optimization tool that promises to "set it and forget it": connect your accounts, let the algorithm take over, and stop thinking about budgets entirely. For a lot of categories, that pitch is genuinely appealing. For ad spend specifically, it's worth being skeptical of, and the reason has less to do with trust in AI and more to do with the structure of the data itself.</p>
-
-<h2>The core problem: the best data arrives late</h2>
-
-<p>As covered in <a href="/articles/the-30-day-return-lag-problem/">a related piece on return-rate lag</a>, the most important input to a genuinely accurate ad-spend decision, whether an order actually stayed sold, isn't available at the moment the decision needs to be made. Any fully autonomous system, no matter how good the model behind it, is making the same bet a human would: acting on the best available estimate, knowing that estimate will keep shifting for weeks.</p>
-
-<p>That's not a reason to avoid automation-assisted decisions. It's a reason to be deliberate about <em>where in the loop a human sits</em>, and how much authority the system has to act before that human sees it.</p>
-
-<h2>What "assisted execution" means, specifically</h2>
-
-<p>Assisted execution is a narrower claim than full automation. The system does the analysis, prepares the exact change it would make, and quantifies the expected impact, but a person approves or dismisses it before any API call touches the ad account. Three concrete mechanisms make this more than a slogan:</p>
-
-<ul>
-  <li><strong>Explicit approval, every time.</strong> Each decision ships with an "Approve" and a "Dismiss" action. Dismissing makes no API call and changes nothing. There's no default timer that executes a recommendation if it's ignored.</li>
-  <li><strong>A hard budget cap.</strong> No single approved decision can move more than 30% of a campaign's current weekly budget, regardless of how confident the underlying model is. Confidence isn't a substitute for a ceiling.</li>
-  <li><strong>A rollback window.</strong> Every executed change can be reversed within 24 hours, without needing to go find the setting inside Meta or Google's own interface.</li>
-</ul>
-
-<div class="article-callout">
-  <span class="callout-label">The distinction that actually matters</span>
-  <p>The difference between "assisted" and "autonomous" isn't how smart the underlying analysis is; it's whether a specific dollar-denominated action gets executed against your ad account without a human looking at it first.</p>
-</div>
-
-<h2>Where full automation makes sense (and where it doesn't)</h2>
-
-<p>Full automation is a reasonable choice for high-frequency, low-stakes, easily-reversible actions: bid adjustments within a tight band, creative rotation, budget pacing within a day. It's a much harder case to make for decisions that are infrequent, high-stakes, and built on data, like return rate, that's known to still be incomplete at decision time. Pausing a campaign, or scaling one by 20–30%, is exactly that second category: consequential enough, and uncertain enough, that removing the human step doesn't save meaningful time but does remove the one checkpoint that catches a bad call before it costs money.</p>
-
-<div class="article-stat-row">
-  <div class="article-stat"><span class="num">3</span><span class="lbl">Decisions delivered per week, each requiring individual approval</span></div>
-  <div class="article-stat"><span class="num">30%</span><span class="lbl">Maximum budget change enforced per approved decision</span></div>
-  <div class="article-stat"><span class="num">24h</span><span class="lbl">Rollback window on every executed change</span></div>
-</div>
-
-<h2>The honest tradeoff</h2>
-
-<p>Assisted execution is slower than full automation by design. A decision sits in an inbox until someone clicks something, rather than executing the moment a threshold is crossed. That's a real cost, not a hidden benefit. The bet is that for budget-level decisions specifically, the few minutes it takes to read three plain-English recommendations and approve or dismiss them is worth trading for the ability to catch the recommendation that's wrong before it's expensive, especially in a data environment where "wrong" often isn't visible for another 30 days.</p>
-<div class="article-cta-box"><h3>See what a proposed-not-automatic decision actually looks like.</h3><p>Connect your store and see your true ROAS this week. Every account starts with a 30-day trial.</p><a class="btn btn-primary" href="https://app.7captur.com/signup" style="text-decoration:none;color:var(--on-accent)">Start free trial</a></div>
-    </div>
-    <div class="article-footer-nav"><a href="/articles/cogs-adjusted-profitability/">← COGS-Adjusted Profitability: The One Metric Every DTC Brand Should Track Weekly</a><a href="/articles/real-time-vs-weekly-ad-optimization/">Why Real-Time Ad Optimization Is a Trap for E-Commerce Brands →</a></div>
-  </div>
-</section>
 <!-- ============================================================
      TODAY'S INSIGHT: pulls the latest LinkedIn post via
      /assets/data/insight.json (written daily by a Make.com scenario;
@@ -99,15 +46,12 @@
 .insight-pdf-btn:hover:not(:disabled){border-color:var(--ink);color:var(--ink)}
 .insight-pdf-btn:disabled{opacity:.4;cursor:default}
 .insight-pdf-page-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
-.insight-card.is-loading .insight-text{color:var(--muted)}
-.insight-card.is-loading .insight-text::after{content:'Loading today\'s post…'}
-.insight-card.is-loading .insight-text{display:block !important}
 @media(max-width:640px){
   .insight-card{flex-direction:column;padding:22px}
   .insight-foot{flex-direction:column;align-items:flex-start;gap:8px}
 }
 </style>
-<section class="insight-section">
+<section class="insight-section" id="insightSection" hidden>
   <div class="wrap">
         <div class="insight-card" id="insightCard">
       <div class="insight-badge" aria-hidden="true">
@@ -118,7 +62,7 @@
           <span class="insight-eyebrow"><span class="live-dot"></span>Today's Insight, from LinkedIn</span>
           <span class="insight-date" id="insightDate"></span>
         </div>
-        <p class="insight-text" id="insightText">Loading today's post...</p>
+        <p class="insight-text" id="insightText"></p>
         <div class="insight-media" id="insightMedia" style="display:none"></div>
         <div class="insight-foot">
           <a href="https://www.linkedin.com/company/7captur" target="_blank" rel="noopener" class="insight-link" id="insightLink">View the full post on LinkedIn &rarr;</a>
@@ -223,6 +167,7 @@
     .then(function(data){
       if(!data || !data.text){ throw new Error('empty insight'); }
       textEl.textContent = data.text;
+      document.getElementById('insightSection').hidden = false;
       if(data.url){ linkEl.href = data.url; }
       if(data.postedAt){
         var d = new Date(data.postedAt);
@@ -238,11 +183,7 @@
         renderPdfMedia(data.media.url);
       }
     })
-    .catch(function(){
-      textEl.textContent = "We post a new ad-spend insight on LinkedIn every day. Follow along for the latest one.";
-      dateEl.textContent = '';
-      updatedEl.textContent = '';
-    });
+    .catch(function(){ /* stays hidden */ });
 })();
 </script>
 
@@ -302,5 +243,106 @@
 
 
 
+<!-- ============================================================
+     NEWSLETTER SIGNUP
+     Mailchimp embedded form. ACTION_URL below is a placeholder;
+     see docs/MAILCHIMP-SETUP.md for how to get your real one and
+     drop it in. Until then this form is inert (won't submit anywhere
+     broken; the JS blocks submission and shows a friendly notice).
+     ============================================================ -->
+<style>
+.newsletter-section{padding:64px 0}
+.newsletter-card{
+  border:1px solid var(--line-strong);border-radius:16px;
+  padding:48px 56px;display:flex;justify-content:space-between;align-items:center;
+  gap:40px;flex-wrap:wrap;position:relative;overflow:hidden;
+}
+.newsletter-copy{max-width:480px}
+.newsletter-copy .eyebrow{margin-bottom:14px}
+.newsletter-copy h2{font-size:clamp(22px,2.6vw,30px);margin-bottom:10px}
+.newsletter-copy p{font-size:14.5px;color:var(--body);line-height:1.65}
+.newsletter-form{display:flex;flex-wrap:wrap;gap:0;min-width:340px;flex:0 0 auto}
+.newsletter-input{
+  flex:1;min-width:220px;background:rgba(255,255,255,0.35);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--glass-border);border-right:none;
+  border-radius:999px 0 0 999px;
+  padding:15px 20px;font-size:14px;color:var(--ink);font-family:'Inter',sans-serif;
+}
+html.dark .newsletter-input{background:rgba(255,255,255,0.05)}
+.newsletter-input:focus{outline:none;border-color:var(--accent)}
+.newsletter-submit{
+  background:var(--accent);color:#fff;border:none;cursor:pointer;
+  font-family:'Inter Tight',sans-serif;font-weight:600;font-size:14px;
+  padding:0 26px;border-radius:0 999px 999px 0;white-space:nowrap;
+}
+html.dark .newsletter-submit{color:#0e1206}
+.newsletter-submit:hover{opacity:.88}
+.newsletter-note{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted);
+  margin-top:10px;width:100%;
+}
+.newsletter-status{font-size:13px;margin-top:10px;display:none;width:100%;flex-basis:100%}
+.newsletter-status.is-visible{display:block}
+.newsletter-status.is-error{color:var(--gold)}
+.newsletter-status.is-success{color:var(--accent)}
+/* honeypot, hidden from humans, catches basic bots */
+.nl-hp{position:absolute;left:-9999px;top:-9999px}
+@media(max-width:760px){
+  .newsletter-card{padding:36px 28px;flex-direction:column;align-items:flex-start}
+  .newsletter-form{width:100%;min-width:0}
+}
+@media(max-width:520px){
+  .newsletter-form{flex-direction:column}
+  .newsletter-input{width:100%;min-width:0;border-radius:999px;border-right:1px solid var(--glass-border)}
+  .newsletter-submit{width:100%;border-radius:999px;padding:14px 26px}
+}
+</style>
+<section class="newsletter-section">
+  <div class="wrap">
+    <div class="newsletter-card">
+      <div class="newsletter-copy">
+        <p class="kicker">Newsletter</p>
+        <h2>One real ad-spend leak a week.</h2>
+        <p>One short email a week: a real ad-spend leak we found, and the fix. No fluff, no daily noise, just what mid-market Shopify and Meta Ads brands need to know.</p>
+      </div>
+      <div>
+        <form class="newsletter-form" id="newsletterForm"
+              action="https://7captur.us5.list-manage.com/subscribe/post?u=e666602be2ab1c85a17cb1b80&amp;id=2691f979b1&amp;f_id=0077c2e1f0"
+              method="post" target="_blank" novalidate>
+          <label for="nlEmail" class="sr-only">Email address</label>
+          <input type="email" name="EMAIL" id="nlEmail" class="newsletter-input" placeholder="you@yourstore.com" required>
+          <!-- Mailchimp honeypot field; name must stay exactly like this -->
+          <div class="nl-hp" aria-hidden="true">
+            <input type="text" name="b_e666602be2ab1c85a17cb1b80_2691f979b1" tabindex="-1" value="">
+          </div>
+          <button type="submit" class="newsletter-submit" id="nlSubmit">Subscribe</button>
+          <div class="newsletter-note">No spam. One email a week. Unsubscribe anytime.</div>
+          <div class="newsletter-status" id="nlStatus"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var form = document.getElementById('newsletterForm');
+  var status = document.getElementById('nlStatus');
+  var PLACEHOLDER = form.action.indexOf('7CAPTUR_MAILCHIMP_DOMAIN') !== -1;
+  form.addEventListener('submit', function(e){
+    if(PLACEHOLDER){
+      e.preventDefault();
+      status.textContent = "Newsletter signup isn't connected yet. The Mailchimp form URL still needs to be added.";
+      status.className = 'newsletter-status is-visible is-error';
+    }
+    // Once the real Mailchimp action URL is in place, this submits
+    // as a normal form POST to Mailchimp (opens a Mailchimp confirmation
+    // tab); no further JS changes needed.
+  });
+})();
+</script>
 
-</main>
+
+
+
+

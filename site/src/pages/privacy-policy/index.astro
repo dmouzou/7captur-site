@@ -1,9 +1,73 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import head from "../../fragments/privacy-policy.head.html?raw";
-import main from "../../fragments/privacy-policy.main.html?raw";
-import scripts from "../../fragments/privacy-policy.scripts.html?raw";
 ---
-<Layout head={head} current="/privacy-policy/" scripts={scripts}>
-  <Fragment set:html={main} />
+<Layout
+  title="Privacy Policy | 7Captur"
+  description="How 7Captur collects, uses, shares and deletes information, including Google user data."
+  path="/privacy-policy/" current="/privacy-policy/">
+<main>
+<header class="page-head"><div class="wrap"><h1>Privacy Policy</h1><p class="lede">How information is collected, used, shared and deleted. For technical detail on access and security, see Security and data.</p></div></header>
+<section class="section section-flush" style="padding-top:48px">
+  <div class="wrap">
+    <div class="legal-layout">
+      <div class="legal-toc">
+        <div class="legal-toc-label">On this page</div>
+        <a href="#p-who">Who we are</a>
+        <a href="#p-collect">What we collect</a>
+        <a href="#p-use">How we use it</a>
+        <a href="#p-ai">AI processing</a>
+        <a href="#p-google">Google user data</a>
+        <a href="#p-share">Who we share it with</a>
+        <a href="#p-retention">Retention and deletion</a>
+        <a href="#p-rights">Your rights</a>
+        <a href="#p-cookies">Cookies</a>
+      </div>
+      <div class="legal-body">
+        <p class="legal-meta">Last updated: October 2026</p>
+
+        <h3 id="p-who">Who we are</h3>
+        <p>7Captur provides marketing decision support. We are the data controller for the information described here. For privacy questions, contact <a href="mailto:privacy@7captur.com">privacy@7captur.com</a>.</p>
+
+        <h3 id="p-collect">What we collect</h3>
+        <ul>
+          <li><strong>Account:</strong> your name and email address, and your sign-in details handled by our authentication provider.</li>
+          <li><strong>Business profile:</strong> business name and type, country, time zone, currency, objective, channels and products or services you choose to describe.</li>
+          <li><strong>Records you add:</strong> posts, promotions, enquiries, sales and costs that you type in, import from a file, or confirm after uploading a screenshot. We ask you to avoid personal data about your customers.</li>
+          <li><strong>Connected data:</strong> if you connect a store or ad account, we read order totals, refunds and dates (store) and campaign spend, impressions and clicks (ads). We do not request customer names, emails or addresses.</li>
+          <li><strong>Usage and billing status:</strong> recommendation and import counts, and your plan and subscription status. Card details are handled by our payment provider and never reach us.</li>
+          <li><strong>Contact messages:</strong> what you send through the contact form.</li>
+        </ul>
+
+        <h3 id="p-use">How we use it</h3>
+        <ul>
+          <li>To provide the service: calculate figures, generate recommendations and weekly summaries, and send transactional email.</li>
+          <li>To run billing, prevent abuse, secure accounts and provide support.</li>
+          <li>To improve the accuracy and reliability of the service, using aggregate or de-identified information where practical.</li>
+          <li>We do not sell your data and we do not share it with third parties for their marketing.</li>
+        </ul>
+
+        <h3 id="p-ai">AI processing</h3>
+        <p>We use an AI service to write plain-language explanations of your recommendations and to read values from screenshots you upload. Calculations are done by our own code, not by the AI. For explanations we send the summary needed for that recommendation. For screenshots, the image you upload is sent for reading, and you review and confirm the values before they are saved. The image is deleted after a successful import. Our AI provider processes this data on our behalf under terms that do not allow it to be used to train its models on your data.</p>
+
+        <h3 id="p-google">Google user data</h3>
+        <p>If you connect Google Ads, we request read-only access to your account to read campaign spend, impressions and clicks. We use this data only to show you your records and generate your recommendations. We do not use it for advertising and we do not transfer it to others except as needed to provide the service or as the law requires.</p>
+        <p>7Captur's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+        <p>You can disconnect at any time in 7Captur, which revokes our access and deletes our stored token, or from your Google account permissions page.</p>
+
+        <h3 id="p-share">Who we share it with</h3>
+        <p>We use service providers to run 7Captur: cloud hosting and database (Google Cloud and Firebase), payments (Paddle), email delivery, and an AI service as described above. They process data only on our instructions. Shopify and Google provide the data you choose to connect. We may disclose information if the law requires it.</p>
+
+        <h3 id="p-retention">Retention and deletion</h3>
+        <p>We keep your workspace data while your account is active. You can export it at any time from Settings. If you request account deletion, there is a 14-day waiting period during which you can cancel. After that your workspace, records, recommendations, reports and connections are permanently deleted, connection tokens are removed, and any paid subscription is stopped. Billing records are retained by our payment provider and by us as accounting and legal rules require. Contact form messages are kept for up to 12 months.</p>
+
+        <h3 id="p-rights">Your rights</h3>
+        <p>You can access, correct, export or delete the personal data we hold about you, and withdraw consent where we rely on it. Email <a href="mailto:privacy@7captur.com">privacy@7captur.com</a>. Most of this you can do yourself in the app under Settings.</p>
+
+        <h3 id="p-cookies">Cookies</h3>
+        <p>This website uses no tracking cookies, third-party analytics scripts or advertising pixels. The app stores only what is needed to keep you signed in and remember your theme choice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 </Layout>

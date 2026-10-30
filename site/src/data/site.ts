@@ -6,5 +6,5 @@ export const NAV = [
   { href: "/articles/", label: "Articles" },
   { href: "/about/", label: "About" },
 ];
-export const CTA = { label: "Start free trial", href: `${APP_URL}/signup` };
+export const CTA = { label: "Start free", href: `${APP_URL}/signup` };
 export const LOGIN = { label: "Log in", href: `${APP_URL}/login` };

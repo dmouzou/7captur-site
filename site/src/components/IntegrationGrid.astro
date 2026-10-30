@@ -1,0 +1,6 @@
+---
+import { INTEGRATIONS, stateLabel } from "../data/integrations";
+---
+<div class="platforms">
+  {INTEGRATIONS.map((i) => { const s = stateLabel(i); return <div class="platform"><b>{i.name}</b><span>{i.what}</span><span class={`badge ${s.cls}`}>{s.text}</span></div>; })}
+</div>
