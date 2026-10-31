@@ -1,6 +1,10 @@
 ---
-import { INTEGRATIONS, stateLabel } from "../data/integrations";
+import { INTEGRATIONS, stateLabel, LOGO_NAMES } from "../data/integrations";
 ---
 <div class="platforms">
-  {INTEGRATIONS.map((i) => { const s = stateLabel(i); return <div class="platform"><b>{i.name}</b><span>{i.what}</span><span class={`badge ${s.cls}`}>{s.text}</span></div>; })}
+  {INTEGRATIONS.map((i) => { const s = stateLabel(i); return (
+    <div class="platform">
+      <span class="plat-logos">{i.logos.map((k) => <img src={`/assets/logos/brands/${k}.svg`} alt={LOGO_NAMES[k]} width="26" height="26" loading="lazy" class={`brand brand-${k}`} />)}</span>
+      <b>{i.name}</b><span>{i.what}</span><span class={`badge ${s.cls}`}>{s.text}</span>
+    </div>); })}
 </div>

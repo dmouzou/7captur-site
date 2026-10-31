@@ -1,7 +1,11 @@
 ---
 const { title, lede, wide = false } = Astro.props;
+const orbs = ["shopify", "meta", "googleads", "tiktok", "instagram", "whatsapp"];
 ---
 <header class={wide ? "page-head is-wide" : "page-head"}>
+  <div class="orbs" aria-hidden="true">
+    {orbs.map((k, i) => <span class={`orb orb-${i + 1}`}><img src={`/assets/logos/brands/${k}.svg`} alt="" width="26" height="26" class={`brand brand-${k}`} /></span>)}
+  </div>
   <div class="wrap">
     <h1>{title}</h1>
     {lede && <p class="lede" set:html={lede} />}

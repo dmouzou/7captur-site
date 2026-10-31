@@ -1,12 +1,12 @@
 ---
-import { INTEGRATIONS, stateLabel } from "../data/integrations";
-const items = INTEGRATIONS.map((i) => ({ name: i.name.replace("Instagram, Facebook and TikTok posts", "Social posts").replace("WhatsApp, DMs, phone and in-person", "WhatsApp and DMs"), s: stateLabel(i) }));
+import { LOGO_NAMES } from "../data/integrations";
+const order = ["shopify", "googleads", "meta", "instagram", "tiktok", "whatsapp", "woocommerce"];
 ---
-<div class="marquee" aria-label="Channels and tools 7Captur works with">
+<div class="marquee" role="img" aria-label="Works with Shopify, Google Ads, Meta, Instagram, TikTok, WhatsApp and WooCommerce">
   <div class="marquee-track">
-    {[0, 1].map((n) => (
-      <ul aria-hidden={n === 1 ? "true" : undefined}>
-        {items.map((i) => <li><b>{i.name}</b><span class={`badge ${i.s.cls}`}>{i.s.text}</span></li>)}
+    {[0, 1, 2].map((n) => (
+      <ul aria-hidden="true">
+        {order.map((k) => <li><img src={`/assets/logos/brands/${k}.svg`} alt="" width="30" height="30" loading="lazy" class={`brand brand-${k}`} /></li>)}
       </ul>
     ))}
   </div>

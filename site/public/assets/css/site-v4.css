@@ -1,0 +1,181 @@
+/* ============================================================
+   7CAPTUR SITE v4: liquid glass surfaces, living colour flow, centred layout,
+   brand logos and icon tiles. Loaded last.
+   ============================================================ */
+
+:root {
+  --glass: rgba(255,255,255,.62);
+  --glass-edge: rgba(255,255,255,.75);
+  --glass-low: rgba(16,20,12,.10);
+  --glass-hi: rgba(255,255,255,.9);
+  --glass-shadow: 0 1px 1px rgba(255,255,255,.6) inset, 0 20px 50px -24px rgba(30,40,20,.28);
+  --blur: blur(22px) saturate(170%);
+  --flow-a: #8fce3a; --flow-b: #1fbfae; --flow-c: #7b61ff; --flow-d: #ffb35c;
+  --flow-op: .38;
+}
+html.dark {
+  --glass: rgba(255,255,255,.055);
+  --glass-edge: rgba(255,255,255,.16);
+  --glass-low: rgba(0,0,0,.35);
+  --glass-hi: rgba(255,255,255,.28);
+  --glass-shadow: 0 1px 0 rgba(255,255,255,.14) inset, 0 -1px 0 rgba(255,255,255,.03) inset, 0 28px 60px -28px rgba(0,0,0,.7);
+  --flow-op: .5;
+}
+
+/* ---------- Living colour flow (ColorOS style) ---------- */
+.bgflow { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.bgflow i { position: absolute; width: 62vmax; height: 62vmax; border-radius: 46% 54% 58% 42% / 52% 40% 60% 48%; filter: blur(70px); opacity: var(--flow-op); will-change: transform, border-radius; }
+.bgflow i:nth-child(1) { background: radial-gradient(circle at 35% 35%, var(--flow-a), transparent 68%); top: -22vmax; left: -14vmax; animation: flow-1 26s ease-in-out infinite alternate; }
+.bgflow i:nth-child(2) { background: radial-gradient(circle at 60% 40%, var(--flow-b), transparent 68%); top: 4vh; right: -24vmax; animation: flow-2 32s ease-in-out infinite alternate; }
+.bgflow i:nth-child(3) { background: radial-gradient(circle at 50% 50%, var(--flow-c), transparent 68%); bottom: -30vmax; left: 10vw; animation: flow-3 38s ease-in-out infinite alternate; opacity: calc(var(--flow-op) * .8); }
+.bgflow i:nth-child(4) { width: 40vmax; height: 40vmax; background: radial-gradient(circle at 50% 50%, var(--flow-d), transparent 68%); bottom: 6vh; right: 6vw; animation: flow-4 30s ease-in-out infinite alternate; opacity: calc(var(--flow-op) * .55); }
+@keyframes flow-1 { 0% { transform: translate(0,0) rotate(0) scale(1); border-radius: 46% 54% 58% 42% / 52% 40% 60% 48%; } 100% { transform: translate(24vw,18vh) rotate(70deg) scale(1.15); border-radius: 60% 40% 44% 56% / 44% 58% 42% 56%; } }
+@keyframes flow-2 { 0% { transform: translate(0,0) rotate(0) scale(1); } 100% { transform: translate(-22vw,26vh) rotate(-60deg) scale(1.2); border-radius: 58% 42% 40% 60% / 60% 46% 54% 40%; } }
+@keyframes flow-3 { 0% { transform: translate(0,0) rotate(0) scale(1.05); } 100% { transform: translate(30vw,-22vh) rotate(90deg) scale(.9); border-radius: 40% 60% 54% 46% / 48% 52% 48% 52%; } }
+@keyframes flow-4 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-26vw,-20vh) scale(1.3); } }
+body { background: var(--bg); }
+.hero::before, .page-head::before { display: none; }
+
+/* ---------- Liquid glass surfaces ---------- */
+.nav { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border-bottom: 1px solid var(--glass-edge); box-shadow: 0 1px 0 var(--glass-hi) inset; }
+.win, .layer, .stage, .res, .platform, .cap, .fact, .rung, .five-item, .sec-card, .plan, .principle, .step, .tier, .tab-list, .marquee li, .cta-card, .mega, .faq details, .insight-card, .panel, .contact-grid .panel, .custom-strip, .table-wrap, .article-card, .vow-card, .drawer {
+  background: var(--glass);
+  backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--glass-shadow);
+  position: relative;
+}
+/* specular sheen: the bright rim and soft top highlight of liquid glass */
+.win::after, .layer::after, .res::after, .platform::after, .cta-card::after, .stage::after, .plan::after, .cap::after, .fact::after, .five-item::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(155deg, var(--glass-hi) 0%, transparent 32%, transparent 70%, rgba(255,255,255,.05) 100%);
+  opacity: .22; mix-blend-mode: soft-light;
+}
+html.dark .win::after, html.dark .layer::after, html.dark .res::after, html.dark .platform::after, html.dark .cta-card::after, html.dark .stage::after { opacity: .9; mix-blend-mode: normal; background: linear-gradient(155deg, rgba(255,255,255,.12) 0%, transparent 30%, transparent 75%, rgba(255,255,255,.03) 100%); }
+.win-bar { background: transparent; border-bottom: 1px solid var(--glass-edge); }
+.win-body, .win-bar { position: relative; z-index: 1; }
+.stage { background: transparent; box-shadow: none; border-color: var(--glass-edge); backdrop-filter: blur(8px); }
+.stage::before { display: none; }
+.stage > * { z-index: 1; }
+.band { background: transparent; border-block: 1px solid var(--glass-edge); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.footer { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border-top: 1px solid var(--glass-edge); }
+.btn-primary { background: linear-gradient(180deg, #b4ef5d, #8fce3a); box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 10px 30px -10px var(--glow); }
+.btn-ghost { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border-color: var(--glass-edge); }
+.tab-list button[aria-selected="true"] { background: linear-gradient(180deg, #b4ef5d, #8fce3a); box-shadow: 0 1px 0 rgba(255,255,255,.6) inset; }
+.mega { background: var(--glass); }
+.drawer { border: 0; background: var(--bg); backdrop-filter: none; }
+.win-live { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-fill); box-shadow: 0 0 0 0 var(--accent-fill); animation: live 2.4s ease-out infinite; }
+@keyframes live { 70% { box-shadow: 0 0 0 9px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+
+/* ---------- Centred layout ---------- */
+.section-head { text-align: center; margin-inline: auto; }
+.section-head h2, .section-head .lede { margin-inline: auto; }
+.section > .wrap > h2, .section > .wrap > .lede, .section > .wrap > .kicker, .section > .wrap > .fine, .section > .wrap > .disclaimer { text-align: center; margin-inline: auto; }
+.page-head, .hero { text-align: center; }
+.page-head h1, .page-head .lede, .hero h1, .hero-sub { margin-inline: auto; }
+.hero-actions, .trust-row { justify-content: center; }
+.cta-card { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+.cta-card h2, .cta-card p { margin-inline: auto; }
+.cta-card .cta-fine { text-align: center; }
+.split > div:not(.stage) { text-align: center; }
+.split h3, .split p { margin-inline: auto; }
+.split .ticks { display: inline-grid; text-align: left; }
+.tab-list { margin-inline: auto; display: flex; width: fit-content; max-width: 100%; }
+.tab-copy { text-align: center; } .tab-copy h3, .tab-copy p { margin-inline: auto; } .tab-copy .ticks { display: inline-grid; text-align: left; }
+.res, .platform, .layer { text-align: center; align-items: center; }
+.layer ul { justify-content: center; }
+.faq { margin-inline: auto; }
+.footer-brand p { margin-inline: 0; }
+
+/* ---------- Hero stage ---------- */
+.hero { padding: 104px 0 72px; }
+.hero-grid.is-product { grid-template-columns: 1fr; justify-items: center; gap: 56px; }
+.hero h1 { max-width: 15ch; }
+.hero-sub { max-width: 40em; }
+.hero-stage { position: relative; width: min(760px, 100%); }
+.hero-stage .win { width: 100%; }
+.float { position: absolute; width: 64px; height: 64px; display: grid; place-items: center; border-radius: 20px; background: var(--glass); border: 1px solid var(--glass-edge); box-shadow: var(--glass-shadow); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); animation: bob 7s ease-in-out infinite; z-index: 2; }
+.float img { width: 32px; height: 32px; }
+.float.f1 { left: -76px; top: 22%; } .float.f2 { right: -72px; top: 8%; animation-delay: -2s; } .float.f3 { right: -60px; bottom: 14%; animation-delay: -4s; } .float.f4 { left: -58px; bottom: 6%; animation-delay: -1s; }
+@keyframes bob { 50% { transform: translateY(-12px); } }
+
+/* hero card replays: each line fades in on its beat, holds, then the cycle restarts */
+.loop .l1 { animation: lp1 16s infinite both; } .loop .l2 { animation: lp2 16s infinite both; } .loop .l3 { animation: lp3 16s infinite both; } .loop .l4 { animation: lp4 16s infinite both; } .loop .l5 { animation: lp5 16s infinite both; }
+@keyframes lp1 { 0%, 2% { opacity: 0; transform: translateY(8px); } 6%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lp2 { 0%, 8% { opacity: 0; transform: translateY(8px); } 13%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lp3 { 0%, 16% { opacity: 0; transform: translateY(8px); } 21%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lp4 { 0%, 24% { opacity: 0; transform: translateY(8px); } 29%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lp5 { 0%, 32% { opacity: 0; transform: translateY(8px); } 37%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+.hero .win-body > *, .hero .mk-dl > * { animation: none; }
+.hero .loop .l1 { animation: lp1 16s infinite both; } .hero .loop .l2 { animation: lp2 16s infinite both; } .hero .loop .l3 { animation: lp3 16s infinite both; } .hero .loop .l4 { animation: lp4 16s infinite both; } .hero .loop .l5 { animation: lp5 16s infinite both; }
+.tab-panel .loop .l1, .tab-panel .loop .l2, .tab-panel .loop .l3, .tab-panel .loop .l4, .tab-panel .loop .l5 { animation-duration: 16s; }
+.win { text-align: left; }
+
+/* ---------- Animated mockup states ---------- */
+.mk-table .row { opacity: 0; transform: translateY(6px); transition: opacity .45s, transform .45s, background .6s; }
+.mk-table .row.in { opacity: 1; transform: none; }
+.mk-table .row.fresh td { background: var(--accent-soft); }
+.fade { opacity: 0; transition: opacity .5s; } .fade.in { opacity: 1; }
+.mk-ladder li { transition: background .5s, border-color .5s; }
+.mk-ladder .mk-bar { transition: background .5s; }
+.mk-map li { transition: border-color .4s, background .4s, transform .4s; opacity: .55; }
+.mk-map li.ok { opacity: 1; border-color: var(--accent-line); background: var(--accent-soft); }
+.mk-map li.warn.ok { border-color: var(--gold); background: transparent; }
+.mk-btn { transition: background .4s, color .4s; }
+.mk-digest div { transition: border-color .5s, background .5s, transform .5s; }
+.mk-digest div.hot { border-color: var(--accent-line); background: var(--accent-soft); transform: translateY(-3px); }
+.hub { list-style: none; display: grid; gap: 10px; }
+.hub li { display: flex; align-items: center; gap: 16px; padding: 14px 16px; border: 1px solid var(--glass-edge); border-radius: 16px; background: var(--glass); transition: transform .45s, border-color .45s, background .45s, box-shadow .45s; }
+.hub li.hot { transform: translateX(6px); border-color: var(--accent-line); background: var(--accent-soft); box-shadow: 0 10px 30px -14px var(--glow); }
+.hub-ic { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 14px; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); flex: none; }
+.hub b { display: block; font: 650 16px 'Inter Tight', sans-serif; color: var(--ink); }
+.hub em { font-style: normal; font-size: 13.5px; color: var(--muted); }
+
+/* ---------- Brand logos and icon tiles ---------- */
+.brand { display: block; object-fit: contain; }
+html.dark .brand-tiktok { filter: invert(1); }
+.marquee { padding: 26px 0; border: 0; }
+.marquee li { width: 76px; height: 76px; padding: 0; display: grid; place-items: center; border-radius: 22px; }
+.marquee li img { width: 32px; height: 32px; }
+.marquee ul { gap: 18px; padding-right: 18px; }
+.marquee-track { animation-duration: 40s; }
+.plat-logos { display: flex; justify-content: center; gap: 10px; margin-bottom: 4px; }
+.plat-logos img { width: 28px; height: 28px; padding: 14px; box-sizing: content-box; border-radius: 16px; background: var(--glass); border: 1px solid var(--glass-edge); }
+.platform { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 28px 24px; }
+.platform .badge { align-self: center; margin-top: auto; }
+.tile { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 18px; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); margin: 0 auto 16px; }
+.layer { grid-template-columns: 1fr; gap: 10px; justify-items: center; padding: 36px 28px; }
+.layers { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.layer h3 { font-size: 26px; }
+.layer ul { max-width: none; }
+.res .thumb { width: 100%; height: 96px; border-radius: 14px; background: var(--accent-soft); border: 1px solid var(--accent-line); display: grid; place-items: center; color: var(--accent); }
+.res .thumb svg { width: 80%; height: 70%; }
+
+/* page-head floating logo orbs */
+.orbs { position: absolute; inset: 0; pointer-events: none; }
+.orb { position: absolute; width: 58px; height: 58px; display: grid; place-items: center; border-radius: 18px; background: var(--glass); border: 1px solid var(--glass-edge); box-shadow: var(--glass-shadow); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); animation: bob 8s ease-in-out infinite; }
+.orb img { width: 28px; height: 28px; }
+.orb-1 { left: 7%; top: 34%; } .orb-2 { left: 15%; top: 68%; animation-delay: -2s; } .orb-3 { left: 3%; top: 8%; animation-delay: -4s; opacity: .8; }
+.orb-4 { right: 8%; top: 30%; animation-delay: -1s; } .orb-5 { right: 16%; top: 66%; animation-delay: -3s; } .orb-6 { right: 3%; top: 6%; animation-delay: -5s; opacity: .8; }
+
+/* ---------- Responsive and reduced motion ---------- */
+@media (max-width: 1000px) {
+  .layers { grid-template-columns: 1fr; }
+  .orbs { display: none; }
+  .float.f1, .float.f4 { left: -8px; } .float.f2, .float.f3 { right: -8px; }
+}
+@media (max-width: 640px) {
+  .float { width: 48px; height: 48px; border-radius: 15px; } .float img { width: 24px; height: 24px; }
+  .float.f3, .float.f4 { display: none; }
+  .bgflow i { filter: blur(50px); }
+  .marquee li { width: 62px; height: 62px; border-radius: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bgflow i, .float, .orb, .win-live, .loop .l1, .loop .l2, .loop .l3, .loop .l4, .loop .l5 { animation: none !important; }
+  .mk-table .row, .fade { opacity: 1; transform: none; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .win, .layer, .stage, .res, .platform, .cap, .fact, .plan, .cta-card, .mega, .nav, .footer { background: var(--surface); }
+}
+.marquee li img.brand-woocommerce { width: 48px; height: auto; }
+.plat-logos img.brand-woocommerce { width: 44px; height: 26px; padding: 14px 12px; }
