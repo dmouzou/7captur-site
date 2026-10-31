@@ -39,11 +39,6 @@ const faq = [
         <a class="btn btn-primary" href={CTA.href}>{CTA.label}</a>
         <a class="btn btn-ghost" href={BOOK.href}>{BOOK.label}</a>
       </div>
-      <div class="trust-row">
-        <span>Free plan, no card needed</span>
-        <span>No website required</span>
-        <span>Nothing changes in your ad accounts</span>
-      </div>
     </div>
     <div class="hero-stage">
       <span class="float f1" aria-hidden="true"><img class="brand brand-shopify" src="/assets/logos/brands/shopify.svg" alt="" /></span>
@@ -140,9 +135,10 @@ const faq = [
   </div>
 </section>
 
-<Fragment set:html={insight} />
 
 <CtaBand title="Find out what your marketing is really doing." text="Start free with the data you already have." second />
+
+<Fragment set:html={insight} />
 
 </main>
 </Layout>
