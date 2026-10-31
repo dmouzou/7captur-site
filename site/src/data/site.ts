@@ -33,3 +33,8 @@ export const MEGA = [
     { href: "/contact/", title: "Contact", text: "Ask us a question directly." },
   ] },
 ] as { label: string; href: string; items?: { href: string; title: string; text: string }[] }[];
+
+// Second call to action. Replace href with your booking link (Calendly, Cal.com, etc.) when you have one.
+export const BOOK = { label: "Book a call", href: "/contact/" };
+// Newsletter form posts to this Mailchimp list (same list as the Resources page).
+export const NEWSLETTER = { action: "https://7captur.us5.list-manage.com/subscribe/post?u=e666602be2ab1c85a17cb1b80&id=2691f979b1&f_id=0077c2e1f0", honeypot: "b_e666602be2ab1c85a17cb1b80_2691f979b1" };

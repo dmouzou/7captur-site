@@ -1,9 +1,18 @@
 ---
 import Logo from "./Logo.astro";
-import { CTA, LOGIN } from "../data/site";
+import { CTA, LOGIN, NEWSLETTER } from "../data/site";
 ---
 <footer class="footer">
   <div class="wrap">
+    <div class="foot-news">
+      <div><h4>One short email a week</h4><p>A real marketing measurement lesson. No fluff, unsubscribe anytime.</p></div>
+      <form id="footNews" action={NEWSLETTER.action} method="post" target="_blank" novalidate>
+        <label for="footEmail" class="sr-only">Email address</label>
+        <input type="email" name="EMAIL" id="footEmail" placeholder="you@example.com" required autocomplete="email" />
+        <div class="nl-hp" aria-hidden="true"><input type="text" name={NEWSLETTER.honeypot} tabindex="-1" value="" /></div>
+        <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+      </form>
+    </div>
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="logo"><Logo />7Captur</a>
@@ -17,7 +26,24 @@ import { CTA, LOGIN } from "../data/site";
     </div>
     <div class="footer-bottom">
       <span>© 2026 7Captur</span>
-      <span><a href="/privacy-policy/">Privacy policy</a><a href="/terms-of-service/">Terms of service</a></span>
+      <span><a href="/privacy-policy/">Privacy policy</a><a href="/terms-of-service/">Terms of service</a><button type="button" class="linklike" id="cookieBtn" aria-controls="cookiePanel" aria-expanded="false">Cookie settings</button></span>
     </div>
   </div>
 </footer>
+
+<div class="cookie-panel" id="cookiePanel" role="dialog" aria-label="Cookie settings" hidden>
+  <h4>Cookies and storage</h4>
+  <p>7captur.com sets no tracking or advertising cookies. Your browser stores one preference, your light or dark theme, so the site remembers it. Text fonts load from Google Fonts. The app at app.7captur.com has its own settings.</p>
+  <p class="cookie-note">If we add analytics later, it will be optional and off until you choose.</p>
+  <button type="button" class="btn btn-primary btn-sm" id="cookieClose">Got it</button>
+</div>
+<script is:inline>
+(function(){
+  var b=document.getElementById('cookieBtn'),p=document.getElementById('cookiePanel'),c=document.getElementById('cookieClose');
+  if(!b||!p) return;
+  function set(o){p.hidden=!o;b.setAttribute('aria-expanded',String(o));if(o)c.focus();else b.focus();}
+  b.addEventListener('click',function(){set(p.hidden)});
+  c.addEventListener('click',function(){set(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!p.hidden)set(false)});
+})();
+</script>

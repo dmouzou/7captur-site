@@ -6,10 +6,12 @@ import IntegrationGrid from "../components/IntegrationGrid.astro";
 import Marquee from "../components/Marquee.astro";
 import Tabs from "../components/Tabs";
 import HeroCarousel from "../components/HeroCarousel";
+import BeforeAfter from "../components/BeforeAfter";
+import ProductTour from "../components/ProductTour";
 import Icon from "../components/Icon.astro";
 import { RecCard, ProvTable, EvidenceMeter, ImportPreview, Digest, HubMock } from "../components/Mockups";
 import insight from "../fragments/insight.html?raw";
-import { CTA } from "../data/site";
+import { CTA, BOOK } from "../data/site";
 
 const faq = [
   { q: "Do I need a website or an ad account?", a: "No. You can start by typing in your posts, promotions, enquiries, sales and costs, importing a spreadsheet, or uploading a screenshot. Connecting a store or ad account is optional." },
@@ -35,7 +37,7 @@ const faq = [
       <p class="hero-sub">7Captur turns your marketing activity into clear, evidence-based next steps, from social posts and messages to paid ads and e-commerce sales. Start with the data you have. Add more as you grow.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href={CTA.href}>{CTA.label}</a>
-        <a class="btn btn-ghost" href="/platform/">See the platform</a>
+        <a class="btn btn-ghost" href={BOOK.href}>{BOOK.label}</a>
       </div>
       <div class="trust-row">
         <span>Free plan, no card needed</span>
@@ -61,6 +63,7 @@ const faq = [
       <h2>From scattered numbers to one next step.</h2>
       <p class="lede">Three layers, one engine. It picks how far to go from the data in front of it, not from the plan you are on.</p>
     </div>
+    <div data-reveal style="margin-bottom:48px"><BeforeAfter client:visible /></div>
     <div class="layers" data-reveal>
       <div class="layer"><span class="tile"><Icon name="add" size={26} /></span><h3>Add</h3><p>Type it in, import a spreadsheet or an Ads Manager export, upload a screenshot, or connect a store or ad account where available.</p><ul><li>Posts</li><li>Promotions</li><li>Enquiries</li><li>Sales</li><li>Costs</li></ul></div>
       <div class="layer"><span class="tile"><Icon name="understand" size={26} /></span><h3>Understand</h3><p>Every number is labelled by where it came from. Gaps and mismatches are flagged, and missing costs stay unknown instead of becoming zero.</p><ul><li>Evidence labels</li><li>Gap checks</li><li>Currency safe</li></ul></div>
@@ -69,22 +72,18 @@ const faq = [
   </div>
 </section>
 
-<section class="section band">
+<section class="section band" id="tour">
   <div class="wrap">
-    <div class="split" data-reveal>
-      <div>
-        <h3>Record what happens in a few taps.</h3>
-        <p>Leads from WhatsApp and DMs, sales, ad spend and posts each have their own entry point. Add a screenshot and the numbers are pulled out for you to confirm.</p>
-      </div>
-      <div class="stage"><HubMock client:visible /></div>
+    <div class="section-head" data-reveal>
+      <h2>Take the tour.</h2>
+      <p class="lede">Click through the five screens you will use. Nothing here needs an account.</p>
     </div>
-    <div class="split rev" data-reveal>
-      <div>
-        <h3>Every number says where it came from.</h3>
-        <p>Entered by you, imported, read from a screenshot you confirmed, or connected. Sales that cannot be tied to a post stay labelled as unknown source, and still count toward your totals.</p>
-      </div>
-      <div class="stage"><ProvTable client:visible /></div>
-    </div>
+    <div data-reveal><ProductTour client:visible /></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
     <div class="split" id="evidence" data-reveal>
       <div>
         <h3>Likes do not prove sales. We say so.</h3>
@@ -92,20 +91,6 @@ const faq = [
         <a class="link" href="/platform/">See the evidence modes</a>
       </div>
       <div class="stage"><EvidenceMeter client:visible /></div>
-    </div>
-    <div class="split rev" data-reveal>
-      <div>
-        <h3>Bring in what you already have.</h3>
-        <p>Drop in a spreadsheet or an Ads Manager export. Columns are matched for you and shown for review. Screenshot values wait for your confirmation before anything is saved.</p>
-      </div>
-      <div class="stage"><ImportPreview client:visible /></div>
-    </div>
-    <div class="split" data-reveal>
-      <div>
-        <h3>A weekly summary that never pads.</h3>
-        <p>What changed, what you tried, what is missing and where to focus next. When there is nothing useful to say, it says that instead of inventing advice.</p>
-      </div>
-      <div class="stage"><Digest client:visible /></div>
     </div>
   </div>
 </section>
@@ -157,7 +142,7 @@ const faq = [
 
 <Fragment set:html={insight} />
 
-<CtaBand title="Find out what your marketing is really doing." text="Start free with the data you already have." />
+<CtaBand title="Find out what your marketing is really doing." text="Start free with the data you already have." second />
 
 </main>
 </Layout>
