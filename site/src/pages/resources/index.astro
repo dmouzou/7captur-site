@@ -1,9 +1,43 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import head from "../../fragments/articles.head.html?raw";
-import main from "../../fragments/articles.main.html?raw";
-import scripts from "../../fragments/articles.scripts.html?raw";
+import CtaBand from "../../components/CtaBand.astro";
+import vow from "../../fragments/vow.html?raw";
+import { ARTICLES } from "../../data/articles";
+const topics = [...new Set(ARTICLES.map((a) => a.topic))];
+const ld = [{ "@context": "https://schema.org", "@type": "CollectionPage", name: "7Captur Resources", url: "https://7captur.com/resources/", hasPart: ARTICLES.map((a) => ({ "@type": "Article", headline: a.title, url: `https://7captur.com/articles/${a.slug}/` })) }];
 ---
-<Layout head={head} current="/articles/" scripts={scripts}>
-  <Fragment set:html={main} />
+<Layout title="Resources: Track Sales, Cost Per Enquiry and Break-Even ROAS | 7Captur" description="Plain-language guides for small sellers: track sales from social posts, WhatsApp and DMs, calculate cost per enquiry, and work out break-even ROAS." path="/resources/" current="/resources/" jsonld={ld}>
+<main>
+  <header class="page-head is-wide">
+    <div class="wrap">
+      <span class="tag-pill">Resources</span>
+      <h1 style="max-width:22ch">Guides for measuring what your marketing really does.</h1>
+      <p class="lede">Short, practical answers on tracking sales, costs and profit. No jargon, no made-up statistics.</p>
+    </div>
+  </header>
+  <Fragment set:html={vow} />
+  <section class="section" style="padding-top:8px">
+    <div class="wrap art-layout">
+      <aside class="art-side">
+        <div class="search"><label class="sr-only" for="artSearch">Search guides</label><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input class="input" id="artSearch" type="search" placeholder="Search guides" /></div>
+        <div class="topics"><h4>Topics</h4><button class="topic" type="button" aria-pressed="true" data-topic="">All guides</button>{topics.map((t) => <button class="topic" type="button" aria-pressed="false" data-topic={t}>{t}</button>)}</div>
+      </aside>
+      <div>
+        <div class="article-grid" id="artGrid" style="margin-top:0">
+          {ARTICLES.map((a) => (<a href={`/articles/${a.slug}/`} class="article-card" data-topic={a.topic}><span class="tag-pill">{a.topic}</span><h3>{a.title}</h3><p>{a.description}</p><span class="fine">{a.minutes} min read</span></a>))}
+        </div>
+        <p class="fine" id="artEmpty" hidden>No guides match. Try another search or topic.</p>
+      </div>
+    </div>
+  </section>
+  <CtaBand title="Put the numbers to work." text="Log your posts, enquiries and sales and get a clear next step." />
+</main>
+<script is:inline>
+(function(){
+  var q=document.getElementById('artSearch'),cards=[].slice.call(document.querySelectorAll('#artGrid .article-card')),btns=[].slice.call(document.querySelectorAll('.topic')),empty=document.getElementById('artEmpty'),topic='';
+  function run(){var t=q.value.trim().toLowerCase(),n=0;cards.forEach(function(c){var ok=(!topic||c.dataset.topic===topic)&&(!t||c.textContent.toLowerCase().indexOf(t)>-1);c.hidden=!ok;if(ok)n++;});empty.hidden=n>0;}
+  q.addEventListener('input',run);
+  btns.forEach(function(b){b.addEventListener('click',function(){topic=b.dataset.topic;btns.forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});run();});});
+})();
+</script>
 </Layout>

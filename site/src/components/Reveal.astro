@@ -9,3 +9,10 @@
   els.forEach(function(e){io.observe(e)});
 })();
 </script>
+<script is:inline>
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('is-off',!e.isIntersecting);})},{rootMargin:'120px'});
+  [].slice.call(document.querySelectorAll('.marquee,.hero,.page-head,.rm,.pipe,.tour,.ba3')).forEach(function(e){io.observe(e)});
+})();
+</script>

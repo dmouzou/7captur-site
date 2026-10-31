@@ -1,0 +1,20 @@
+# 7Captur
+
+> 7Captur turns a small business's marketing activity (social posts, messages, ads and sales) into clear, evidence-based next steps. Rules decide the recommendation; AI only explains it in plain language. Free plan available. Works without a website.
+
+## Key pages
+- [Home](https://7captur.com/): what 7Captur does and who it is for
+- [Platform](https://7captur.com/platform/): how recommendations, evidence levels and connections work
+- [Pricing](https://7captur.com/pricing/): Free, Starter, Growth, Pro and Custom plans
+- [Security](https://7captur.com/security/): data handling and access
+- [Resources](https://7captur.com/resources/): guides for small sellers
+
+## Guides
+- [How to Track Sales From Social Media Posts](https://7captur.com/articles/track-sales-from-social-media-posts/): Learn how to track which social media posts bring in sales, even when customers order by DM or WhatsApp. Four simple methods, a worked example and what to do with the results.
+- [Cost Per Enquiry: How to Calculate It and Why It Matters](https://7captur.com/articles/cost-per-enquiry-how-to-calculate/): Cost per enquiry is your ad spend divided by the messages, calls or leads it brought in. Learn the formula, how it differs from cost per click and cost per sale, and how to use it.
+- [Likes vs Sales: Which Social Media Metrics Actually Matter](https://7captur.com/articles/likes-vs-sales-engagement-metrics/): Likes, views and followers are easy to count but do not pay the bills. See which social media metrics predict sales, which are vanity, and how to track the ones that matter.
+- [How to Track WhatsApp and DM Sales From Ads and Posts](https://7captur.com/articles/track-whatsapp-and-dm-sales/): Customers who order by WhatsApp or DM are invisible to most analytics. Here is a simple way to tag, log and attribute those sales to the post or ad that started them.
+- [ROAS vs Profit: How to Calculate Break-Even ROAS](https://7captur.com/articles/roas-vs-profit-break-even-roas/): A good-looking ROAS can still lose money. Learn the break-even ROAS formula, why margin, returns and fees change the answer, and how to check whether your ads make a profit.
+
+## Contact
+- [Contact](https://7captur.com/contact/): replies within 24 hours

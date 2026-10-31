@@ -1,0 +1,43 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Faq from "../../../components/Faq.astro";
+import CtaBand from "../../../components/CtaBand.astro";
+import { ARTICLES, bySlug } from "../../../data/articles";
+export function getStaticPaths() { return ARTICLES.map((a) => ({ params: { slug: a.slug }, props: { a } })); }
+const { a } = Astro.props;
+const path = `/articles/${a.slug}/`;
+const fmt = (d: string) => new Date(d + "T00:00:00Z").toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+const strip = (h: string) => h.replace(/<[^>]+>/g, "");
+const ld = [
+  { "@context": "https://schema.org", "@type": "Article", headline: a.title, description: a.description, datePublished: a.published, dateModified: a.modified, inLanguage: "en", keywords: a.keywords.join(", "), image: `https://7captur.com/assets/og/${a.slug}.png`, mainEntityOfPage: `https://7captur.com${path}`, author: { "@type": "Organization", name: "7Captur", url: "https://7captur.com/" }, publisher: { "@id": "https://7captur.com/#org" } },
+  { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [["Home", "/"], ["Resources", "/resources/"], [a.title, path]].map(([n, u], i) => ({ "@type": "ListItem", position: i + 1, name: n, item: `https://7captur.com${u}` })) },
+];
+const related = a.related.map(bySlug);
+---
+<Layout title={a.seoTitle} description={a.description} path={path} current="/resources/" jsonld={ld} ogImage={`/assets/og/${a.slug}.png`} ogType="article" published={a.published} modified={a.modified}>
+<main>
+  <header class="page-head is-wide" style="padding-bottom:8px">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/resources/">Resources</a></nav>
+      <span class="tag-pill">{a.topic}</span>
+      <h1 style="max-width:24ch">{a.title}</h1>
+      <div class="article-meta"><span>Updated <time datetime={a.modified}>{fmt(a.modified)}</time></span><span>{a.minutes} min read</span><span>By 7Captur</span></div>
+    </div>
+  </header>
+  <section class="section" style="padding-top:40px;padding-bottom:40px">
+    <div class="wrap">
+      <div class="article-body">
+        <p class="art-answer"><strong>Short answer.</strong> {a.answer}</p>
+        <div class="art-takeaways"><h2>Key takeaways</h2><ul>{a.takeaways.map((t) => <li>{t}</li>)}</ul></div>
+        <nav class="art-toc" aria-label="On this page"><h2>On this page</h2><ol>{a.sections.map((s) => <li><a href={`#${s.id}`}>{s.h}</a></li>)}<li><a href="#faq">Frequently asked questions</a></li></ol></nav>
+        {a.sections.map((s) => (<><h2 id={s.id}>{s.h}</h2><Fragment set:html={s.html} /></>))}
+        <h2 id="faq">Frequently asked questions</h2>
+        <Faq items={a.faq} />
+        <div class="article-cta-box"><h3>{a.cta.h}</h3><p>{a.cta.p}</p><a class="btn btn-primary" href="https://app.7captur.com/signup">Start free</a></div>
+        <h2>Keep reading</h2>
+        <ul class="art-related">{related.map((r) => <li><a href={`/articles/${r.slug}/`}>{r.title}</a></li>)}<li><a href="/platform/">How the 7Captur platform works</a></li></ul>
+      </div>
+    </div>
+  </section>
+</main>
+</Layout>

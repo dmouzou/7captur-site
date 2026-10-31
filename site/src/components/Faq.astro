@@ -1,7 +1,10 @@
 ---
 interface Item { q: string; a: string }
 const { items } = Astro.props as { items: Item[] };
+const strip = (h: string) => h.replace(/<[^>]+>/g, "");
+const ld = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: items.map((i) => ({ "@type": "Question", name: i.q, acceptedAnswer: { "@type": "Answer", text: strip(i.a) } })) };
 ---
+<script type="application/ld+json" set:html={JSON.stringify(ld)} />
 <div class="faq">
   {items.map((i) => <details><summary>{i.q}</summary><p set:html={i.a} /></details>)}
 </div>

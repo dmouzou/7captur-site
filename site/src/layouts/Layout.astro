@@ -5,9 +5,17 @@ import Reveal from "../components/Reveal.astro";
 // `head` is page-specific head HTML (title, description, canonical, social tags).
 // Layout owns charset, viewport, theme bootstrap, fonts and the stylesheet.
 // Pass `title` + `description` (+ `path`) for generated SEO tags, or legacy raw `head` HTML.
-const { head = "", current = "", scripts = "", title = "", description = "", path = "", noindex = false } = Astro.props;
+const { head = "", current = "", scripts = "", title = "", description = "", path = "", noindex = false, jsonld = [], ogImage: ogImg = "", ogType = "website", published = "", modified = "" } = Astro.props;
 const url = `https://7captur.com${path}`;
-const ogImage = "https://7captur.com/assets/og/og-default.png";
+const ogImage = ogImg ? `https://7captur.com${ogImg}` : "https://7captur.com/assets/og/og-default.png";
+const site = [
+  { "@context": "https://schema.org", "@type": "Organization", "@id": "https://7captur.com/#org", name: "7Captur", url: "https://7captur.com/", logo: "https://7captur.com/favicon-dark.png", sameAs: [] },
+  { "@context": "https://schema.org", "@type": "WebSite", "@id": "https://7captur.com/#website", url: "https://7captur.com/", name: "7Captur", inLanguage: "en", publisher: { "@id": "https://7captur.com/#org" } },
+];
+import plans from "../data/plans.json";
+const offers = Object.values(plans.plans as Record<string, any>).filter((p) => typeof p.priceMonthly === "number").map((p) => ({ "@type": "Offer", name: p.name, price: String(p.priceMonthly), priceCurrency: "USD", url: "https://7captur.com/pricing/" }));
+const app = ["/", "/platform/", "/pricing/"].includes(path) ? [{ "@context": "https://schema.org", "@type": "SoftwareApplication", name: "7Captur", url: "https://7captur.com/", applicationCategory: "BusinessApplication", operatingSystem: "Web", description: "Evidence-based marketing recommendations for small businesses and sellers: connect posts, messages, ads and sales to see what is working and what to do next.", offers }] : [];
+const graph = [...site, ...app, ...jsonld];
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -20,8 +28,12 @@ const ogImage = "https://7captur.com/assets/og/og-default.png";
 <title>{title}</title>
 <meta name="description" content={description} />
 {path && <link rel="canonical" href={url} />}
-{noindex && <meta name="robots" content="noindex" />}
-<meta property="og:type" content="website" />
+
+<meta property="og:type" content={ogType} />
+{published && <meta property="article:published_time" content={published} />}
+{modified && <meta property="article:modified_time" content={modified} />}
+{noindex ? <meta name="robots" content="noindex" /> : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />}
+<link rel="alternate" type="application/rss+xml" title="7Captur Resources" href="/rss.xml" />
 <meta property="og:site_name" content="7Captur" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -31,13 +43,14 @@ const ogImage = "https://7captur.com/assets/og/og-default.png";
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
+{graph.map((g) => <script type="application/ld+json" set:html={JSON.stringify(g)} />)}
 <link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: light)" />
 <link rel="icon" href="/favicon-dark.png" media="(prefers-color-scheme: dark)" />
 <link rel="shortcut icon" href="/favicon-dark.png" />
 </>)}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/assets/css/site.css" />
 <link rel="stylesheet" href="/assets/css/site-v2.css" />
 <link rel="stylesheet" href="/assets/css/site-v3.css" />
@@ -72,10 +85,11 @@ const ogImage = "https://7captur.com/assets/og/og-default.png";
 // Condensed light: a soft highlight follows the pointer across glass surfaces.
 (function(){
   if(!window.matchMedia('(hover:hover)').matches) return;
-  var sel='.win,.layer,.res,.platform,.plan,.cap,.fact,.rm-panel,.pipe>li,.cta-card';
+  var busy=false; var sel='.win,.layer,.res,.platform,.plan,.cap,.fact,.rm-panel,.pipe>li,.cta-card';
   document.addEventListener('pointermove',function(e){
     var t=e.target.closest&&e.target.closest(sel); if(!t) return;
-    var r=t.getBoundingClientRect(); t.style.setProperty('--mx',(e.clientX-r.left)+'px'); t.style.setProperty('--my',(e.clientY-r.top)+'px');
+    if(busy) return; busy=true; var x=e.clientX; var y=e.clientY;
+    requestAnimationFrame(function(){ var r=t.getBoundingClientRect(); t.style.setProperty('--mx',(x-r.left)+'px'); t.style.setProperty('--my',(y-r.top)+'px'); busy=false; });
   },{passive:true});
 })();
 </script>
