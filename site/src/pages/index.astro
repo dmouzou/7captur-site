@@ -5,6 +5,7 @@ import CtaBand from "../components/CtaBand.astro";
 import IntegrationGrid from "../components/IntegrationGrid.astro";
 import Marquee from "../components/Marquee.astro";
 import Tabs from "../components/Tabs";
+import HeroCarousel from "../components/HeroCarousel";
 import Icon from "../components/Icon.astro";
 import { RecCard, ProvTable, EvidenceMeter, ImportPreview, Digest, HubMock } from "../components/Mockups";
 import insight from "../fragments/insight.html?raw";
@@ -34,7 +35,7 @@ const faq = [
       <p class="hero-sub">7Captur turns your marketing activity into clear, evidence-based next steps, from social posts and messages to paid ads and e-commerce sales. Start with the data you have. Add more as you grow.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href={CTA.href}>{CTA.label}</a>
-        <a class="btn btn-ghost" href="/how-it-works/">See how it works</a>
+        <a class="btn btn-ghost" href="/platform/">See the platform</a>
       </div>
       <div class="trust-row">
         <span>Free plan, no card needed</span>
@@ -47,13 +48,7 @@ const faq = [
       <span class="float f2" aria-hidden="true"><img class="brand brand-meta" src="/assets/logos/brands/meta.svg" alt="" /></span>
       <span class="float f3" aria-hidden="true"><img class="brand brand-googleads" src="/assets/logos/brands/googleads.svg" alt="" /></span>
       <span class="float f4" aria-hidden="true"><img class="brand brand-instagram" src="/assets/logos/brands/instagram.svg" alt="" /></span>
-      <RecCard
-        move="Run a small, time-limited test on the video that brought more enquiries per dollar spent. Do not raise the budget yet."
-        why="In the data entered, this video produced more enquiries for each dollar of promotion than the comparison post. That is an early signal for your goal of more enquiries."
-        unknown="Enquiries are not yet linked to confirmed orders, so we cannot say which post earned more revenue or profit."
-        next="Spend, enquiries and confirmed orders over the same test window."
-        tags={["Evidence: partial", "Source: entered by you", "Sales attribution: unknown"]}
-      />
+      <HeroCarousel client:load />
     </div>
   </div>
 </header>
@@ -94,7 +89,7 @@ const faq = [
       <div>
         <h3>Likes do not prove sales. We say so.</h3>
         <p>7Captur matches its advice to the evidence you have, and tells you plainly what more data would unlock. Thin evidence gets a small test, not a confident guess.</p>
-        <a class="link" href="/how-it-works/">See the evidence modes</a>
+        <a class="link" href="/platform/">See the evidence modes</a>
       </div>
       <div class="stage"><EvidenceMeter client:visible /></div>
     </div>

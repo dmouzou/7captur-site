@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 
 // Every .astro page except 404 is listed. Priorities keep the existing sitemap's values.
-const PRIORITY: Record<string, [string, string]> = { "/": ["weekly", "1.0"], "/pricing/": ["monthly", "0.9"], "/how-it-works/": ["monthly", "0.9"] };
+const PRIORITY: Record<string, [string, string]> = { "/": ["weekly", "1.0"], "/pricing/": ["monthly", "0.9"], "/platform/": ["monthly", "0.9"] };
 export const GET: APIRoute = ({ site }) => {
   const files = Object.keys(import.meta.glob("./**/*.astro"));
   const paths = files

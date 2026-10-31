@@ -18,10 +18,10 @@ function useLoop(total: number, ms = 1100, hold = 2600) {
   return n;
 }
 
-export function Win({ title, children }: { title: string; children: ReactNode }) {
+export function Win({ title, children, tag }: { title: string; children: ReactNode; tag?: string }) {
   return (
     <div className="win" role="group" aria-label={title}>
-      <div className="win-bar"><i /><i /><i /><span className="win-title">{title}</span><span className="win-live" aria-hidden="true" /></div>
+      <div className="win-bar"><i /><i /><i /><span className="win-title">{title}</span>{tag && <span className="win-tag">{tag}</span>}<span className="win-live" aria-hidden="true" /></div>
       <div className="win-body">{children}</div>
     </div>
   );
@@ -32,10 +32,10 @@ export function Src({ k }: { k: keyof typeof SRC }) {
   return <span className={`src src-${k}`}><b />{SRC[k]}</span>;
 }
 
-export function RecCard({ move, why, unknown, next, tags }: { move: string; why: string; unknown: string; next: string; tags: string[] }) {
+export function RecCard({ move, why, unknown, next, tags, tag, steps = false }: { move: string; why: string; unknown: string; next: string; tags: string[]; tag?: string; steps?: boolean }) {
   return (
-    <Win title="Your next move">
-      <div className="loop">
+    <Win title="Your next move" tag={tag}>
+      <div className={steps ? "steps-in" : "loop"}>
         <p className="mk-move l1">{move}</p>
         <dl className="mk-dl">
           <dt className="l2">Why</dt><dd className="l2">{why}</dd>

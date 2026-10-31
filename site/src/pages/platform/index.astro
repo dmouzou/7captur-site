@@ -4,29 +4,30 @@ import PageHead from "../../components/PageHead.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import IntegrationGrid from "../../components/IntegrationGrid.astro";
 import Faq from "../../components/Faq.astro";
+import Roadmap from "../../components/Roadmap";
+import Icon from "../../components/Icon.astro";
 
 const faq = [
+  { q: "Does an AI write my recommendations?", a: "No. The action, reasons and unknowns come from fixed rules that look at your data. Claude, an AI model made by Anthropic, only rewrites those conclusions in plain language, and every sentence is checked against the engine output before you see it. If Claude is unavailable or its text fails the check, you still get the full recommendation." },
   { q: "What if my data is incomplete or messy?", a: "That is expected. 7Captur works with what you give it, flags what is missing or does not line up, and tells you which single input would improve the next decision most." },
   { q: "What does an evidence label mean?", a: "It tells you where a number came from: entered by you, imported from a file, extracted from a screenshot (and confirmed by you), connected directly, estimated, or unknown. We never present an estimate as a measured fact." },
   { q: "Can 7Captur tell me which post made a sale?", a: "Only when the link is recorded. If you tell us an order came from a post, it is shown as reported by you. If the source is unknown, the sale still counts in your business totals but is not credited to a post." },
 ];
 ---
 <Layout
-  title="How it works | 7Captur"
+  title="Platform | 7Captur"
   description="Set a goal, add the data you have, get an evidence-based recommendation, choose whether to act, and learn from the result. No website required."
-  path="/how-it-works/" current="/how-it-works/">
+  path="/platform/" current="/platform/">
 <main>
 <PageHead wide title="From the data you have to a clear next step." lede="Setup takes a few minutes. You do not need a website, a store or an ad account. Add more later and the guidance gets sharper." />
 
 <section class="section section-flush" style="padding-bottom:72px">
   <div class="wrap">
-    <div class="five">
-      <div class="five-item"><h3>Set a goal</h3><span class="when">Once, in a minute</span><p>Tell us what you want: more enquiries, more orders, better content, less wasted spend or more profit. Add your business type, currency and how customers buy.</p></div>
-      <div class="five-item"><h3>Add what you have</h3><span class="when">Type, import or connect</span><p>Enter posts, promotions, enquiries, sales and costs, import a CSV, upload a screenshot, or connect a supported source. Screenshot values are shown for you to check before they are saved.</p></div>
-      <div class="five-item"><h3>Get a recommendation</h3><span class="when">When you ask</span><p>One concrete action, why it is suggested, what we do not know and what to measure next.</p></div>
-      <div class="five-item"><h3>You choose</h3><span class="when">Your call</span><p>Mark it to try, dismiss it or come back later. 7Captur never changes your ads, budgets or posts.</p></div>
-      <div class="five-item"><h3>Learn from the result</h3><span class="when">Optional</span><p>Record what happened. A weekly summary shows what changed and where to focus next.</p></div>
+    <div class="section-head" data-reveal>
+      <h2>Five steps. You set the pace.</h2>
+      <p class="lede">Tap a step to see what happens there. On a phone, swipe through them like cards.</p>
     </div>
+    <Roadmap client:visible />
   </div>
 </section>
 
@@ -49,19 +50,30 @@ const faq = [
   </div>
 </section>
 
-<section class="section" style="padding-top:0">
+<section class="section" id="engine" style="padding-top:0">
   <div class="wrap">
-    <p class="kicker">Example</p>
-    <h2>What a recommendation looks like.</h2>
-    <p class="lede">An illustrative social seller with no website. Not a real customer.</p>
-    <div class="dash hero-card" style="max-width:760px;margin-top:28px">
-      <div class="dash-top"><strong>Your next move</strong></div>
-      <p class="move">Run a small, time-limited test on the video that generated more enquiries per dollar spent, and record which enquiries become confirmed orders. Do not substantially increase the budget yet.</p>
-      <h5>Why</h5><p>In the data entered, this video generated more enquiries relative to promotion spend than the comparison post. This is an early signal for the goal of increasing enquiries.</p>
-      <h5>What we do not know</h5><p>Enquiries are not consistently linked to confirmed orders, so we cannot say which post generated more revenue or profit.</p>
-      <h5>What to measure next</h5><p>Spend, enquiries, qualified enquiries if available, and confirmed orders over the same test window.</p>
-      <div class="tags"><span>Mode: Improve, partial evidence</span><span>Values entered by you</span><span>Sales attribution unknown</span></div>
+    <div class="section-head" data-reveal>
+      <h2>Rules decide. Claude explains.</h2>
+      <p class="lede">Your recommendation is built by fixed rules, not by a chatbot guessing. Claude, an AI model made by Anthropic, then puts it in plain words, and the result is checked before you see it.</p>
     </div>
+    <ol class="pipe" data-reveal>
+      <li><span class="tile"><Icon name="posts" size={24} /></span><b>Your records</b><span>Posts, promotions, enquiries, sales and costs, each labelled by source.</span><em class="who">You</em></li>
+      <li class="arrow" aria-hidden="true"></li>
+      <li><span class="tile"><Icon name="understand" size={24} /></span><b>Checks</b><span>Currency, gaps and mismatches are checked. Missing costs stay unknown.</span><em class="who">7Captur rules</em></li>
+      <li class="arrow" aria-hidden="true"></li>
+      <li><span class="tile"><Icon name="decide" size={24} /></span><b>Recommendation</b><span>An evidence mode is chosen. The action, reasons, unknowns and next measurement are written.</span><em class="who">7Captur rules</em></li>
+      <li class="arrow" aria-hidden="true"></li>
+      <li class="ai"><span class="tile"><Icon name="leads" size={24} /></span><b>Plain wording</b><span>Claude rewrites those conclusions as a short, friendly summary. It receives the conclusions only, not your raw records or notes.</span><em class="who">Claude</em></li>
+      <li class="arrow" aria-hidden="true"></li>
+      <li><span class="tile"><Icon name="coins" size={24} /></span><b>Safety check</b><span>Every number must trace back to the engine. Promises, links and unsupported profit claims are rejected.</span><em class="who">7Captur rules</em></li>
+    </ol>
+    <div class="facts" style="margin-top:40px" data-reveal>
+      <div class="fact"><h3>Claude never makes the decision</h3><p>The action and the reasons come from rules you can read about on this page. Claude only rewrites them.</p></div>
+      <div class="fact"><h3>Checked before you see it</h3><p>If the wording adds a number the engine did not produce, or promises a result, it is thrown away.</p></div>
+      <div class="fact"><h3>Works without AI</h3><p>If Claude is unavailable or its wording fails the check, you still get the complete recommendation.</p></div>
+      <div class="fact"><h3>Screenshots: Claude reads, you confirm</h3><p>When you upload a screenshot, Claude reads the values. Nothing is saved until you have reviewed and confirmed them.</p></div>
+    </div>
+    <p class="fine">Requests to Claude go to Anthropic's API. See the <a href="/privacy-policy/">privacy policy</a> for how your data is handled.</p>
   </div>
 </section>
 

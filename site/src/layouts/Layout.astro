@@ -62,9 +62,21 @@ const ogImage = "https://7captur.com/assets/og/og-default.png";
   });
   paint();
   var d = document.getElementById('drawer');
-  document.getElementById('menuBtn').addEventListener('click', function(){ d.classList.add('open'); });
-  document.getElementById('drawerClose').addEventListener('click', function(){ d.classList.remove('open'); });
-  d.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ d.classList.remove('open'); }); });
+  document.getElementById('menuBtn').addEventListener('click', function(){ d.classList.add('open'); document.body.style.overflow='hidden'; });
+  document.getElementById('drawerClose').addEventListener('click', function(){ d.classList.remove('open'); document.body.style.overflow=''; });
+  d.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ d.classList.remove('open'); document.body.style.overflow=''; }); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ d.classList.remove('open'); document.body.style.overflow=''; } });
+})();
+</script>
+<script is:inline>
+// Condensed light: a soft highlight follows the pointer across glass surfaces.
+(function(){
+  if(!window.matchMedia('(hover:hover)').matches) return;
+  var sel='.win,.layer,.res,.platform,.plan,.cap,.fact,.rm-panel,.pipe>li,.cta-card';
+  document.addEventListener('pointermove',function(e){
+    var t=e.target.closest&&e.target.closest(sel); if(!t) return;
+    var r=t.getBoundingClientRect(); t.style.setProperty('--mx',(e.clientX-r.left)+'px'); t.style.setProperty('--my',(e.clientY-r.top)+'px');
+  },{passive:true});
 })();
 </script>
 <Fragment set:html={scripts} />

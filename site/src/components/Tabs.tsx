@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RecCard, ProvTable, EvidenceMeter, ImportPreview } from "./Mockups";
 
 const TABS = [
@@ -36,6 +36,13 @@ export default function Tabs() {
   const [i, setI] = useState(0);
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const t = TABS[i];
+  const [pill, setPill] = useState<{ left: number; width: number } | null>(null);
+  useEffect(() => {
+    const place = () => { const b = refs.current[i]; if (b) setPill({ left: b.offsetLeft, width: b.offsetWidth }); };
+    place();
+    window.addEventListener("resize", place);
+    return () => window.removeEventListener("resize", place);
+  }, [i]);
   const onKey = (e: React.KeyboardEvent) => {
     let n = i;
     if (e.key === "ArrowRight") n = (i + 1) % TABS.length;
@@ -45,7 +52,8 @@ export default function Tabs() {
   };
   return (
     <div className="tabs">
-      <div className="tab-list" role="tablist" aria-label="Who 7Captur is for" onKeyDown={onKey}>
+      <div className={`tab-list${pill ? " ready" : ""}`} role="tablist" aria-label="Who 7Captur is for" onKeyDown={onKey}>
+        {pill && <span className="tab-pill" style={{ transform: `translateX(${pill.left}px)`, width: pill.width }} aria-hidden="true" />}
         {TABS.map((x, n) => (
           <button key={x.id} ref={(el) => { refs.current[n] = el; }} role="tab" id={`tab-${x.id}`} aria-selected={n === i} aria-controls="tab-panel" tabIndex={n === i ? 0 : -1} onClick={() => setI(n)}>{x.label}</button>
         ))}
