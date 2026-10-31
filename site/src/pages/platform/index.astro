@@ -8,7 +8,7 @@ import Roadmap from "../../components/Roadmap";
 import Icon from "../../components/Icon.astro";
 
 const faq = [
-  { q: "Does an AI write my recommendations?", a: "No. The action, reasons and unknowns come from fixed rules that look at your data. Claude, an AI model made by Anthropic, only rewrites those conclusions in plain language, and every sentence is checked against the engine output before you see it. If Claude is unavailable or its text fails the check, you still get the full recommendation." },
+  { q: "Does an AI write my recommendations?", a: "No. The action, reasons and unknowns come from fixed rules that look at your data. An AI model only rewrites those conclusions in plain language, and every sentence is checked against the engine output before you see it. If the AI service is unavailable or its text fails the check, you still get the full recommendation." },
   { q: "What if my data is incomplete or messy?", a: "That is expected. 7Captur works with what you give it, flags what is missing or does not line up, and tells you which single input would improve the next decision most." },
   { q: "What does an evidence label mean?", a: "It tells you where a number came from: entered by you, imported from a file, extracted from a screenshot (and confirmed by you), connected directly, estimated, or unknown. We never present an estimate as a measured fact." },
   { q: "Can 7Captur tell me which post made a sale?", a: "Only when the link is recorded. If you tell us an order came from a post, it is shown as reported by you. If the source is unknown, the sale still counts in your business totals but is not credited to a post." },
@@ -53,8 +53,8 @@ const faq = [
 <section class="section" id="engine" style="padding-top:0">
   <div class="wrap">
     <div class="section-head" data-reveal>
-      <h2>Rules decide. Claude explains.</h2>
-      <p class="lede">Your recommendation is built by fixed rules, not by a chatbot guessing. Claude, an AI model made by Anthropic, then puts it in plain words, and the result is checked before you see it.</p>
+      <h2>Rules decide. AI explains.</h2>
+      <p class="lede">Your recommendation is built by fixed rules, not by a chatbot guessing. An AI model then puts it in plain words, and the result is checked before you see it.</p>
     </div>
     <ol class="pipe" data-reveal>
       <li><span class="tile"><Icon name="posts" size={24} /></span><b>Your records</b><span>Posts, promotions, enquiries, sales and costs, each labelled by source.</span><em class="who">You</em></li>
@@ -63,17 +63,17 @@ const faq = [
       <li class="arrow" aria-hidden="true"></li>
       <li><span class="tile"><Icon name="decide" size={24} /></span><b>Recommendation</b><span>An evidence mode is chosen. The action, reasons, unknowns and next measurement are written.</span><em class="who">7Captur rules</em></li>
       <li class="arrow" aria-hidden="true"></li>
-      <li class="ai"><span class="tile"><Icon name="leads" size={24} /></span><b>Plain wording</b><span>Claude rewrites those conclusions as a short, friendly summary. It receives the conclusions only, not your raw records or notes.</span><em class="who">Claude</em></li>
+      <li class="ai"><span class="tile"><Icon name="leads" size={24} /></span><b>Plain wording</b><span>An AI model rewrites those conclusions as a short, friendly summary. It receives the conclusions only, not your raw records or notes.</span><em class="who">AI model</em></li>
       <li class="arrow" aria-hidden="true"></li>
       <li><span class="tile"><Icon name="coins" size={24} /></span><b>Safety check</b><span>Every number must trace back to the engine. Promises, links and unsupported profit claims are rejected.</span><em class="who">7Captur rules</em></li>
     </ol>
     <div class="facts" style="margin-top:40px" data-reveal>
-      <div class="fact"><h3>Claude never makes the decision</h3><p>The action and the reasons come from rules you can read about on this page. Claude only rewrites them.</p></div>
+      <div class="fact"><h3>The AI never makes the decision</h3><p>The action and the reasons come from rules you can read about on this page. The AI only rewrites them.</p></div>
       <div class="fact"><h3>Checked before you see it</h3><p>If the wording adds a number the engine did not produce, or promises a result, it is thrown away.</p></div>
-      <div class="fact"><h3>Works without AI</h3><p>If Claude is unavailable or its wording fails the check, you still get the complete recommendation.</p></div>
-      <div class="fact"><h3>Screenshots: Claude reads, you confirm</h3><p>When you upload a screenshot, Claude reads the values. Nothing is saved until you have reviewed and confirmed them.</p></div>
+      <div class="fact"><h3>Works without AI</h3><p>If the AI service is unavailable or its wording fails the check, you still get the complete recommendation.</p></div>
+      <div class="fact"><h3>Screenshots: AI reads, you confirm</h3><p>When you upload a screenshot, an AI model reads the values. Nothing is saved until you have reviewed and confirmed them.</p></div>
     </div>
-    <p class="fine">Requests to Claude go to Anthropic's API. See the <a href="/privacy-policy/">privacy policy</a> for how your data is handled.</p>
+    <p class="fine">Text is processed by a third-party AI provider. See the <a href="/privacy-policy/">privacy policy</a> for how your data is handled.</p>
   </div>
 </section>
 

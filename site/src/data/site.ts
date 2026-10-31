@@ -15,11 +15,9 @@ export const MEGA = [
   { label: "Platform", href: "/platform/" },
   { label: "Pricing", href: "/pricing/" },
   { label: "Resources", href: "/resources/" },
-  { label: "Company", href: "/about/", items: [
-    { href: "/about/", title: "About", text: "Why 7Captur exists." },
-    { href: "/security/", title: "Security", text: "How we handle your data." },
-    { href: "/contact/", title: "Contact", text: "Ask us a question directly." },
-  ] },
+  { label: "About", href: "/about/" },
+  { label: "Security", href: "/security/" },
+  { label: "Contact", href: "/contact/" },
 ] as { label: string; href: string; items?: { href: string; title: string; text: string }[] }[];
 
 // Second call to action. Replace href with your booking link (Calendly, Cal.com, etc.) when you have one.
