@@ -526,3 +526,4 @@ html.dark .an-logo.on{animation-name:anGlowD}
 .duo{align-items:center}
 .duo .vow-section,.duo .insight-section{height:auto}
 .duo .vow-card,.duo .insight-card{height:auto}
+.an-logo,html.dark .an-logo{background:transparent;box-shadow:none}
