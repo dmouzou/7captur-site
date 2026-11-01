@@ -10,7 +10,7 @@ import { CTA } from "../../data/site";
 const P = plans.plans as Record<string, { priceMonthly?: number; importsPerMonth: number; historyDays: number; maxConnections: number; maxBusinesses: number; recommendations: { weekly: number } }>;
 const dur = (d: number) => (d < 365 ? `${Math.round(d / 30)} month${Math.round(d / 30) === 1 ? "" : "s"}` : `${Math.round(d / 365)} year${Math.round(d / 365) === 1 ? "" : "s"}`);
 const plat = (n: number) => `${n} connected platform${n === 1 ? "" : "s"}`;
-const biz = (n: number) => `${n} business${n === 1 ? "" : "es"}`;
+const biz = (n: number) => `${n} business workspace${n === 1 ? "" : "s"}`;
 const faq = [
   { q: "Is the Free plan really free?", a: "Yes. Free is permanent and needs no card. There is no trial that expires. You can stay on Free as long as you like." },
   { q: "What does a paid plan change?", a: "Paid plans give you more room: a larger weekly recommendation allowance, more import capacity, longer history and, on Pro, more connected platforms. The recommendation engine is the same on every plan. What you can conclude depends on your evidence, not your plan." },
@@ -42,10 +42,8 @@ const faq = [
         <p class="plan-sub">Start with what you have.</p>
         <ul>
           <li>Manual entry for posts, promotions, enquiries, sales and costs</li>
-          <li>{P.free.importsPerMonth} imports a month (CSV, screenshot or document)</li>
-          <li>{P.free.recommendations.weekly} recommendations a week</li>
+          <li>CSV, screenshot and document import</li>
           <li>Weekly summary</li>
-          <li>{dur(P.free.historyDays)} of history</li>
           <li>{plat(P.free.maxConnections)}, optional</li>
           <li>{biz(P.free.maxBusinesses)}</li>
         </ul>
@@ -57,9 +55,6 @@ const faq = [
         <p class="plan-sub">For regular marketing.</p>
         <ul>
           <li>Everything in Free</li>
-          <li>{P.starter.recommendations.weekly} recommendations a week</li>
-          <li>{P.starter.importsPerMonth} imports a month</li>
-          <li>{dur(P.starter.historyDays)} of history</li>
           <li>{plat(P.starter.maxConnections)}</li>
           <li>{biz(P.starter.maxBusinesses)}</li>
         </ul>
@@ -71,9 +66,6 @@ const faq = [
         <p class="plan-sub">For growing businesses.</p>
         <ul>
           <li>Everything in Starter</li>
-          <li>{P.growth.recommendations.weekly} recommendations a week</li>
-          <li>{P.growth.importsPerMonth} imports a month</li>
-          <li>{dur(P.growth.historyDays)} of history</li>
           <li>{plat(P.growth.maxConnections)}</li>
           <li>{biz(P.growth.maxBusinesses)}</li>
         </ul>
@@ -104,7 +96,7 @@ const faq = [
           <tr><td>Imports a month</td><td>{P.free.importsPerMonth}</td><td>{P.starter.importsPerMonth}</td><td>{P.growth.importsPerMonth}</td><td>{P.pro_growth.importsPerMonth}</td><td>{P.custom.importsPerMonth}</td></tr>
           <tr><td>History</td><td>{dur(P.free.historyDays)}</td><td>{dur(P.starter.historyDays)}</td><td>{dur(P.growth.historyDays)}</td><td>{dur(P.pro_growth.historyDays)}</td><td>{dur(P.custom.historyDays)}</td></tr>
           <tr><td>Connected platforms</td><td>{P.free.maxConnections}</td><td>{P.starter.maxConnections}</td><td>{P.growth.maxConnections}</td><td>Up to {P.pro_growth.maxConnections}</td><td>{P.custom.maxConnections} or more</td></tr>
-          <tr><td>Businesses</td><td>{P.free.maxBusinesses}</td><td>{P.starter.maxBusinesses}</td><td>{P.growth.maxBusinesses}</td><td>Up to {P.pro_growth.maxBusinesses}</td><td>Up to {P.custom.maxBusinesses}</td></tr>
+          <tr><td>Business workspaces</td><td>{P.free.maxBusinesses}</td><td>{P.starter.maxBusinesses}</td><td>{P.growth.maxBusinesses}</td><td>Up to {P.pro_growth.maxBusinesses}</td><td>Up to {P.custom.maxBusinesses}</td></tr>
           <tr><td>Price</td><td>$0</td><td>${P.starter.priceMonthly}</td><td>${P.growth.priceMonthly}</td><td>$59, $79 or $119</td><td>From $199</td></tr>
         </tbody>
       </table>

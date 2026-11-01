@@ -26,11 +26,8 @@ export default function ProPlan({ signupUrl }: { signupUrl: string }) {
       <p className="plan-sub">{band.sub}</p>
       <p className="plan-note">Billed monthly. Cancel anytime.</p>
       <ul>
-        <li>{P[id].recommendations.weekly} recommendations a week</li>
-        <li>{P[id].importsPerMonth} imports a month</li>
-        <li>{dur(P[id].historyDays)} of history</li>
         <li>Up to {P[id].maxConnections} connected platforms</li>
-        <li>Up to {P[id].maxBusinesses} businesses</li>
+        <li>Up to {P[id].maxBusinesses} business workspaces</li>
         <li>Same recommendation engine as every plan</li>
       </ul>
       <a className="btn btn-primary btn-block" href={signupUrl}>Start free</a>
