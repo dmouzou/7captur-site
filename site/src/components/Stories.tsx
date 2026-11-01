@@ -51,7 +51,7 @@ export function SocialStory() {
       {(s) => (
         <>
           {CHIPS.map((c, i) => <span key={c[0]} className={`an-chip${s >= 2 ? " gone" : ""}`} style={{ left: c[1], top: c[2], transitionDelay: `${s >= 2 ? i * 70 : i * 120}ms` }}>{c[0]}</span>)}
-          <Engine on={s >= 1 && s <= 2} style={s >= 3 ? { top: "6%", left: "92%", transform: "scale(.7)" } : undefined} />
+          <Engine on={s >= 1} style={s >= 3 ? { top: "6%", left: "92%", transform: "scale(.7)" } : undefined} />
           <div className={`an-board${s >= 3 ? " in" : ""}`}>
             <div className="an-row an-head"><span>Post</span><span>Likes</span><span>Sales</span></div>
             <div className="an-row"><span>Trend video {s >= 4 && <em className="an-tag grey">most likes</em>}</span><span>1,200</span><span>0</span></div>
@@ -72,7 +72,7 @@ export function ResellerStory() {
     <Story title="Reseller" total={4}>
       {(s) => (
         <>
-          <Engine on={s >= 1 && s <= 2} style={s >= 3 ? { top: "6%", left: "92%", transform: "scale(.7)" } : { top: s >= 1 ? "70%" : "8%", left: "50%" }} />
+          <Engine on={s >= 1} style={s >= 3 ? { top: "6%", left: "92%", transform: "scale(.7)" } : { top: s >= 1 ? "70%" : "8%", left: "50%" }} />
           <div className="an-list">
             {ITEMS.map((it, i) => (
               <div key={it[0]} className="an-item">
@@ -97,7 +97,7 @@ export function ServiceStory() {
       {(s) => (
         <>
           {Array.from({ length: 8 }).map((_, i) => <span key={i} className={`an-dot${s >= 1 ? " fall" : ""}`} style={{ left: `${14 + i * 10}%`, transitionDelay: `${i * 90}ms`, ["--dx" as string]: `${(3.5 - i) * 26}px` }} />)}
-          <Engine on={s >= 1 && s <= 2} style={{ top: "20%" }} />
+          <Engine on={s >= 1} style={{ top: "20%" }} />
           <div className={`an-funnel${s >= 2 ? " in" : ""}`}>
             <div><span style={{ width: "100%" }} className="an-fbar">24 enquiries</span></div>
             <div><span style={{ width: s >= 3 ? "62%" : "10%" }} className="an-fbar">{s >= 3 ? "9 calls booked" : ""}</span></div>
@@ -119,7 +119,7 @@ export function EcomStory() {
         const v = val(s);
         return (
           <>
-            <Engine on={s >= 1 && s <= 3} style={{ top: "14%", left: "88%" }} />
+            <Engine on={s >= 1} style={{ top: "14%", left: "88%" }} />
             <div className="an-roas">
               <div className="an-rlabel"><span>{s >= 4 ? "True ROAS" : "Reported ROAS"}</span><b>{v.toFixed(1)}</b></div>
               <div className="an-track"><i style={{ width: `${(v / 3.5) * 100}%` }} className={s >= 4 ? "low" : ""} /><span className="an-be" style={{ left: `${(2.5 / 3.5) * 100}%` }}><small>break-even 2.5</small></span></div>

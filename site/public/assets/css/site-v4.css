@@ -479,11 +479,14 @@ html:not(.dark) .win::after, html:not(.dark) .layer::after { opacity: .6; }
 .an{position:relative;min-height:310px;padding:6px 4px 28px;overflow:hidden;text-align:left}
 .an-replay{position:absolute;right:6px;bottom:2px;font:inherit;font-size:12.5px;color:var(--muted);background:none;border:0;cursor:pointer;padding:4px 6px}
 .an-replay:hover{color:var(--ink)}
-.an-logo{position:absolute;left:50%;top:44%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(180deg,#b4ef5d,#8fce3a);color:var(--on-accent);z-index:3;transition:transform .5s,top .9s cubic-bezier(.4,0,.2,1)}
+.an-logo{position:absolute;left:50%;top:44%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:14px;display:grid;place-items:center;background:#fff;color:#2f6b0f;border:1px solid rgba(47,107,15,.25);box-shadow:0 4px 14px rgba(0,0,0,.12);z-index:3;transition:transform .5s,top .9s cubic-bezier(.4,0,.2,1)}
 .an-logo svg{width:24px;height:auto}
 .an-logo{transition:transform .5s,top .9s cubic-bezier(.4,0,.2,1),left .9s cubic-bezier(.4,0,.2,1)}
-.an-logo.on{animation:anPulse 1s ease-in-out infinite}
-@keyframes anPulse{50%{transform:scale(1.16)}}
+html.dark .an-logo{background:#0d130e;color:#b4ef5d;border-color:rgba(180,239,93,.3);box-shadow:0 4px 14px rgba(0,0,0,.5)}
+.an-logo.on{animation:anGlowL 1.6s ease-in-out infinite}
+html.dark .an-logo.on{animation-name:anGlowD}
+@keyframes anGlowL{0%,100%{box-shadow:0 0 0 0 rgba(47,107,15,0),0 4px 14px rgba(0,0,0,.12)}50%{box-shadow:0 0 22px 6px rgba(47,160,15,.45),0 4px 14px rgba(0,0,0,.12)}}
+@keyframes anGlowD{0%,100%{box-shadow:0 0 0 0 rgba(180,239,93,0),0 4px 14px rgba(0,0,0,.5)}50%{box-shadow:0 0 26px 7px rgba(180,239,93,.55),0 4px 14px rgba(0,0,0,.5)}}
 .an-chip{position:absolute;padding:7px 11px;border-radius:99px;font-size:12.5px;background:var(--glass);border:1px solid var(--glass-edge);color:var(--ink);opacity:1;transform:none;transition:opacity .5s,transform .6s cubic-bezier(.4,0,.2,1);z-index:2}
 .an-chip.gone{opacity:0;transform:translate(60px,40px) scale(.3)}
 .an-board{position:absolute;left:4%;right:4%;top:14%;display:grid;gap:8px;opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s;z-index:1}
