@@ -7,6 +7,7 @@
 - [Platform](https://7captur.com/platform/): how recommendations, evidence levels and connections work
 - [Pricing](https://7captur.com/pricing/): Free, Starter, Growth, Pro and Custom plans
 - [Security](https://7captur.com/security/): data handling and access
+- [Free ad budget check](https://7captur.com/ad-budget-check/): five-question tool that emails a plain-language review of your ad budget
 - [Resources](https://7captur.com/resources/): guides for small sellers
 
 ## Guides
@@ -15,6 +16,13 @@
 - [Likes vs Sales: Which Social Media Metrics Actually Matter](https://7captur.com/articles/likes-vs-sales-engagement-metrics/): Likes, views and followers are easy to count but do not pay the bills. See which social media metrics predict sales, which are vanity, and how to track the ones that matter.
 - [How to Track WhatsApp and DM Sales From Ads and Posts](https://7captur.com/articles/track-whatsapp-and-dm-sales/): Customers who order by WhatsApp or DM are invisible to most analytics. Here is a simple way to tag, log and attribute those sales to the post or ad that started them.
 - [ROAS vs Profit: How to Calculate Break-Even ROAS](https://7captur.com/articles/roas-vs-profit-break-even-roas/): A good-looking ROAS can still lose money. Learn the break-even ROAS formula, why margin, returns and fees change the answer, and how to check whether your ads make a profit.
+- [Advertising Budget Optimization: A Practical Guide for Small Sellers](https://7captur.com/articles/advertising-budget-optimization/): Advertising budget optimization means putting each dollar where it returns the most profit. Learn a five-step process any small business can follow, with no special software.
+- [Ad Spend Management: How to Set, Split and Review Your Budget](https://7captur.com/articles/ad-spend-management/): Ad spend management is how you decide how much to spend, where, and when to change it. A simple routine for small businesses, with a monthly review checklist.
+- [E-commerce Analytics: The Few Numbers Worth Tracking](https://7captur.com/articles/ecommerce-analytics-metrics-that-matter/): E-commerce analytics can drown you in dashboards. These are the handful of metrics small stores should track, what each one means, and how often to check it.
+- [How to Allocate Your Advertising Budget Across Channels](https://7captur.com/articles/advertising-budget-allocation/): Not sure how to divide your ad budget between Meta, Google, TikTok and organic? A simple allocation method for small businesses, with an example split and review rules.
+- [True ROAS Explained: What It Is and How to Calculate It](https://7captur.com/articles/true-roas-explained/): True ROAS is return on ad spend after costs, returns and fees. Learn the formula, see a worked example, and understand why it differs from the ROAS your ad platform reports.
+- [Ad Performance Tracking: A Simple Checklist for Meta and Google Ads](https://7captur.com/articles/ad-performance-tracking/): How to track ad performance without drowning in reports. A short checklist for Meta (Facebook and Instagram) and Google Ads: what to export, what to record and what to compare.
+- [Meta Ads vs Google Ads: Where to Put Your First $500](https://7captur.com/articles/meta-vs-google-ads-first-500/): Choosing between Facebook and Instagram ads and Google Ads with a small budget? A plain comparison, a decision guide by business type, and how to test with $500.
 
 ## Contact
 - [Contact](https://7captur.com/contact/): replies within 24 hours

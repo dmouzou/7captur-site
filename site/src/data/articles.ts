@@ -21,7 +21,7 @@ export interface Article {
 
 const D = "2026-10-31";
 
-export const ARTICLES: Article[] = [
+const BASE: Article[] = [
   {
     slug: "track-sales-from-social-media-posts",
     title: "How to Track Sales From Social Media Posts",
@@ -349,4 +349,6 @@ export const ARTICLES: Article[] = [
   },
 ];
 
+import { MORE } from "./articles2";
+export const ARTICLES: Article[] = [...BASE, ...MORE];
 export const bySlug = (s: string) => ARTICLES.find((a) => a.slug === s)!;

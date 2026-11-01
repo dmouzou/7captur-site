@@ -443,3 +443,34 @@ html:not(.dark) .win::after, html:not(.dark) .layer::after { opacity: .6; }
 .article-body h2,.article-body h3{max-width:none;text-align:left}
 .article-cta-box .btn-primary{color:#0b0f0c}
 .article-cta-box{text-align:left}
+
+/* RESOURCES: video + insight side by side */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch;margin-bottom:28px}
+.duo .wrap{padding:0;max-width:none}
+.duo .vow-section,.duo .insight-section{padding:0;height:100%}
+.duo .vow-card,.duo .insight-card{height:100%;padding:20px;box-sizing:border-box}
+.duo .vow-title{font-size:17px;margin-bottom:12px}
+.duo .vow-desc{font-size:14px;margin-top:10px}
+.duo .insight-card{flex-direction:column;gap:12px}
+@media (max-width:900px){.duo{grid-template-columns:1fr}}
+
+/* AD BUDGET CHECK */
+.abc{max-width:680px;margin:0 auto;padding:28px;border-radius:22px;background:var(--glass);border:1px solid var(--glass-edge);text-align:center}
+.abc-progress{margin-bottom:22px;font-size:13px;color:var(--muted)}
+.abc-progress i{display:block;height:6px;border-radius:99px;background:var(--line);margin-top:8px;overflow:hidden}
+.abc-progress b{display:block;height:100%;background:var(--accent-fill);border-radius:99px;transition:width .3s}
+.abc-q{font-size:24px;margin-bottom:20px;max-width:none}
+.abc-opts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.abc-opt{font:inherit;color:var(--ink);background:var(--bg2);border:1px solid var(--line-strong);border-radius:12px;padding:12px 18px;cursor:pointer}
+.abc-opt:hover{border-color:var(--accent)}
+.abc-num{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
+.abc-num .input{max-width:200px}
+.abc-pre{color:var(--muted);font-weight:600}
+.abc-form{display:grid;gap:14px;text-align:left}
+.abc-check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--body)}
+.abc-check input{margin-top:3px}
+.abc-back{margin-top:18px;font-size:14px}
+.abc-done{font-size:17px;margin-bottom:18px}
+.duo{grid-template-columns:minmax(0,380px) minmax(0,1fr)}
+.duo .vow-title{max-width:none;font-weight:600}
+@media (max-width:900px){.duo{grid-template-columns:1fr}}

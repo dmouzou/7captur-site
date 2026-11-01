@@ -24,7 +24,6 @@ export default function HeroCarousel() {
           </div>
         ))}
       </div>
-      <div className="dots" aria-hidden="true">{SLIDES.map((s, n) => <i key={s.tag} className={n === i ? "on" : ""} />)}</div>
     </div>
   );
 }

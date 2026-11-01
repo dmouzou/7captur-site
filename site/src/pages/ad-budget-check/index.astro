@@ -1,0 +1,142 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Faq from "../../components/Faq.astro";
+const faq = [
+  { q: "Is the ad budget check really free?", a: "Yes. There is no card, no account and no obligation. You answer a few questions and we email you a plain-language review of how to approach your ad budget." },
+  { q: "What will I receive?", a: "An email within one hour with a short review based on your answers: where your budget may be going further or less far, what to measure first, and a suggested next step." },
+  { q: "What do you do with my data?", a: "We use your answers only to prepare your review and to follow up about it. You can opt out of promotional emails at any time. See the <a href=\"/privacy-policy/\">privacy policy</a>." },
+  { q: "Do I need a website or an ad account?", a: "No. The check works for social-first sellers, resellers, online stores, service providers and local businesses, with or without ads running today." },
+  { q: "How long does it take?", a: "About two minutes. There are five short questions, then your name and email." },
+];
+const ld = [{ "@context": "https://schema.org", "@type": "WebApplication", name: "Free Ad Budget Check", url: "https://7captur.com/ad-budget-check/", applicationCategory: "BusinessApplication", operatingSystem: "Web", description: "A free five-question check that reviews how a small business is spending its advertising budget and what to measure next.", offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }, provider: { "@id": "https://7captur.com/#org" } }];
+---
+<Layout title="Free Ad Budget Check: Is Your Ad Spend Working? | 7Captur" description="Answer five quick questions about your business and get a free, plain-language review of your advertising budget by email within one hour. No card, no website needed." path="/ad-budget-check/" current="" jsonld={ld}>
+<main>
+  <header class="page-head is-wide">
+    <div class="wrap">
+      <span class="tag-pill">Free tool</span>
+      <h1 style="max-width:20ch">Free ad budget check.</h1>
+      <p class="lede">Five questions. A clear review of your advertising budget in your inbox within one hour.</p>
+    </div>
+  </header>
+  <section class="section" style="padding-top:8px">
+    <div class="wrap">
+      <div class="abc" id="abc">
+        <div class="abc-progress" id="abcProg" hidden><span id="abcStep"></span><i><b id="abcBar"></b></i></div>
+        <div id="abcBody"><noscript><p>This tool needs JavaScript. You can also <a href="/contact/">contact us</a> directly.</p></noscript></div>
+      </div>
+    </div>
+  </section>
+  <section class="section band">
+    <div class="wrap">
+      <div class="section-head"><h2>What you get.</h2></div>
+      <div class="plans-trial" style="max-width:900px;margin:0 auto">
+        <div class="fact"><h3>A tailored read</h3><p>Questions adapt to the way you sell, whether that is DMs, a marketplace, a store or a service.</p></div>
+        <div class="fact"><h3>What to measure first</h3><p>The two or three numbers that matter most for your budget right now.</p></div>
+        <div class="fact"><h3>A suggested next step</h3><p>A clear, honest recommendation, with a note on how strong the evidence is.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap"><div class="section-head"><h2>Questions.</h2></div><Faq items={faq} /></div>
+  </section>
+</main>
+<script is:inline>
+(function(){
+  var ENDPOINT='https://formspree.io/f/xkoqapnn';
+  var N='n',S='s';
+  var TYPES={
+    social:{label:'Social-first seller',q:[
+      {id:'platform',t:S,q:'Where do most of your customers find you?',o:['Instagram','TikTok','Facebook','WhatsApp','Other']},
+      {id:'revenue',t:N,q:'What was your total sales revenue last month?',u:'amount'},
+      {id:'budget',t:N,q:'How much do you spend on ads or boosted posts in a month?',u:'amount'},
+      {id:'orders',t:S,q:'How do customers usually place orders?',o:['DM','WhatsApp','Website','In person','A mix']},
+      {id:'tracking',t:S,q:'Do you know which posts lead to sales?',o:['Always','Sometimes','Never']}]},
+    reseller:{label:'Reseller',q:[
+      {id:'where',t:S,q:'Where do you mainly sell?',o:['A marketplace','Social media','My own site','A mix']},
+      {id:'revenue',t:N,q:'What was your total sales revenue last month?',u:'amount'},
+      {id:'margin',t:N,q:'Roughly what is your average profit margin, in percent?',u:'%'},
+      {id:'stock',t:S,q:'How do you source your products?',o:['I hold stock','Dropshipping','Pre-orders','A mix']},
+      {id:'challenge',t:S,q:'What is your biggest challenge right now?',o:['Finding buyers','Pricing','Returns','Knowing what works']}]},
+    store:{label:'Online store',q:[
+      {id:'platform',t:S,q:'Which platform is your store on?',o:['Shopify','WooCommerce','Other']},
+      {id:'revenue',t:N,q:'What was your total sales revenue last month?',u:'amount'},
+      {id:'budget',t:N,q:'How much did you spend on ads last month?',u:'amount'},
+      {id:'returns',t:N,q:'What percentage of orders are returned?',u:'%'},
+      {id:'costs',t:S,q:'Do you know your product costs per item?',o:['Yes, all','Some','Not yet']}]},
+    service:{label:'Service provider',q:[
+      {id:'source',t:S,q:'How do most clients find you?',o:['Referrals','Social media','Google search','Ads','Other']},
+      {id:'enquiries',t:N,q:'How many enquiries do you get in a month?',u:'count'},
+      {id:'close',t:N,q:'Of those, roughly what percentage become paying clients?',u:'%'},
+      {id:'value',t:N,q:'What is the average value of one client?',u:'amount'},
+      {id:'challenge',t:S,q:'What is your biggest challenge right now?',o:['Not enough enquiries','Poor quality enquiries','Closing clients','Knowing what works']}]},
+    local:{label:'Local business',q:[
+      {id:'source',t:S,q:'How do most customers find you?',o:['Walk-ins','Word of mouth','Google Maps or search','Social media','Ads']},
+      {id:'customers',t:N,q:'How many customers do you serve in a typical week?',u:'count'},
+      {id:'spend',t:N,q:'What does the average customer spend?',u:'amount'},
+      {id:'budget',t:N,q:'How much do you spend on advertising in a month?',u:'amount'},
+      {id:'goal',t:S,q:'What do you want ads to do?',o:['More new customers','More repeat visits','Fill quiet periods','Not sure']}]},
+    other:{label:'Something else',q:[
+      {id:'what',t:S,q:'What best describes what you sell?',o:['Physical products','Digital products','Services','Subscriptions']},
+      {id:'revenue',t:N,q:'What was your total sales revenue last month?',u:'amount'},
+      {id:'budget',t:N,q:'How much do you spend on advertising in a month?',u:'amount'},
+      {id:'goal',t:S,q:'What is your main goal?',o:['More sales','Lower cost per sale','Better tracking','Not sure']},
+      {id:'tracking',t:S,q:'How do you track results today?',o:['Spreadsheet','Platform reports','Not really']}]}
+  };
+  var body=document.getElementById('abcBody'),prog=document.getElementById('abcProg'),stepEl=document.getElementById('abcStep'),bar=document.getElementById('abcBar');
+  var state={type:null,answers:[],i:0};
+  function el(h){var d=document.createElement('div');d.innerHTML=h;return d.firstChild;}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
+  function start(){
+    prog.hidden=true;state={type:null,answers:[],i:0};
+    var h='<h2 class="abc-q">What kind of business do you run?</h2><div class="abc-opts">';
+    Object.keys(TYPES).forEach(function(k){h+='<button type="button" class="abc-opt" data-k="'+k+'">'+TYPES[k].label+'</button>';});
+    body.innerHTML=h+'</div>';
+    body.querySelectorAll('.abc-opt').forEach(function(b){b.addEventListener('click',function(){state.type=b.dataset.k;state.i=0;ask();});});
+  }
+  function setProg(n,total){prog.hidden=false;stepEl.textContent='Question '+n+' of '+total;bar.style.width=(n/(total+1)*100)+'%';}
+  function ask(){
+    var qs=TYPES[state.type].q,q=qs[state.i];setProg(state.i+1,qs.length);
+    var h='<h2 class="abc-q">'+esc(q.q)+'</h2>';
+    if(q.t===S){h+='<div class="abc-opts">'+q.o.map(function(o){return '<button type="button" class="abc-opt" data-v="'+esc(o)+'">'+esc(o)+'</button>';}).join('')+'</div>';}
+    else{var pre=q.u==='amount'?'<span class="abc-pre">$</span>':'',suf=q.u==='%'?'<span class="abc-pre">%</span>':'';
+      h+='<form class="abc-num" novalidate><label class="sr-only" for="abcN">Your answer</label>'+pre+'<input class="input" id="abcN" type="number" inputmode="decimal" min="0" step="any" placeholder="0" required>'+suf+'<button class="btn btn-primary" type="submit">Next</button></form><p class="fine" id="abcErr" role="alert"></p>';}
+    h+='<p class="abc-back"><button type="button" class="linklike" id="abcBk">Back</button></p>';
+    body.innerHTML=h;
+    body.querySelectorAll('.abc-opt[data-v]').forEach(function(b){b.addEventListener('click',function(){record(q,b.dataset.v);});});
+    var f=body.querySelector('.abc-num');
+    if(f){var inp=f.querySelector('input');inp.focus();f.addEventListener('submit',function(e){e.preventDefault();var v=inp.value.trim();if(v===''||isNaN(Number(v))||Number(v)<0){document.getElementById('abcErr').textContent='Enter a number, zero or higher.';return;}record(q,v);});}
+    document.getElementById('abcBk').addEventListener('click',function(){if(state.i===0){start();}else{state.i--;state.answers.pop();ask();}});
+  }
+  function record(q,v){state.answers[state.i]={id:q.id,q:q.q,a:v};state.i++;if(state.i<TYPES[state.type].q.length)ask();else contact();}
+  function contact(){
+    var total=TYPES[state.type].q.length;prog.hidden=false;stepEl.textContent='Last step';bar.style.width='92%';
+    body.innerHTML='<h2 class="abc-q">Where should we send your review?</h2><form class="abc-form" id="abcForm" novalidate>'+
+    '<div class="field"><label for="abcName">Your name</label><input class="input" id="abcName" name="name" autocomplete="name" required></div>'+
+    '<div class="field"><label for="abcEmail">Email address</label><input class="input" id="abcEmail" name="email" type="email" autocomplete="email" required></div>'+
+    '<label class="abc-check"><input type="checkbox" id="abcTerms"> <span>I accept the <a href="/terms-of-service/" target="_blank" rel="noopener">terms</a> and agree that my data is handled as described in the <a href="/privacy-policy/" target="_blank" rel="noopener">privacy policy</a>.</span></label>'+
+    '<label class="abc-check"><input type="checkbox" id="abcPromo" checked> <span>Send me occasional tips and product updates. You can opt out at any time.</span></label>'+
+    '<input class="hp" type="text" name="_gotcha" id="abcHp" tabindex="-1" autocomplete="off" aria-hidden="true">'+
+    '<button class="btn btn-primary" id="abcSend" type="submit">Get my free review</button><p class="fine" id="abcMsg" role="alert"></p></form>'+
+    '<p class="abc-back"><button type="button" class="linklike" id="abcBk">Back</button></p>';
+    document.getElementById('abcBk').addEventListener('click',function(){state.i=total-1;state.answers.pop();ask();});
+    document.getElementById('abcForm').addEventListener('submit',submit);
+  }
+  async function submit(e){
+    e.preventDefault();var m=document.getElementById('abcMsg'),n=document.getElementById('abcName').value.trim(),em=document.getElementById('abcEmail').value.trim();
+    if(document.getElementById('abcHp').value)return;
+    if(!n||!em){m.textContent='Enter your name and email address.';return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){m.textContent='Enter a valid email address.';return;}
+    if(!document.getElementById('abcTerms').checked){m.textContent='Please accept the terms to continue.';return;}
+    var btn=document.getElementById('abcSend');btn.disabled=true;btn.textContent='Sending';m.textContent='';
+    var payload={name:n,email:em,source:'Free ad budget check',business_type:TYPES[state.type].label,promotional_opt_in:document.getElementById('abcPromo').checked?'yes':'no',terms_accepted:'yes',_subject:'Ad budget check: '+n+' ('+TYPES[state.type].label+')'};
+    state.answers.forEach(function(a,i){payload['q'+(i+1)+': '+a.q]=a.a;});
+    try{var r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
+      if(r.ok){prog.hidden=true;body.innerHTML='<h2 class="abc-q">Thank you, '+esc(n)+'.</h2><p class="abc-done">Your review is on its way. Expect an email at <strong>'+esc(em)+'</strong> within one hour. If you do not see it, check your spam folder.</p><p><a class="btn btn-ghost" href="/resources/">Read our guides while you wait</a></p>';}
+      else{m.textContent='Something went wrong. Please try again in a moment.';btn.disabled=false;btn.textContent='Get my free review';}
+    }catch(err){m.textContent='Could not send. Check your connection and try again.';btn.disabled=false;btn.textContent='Get my free review';}
+  }
+  start();
+})();
+</script>
+</Layout>

@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import CtaBand from "../../components/CtaBand.astro";
+import insight from "../../fragments/insight.html?raw";
 import vow from "../../fragments/vow.html?raw";
 import { ARTICLES } from "../../data/articles";
 const topics = [...new Set(ARTICLES.map((a) => a.topic))];
@@ -15,7 +16,8 @@ const ld = [{ "@context": "https://schema.org", "@type": "CollectionPage", name:
       <p class="lede">Short, practical answers on tracking sales, costs and profit. No jargon, no made-up statistics.</p>
     </div>
   </header>
-  <Fragment set:html={vow} />
+  <div class="wrap duo"><Fragment set:html={vow} /><Fragment set:html={insight} /></div>
+  <div class="wrap" style="text-align:center;margin-bottom:24px"><a class="btn btn-ghost" href="/ad-budget-check/">Try the free ad budget check</a></div>
   <section class="section" style="padding-top:8px">
     <div class="wrap art-layout">
       <aside class="art-side">
