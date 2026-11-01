@@ -477,12 +477,10 @@ html:not(.dark) .win::after, html:not(.dark) .layer::after { opacity: .6; }
 
 /* TAB STORIES (transform/opacity only) */
 .an{position:relative;min-height:310px;padding:6px 4px 28px;overflow:hidden;text-align:left}
-.an-replay{position:absolute;right:6px;bottom:2px;font:inherit;font-size:12.5px;color:var(--muted);background:none;border:0;cursor:pointer;padding:4px 6px}
-.an-replay:hover{color:var(--ink)}
 .an-logo{position:absolute;left:50%;top:44%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:14px;display:grid;place-items:center;background:#fff;color:#2f6b0f;border:1px solid rgba(47,107,15,.25);box-shadow:0 4px 14px rgba(0,0,0,.12);z-index:3;transition:transform .5s,top .9s cubic-bezier(.4,0,.2,1)}
 .an-logo svg{width:24px;height:auto}
 .an-logo{transition:transform .5s,top .9s cubic-bezier(.4,0,.2,1),left .9s cubic-bezier(.4,0,.2,1)}
-html.dark .an-logo{background:#0d130e;color:#b4ef5d;border-color:rgba(180,239,93,.3);box-shadow:0 4px 14px rgba(0,0,0,.5)}
+html.dark .an-logo{background:#2a3b2c;color:#b4ef5d;border-color:rgba(180,239,93,.4);box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .an-logo.on{animation:anGlowL 1.6s ease-in-out infinite}
 html.dark .an-logo.on{animation-name:anGlowD}
 @keyframes anGlowL{0%,100%{box-shadow:0 0 0 0 rgba(47,107,15,0),0 4px 14px rgba(0,0,0,.12)}50%{box-shadow:0 0 22px 6px rgba(47,160,15,.45),0 4px 14px rgba(0,0,0,.12)}}

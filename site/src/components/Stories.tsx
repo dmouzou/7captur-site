@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Win } from "./Mockups";
 
 const Mark = () => (
   <svg viewBox="99 121 301 257" aria-hidden="true"><path d="M99,121 L400,121 L400,170 L296,170 L296,328 L400,328 L400,378 L200,378 L200,170 L99,170 Z" fill="currentColor" /></svg>
@@ -31,14 +30,11 @@ function useStory(total: number, ms = 1000, gap = 1000) {
 }
 
 function Story({ title, total, children }: { title: string; total: number; children: (s: number) => ReactNode }) {
-  const { ref, s, replay } = useStory(total);
+  const { ref, s } = useStory(total);
   return (
-    <Win title={title} tag="Example">
-      <div className="an" ref={ref}>
-        {children(s)}
-        <button type="button" className="an-replay" onClick={replay}>Replay</button>
-      </div>
-    </Win>
+    <div className="an" ref={ref} role="group" aria-label={title}>
+      {children(s)}
+    </div>
   );
 }
 const Engine = ({ on, style }: { on: boolean; style?: React.CSSProperties }) => <span className={`an-logo${on ? " on" : ""}`} style={style}><Mark /></span>;
