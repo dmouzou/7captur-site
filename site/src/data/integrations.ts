@@ -1,5 +1,5 @@
 // One place for what the public site claims about integrations (spec 4.1, AC-16).
-// `verified: false` renders "Coming soon" instead of "Direct connection available".
+// `verified: false` renders "Coming soon" instead of "Connected platform available".
 // Flip to true only after the connection passes acceptance tests against a real account
 // (OAuth, sync, error handling, disconnect) and credentials are configured in production.
 export type IntegrationState = "direct" | "import" | "manual" | "planned";
@@ -16,7 +16,7 @@ export const INTEGRATIONS: Integration[] = [
 ];
 
 export const stateLabel = (i: Integration): { text: string; cls: string } => {
-  if (i.state === "direct") return i.verified ? { text: "Direct connection available", cls: "badge-live" } : { text: "Coming soon", cls: "badge-soon" };
+  if (i.state === "direct") return i.verified ? { text: "Connected platform available", cls: "badge-live" } : { text: "Coming soon", cls: "badge-soon" };
   if (i.state === "import") return { text: "Import supported", cls: "badge-live" };
   if (i.state === "manual") return { text: "Manual tracking supported", cls: "badge-live" };
   return { text: "Planned", cls: "badge-soon" };
