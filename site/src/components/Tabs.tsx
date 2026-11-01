@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { RecCard, ProvTable, EvidenceMeter, ImportPreview } from "./Mockups";
+import { SocialStory, ResellerStory, ServiceStory, EcomStory } from "./Stories";
 
 const TABS = [
   {
@@ -7,28 +7,28 @@ const TABS = [
     title: "Sell through DMs? Start there.",
     text: "Type in your posts, promotions, enquiries and orders. Aggregate numbers are fine. You get a clear next step, and a plain note on what the data cannot tell you yet.",
     points: ["No website or ad account needed", "Sales from WhatsApp and DMs count as unknown source until you link them", "Small tests, not budget leaps"],
-    mock: () => <RecCard move="Test the studio tour reel again for five days. Keep the budget where it is." why="It brought more enquiries per dollar than the comparison post in the data you entered." unknown="Enquiries are not yet tied to confirmed orders." next="Spend, enquiries and confirmed orders for the same five days." tags={["Evidence: partial", "Source: entered by you"]} />,
+    mock: () => <SocialStory />,
   },
   {
     id: "resellers", label: "Resellers",
     title: "Know what sells before you restock.",
     text: "Record what you spend and what moves. Compare content and promotions without store software.",
     points: ["Import a spreadsheet instead of retyping", "Mixed sources stay labelled", "Missing costs stay unknown, never zero"],
-    mock: () => <ImportPreview />,
+    mock: () => <ResellerStory />,
   },
   {
     id: "services", label: "Services and local",
     title: "Count calls, bookings and visits.",
     text: "Outcomes are not always orders. Log the enquiries that matter and see which posts and promotions bring them.",
     points: ["Calls, bookings and walk-ins as outcomes", "Cost per enquiry where spend is known", "A weekly summary you can read in a minute"],
-    mock: () => <ProvTable />,
+    mock: () => <ServiceStory />,
   },
   {
     id: "ecom", label: "E-commerce brands",
     title: "Go deeper when your data does.",
     text: "Connect your store and ads where available, add returns and costs, and see performance after the costs you declare. Deeper data unlocks deeper calculations.",
     points: ["Store and ad data labelled as connected", "Return after declared costs, not before", "Budget suggestions only when inputs are reliable"],
-    mock: () => <EvidenceMeter level={3} />,
+    mock: () => <EcomStory />,
   },
 ];
 
