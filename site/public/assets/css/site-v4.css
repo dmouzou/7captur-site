@@ -522,3 +522,7 @@ html.dark .an-logo.on{animation-name:anGlowD}
 .an-peels .an-tag.in{opacity:1;transform:none}
 @media (max-width:640px){.an-item{grid-template-columns:78px 1fr 84px}.an-slot{display:none}.an-row{grid-template-columns:1fr 50px 44px;font-size:12.5px}}
 @media (prefers-reduced-motion:reduce){.an *{transition:none!important;animation:none!important}}
+.tab-list{background:transparent;box-shadow:none}
+.duo{align-items:center}
+.duo .vow-section,.duo .insight-section{height:auto}
+.duo .vow-card,.duo .insight-card{height:auto}

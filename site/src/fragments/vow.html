@@ -5,9 +5,9 @@
 <section class="vow-section" id="video-of-the-week">
   <div class="wrap">
     <div class="vow-card" id="vowCard" style="display:none">
-      <div class="vow-eyebrow">Video of the week</div>
+      <div class="vow-eyebrow">Video of the Month</div>
       <h2 class="vow-title" id="vowTitle"></h2>
-      <div class="vow-embed-wrap" id="vowEmbedWrap"><iframe id="vowIframe" src="" title="Video of the week" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="vow-embed-wrap" id="vowEmbedWrap"><iframe id="vowIframe" src="" title="Video of the Month" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
       <p class="vow-desc" id="vowDesc"></p>
     </div>
   </div>
@@ -26,7 +26,7 @@
       var wrap = document.getElementById('vowEmbedWrap');
 
       if(isYoutube){
-        wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + data.youtubeId + '" title="Video of the Week" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + data.youtubeId + '" title="Video of the Month" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
       } else {
         var posterAttr = data.poster ? (' poster="' + data.poster + '"') : '';
         wrap.innerHTML = '<video controls preload="metadata"' + posterAttr + ' style="position:absolute;top:0;left:0;width:100%;height:100%;background:#000"><source src="' + data.filePath + '">Your browser does not support embedded video. <a href="' + data.filePath + '">Download the video instead.</a></video>';
