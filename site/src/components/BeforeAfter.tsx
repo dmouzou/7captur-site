@@ -16,7 +16,7 @@ export default function BeforeAfter() {
         </div>
         <div className="ba3-layer ba3-after">
           <span className="ba3-tag">After</span>
-          <div className="ba3-clean">
+          <div className="ba3-clean" style={{ opacity: Math.max(0, Math.min(1, (78 - v) / 28)), transform: `translateX(${Math.max(0, v - 50) * 0.6}px)` }}>
             <b>Your next move</b>
             <p>Test the video that brought more enquiries per dollar. Keep the budget where it is.</p>
             <ul><li>Why it is suggested</li><li>What we do not know</li><li>What to record next</li></ul>

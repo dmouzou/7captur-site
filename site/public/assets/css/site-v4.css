@@ -362,7 +362,7 @@ html.dark { --lit-on: rgba(255,255,255,.13); } html:not(.dark) { --lit-on: rgba(
 .ba3 { max-width: 860px; margin-inline: auto; text-align: center; }
 .ba3-stage { --cut: 50%; position: relative; height: 340px; border-radius: 28px; overflow: hidden; border: 1px solid var(--glass-edge); box-shadow: var(--glass-shadow); background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); text-align: left; user-select: none; }
 .ba3-layer { position: absolute; inset: 0; }
-.ba3-before { clip-path: inset(0 calc(100% - var(--cut)) 0 0); background: linear-gradient(135deg, rgba(255,120,80,.12), transparent 60%); z-index: 1; }
+.ba3-before { clip-path: inset(0 calc(100% - var(--cut)) 0 0); background: linear-gradient(135deg, rgba(255,120,80,.12), transparent 60%), var(--bg2); z-index: 1; }
 .ba3-after { display: grid; place-items: center; }
 .ba3-tag { position: absolute; top: 16px; left: 18px; z-index: 3; font: 700 12.5px 'Inter Tight', sans-serif; padding: 4px 12px; border-radius: 99px; background: var(--glass); border: 1px solid var(--glass-edge); color: var(--ink); }
 .ba3-after .ba3-tag { left: auto; right: 18px; background: var(--accent-soft); border-color: var(--accent-line); }
