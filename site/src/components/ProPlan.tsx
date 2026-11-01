@@ -1,7 +1,8 @@
 import { useState } from "react";
 import plans from "../data/plans.json";
+const dur = (d: number) => (d < 365 ? `${Math.round(d / 30)} months` : `${Math.round(d / 365)} years`);
 
-type Plan = { name: string; priceMonthly?: number; priceMonthlyFrom?: number; spendBandUsd?: { min: number; max: number }; maxConnections: number };
+type Plan = { name: string; priceMonthly?: number; priceMonthlyFrom?: number; spendBandUsd?: { min: number; max: number }; maxConnections: number; maxBusinesses: number; importsPerMonth: number; historyDays: number; recommendations: { weekly: number } };
 const P = plans.plans as Record<string, Plan>;
 const BANDS = [
   { id: "pro_growth", label: "Under $15k", sub: "Under $15,000 a month in ad spend" },
@@ -25,9 +26,11 @@ export default function ProPlan({ signupUrl }: { signupUrl: string }) {
       <p className="plan-sub">{band.sub}</p>
       <p className="plan-note">Billed monthly. Cancel anytime.</p>
       <ul>
+        <li>{P[id].recommendations.weekly} recommendations a week</li>
+        <li>{P[id].importsPerMonth} imports a month</li>
+        <li>{dur(P[id].historyDays)} of history</li>
         <li>Up to {P[id].maxConnections} connected platforms</li>
-        <li>Larger recommendation allowance and import capacity</li>
-        <li>Longest history</li>
+        <li>Up to {P[id].maxBusinesses} businesses</li>
         <li>Same recommendation engine as every plan</li>
       </ul>
       <a className="btn btn-primary btn-block" href={signupUrl}>Start free</a>

@@ -6,7 +6,7 @@ export default defineConfig({
   site: "https://7captur.com",
   trailingSlash: "always",
   // Removed because it described ad execution, which the product does not do.
-  redirects: { "/articles/assisted-execution-vs-full-automation/": "/resources/", "/how-it-works/": "/platform/", "/articles/": "/resources/",
+  redirects: { "/articles/assisted-execution-vs-full-automation/": "/resources/", "/how-it-works/": "/product/", "/platform/": "/product/", "/articles/": "/resources/",
     "/articles/why-your-meta-roas-is-lying-to-you/": "/articles/roas-vs-profit-break-even-roas/",
     "/articles/the-30-day-return-lag-problem/": "/articles/roas-vs-profit-break-even-roas/",
     "/articles/cogs-adjusted-profitability/": "/articles/roas-vs-profit-break-even-roas/",

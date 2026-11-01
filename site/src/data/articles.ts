@@ -80,7 +80,7 @@ const BASE: Article[] = [
 <p>Count these sales in your business total and label them "unknown source". That keeps your post comparison honest. It also shows how much of your revenue you can and cannot explain, which is useful on its own.</p>` },
       { id: "timing", h: "How long before you trust the results", html: `
 <p>One week of data is mostly noise. A few weeks is better, and a few dozen sales is better still. With small numbers, treat the result as a hint, not a verdict. Try more of what seems to work, then check again.</p>
-<p>That is how <a href="/platform/">7Captur</a> labels its evidence: early signals are marked as early, and stronger claims only appear when there is enough data behind them.</p>` },
+<p>That is how <a href="/product/">7Captur</a> labels its evidence: early signals are marked as early, and stronger claims only appear when there is enough data behind them.</p>` },
     ],
     faq: [
       { q: "How do I track sales from Instagram without a website?", a: "Use a promo code in the caption, a pre-filled WhatsApp or DM message, or ask every buyer which post brought them. Then record each sale against that post. No website or pixel is required." },
@@ -262,7 +262,7 @@ const BASE: Article[] = [
 <li>Do not chase perfect accuracy. A mostly complete log beats a perfect one you stop keeping.</li>
 </ul>` },
       { id: "tools", h: "Where to keep the log", html: `
-<p>A spreadsheet works. So does a notes app. The downside is the weekly summing and comparing. <a href="/platform/">7Captur</a> takes manual enquiries and sales, ties them to posts and ads, and shows what to do next, with each number labelled by where it came from.</p>` },
+<p>A spreadsheet works. So does a notes app. The downside is the weekly summing and comparing. <a href="/product/">7Captur</a> takes manual enquiries and sales, ties them to posts and ads, and shows what to do next, with each number labelled by where it came from.</p>` },
     ],
     faq: [
       { q: "Can I track WhatsApp sales from Facebook or Instagram ads?", a: "Yes. Use ads that open a chat with pre-filled text, then log each enquiry and sale with that source. Match the log against your ad spend to work out cost per enquiry and cost per sale." },
@@ -334,7 +334,7 @@ const BASE: Article[] = [
 <p>Note that break-even is not the goal. It is the floor. Most businesses want a buffer above it to cover overheads and growth.</p>` },
       { id: "no-ads", h: "What if you do not use ad platforms for sales?", html: `
 <p>The same logic applies to boosted posts that bring messages. Replace revenue with the sales you can trace, and compare against your margin. See <a href="/articles/cost-per-enquiry-how-to-calculate/">cost per enquiry</a> and <a href="/articles/track-whatsapp-and-dm-sales/">tracking WhatsApp and DM sales</a> for that setup.</p>
-<p><a href="/platform/">7Captur</a> works this out from your costs and returns and says plainly when it cannot, instead of guessing.</p>` },
+<p><a href="/product/">7Captur</a> works this out from your costs and returns and says plainly when it cannot, instead of guessing.</p>` },
     ],
     faq: [
       { q: "What is a good ROAS?", a: "It depends on your margin. A good ROAS is one above your break-even ROAS, which is 1 divided by your gross margin." },

@@ -14,7 +14,7 @@ const site = [
 ];
 import plans from "../data/plans.json";
 const offers = Object.values(plans.plans as Record<string, any>).filter((p) => typeof p.priceMonthly === "number").map((p) => ({ "@type": "Offer", name: p.name, price: String(p.priceMonthly), priceCurrency: "USD", url: "https://7captur.com/pricing/" }));
-const app = ["/", "/platform/", "/pricing/"].includes(path) ? [{ "@context": "https://schema.org", "@type": "SoftwareApplication", name: "7Captur", url: "https://7captur.com/", applicationCategory: "BusinessApplication", operatingSystem: "Web", description: "Evidence-based marketing recommendations for small businesses and sellers: connect posts, messages, ads and sales to see what is working and what to do next.", offers }] : [];
+const app = ["/", "/product/", "/pricing/"].includes(path) ? [{ "@context": "https://schema.org", "@type": "SoftwareApplication", name: "7Captur", url: "https://7captur.com/", applicationCategory: "BusinessApplication", operatingSystem: "Web", description: "Evidence-based marketing recommendations for small businesses and sellers: connect posts, messages, ads and sales to see what is working and what to do next.", offers }] : [];
 const graph = [...site, ...app, ...jsonld];
 ---
 <!DOCTYPE html>

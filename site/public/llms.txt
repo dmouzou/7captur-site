@@ -4,7 +4,7 @@
 
 ## Key pages
 - [Home](https://7captur.com/): what 7Captur does and who it is for
-- [Platform](https://7captur.com/platform/): how recommendations, evidence levels and connections work
+- [Product](https://7captur.com/product/): how recommendations, evidence levels and connections work
 - [Pricing](https://7captur.com/pricing/): Free, Starter, Growth, Pro and Custom plans
 - [Security](https://7captur.com/security/): data handling and access
 - [Free ad budget check](https://7captur.com/ad-budget-check/): five-question tool that emails a plain-language review of your ad budget

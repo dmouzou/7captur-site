@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import { ARTICLES } from "../data/articles";
 
 const TODAY = "2026-11-01";
-const PRIORITY: Record<string, [string, string]> = { "/": ["weekly", "1.0"], "/pricing/": ["monthly", "0.9"], "/platform/": ["monthly", "0.9"], "/resources/": ["weekly", "0.8"] };
+const PRIORITY: Record<string, [string, string]> = { "/": ["weekly", "1.0"], "/pricing/": ["monthly", "0.9"], "/product/": ["monthly", "0.9"], "/resources/": ["weekly", "0.8"] };
 export const GET: APIRoute = ({ site }) => {
   const files = Object.keys(import.meta.glob("./**/*.astro"));
   const paths = files

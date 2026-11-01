@@ -1,6 +1,6 @@
 export const APP_URL = "https://app.7captur.com";
 export const NAV = [
-  { href: "/platform/", label: "Platform" },
+  { href: "/product/", label: "Product" },
   { href: "/pricing/", label: "Pricing" },
   { href: "/resources/", label: "Resources" },
   { href: "/security/", label: "Security" },
@@ -12,7 +12,7 @@ export const LOGIN = { label: "Log in", href: `${APP_URL}/login` };
 
 // Top bar. Every label is a link; items with `items` also open a panel on hover or focus. No new pages.
 export const MEGA = [
-  { label: "Platform", href: "/platform/" },
+  { label: "Product", href: "/product/" },
   { label: "Pricing", href: "/pricing/" },
   { label: "Resources", href: "/resources/" },
   { label: "About", href: "/about/" },

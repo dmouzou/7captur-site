@@ -7,11 +7,15 @@ import ProPlan from "../../components/ProPlan.tsx";
 import plans from "../../data/plans.json";
 import { CTA } from "../../data/site";
 
-const P = plans.plans as Record<string, { priceMonthly?: number }>;
+const P = plans.plans as Record<string, { priceMonthly?: number; importsPerMonth: number; historyDays: number; maxConnections: number; maxBusinesses: number; recommendations: { weekly: number } }>;
+const dur = (d: number) => (d < 365 ? `${Math.round(d / 30)} month${Math.round(d / 30) === 1 ? "" : "s"}` : `${Math.round(d / 365)} year${Math.round(d / 365) === 1 ? "" : "s"}`);
+const plat = (n: number) => `${n} connected platform${n === 1 ? "" : "s"}`;
+const biz = (n: number) => `${n} business${n === 1 ? "" : "es"}`;
 const faq = [
   { q: "Is the Free plan really free?", a: "Yes. Free is permanent and needs no card. There is no trial that expires. You can stay on Free as long as you like." },
   { q: "What does a paid plan change?", a: "Paid plans give you more room: a larger weekly recommendation allowance, more import capacity, longer history and, on Pro, more connected platforms. The recommendation engine is the same on every plan. What you can conclude depends on your evidence, not your plan." },
-  { q: "What counts as a connected platform?", a: "A direct, read-only connection to a store or ad account, such as Shopify or Google Ads. Typing in data, importing a spreadsheet or uploading a screenshot does not use a connection." },
+  { q: "What counts as a connected platform?", a: "A direct, read-only connection to an e-commerce platform (such as Shopify, WooCommerce or Amazon) or an ad account (Google, Meta or TikTok Ads). E-commerce platforms and ad accounts share one pool, and the limit applies to your whole account, not to each business. Typing in data or importing a file does not use a connection." },
+  { q: "What counts as an import?", a: "Any CSV file, screenshot or document you bring into the app. Typing records in by hand does not count. Your import allowance resets every month." },
   { q: "How is my Pro price decided?", a: "By your monthly ad spend across the platforms you use. Spend we can read from connected accounts is used when available. If you enter it yourself, it is labelled as reported by you. The Growth band is under $15,000 a month, Scale is $15,000 to $30,000, and Pro is $30,000 to $50,000." },
   { q: "What if my spend changes and my band changes?", a: "We tell you before it happens. A new band applies from your next billing date, never silently in the middle of a cycle. If you think the band is wrong, contact us and we will review it." },
   { q: "When do weekly limits reset?", a: "Every Monday in your business time zone. Viewing, rereading and exporting recommendations you already have never uses your allowance, and a recommendation that fails to generate is not counted." },
@@ -38,11 +42,12 @@ const faq = [
         <p class="plan-sub">Start with what you have.</p>
         <ul>
           <li>Manual entry for posts, promotions, enquiries, sales and costs</li>
-          <li>CSV and screenshot import</li>
-          <li>Recommendations every week</li>
+          <li>{P.free.importsPerMonth} imports a month (CSV, screenshot or document)</li>
+          <li>{P.free.recommendations.weekly} recommendations a week</li>
           <li>Weekly summary</li>
-          <li>Basic history</li>
-          <li>One direct connection, optional</li>
+          <li>{dur(P.free.historyDays)} of history</li>
+          <li>{plat(P.free.maxConnections)}, optional</li>
+          <li>{biz(P.free.maxBusinesses)}</li>
         </ul>
         <a class="btn btn-ghost btn-block" href={CTA.href}>Start free</a>
       </div>
@@ -52,10 +57,11 @@ const faq = [
         <p class="plan-sub">For regular marketing.</p>
         <ul>
           <li>Everything in Free</li>
-          <li>More recommendations each week</li>
-          <li>More import capacity</li>
-          <li>Longer history</li>
-          <li>One direct connection</li>
+          <li>{P.starter.recommendations.weekly} recommendations a week</li>
+          <li>{P.starter.importsPerMonth} imports a month</li>
+          <li>{dur(P.starter.historyDays)} of history</li>
+          <li>{plat(P.starter.maxConnections)}</li>
+          <li>{biz(P.starter.maxBusinesses)}</li>
         </ul>
         <a class="btn btn-ghost btn-block" href={CTA.href}>Start free</a>
       </div>
@@ -65,9 +71,11 @@ const faq = [
         <p class="plan-sub">For growing businesses.</p>
         <ul>
           <li>Everything in Starter</li>
-          <li>A larger weekly allowance</li>
-          <li>More records, imports and history</li>
-          <li>One direct connection</li>
+          <li>{P.growth.recommendations.weekly} recommendations a week</li>
+          <li>{P.growth.importsPerMonth} imports a month</li>
+          <li>{dur(P.growth.historyDays)} of history</li>
+          <li>{plat(P.growth.maxConnections)}</li>
+          <li>{biz(P.growth.maxBusinesses)}</li>
         </ul>
         <a class="btn btn-ghost btn-block" href={CTA.href}>Start free</a>
       </div>
@@ -92,10 +100,11 @@ const faq = [
           <tr><td>Same recommendation engine</td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td></tr>
           <tr><td>Manual entry, CSV and screenshot import</td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td></tr>
           <tr><td>Weekly summary</td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td><td class="yes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.500 4.500L19 7.500"/></svg></td></tr>
-          <tr><td>Recommendation allowance</td><td>Basic</td><td>Higher</td><td>Higher</td><td>Highest</td><td>Agreed</td></tr>
-          <tr><td>Import capacity</td><td>Basic</td><td>More</td><td>More</td><td>Most</td><td>Agreed</td></tr>
-          <tr><td>History</td><td>Basic</td><td>Longer</td><td>Longer</td><td>Longest</td><td>Agreed</td></tr>
-          <tr><td>Direct connections</td><td>1</td><td>1</td><td>1</td><td>Up to 3</td><td>4 or more</td></tr>
+          <tr><td>Recommendations a week</td><td>{P.free.recommendations.weekly}</td><td>{P.starter.recommendations.weekly}</td><td>{P.growth.recommendations.weekly}</td><td>{P.pro_growth.recommendations.weekly} to {P.pro_pro.recommendations.weekly}</td><td>{P.custom.recommendations.weekly}</td></tr>
+          <tr><td>Imports a month</td><td>{P.free.importsPerMonth}</td><td>{P.starter.importsPerMonth}</td><td>{P.growth.importsPerMonth}</td><td>{P.pro_growth.importsPerMonth}</td><td>{P.custom.importsPerMonth}</td></tr>
+          <tr><td>History</td><td>{dur(P.free.historyDays)}</td><td>{dur(P.starter.historyDays)}</td><td>{dur(P.growth.historyDays)}</td><td>{dur(P.pro_growth.historyDays)}</td><td>{dur(P.custom.historyDays)}</td></tr>
+          <tr><td>Connected platforms</td><td>{P.free.maxConnections}</td><td>{P.starter.maxConnections}</td><td>{P.growth.maxConnections}</td><td>Up to {P.pro_growth.maxConnections}</td><td>{P.custom.maxConnections} or more</td></tr>
+          <tr><td>Businesses</td><td>{P.free.maxBusinesses}</td><td>{P.starter.maxBusinesses}</td><td>{P.growth.maxBusinesses}</td><td>Up to {P.pro_growth.maxBusinesses}</td><td>Up to {P.custom.maxBusinesses}</td></tr>
           <tr><td>Price</td><td>$0</td><td>${P.starter.priceMonthly}</td><td>${P.growth.priceMonthly}</td><td>$59, $79 or $119</td><td>From $199</td></tr>
         </tbody>
       </table>

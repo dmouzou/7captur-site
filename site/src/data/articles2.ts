@@ -47,7 +47,7 @@ export const MORE: Article[] = [
 <li>Treating missing costs as zero.</li>
 </ul>` },
       { id: "tools", h: "Where tools help", html: `
-<p>A spreadsheet is enough to start. A tool like <a href="/platform/">7Captur</a> helps when the numbers come from several places and you want the next step spelled out, along with how strong the evidence behind it is.</p>` },
+<p>A spreadsheet is enough to start. A tool like <a href="/product/">7Captur</a> helps when the numbers come from several places and you want the next step spelled out, along with how strong the evidence behind it is.</p>` },
     ],
     faq: [
       { q: "How do I optimize my advertising budget?", a: "Know your break-even point, measure results by sales, split money between proven campaigns and tests, change one thing at a time, and review weekly." },
