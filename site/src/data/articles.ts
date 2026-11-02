@@ -90,7 +90,7 @@ const BASE: Article[] = [
       { q: "How many sales do I need before I can trust the pattern?", a: "More is better. A few weeks of data and a few dozen sales gives a reasonable signal. Under that, treat the result as an early hint." },
     ],
     related: ["track-whatsapp-and-dm-sales", "likes-vs-sales-engagement-metrics", "cost-per-enquiry-how-to-calculate"],
-    cta: { h: "See which posts actually bring in sales.", p: "Log posts, enquiries and sales in one place and get a clear next step. Start on the free plan with the data you have." },
+    cta: { h: "See which posts actually bring in sales.", p: "Log posts, enquiries and sales in one place and get a clear next step. Start your free trial with the data you have." },
   },
 
   {
@@ -153,7 +153,7 @@ const BASE: Article[] = [
       { q: "What is a good cost per enquiry?", a: "It depends on your profit per sale and how many enquiries turn into sales. Multiply the two to find the most you can afford per enquiry." },
     ],
     related: ["track-whatsapp-and-dm-sales", "roas-vs-profit-break-even-roas", "track-sales-from-social-media-posts"],
-    cta: { h: "Know what each enquiry really costs you.", p: "Add your spend, enquiries and sales and see cost per enquiry and cost per sale side by side. Start free." },
+    cta: { h: "Know what each enquiry really costs you.", p: "Add your spend, enquiries and sales and see cost per enquiry and cost per sale side by side. Start your free trial." },
   },
 
   {
@@ -214,7 +214,7 @@ const BASE: Article[] = [
       { q: "How often should I review my metrics?", a: "Weekly is enough for most small businesses. Daily numbers swing too much to act on." },
     ],
     related: ["track-sales-from-social-media-posts", "cost-per-enquiry-how-to-calculate", "roas-vs-profit-break-even-roas"],
-    cta: { h: "Judge your posts by what they sold.", p: "7Captur connects posts, enquiries and sales so the next move is clear. Start free." },
+    cta: { h: "Judge your posts by what they sold.", p: "7Captur connects posts, enquiries and sales so the next move is clear. Start your free trial." },
   },
 
   {
@@ -272,7 +272,7 @@ const BASE: Article[] = [
       { q: "How do I track phone call sales too?", a: "Use the same log. Add \"call\" as the channel and ask the caller how they found you." },
     ],
     related: ["track-sales-from-social-media-posts", "cost-per-enquiry-how-to-calculate", "likes-vs-sales-engagement-metrics"],
-    cta: { h: "Turn messages into a clear sales picture.", p: "Log enquiries and sales by source and see what is working. Start on the free plan." },
+    cta: { h: "Turn messages into a clear sales picture.", p: "Log enquiries and sales by source and see what is working. Start your free trial." },
   },
 
   {
@@ -345,7 +345,7 @@ const BASE: Article[] = [
       { q: "What if I do not know my costs?", a: "Treat the result as unknown. Do not use zero for missing costs, because that overstates profit." },
     ],
     related: ["cost-per-enquiry-how-to-calculate", "likes-vs-sales-engagement-metrics", "track-sales-from-social-media-posts"],
-    cta: { h: "Find out if your ads make a profit.", p: "Add your costs and 7Captur shows what your numbers can and cannot prove. Start free." },
+    cta: { h: "Find out if your ads make a profit.", p: "Add your costs and 7Captur shows what your numbers can and cannot prove. Start your free trial." },
   },
 ];
 

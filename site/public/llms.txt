@@ -1,11 +1,11 @@
 # 7Captur
 
-> 7Captur turns a small business's marketing activity (social posts, messages, ads and sales) into clear, evidence-based next steps. Rules decide the recommendation; AI only explains it in plain language. Free plan available. Works without a website.
+> 7Captur turns a small business's marketing activity (social posts, messages, ads and sales) into clear, evidence-based next steps. Rules decide the recommendation; AI only explains it in plain language. 14-day free trial, no card needed. Works without a website.
 
 ## Key pages
 - [Home](https://7captur.com/): what 7Captur does and who it is for
-- [Product](https://7captur.com/product/): how recommendations, evidence levels and connections work
-- [Pricing](https://7captur.com/pricing/): Free, Starter, Growth, Pro and Custom plans
+- [Product](https://7captur.com/product/): how recommendations, evidence levels, the decide-review-learn loop and connections work
+- [Pricing](https://7captur.com/pricing/): Starter, Growth and Custom plans, with a 14-day free trial
 - [Security](https://7captur.com/security/): data handling and access
 - [Free ad budget check](https://7captur.com/ad-budget-check/): five-question tool that emails a plain-language review of your ad budget
 - [Resources](https://7captur.com/resources/): guides for small sellers

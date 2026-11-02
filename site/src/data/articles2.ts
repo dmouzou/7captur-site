@@ -57,7 +57,7 @@ export const MORE: Article[] = [
       { q: "Is marketing budget optimization different from advertising budget optimization?", a: "Marketing budget covers everything including content and tools. Advertising budget covers paid placements. The same profit-first logic applies to both." },
     ],
     related: ["ad-spend-management", "advertising-budget-allocation", "roas-vs-profit-break-even-roas"],
-    cta: { h: "Know where your next dollar should go.", p: "Add your spend and sales and get a clear next step with the evidence behind it. Start free." },
+    cta: { h: "Know where your next dollar should go.", p: "Add your spend and sales and get a clear next step with the evidence behind it. Start your free trial." },
   },
 
   {
@@ -112,7 +112,7 @@ export const MORE: Article[] = [
       { q: "Can a spreadsheet manage ad spend?", a: "Yes, for small budgets. A tool becomes useful when data comes from several sources." },
     ],
     related: ["advertising-budget-optimization", "cost-per-enquiry-how-to-calculate", "ad-performance-tracking"],
-    cta: { h: "Keep spend and sales in one place.", p: "7Captur turns your records into a clear next step. Start on the free plan." },
+    cta: { h: "Keep spend and sales in one place.", p: "7Captur turns your records into a clear next step. Start your free trial." },
   },
 
   {
@@ -169,7 +169,7 @@ export const MORE: Article[] = [
       { q: "What is customer acquisition cost?", a: "Marketing spend divided by the number of new customers it brought in over the same period." },
     ],
     related: ["roas-vs-profit-break-even-roas", "true-roas-explained", "ad-performance-tracking"],
-    cta: { h: "See profit, not only revenue.", p: "Add your costs and get a clear read on what your numbers prove. Start free." },
+    cta: { h: "See profit, not only revenue.", p: "Add your costs and get a clear read on what your numbers prove. Start your free trial." },
   },
 
   {
@@ -223,7 +223,7 @@ export const MORE: Article[] = [
       { q: "How often should I reallocate?", a: "Every few weeks, and in small steps." },
     ],
     related: ["advertising-budget-optimization", "meta-vs-google-ads-first-500", "ad-spend-management"],
-    cta: { h: "Decide where the next dollar goes.", p: "Compare your channels on sales and profit, not clicks. Start free." },
+    cta: { h: "Decide where the next dollar goes.", p: "Compare your channels on sales and profit, not clicks. Start your free trial." },
   },
 
   {
@@ -281,7 +281,7 @@ export const MORE: Article[] = [
       { q: "Is there a ROAS calculator?", a: "The formula is simple enough to use in a spreadsheet: revenue divided by spend, then compare with 1 divided by margin." },
     ],
     related: ["roas-vs-profit-break-even-roas", "ecommerce-analytics-metrics-that-matter", "ad-performance-tracking"],
-    cta: { h: "See your true ROAS.", p: "Add your costs and get a result that says what your numbers can and cannot prove. Start free." },
+    cta: { h: "See your true ROAS.", p: "Add your costs and get a result that says what your numbers can and cannot prove. Start your free trial." },
   },
 
   {
@@ -333,7 +333,7 @@ export const MORE: Article[] = [
       { q: "What is the simplest way to start?", a: "A spreadsheet with one row per campaign per week." },
     ],
     related: ["ad-spend-management", "true-roas-explained", "meta-vs-google-ads-first-500"],
-    cta: { h: "Bring your ad reports together.", p: "Import your exports and see what to do next. Start free." },
+    cta: { h: "Bring your ad reports together.", p: "Import your exports and see what to do next. Start your free trial." },
   },
 
   {
@@ -388,6 +388,6 @@ export const MORE: Article[] = [
       { q: "How do I know if the test worked?", a: "Compare cost per sale or cost per enquiry with the most you can afford to pay." },
     ],
     related: ["advertising-budget-allocation", "advertising-budget-optimization", "ad-performance-tracking"],
-    cta: { h: "Test your first budget with a plan.", p: "Log spend and sales and see whether it paid off. Start free." },
+    cta: { h: "Test your first budget with a plan.", p: "Log spend and sales and see whether it paid off. Start your free trial." },
   },
 ];

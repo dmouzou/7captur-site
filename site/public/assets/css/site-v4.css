@@ -528,3 +528,9 @@ html.dark .an-logo.on{animation-name:anGlowD}
 .duo .vow-card,.duo .insight-card{height:auto}
 .an-logo,html.dark .an-logo{background:transparent;box-shadow:none}
 .an-logo,html.dark .an-logo{border-color:transparent}
+
+/* BILLING TOGGLE */
+.bill-toggle{display:flex;width:fit-content;margin:0 auto 8px;padding:4px;gap:4px;border-radius:99px;border:1px solid var(--glass-edge);background:var(--glass)}
+.bill-toggle button{font:600 14.5px 'Inter Tight',sans-serif;padding:9px 18px;border-radius:99px;border:0;background:transparent;color:var(--body);cursor:pointer}
+.bill-toggle button[aria-pressed="true"]{background:linear-gradient(180deg,#b4ef5d,#8fce3a);color:var(--on-accent)}
+.bill-toggle button span{font-size:12px;font-weight:700;opacity:.85;margin-left:6px}

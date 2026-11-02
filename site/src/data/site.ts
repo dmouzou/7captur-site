@@ -7,7 +7,7 @@ export const NAV = [
   { href: "/about/", label: "About" },
   { href: "/contact/", label: "Contact" },
 ];
-export const CTA = { label: "Start free", href: `${APP_URL}/signup` };
+export const CTA = { label: "Start free trial", href: `${APP_URL}/signup` };
 export const LOGIN = { label: "Log in", href: `${APP_URL}/login` };
 
 // Top bar. Every label is a link; items with `items` also open a panel on hover or focus. No new pages.
