@@ -3,7 +3,7 @@
   "currency": "USD",
   "trialDays": 14,
   "annualDiscountPercent": 20,
-  "notes": "Site plan set. No free plan: 14-day trial of Starter, no card. Connections are counted per account (workspace), across all businesses, and e-commerce and ad accounts share one pool. An import is any CSV, screenshot or document brought into the app. Custom has no published price and includes a monthly strategy call. Growth weekly recommendations and imports are 10x Starter (30 and 50). Weekly summary is a Growth and Custom feature.",
+  "notes": "Site plan set. No free plan: 14-day trial of Starter, no card. Connections are counted per account (workspace), across all businesses, and e-commerce and ad accounts share one pool. An import is any CSV file brought into the app. Custom has no published price and includes a monthly strategy call. Growth weekly recommendations and imports are 10x Starter (30 and 50). Weekly summary is a Growth and Custom feature.",
   "plans": {
     "starter": {
       "name": "Starter",

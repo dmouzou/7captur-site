@@ -39,6 +39,14 @@ function Story({ title, total, children }: { title: string; total: number; child
 }
 const Engine = ({ on, style }: { on: boolean; style?: React.CSSProperties }) => <span className={`an-logo${on ? " on" : ""}`} style={style}><Mark /></span>;
 
+const Next = ({ on, text, ev, src }: { on: boolean; text: string; ev: string; src: string }) => (
+  <div className={`an-next${on ? " in" : ""}`}>
+    <b>Next move</b>
+    <p>{text}</p>
+    <div><em className="an-src">{src}</em><em className="an-ev">{ev}</em></div>
+  </div>
+);
+
 /* 1. Social-first: scattered signals in, post scoreboard out */
 const CHIPS: [string, string, string][] = [["DM: is this available?", "4%", "8%"], ["WhatsApp order", "62%", "4%"], ["Reel", "10%", "62%"], ["Story", "70%", "58%"], ["Which post sold it?", "34%", "80%"]];
 export function SocialStory() {
@@ -54,7 +62,7 @@ export function SocialStory() {
             <div className="an-row"><span>How to choose a size {s >= 4 && <em className="an-tag lime">most sales</em>}</span><span>180</span><span>4</span></div>
             <div className="an-row"><span>Customer photo</span><span>310</span><span>2</span></div>
           </div>
-          <p className={`an-line${s >= 4 ? " in" : ""}`}>Next move: make more like the sizing post.</p>
+          <Next on={s >= 4} text="Make more posts like the sizing post." src="Entered by you" ev="Evidence: partial" />
         </>
       )}
     </Story>
@@ -79,7 +87,7 @@ export function ResellerStory() {
               </div>
             ))}
           </div>
-          <p className={`an-line${s >= 4 ? " in" : ""}`}>Restock the shirt. Add the scarf cost to get a margin.</p>
+          <Next on={s >= 4} text="Restock the shirt. Add the scarf cost for a margin." src="Imported" ev="Evidence: partial" />
         </>
       )}
     </Story>
@@ -99,7 +107,7 @@ export function ServiceStory() {
             <div><span style={{ width: s >= 3 ? "62%" : "10%" }} className="an-fbar">{s >= 3 ? "9 calls booked" : ""}</span></div>
             <div><span style={{ width: s >= 4 ? "38%" : "10%" }} className="an-fbar">{s >= 4 ? "5 clients" : ""}</span></div>
           </div>
-          <p className={`an-line${s >= 4 ? " in" : ""}`}>Cost per enquiry: $6. Calls from Reels are up, referrals are flat.</p>
+          <Next on={s >= 4} text="Put more into Reels. Referrals are flat." src="Entered by you" ev="Evidence: partial" />
         </>
       )}
     </Story>
@@ -124,7 +132,7 @@ export function EcomStory() {
                 <em className={`an-tag grey${s >= 3 ? " in" : ""}`}>Fees -0.2</em>
               </div>
             </div>
-            <p className={`an-line${s >= 4 ? " in" : ""}`}>Below break-even after returns and fees. Hold the budget.</p>
+            <Next on={s >= 4} text="Hold the budget. Below break-even after returns and fees." src="Imported" ev="Evidence: sufficient" />
           </>
         );
       }}

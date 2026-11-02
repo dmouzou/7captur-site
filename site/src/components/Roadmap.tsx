@@ -6,7 +6,7 @@ const STEPS: { icon: IconName; title: string; when: string; text: string; see: s
   { icon: "add", title: "Add what you have", when: "Type, import or connect", text: "Enter posts, promotions, enquiries, sales and costs, import a CSV, or connect a supported source. Imports are shown for you to check before they are saved.", see: ["Record hub with one entry per type", "Import preview before saving"] },
   { icon: "understand", title: "Get a recommendation", when: "When you ask", text: "One concrete action, why it is suggested, what we do not know and what to measure next. It matches the evidence you have, and says so when that evidence is thin.", see: ["The action and the reasons", "What is unknown, what to record"] },
   { icon: "decide", title: "You choose", when: "Your call", text: "Mark it to try, dismiss it or come back later. 7Captur never changes your ads, budgets or posts. Any change happens in your own accounts, made by you.", see: ["Try it, dismiss it, or later", "Nothing changes in your accounts"] },
-  { icon: "clock", title: "Learn from the result", when: "Optional", text: "Record what happened. A weekly summary shows what changed, what you tried, what is missing and where to focus next.", see: ["Weekly summary", "A sharper next recommendation"] },
+  { icon: "clock", title: "Review the result", when: "Optional", text: "Record what happened. On Growth, a weekly summary shows what changed, what you tried, what is missing and where to focus next.", see: ["Weekly summary", "A record of what worked"] },
 ];
 
 export default function Roadmap() {

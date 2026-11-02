@@ -7,7 +7,7 @@ const SCREENS: { icon: IconName; title: string; line: string; view: () => JSX.El
   { icon: "camera", title: "Import", line: "Drop in a file. Columns are matched for you to check.", view: () => <ImportPreview /> },
   { icon: "understand", title: "Label", line: "Every number shows where it came from.", view: () => <ProvTable /> },
   { icon: "decide", title: "Decide", line: "One clear action, with the reasons and the unknowns.", view: () => <RecCard move="Test the studio tour reel again for five days. Keep the budget where it is." why="It brought more enquiries per dollar than the comparison post in the data you entered." unknown="Enquiries are not yet tied to confirmed orders." next="Spend, enquiries and confirmed orders for the same five days." tags={["Evidence: partial", "Source: entered by you"]} /> },
-  { icon: "clock", title: "Review", line: "A weekly summary of what changed and what to do next.", view: () => <Digest /> },
+  { icon: "clock", title: "Review", line: "On Growth, a weekly summary of what changed and what is waiting for review.", view: () => <Digest /> },
 ];
 
 export default function ProductTour() {

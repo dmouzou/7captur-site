@@ -10,6 +10,8 @@
     if (v('f-hp')) return;
     if (!name || !email) { say('Enter your name and email address.', 'is-error'); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { say('Enter a valid email address, like jane@yourstore.com.', 'is-error'); return; }
+    var FREE = ['gmail.com','googlemail.com','outlook.com','hotmail.com','live.com','msn.com','yahoo.com','yahoo.co.uk','ymail.com','icloud.com','me.com','mac.com','aol.com','proton.me','protonmail.com','gmx.com','gmx.net','mail.com','yandex.com','zoho.com','hey.com','fastmail.com','tutanota.com','tuta.io','qq.com','163.com','126.com','web.de'];
+    if (FREE.indexOf(email.split('@')[1].toLowerCase()) !== -1) { say('Please use your business email address, like jane@yourstore.com.', 'is-error'); return; }
     if (!message) { say('Tell us how we can help.', 'is-error'); return; }
     btn.disabled = true; btn.textContent = 'Sending';
     say('');
