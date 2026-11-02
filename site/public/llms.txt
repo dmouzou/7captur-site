@@ -1,6 +1,6 @@
 # 7Captur
 
-> 7Captur turns a small business's marketing activity (social posts, messages, ads and sales) into clear, evidence-based next steps. Rules decide the recommendation; AI only explains it in plain language. 14-day free trial, no card needed. Works without a website.
+> 7Captur turns a small business's marketing activity (social posts, messages, ads and sales) into clear, evidence-based next steps. Fixed rules decide the recommendation, and every result shows how strong its evidence is. 14-day free trial, no card needed. Works without a website.
 
 ## Key pages
 - [Home](https://7captur.com/): what 7Captur does and who it is for

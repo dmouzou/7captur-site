@@ -27,7 +27,7 @@ export function Win({ title, children, tag }: { title: string; children: ReactNo
   );
 }
 
-const SRC: Record<string, string> = { entered: "Entered by you", imported: "Imported", screenshot: "Screenshot, confirmed", connected: "Connected", unknown: "Unknown source" };
+const SRC: Record<string, string> = { entered: "Entered by you", imported: "Imported", connected: "Connected", unknown: "Unknown source" };
 export function Src({ k }: { k: keyof typeof SRC }) {
   return <span className={`src src-${k}`}><b />{SRC[k]}</span>;
 }
@@ -52,7 +52,7 @@ export function ProvTable() {
   const rows: [string, string, string, keyof typeof SRC][] = [
     ["Reel: studio tour", "$42.00", "31 enquiries", "entered"],
     ["Story promo, week 2", "$118.50", "64 clicks", "imported"],
-    ["Carousel: new scents", "$30.00", "18 enquiries", "screenshot"],
+    ["Carousel: new scents", "$30.00", "18 enquiries", "entered"],
     ["Orders via WhatsApp", "$264.00", "9 orders", "unknown"],
   ];
   const n = useLoop(rows.length + 1);
@@ -139,7 +139,7 @@ export function HubMock() {
     ["spend", "Record Ad Spend", "Daily campaign expenditures"],
     ["posts", "Record Posts", "Social media creatives & hooks"],
     ["plug", "Integrations", "Connect Shopify & Google Ads"],
-    ["camera", "Screenshot OCR", "Auto-extract ads & metrics"],
+    ["add", "Import a file", "Match columns from a CSV"],
   ];
   const n = useLoop(items.length - 1, 1100, 1100);
   return (

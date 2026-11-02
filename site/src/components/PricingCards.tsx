@@ -22,13 +22,11 @@ export default function PricingCards({ signupUrl }: { signupUrl: string }) {
           <p className="plan-sub">{bill(S)}. For regular marketing.</p>
           <ul>
             <li>Manual entry for posts, promotions, enquiries, sales and costs</li>
-            <li>CSV, screenshot and document import</li>
-            <li>Weekly summary with decision reviews</li>
+            <li>CSV import</li>
             <li>{check(S.maxConnections)}</li>
             <li>{ws(S.maxBusinesses)}</li>
           </ul>
           <a className="btn btn-primary btn-block" href={signupUrl}>Start 14-day free trial</a>
-          <p className="plan-note">No card needed.</p>
         </div>
         <div className="plan is-lit">
           <div className="plan-name">Growth <span className="plan-badge">Most capacity</span></div>
@@ -36,6 +34,8 @@ export default function PricingCards({ signupUrl }: { signupUrl: string }) {
           <p className="plan-sub">{bill(G)}. For growing businesses.</p>
           <ul>
             <li>Everything in Starter</li>
+            <li>Weekly summary with decision reviews</li>
+            <li>10x Starter's weekly recommendations and imports</li>
             <li>{check(G.maxConnections)}</li>
             <li>{ws(G.maxBusinesses)}</li>
             <li>Priority support</li>

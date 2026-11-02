@@ -5,7 +5,7 @@ const Mark = () => (
 );
 
 /** Plays stages 0..total once, waits `gap` ms, then plays again. Pauses off-screen. Static final frame when motion is reduced. */
-function useStory(total: number, ms = 1000, gap = 1000) {
+export function useStory(total: number, ms = 1000, gap = 1000) {
   const ref = useRef<HTMLDivElement>(null);
   const [s, setS] = useState(total);
   const [k, setK] = useState(0);

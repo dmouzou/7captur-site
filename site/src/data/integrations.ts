@@ -10,7 +10,7 @@ export const INTEGRATIONS: Integration[] = [
   { name: "Google Ads", what: "Campaign spend, clicks and impressions, read-only", state: "direct", verified: false, logos: ["googleads"] },
   { name: "Meta Ads", what: "Spend and results from an Ads Manager CSV export", state: "import", verified: true, logos: ["meta"] },
   { name: "TikTok Ads", what: "Spend and results from a CSV export", state: "import", verified: true, logos: ["tiktok"] },
-  { name: "Instagram, Facebook and TikTok posts", what: "Enter post metrics, import a file or upload a screenshot", state: "manual", verified: true, logos: ["instagram","facebook","tiktok"] },
+  { name: "Instagram, Facebook and TikTok posts", what: "Enter post metrics or import a file", state: "manual", verified: true, logos: ["instagram","facebook","tiktok"] },
   { name: "WhatsApp, DMs, phone and in-person", what: "Log enquiries and sales by hand", state: "manual", verified: true, logos: ["whatsapp"] },
   { name: "WooCommerce", what: "Orders and refunds", state: "planned", verified: true, logos: ["woocommerce"] },
 ];

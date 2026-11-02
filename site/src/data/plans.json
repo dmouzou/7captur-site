@@ -3,7 +3,7 @@
   "currency": "USD",
   "trialDays": 14,
   "annualDiscountPercent": 20,
-  "notes": "Site plan set. No free plan: 14-day trial of Starter, no card. Connections are counted per account (workspace), across all businesses, and e-commerce and ad accounts share one pool. An import is any CSV, screenshot or document brought into the app. Custom has no published price and includes a monthly strategy call.",
+  "notes": "Site plan set. No free plan: 14-day trial of Starter, no card. Connections are counted per account (workspace), across all businesses, and e-commerce and ad accounts share one pool. An import is any CSV, screenshot or document brought into the app. Custom has no published price and includes a monthly strategy call. Growth weekly recommendations and imports are 10x Starter (30 and 50). Weekly summary is a Growth and Custom feature.",
   "plans": {
     "starter": {
       "name": "Starter",
@@ -11,7 +11,10 @@
       "priceAnnualMonthly": 39,
       "maxConnections": 2,
       "maxBusinesses": 1,
-      "recommendations": { "weekly": 3, "monthly": null },
+      "recommendations": {
+        "weekly": 3,
+        "monthly": null
+      },
       "importsPerMonth": 5,
       "historyDays": 30,
       "prioritySupport": false
@@ -22,7 +25,10 @@
       "priceAnnualMonthly": 159,
       "maxConnections": 5,
       "maxBusinesses": 2,
-      "recommendations": { "weekly": 25, "monthly": null },
+      "recommendations": {
+        "weekly": 30,
+        "monthly": null
+      },
       "importsPerMonth": 50,
       "historyDays": 365,
       "prioritySupport": true
@@ -31,7 +37,10 @@
       "name": "Custom",
       "maxConnections": null,
       "maxBusinesses": null,
-      "recommendations": { "weekly": null, "monthly": null },
+      "recommendations": {
+        "weekly": null,
+        "monthly": null
+      },
       "importsPerMonth": null,
       "historyDays": null,
       "prioritySupport": true,

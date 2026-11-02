@@ -1,4 +1,5 @@
 ---
+import LoopStory from "../components/LoopStory.tsx";
 import { ARTICLES } from "../data/articles";
 import Layout from "../layouts/Layout.astro";
 import Faq from "../components/Faq.astro";
@@ -14,12 +15,12 @@ import { RecCard, ProvTable, EvidenceMeter, ImportPreview, Digest, HubMock } fro
 import { CTA, BOOK } from "../data/site";
 
 const faq = [
-  { q: "Do I need a website or an ad account?", a: "No. You can start by typing in your posts, promotions, enquiries, sales and costs, importing a spreadsheet, or uploading a screenshot. Connecting a store or ad account is optional." },
+  { q: "Do I need a website or an ad account?", a: "No. You can start by typing in your posts, promotions, enquiries, sales and costs, or importing a CSV file. Connecting a store or ad account is optional." },
   { q: "What does 7Captur actually tell me?", a: "One clear next step, why it is suggested, what the data cannot tell us, and what to record next. When the evidence is thin, it says so and suggests a small test instead of guessing." },
   { q: "Will it change my ads or posts?", a: "No. 7Captur only reads data and gives you recommendations. You decide whether to act, and you make any change yourself in your own accounts." },
   { q: "What if I do not know my costs?", a: "Missing costs are treated as unknown, never as zero. You still get guidance, but 7Captur will not claim profit or return after costs until you provide the costs it needs." },
   { q: "Can I use it if customers order through DMs or WhatsApp?", a: "Yes. Log enquiries and sales by hand. Sales that cannot be tied to a post or promotion still count toward your business totals, and they are labelled as unknown source." },
-  { q: "Can I bring in Meta or Google ad data?", a: "Yes. Import an Ads Manager export, or connect Google Ads directly where available. Every number is labelled by where it came from: entered by you, imported, extracted from a screenshot, or connected." },
+  { q: "Can I bring in Meta or Google ad data?", a: "Yes. Import an Ads Manager export, or connect Google Ads directly where available. Every number is labelled by where it came from: entered by you, imported, or connected." },
   { q: "Which currencies are supported?", a: "Each business picks its own currency, and original amounts are kept. Records in a different currency are left out of comparisons, with a warning, rather than silently mixed." },
   { q: "Is my data safe?", a: "We ask for the narrowest access that works, store connection credentials encrypted, and let you disconnect, export or delete at any time. See the <a href=\"/security/\">security page</a>." },
 ];
@@ -60,7 +61,7 @@ const faq = [
     </div>
     <div data-reveal style="margin-bottom:48px"><BeforeAfter client:visible /></div>
     <div class="layers" data-reveal>
-      <div class="layer"><span class="tile"><Icon name="add" size={26} /></span><h3>Add</h3><p>Type it in, import a spreadsheet or an Ads Manager export, upload a screenshot, or connect a store or ad account where available.</p><ul><li>Posts</li><li>Promotions</li><li>Enquiries</li><li>Sales</li><li>Costs</li></ul></div>
+      <div class="layer"><span class="tile"><Icon name="add" size={26} /></span><h3>Add</h3><p>Type it in, import a CSV file or an Ads Manager export, or connect a store or ad account where available.</p><ul><li>Posts</li><li>Promotions</li><li>Enquiries</li><li>Sales</li><li>Costs</li></ul></div>
       <div class="layer"><span class="tile"><Icon name="understand" size={26} /></span><h3>Understand</h3><p>Every number is labelled by where it came from. Gaps and mismatches are flagged, and missing costs stay unknown instead of becoming zero.</p><ul><li>Evidence labels</li><li>Gap checks</li><li>Currency safe</li></ul></div>
       <div class="layer"><span class="tile"><Icon name="decide" size={26} /></span><h3>Decide</h3><p>One clear action, why it is suggested, what the data cannot tell us and what to record next. You choose. Nothing changes in your accounts.</p><ul><li>Recommendations</li><li>Weekly summary</li></ul></div>
     </div>
@@ -71,13 +72,9 @@ const faq = [
   <div class="wrap">
     <div class="section-head" data-reveal>
       <h2>Recommendations first. No dashboard maze.</h2>
-      <p class="lede">Most tools hand you charts and leave the thinking to you. 7Captur leads with one clear next step, then helps you check how it went.</p>
+      <p class="lede">Most tools hand you charts and leave the thinking to you. 7Captur leads with one clear next step, then makes sure someone checks how it went.</p>
     </div>
-    <div class="facts" data-reveal>
-      <div class="fact"><h3>Decide</h3><p>One recommended move, with the reasons and what we do not know yet.</p></div>
-      <div class="fact"><h3>Review</h3><p>Every decision gets a review date, and your weekly summary lists what is waiting.</p></div>
-      <div class="fact"><h3>Learn</h3><p>Record how it went and keep a history of what worked.</p></div>
-    </div>
+    <div data-reveal><LoopStory client:visible /></div>
     <p class="fine"><a href="/product/#review">See how the review loop works</a></p>
   </div>
 </section>
