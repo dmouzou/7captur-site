@@ -23,6 +23,7 @@ export default function PricingCards({ signupUrl }: { signupUrl: string }) {
           <ul>
             <li>Manual entry for posts, promotions, enquiries, sales and costs</li>
             <li>CSV import</li>
+            <li>{S.aiFollowUps} AI follow-up credits a month</li>
             <li>{check(S.maxConnections)}</li>
             <li>{ws(S.maxBusinesses)}</li>
           </ul>
@@ -36,6 +37,7 @@ export default function PricingCards({ signupUrl }: { signupUrl: string }) {
             <li>Everything in Starter</li>
             <li>Weekly summary with decision reviews</li>
             <li>10x Starter's weekly recommendations and imports</li>
+            <li>{G.aiFollowUps} AI follow-up credits a month (10x Starter)</li>
             <li>{check(G.maxConnections)}</li>
             <li>{ws(G.maxBusinesses)}</li>
             <li>Priority support</li>

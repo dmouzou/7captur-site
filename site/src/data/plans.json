@@ -1,9 +1,9 @@
 {
-  "version": 3,
+  "version": 4,
   "currency": "USD",
   "trialDays": 14,
   "annualDiscountPercent": 20,
-  "notes": "Site plan set. No free plan: 14-day trial of Starter, no card. Connections are counted per account (workspace), across all businesses, and e-commerce and ad accounts share one pool. An import is any CSV file brought into the app. Custom has no published price and includes a monthly strategy call. Growth weekly recommendations and imports are 10x Starter (30 and 50). Weekly summary is a Growth and Custom feature.",
+  "notes": "Site plan set. No free plan: 14-day trial of Starter, no card. Connections are counted per account (workspace), across all businesses, and e-commerce and ad accounts share one pool. An import is any CSV file brought into the app. Custom has no published price and includes a monthly strategy call. Growth weekly recommendations and imports are 10x Starter (30 and 50). Weekly summary is a Growth and Custom feature. AI follow-up credits are a separate monthly allowance for questions about a saved decision: Starter 10, Growth 100 (10x), Custom agreed. They never use recommendation credits.",
   "plans": {
     "starter": {
       "name": "Starter",
@@ -17,7 +17,8 @@
       },
       "importsPerMonth": 5,
       "historyDays": 30,
-      "prioritySupport": false
+      "prioritySupport": false,
+      "aiFollowUps": 10
     },
     "growth": {
       "name": "Growth",
@@ -31,7 +32,8 @@
       },
       "importsPerMonth": 50,
       "historyDays": 365,
-      "prioritySupport": true
+      "prioritySupport": true,
+      "aiFollowUps": 100
     },
     "custom": {
       "name": "Custom",
@@ -44,7 +46,8 @@
       "importsPerMonth": null,
       "historyDays": null,
       "prioritySupport": true,
-      "monthlyStrategyCall": true
+      "monthlyStrategyCall": true,
+      "aiFollowUps": null
     }
   }
 }

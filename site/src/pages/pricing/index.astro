@@ -13,9 +13,10 @@ const yes = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke=
 const faq = [
   { q: "Is there a free plan?", a: "No. Every new account gets a 14-day free trial of Starter, with no card needed. When the trial ends, pick a plan to keep going." },
   { q: "What happens when my trial ends?", a: "If you do not pick a plan, your account becomes read-only for 30 days. Your data is kept and you can export it at any time. After that, we email you before deleting it." },
-  { q: "What does a higher plan change?", a: "More room: 10x the weekly recommendations and imports, longer history, more connected platforms and business workspaces, plus the weekly summary and priority support on Growth. The recommendation engine is the same on every plan. What you can conclude depends on your evidence, not your plan." },
+  { q: "What does a higher plan change?", a: "More room: 10x the weekly recommendations, imports and AI follow-up credits, longer history, more connected platforms and business workspaces, plus the weekly summary and priority support on Growth. The recommendation engine is the same on every plan. What you can conclude depends on your evidence, not your plan." },
   { q: "What counts as a connected platform?", a: "A direct, read-only connection to an e-commerce platform (such as Shopify, WooCommerce or Amazon) or an ad account (Google, Meta or TikTok Ads). E-commerce platforms and ad accounts share one pool, and the limit applies to your whole account, not to each business workspace. Typing in data or importing a file does not use a connection." },
   { q: "What is a business workspace?", a: "A separate space for one business, with its own records, recommendations and weekly summary. Your plan sets how many you can have." },
+  { q: "What are AI follow-up credits?", a: "Each saved decision lets you ask follow-up questions, such as why one option was chosen over another. One question uses one credit. Starter has 10 credits a month and Growth has 100, with a cap on how many questions one decision can take. Follow-up credits are separate from your weekly recommendations, so asking never uses up a recommendation. Answers are written by AI and can make mistakes. The recommendation itself comes from 7Captur's decision engine and does not change." },
   { q: "What counts as an import?", a: "Any CSV file you bring into the app. Typing records in by hand does not count. Your import allowance resets every month." },
   { q: "How does annual billing work?", a: "Annual saves 20%. You pay once a year, and the price shown is the monthly equivalent. Starter is $468 a year and Growth is $1,908 a year. Monthly billing is available at $49 and $199." },
   { q: "When do weekly limits reset?", a: "Every Monday in your business time zone. Viewing, rereading and exporting recommendations you already have never uses your allowance, and a recommendation that fails to generate is not counted." },
@@ -52,6 +53,7 @@ const faq = [
           <tr><td>Manual entry and CSV import</td><td class="yes" set:html={yes}></td><td class="yes" set:html={yes}></td><td class="yes" set:html={yes}></td></tr>
           <tr><td>Weekly summary with decision reviews</td><td>No</td><td class="yes" set:html={yes}></td><td class="yes" set:html={yes}></td></tr>
           <tr><td>Recommendations a week</td><td>{S.recommendations.weekly}</td><td>{G.recommendations.weekly} (10x Starter)</td><td>Agreed</td></tr>
+          <tr><td>AI follow-up credits a month</td><td>{S.aiFollowUps}</td><td>{G.aiFollowUps} (10x Starter)</td><td>Agreed</td></tr>
           <tr><td>Imports a month</td><td>{S.importsPerMonth}</td><td>{G.importsPerMonth} (10x Starter)</td><td>Agreed</td></tr>
           <tr><td>History</td><td>{dur(S.historyDays)}</td><td>{dur(G.historyDays)}</td><td>Agreed</td></tr>
           <tr><td>Connected platforms</td><td>{S.maxConnections}</td><td>{G.maxConnections}</td><td>Agreed</td></tr>
