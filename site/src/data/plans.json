@@ -1,9 +1,9 @@
 {
-  "version": 4,
+  "version": 5,
   "currency": "USD",
   "trialDays": 14,
   "annualDiscountPercent": 20,
-  "notes": "Site plan set. No free plan: 14-day trial of Starter, no card. Connections are counted per account (workspace), across all businesses, and e-commerce and ad accounts share one pool. An import is any CSV file brought into the app. Custom has no published price and includes a monthly strategy call. Growth weekly recommendations and imports are 10x Starter (30 and 50). Weekly summary is a Growth and Custom feature. AI follow-up credits are a separate monthly allowance for questions about a saved decision: Starter 10, Growth 100 (10x), Custom agreed. They never use recommendation credits.",
+  "notes": "Site plan set, matches the app (pricing v5). No free plan: 14-day trial of Starter, no card. The plan belongs to the account. maxBusinesses is the number of business workspaces (Starter 1, Growth 3). maxConnections is PER business workspace, because each workspace is a separate business: Growth connects up to 7 platforms in every workspace, and e-commerce and ad accounts share that pool. Recommendations, imports and AI follow-up credits are shared by all workspaces of the account. An import is any CSV file brought into the app. Custom has no published price and includes a monthly strategy call. Growth weekly recommendations are 15 (5x Starter) and imports are 50 (10x Starter). Weekly summary and priority support are Growth and Custom features. AI follow-up credits are a separate monthly allowance for questions about a saved decision: Starter 10, Growth 100 (10x), Custom agreed. They never use recommendation credits.",
   "plans": {
     "starter": {
       "name": "Starter",
@@ -24,10 +24,10 @@
       "name": "Growth",
       "priceMonthly": 199,
       "priceAnnualMonthly": 159,
-      "maxConnections": 5,
-      "maxBusinesses": 2,
+      "maxConnections": 7,
+      "maxBusinesses": 3,
       "recommendations": {
-        "weekly": 30,
+        "weekly": 15,
         "monthly": null
       },
       "importsPerMonth": 50,

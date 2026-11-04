@@ -5,7 +5,7 @@
 ## Key pages
 - [Home](https://7captur.com/): what 7Captur does and who it is for
 - [Product](https://7captur.com/product/): how recommendations, evidence levels, AI follow-up questions on decisions, the decide-review-learn loop and connections work
-- [Pricing](https://7captur.com/pricing/): Starter, Growth and Custom plans, with a 14-day free trial; AI follow-up credits are 10 a month on Starter and 100 on Growth
+- [Pricing](https://7captur.com/pricing/): Starter, Growth and Custom plans, with a 14-day free trial; AI follow-up credits are 10 a month on Starter and 100 on Growth; Growth includes 15 recommendations a week, 3 business workspaces and 7 connected platforms per workspace, with weekly summaries and priority support
 - [Security](https://7captur.com/security/): data handling and access
 - [Free ad budget check](https://7captur.com/ad-budget-check/): five-question tool that emails a plain-language review of your ad budget
 - [Resources](https://7captur.com/resources/): guides for small sellers

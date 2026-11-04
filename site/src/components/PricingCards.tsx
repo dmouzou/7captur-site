@@ -2,7 +2,7 @@ import { useState } from "react";
 import plans from "../data/plans.json";
 
 const S = plans.plans.starter, G = plans.plans.growth;
-const check = (n: number) => `${n} connected platform${n === 1 ? "" : "s"}`;
+const check = (n: number, perWorkspace = false) => `${n} connected platform${n === 1 ? "" : "s"}${perWorkspace ? " per business workspace" : ""}`;
 const ws = (n: number) => `${n} business workspace${n === 1 ? "" : "s"}`;
 
 export default function PricingCards({ signupUrl }: { signupUrl: string }) {
@@ -36,9 +36,9 @@ export default function PricingCards({ signupUrl }: { signupUrl: string }) {
           <ul>
             <li>Everything in Starter</li>
             <li>Weekly summary with decision reviews</li>
-            <li>10x Starter's weekly recommendations and imports</li>
+            <li>{G.recommendations.weekly} recommendations a week and {G.importsPerMonth} imports a month, shared across your workspaces</li>
             <li>{G.aiFollowUps} AI follow-up credits a month (10x Starter)</li>
-            <li>{check(G.maxConnections)}</li>
+            <li>{check(G.maxConnections, true)}</li>
             <li>{ws(G.maxBusinesses)}</li>
             <li>Priority support</li>
           </ul>
