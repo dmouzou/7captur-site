@@ -3,9 +3,11 @@ import { ARTICLES } from "../data/articles";
 import Layout from "../layouts/Layout.astro";
 import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
-import IntegrationGrid from "../components/IntegrationGrid.astro";
+import ArticleCarousel from "../components/ArticleCarousel";
+import LayerCards from "../components/LayerCards";
 import Marquee from "../components/Marquee.astro";
 import Tabs from "../components/Tabs";
+import HeroWords from "../components/HeroWords.tsx";
 import HeroCarousel from "../components/HeroCarousel";
 import BeforeAfter from "../components/BeforeAfter";
 import ProductTour from "../components/ProductTour";
@@ -25,16 +27,16 @@ const faq = [
 ];
 ---
 <Layout
-  title="7Captur | Know what's working. Decide what to do next."
-  description="7Captur turns your marketing activity into clear, evidence-based next steps, from social posts and messages to paid ads and e-commerce sales. Start with the data you have."
+  title="7Captur | Grow your business with one clear decision"
+  description="Turn your marketing activity into clear, evidence-based next steps, from social posts and messages to paid ads and e-commerce sales. Start with the data you have."
   path="/" current="/">
 <main>
 
 <header class="hero">
   <div class="wrap hero-grid is-product">
     <div>
-      <h1>Know what's working. Decide what to do next.</h1>
-      <p class="hero-sub">7Captur turns your marketing activity into clear, evidence-based next steps, from social posts and messages to paid ads and e-commerce sales. Start with the data you have. Add more as you grow.</p>
+      <h1><span class="h1-line">Grow your business</span> <span class="h1-line h1-nowrap">with one <HeroWords client:load /> decision</span></h1>
+      <p class="hero-sub">Turn your marketing activity into clear, evidence-based next steps, from social posts and messages to paid ads and e-commerce sales. Start with the data you have. Add more as you grow.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href={CTA.href}>{CTA.label}</a>
         <a class="btn btn-ghost" href={BOOK.href}>{BOOK.label}</a>
@@ -50,8 +52,6 @@ const faq = [
   </div>
 </header>
 
-<Marquee />
-
 <section class="section">
   <div class="wrap">
     <div class="section-head" data-reveal>
@@ -59,11 +59,7 @@ const faq = [
       <p class="lede">Three layers, one engine. It picks how far to go from the data in front of it, not from the plan you are on.</p>
     </div>
     <div data-reveal style="margin-bottom:48px"><BeforeAfter client:visible /></div>
-    <div class="layers" data-reveal>
-      <div class="layer"><span class="tile"><Icon name="add" size={26} /></span><h3>Add</h3><p>Type it in, import a CSV file or an Ads Manager export, or connect a store or ad account where available.</p><ul><li>Posts</li><li>Promotions</li><li>Enquiries</li><li>Sales</li><li>Costs</li></ul></div>
-      <div class="layer"><span class="tile"><Icon name="understand" size={26} /></span><h3>Understand</h3><p>Every number is labelled by where it came from. Gaps and mismatches are flagged, and missing costs stay unknown instead of becoming zero.</p><ul><li>Evidence labels</li><li>Gap checks</li><li>Currency safe</li></ul></div>
-      <div class="layer"><span class="tile"><Icon name="decide" size={26} /></span><h3>Decide</h3><p>One clear action, why it is suggested, what the data cannot tell us and what to record next. You choose. Nothing changes in your accounts.</p><ul><li>Recommendations</li><li>Weekly summary</li></ul></div>
-    </div>
+    <div data-reveal><LayerCards ctaHref={CTA.href} ctaLabel={CTA.label} client:visible /></div>
   </div>
 </section>
 
@@ -118,10 +114,10 @@ const faq = [
 <section class="section band" id="connections">
   <div class="wrap">
     <div class="section-head" data-reveal>
-      <h2>Connect when it helps. Import or type when it does not.</h2>
-      <p class="lede">A channel listed here is not always a connected platform. We label exactly what is supported.</p>
+      <h2>Connect or Import your data. Your choice.</h2>
+      <p class="lede">Connect a store or ad account, import a CSV, or type it in. Whatever fits your day.</p>
     </div>
-    <div data-reveal><IntegrationGrid /></div>
+    <div data-reveal><Marquee /></div>
     <p class="fine">Connected platforms are read-only. <a href="/security/">Read the security details</a>.</p>
   </div>
 </section>
@@ -130,12 +126,12 @@ const faq = [
   <div class="wrap">
     <div class="section-head" data-reveal>
       <h2>Read before you decide.</h2>
-      <p class="lede">Plain-language notes on measuring marketing without fooling yourself.</p>
+      <p class="lede">Plain-language notes on measuring marketing without fooling yourself. Visit the resources page, or try our free ad budget check to see where your spend stands.</p>
     </div>
-    <div class="res-grid" data-reveal>
-      {ARTICLES.slice(0,3).map((a) => (
-        <a class="res" href={`/articles/${a.slug}/`}><span class="tag">{a.topic}</span><h3>{a.title}</h3><p>{a.description}</p></a>
-      ))}
+    <div data-reveal><ArticleCarousel client:visible items={ARTICLES.map((a) => ({ slug: a.slug, topic: a.topic, title: a.title, description: a.description }))} /></div>
+    <div class="res-cta" data-reveal>
+      <a class="btn btn-primary" href="/resources/">Go to the resources page</a>
+      <a class="btn btn-ghost" href="/ad-budget-check/">Try the free ad budget check</a>
     </div>
   </div>
 </section>
