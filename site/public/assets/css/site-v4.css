@@ -734,3 +734,6 @@ button { font-family: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .lc-flow, .lc-orbit-flow, .lc-grow, .lc-pulse, .lc-backdrop, .lc-sheet { animation: none; }
 }
+
+/* "decision" always sits on its own line, so the width change of the rolling word never leaves a gap beside it */
+.hero h1 .h1-line { display: block; }
