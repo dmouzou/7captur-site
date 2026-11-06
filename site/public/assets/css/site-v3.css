@@ -18,7 +18,7 @@ h2 { font-size: clamp(32px, 4.2vw, 56px); line-height: 1.04; letter-spacing: -.0
 .nav-links { gap: 6px; align-items: center; }
 .nav-links > li > a, .mega-btn {
   display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 9px;
-  font: 500 14.5px 'DM Sans', system-ui, sans-serif; color: var(--body); text-decoration: none; background: none; border: 0; cursor: pointer;
+  font: 500 14.5px 'Inter', system-ui, sans-serif; color: var(--body); text-decoration: none; background: none; border: 0; cursor: pointer;
 }
 .nav-links > li > a:hover, .mega-btn:hover, .mega-btn[aria-expanded="true"] { color: var(--ink); background: var(--accent-soft); }
 .mega-btn svg { transition: transform .15s; }
@@ -32,7 +32,7 @@ h2 { font-size: clamp(32px, 4.2vw, 56px); line-height: 1.04; letter-spacing: -.0
 .mega ul { list-style: none; display: grid; gap: 2px; }
 .mega a { display: block; padding: 12px 14px; border-radius: 10px; text-decoration: none; }
 .mega a:hover { background: var(--accent-soft); }
-.mega b { display: block; font: 500 14.5px 'DM Sans', system-ui, sans-serif; color: var(--ink); }
+.mega b { display: block; font: 500 14.5px 'Inter', system-ui, sans-serif; color: var(--ink); }
 .mega span { display: block; font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
 
 /* ---------- Hero ---------- */
@@ -50,9 +50,9 @@ h2 { font-size: clamp(32px, 4.2vw, 56px); line-height: 1.04; letter-spacing: -.0
 .win { background: var(--surface); border: 1px solid var(--line-strong); border-radius: 18px; box-shadow: var(--shadow); overflow: hidden; text-align: left; }
 .win-bar { display: flex; align-items: center; gap: 6px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--bg2); }
 .win-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-strong); }
-.win-title { margin-left: 10px; margin-right: auto; font: 500 13.5px 'DM Sans', system-ui, sans-serif; color: var(--ink); }
+.win-title { margin-left: 10px; margin-right: auto; font: 500 13.5px 'Inter', system-ui, sans-serif; color: var(--ink); }
 .win-body { padding: 22px 24px 24px; }
-.mk-move { font: 500 19px/1.4 'DM Sans', system-ui, sans-serif; color: var(--ink); letter-spacing: -.01em; margin-bottom: 18px; }
+.mk-move { font: 500 19px/1.4 'Inter', system-ui, sans-serif; color: var(--ink); letter-spacing: -.01em; margin-bottom: 18px; }
 .mk-dl dt { font-size: 12.5px; font-weight: 500; color: var(--accent); margin-top: 14px; }
 .mk-dl dd { color: var(--body); font-size: 15px; margin-top: 2px; }
 .mk-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
@@ -71,7 +71,7 @@ h2 { font-size: clamp(32px, 4.2vw, 56px); line-height: 1.04; letter-spacing: -.0
 .mk-ladder .mk-bar { align-self: stretch; border-radius: 4px; background: var(--line-strong); }
 .mk-ladder li.on { border-color: var(--accent-line); background: var(--accent-soft); }
 .mk-ladder li.on .mk-bar { background: var(--accent-fill); }
-.mk-ladder b { display: block; color: var(--ink); font: 500 15px 'DM Sans', system-ui, sans-serif; }
+.mk-ladder b { display: block; color: var(--ink); font: 500 15px 'Inter', system-ui, sans-serif; }
 .mk-ladder span { font-size: 13px; color: var(--muted); }
 .mk-ladder em { font-style: normal; font-size: 12px; font-weight: 500; color: var(--muted); }
 .mk-ladder li.on em { color: var(--accent); }
@@ -81,11 +81,11 @@ h2 { font-size: clamp(32px, 4.2vw, 56px); line-height: 1.04; letter-spacing: -.0
 .mk-map b { color: var(--ink); }
 .mk-map li.warn { border-color: var(--gold); } .mk-map li.warn b { color: var(--gold); }
 .mk-actions { display: flex; gap: 8px; margin-top: 16px; }
-.mk-btn { font: 500 13.5px 'DM Sans', system-ui, sans-serif; padding: 9px 14px; border-radius: 9px; border: 1px solid var(--line-strong); color: var(--ink); }
+.mk-btn { font: 500 13.5px 'Inter', system-ui, sans-serif; padding: 9px 14px; border-radius: 9px; border: 1px solid var(--line-strong); color: var(--ink); }
 .mk-btn.on { background: var(--accent-fill); border-color: transparent; color: var(--on-accent); }
 .mk-digest { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .mk-digest div { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; }
-.mk-digest b { font: 500 14px 'DM Sans', system-ui, sans-serif; color: var(--ink); }
+.mk-digest b { font: 500 14px 'Inter', system-ui, sans-serif; color: var(--ink); }
 .mk-digest p { font-size: 14px; margin-top: 4px; }
 
 /* The one orchestrated moment: the hero card writes itself on load */
@@ -103,7 +103,7 @@ h2 { font-size: clamp(32px, 4.2vw, 56px); line-height: 1.04; letter-spacing: -.0
 .marquee:hover .marquee-track { animation-play-state: paused; }
 .marquee ul { display: flex; gap: 14px; list-style: none; padding-right: 14px; }
 .marquee li { display: inline-flex; align-items: center; gap: 12px; padding: 10px 18px; border: 1px solid var(--line-strong); border-radius: 99px; white-space: nowrap; background: var(--surface); }
-.marquee li b { font: 500 15px 'DM Sans', system-ui, sans-serif; color: var(--ink); }
+.marquee li b { font: 500 15px 'Inter', system-ui, sans-serif; color: var(--ink); }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 /* ---------- Three layers ---------- */
@@ -129,7 +129,7 @@ h2 { font-size: clamp(32px, 4.2vw, 56px); line-height: 1.04; letter-spacing: -.0
 
 /* ---------- Tabs ---------- */
 .tab-list { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 5px; border: 1px solid var(--line-strong); border-radius: 14px; background: var(--surface); margin-bottom: 40px; }
-.tab-list button { font: 500 14.5px 'DM Sans', system-ui, sans-serif; padding: 10px 18px; border-radius: 10px; border: 0; background: transparent; color: var(--body); cursor: pointer; transition: background .15s, color .15s; }
+.tab-list button { font: 500 14.5px 'Inter', system-ui, sans-serif; padding: 10px 18px; border-radius: 10px; border: 0; background: transparent; color: var(--body); cursor: pointer; transition: background .15s, color .15s; }
 .tab-list button:hover { color: var(--ink); }
 .tab-list button[aria-selected="true"] { background: var(--accent-fill); color: var(--on-accent); }
 .tab-panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 64px; align-items: center; animation: mk-in .35s ease both; }
