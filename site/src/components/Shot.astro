@@ -1,0 +1,11 @@
+---
+// Real screenshot of the app, framed like a browser window. Two images, one per theme; CSS shows the right one.
+// Screens come from the app's own mock-data harness, so they match the product exactly.
+const { name, alt, eager = false } = Astro.props;
+const load = eager ? "eager" : "lazy";
+---
+<div class="shot">
+  <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span class="shot-url">app.7captur.com</span></div>
+  <img class="lt" src={`/assets/app/${name}-light.webp`} alt={alt} width="1800" height="1138" loading={load} decoding="async" />
+  <img class="dk" src={`/assets/app/${name}-dark.webp`} alt={alt} width="1800" height="1138" loading={load} decoding="async" />
+</div>

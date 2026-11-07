@@ -4,11 +4,11 @@ import Layout from "../layouts/Layout.astro";
 import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
 import ArticleCarousel from "../components/ArticleCarousel";
-import LayerCards from "../components/LayerCards";
+import FeatureRows from "../components/FeatureRows.astro";
+import Shot from "../components/Shot.astro";
 import Marquee from "../components/Marquee.astro";
 import Tabs from "../components/Tabs";
 import HeroWords from "../components/HeroWords.tsx";
-import HeroCarousel from "../components/HeroCarousel";
 import BeforeAfter from "../components/BeforeAfter";
 import ProductTour from "../components/ProductTour";
 import Icon from "../components/Icon.astro";
@@ -42,13 +42,7 @@ const faq = [
         <a class="btn btn-ghost" href={BOOK.href}>{BOOK.label}</a>
       </div>
     </div>
-    <div class="hero-stage">
-      <span class="float f1" aria-hidden="true"><img class="brand brand-shopify" src="/assets/logos/brands/shopify.svg" alt="" /></span>
-      <span class="float f2" aria-hidden="true"><img class="brand brand-meta" src="/assets/logos/brands/meta.svg" alt="" /></span>
-      <span class="float f3" aria-hidden="true"><img class="brand brand-googleads" src="/assets/logos/brands/googleads.svg" alt="" /></span>
-      <span class="float f4" aria-hidden="true"><img class="brand brand-instagram" src="/assets/logos/brands/instagram.svg" alt="" /></span>
-      <HeroCarousel client:load />
-    </div>
+    <Shot name="decide" eager alt="The Decide screen in 7Captur: one recommended next move, its evidence level and a review date." />
   </div>
 </header>
 
@@ -59,21 +53,16 @@ const faq = [
       <p class="lede">Three layers, one engine. It picks how far to go from the data in front of it, not from the plan you are on.</p>
     </div>
     <div data-reveal style="margin-bottom:48px"><BeforeAfter client:visible /></div>
-    <div data-reveal><LayerCards ctaHref={CTA.href} ctaLabel={CTA.label} client:visible /></div>
   </div>
 </section>
 
-<section class="section">
+<section class="section band">
   <div class="wrap">
     <div class="section-head" data-reveal>
       <h2>Recommendations first. No dashboard maze.</h2>
       <p class="lede">Most tools hand you charts and leave the thinking to you. 7Captur leads with one clear next step, then helps you check how it went.</p>
     </div>
-    <div class="facts" data-reveal>
-      <div class="fact"><h3>Decide</h3><p>One recommended move, with the reasons and what we do not know yet.</p></div>
-      <div class="fact"><h3>Review</h3><p>Every decision gets a review date, and your weekly summary lists what is waiting.</p></div>
-      <div class="fact"><h3>Learn</h3><p>Record how it went and keep a history of what worked.</p></div>
-    </div>
+    <FeatureRows />
     <p class="fine"><a href="/product/#review">See how the review loop works</a></p>
   </div>
 </section>

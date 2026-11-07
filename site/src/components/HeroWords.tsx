@@ -43,10 +43,15 @@ export default function HeroWords() {
     return () => cancelAnimationFrame(r);
   }, [snap]);
 
-  const w = widths[i];
+  // The repeated first word at the end shares the first word's width, so the slot never jumps to the widest word.
+  const widthAt = (n: number) => widths[n % WORDS.length] ?? 0;
+  const w = widthAt(i);
+  const prev = widthAt(i === 0 ? WORDS.length - 1 : i - 1);
+  const dir = w && prev && w < prev ? "shrink" : "grow";
   return (
     <span
       className="hero-words"
+      data-dir={dir}
       style={w ? { width: w } : undefined}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
