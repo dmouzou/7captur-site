@@ -115,3 +115,8 @@ html.dark .shot .lt, html:not(.dark) .shot .dk { display: none; }
 .hero-words[data-dir="grow"] .hero-words-track { transition-delay: .14s; }
 .hero-words[data-dir="shrink"] { transition-delay: .14s; }
 @media (prefers-reduced-motion: reduce) { .hero-words, .hero-words-track { transition: none; } }
+
+/* ---------- Hero carousel: centered under the headline, no floating logos ---------- */
+.hero-carousel { width: min(760px, 100%); margin: 48px auto 0; text-align: left; }
+.hero-carousel .slide { transition: opacity .5s ease, transform .6s cubic-bezier(.45, 0, .2, 1), visibility 0s .6s; }
+@media (prefers-reduced-motion: reduce) { .hero-carousel .slide { transition: none; } }

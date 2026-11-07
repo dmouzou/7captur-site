@@ -7,6 +7,8 @@ import IntegrationGrid from "../../components/IntegrationGrid.astro";
 import Faq from "../../components/Faq.astro";
 import Roadmap from "../../components/Roadmap";
 import Icon from "../../components/Icon.astro";
+import LayerCards from "../../components/LayerCards";
+import { CTA } from "../../data/site";
 
 const faq = [
   { q: "How is a recommendation decided?", a: "By fixed rules written by us and applied the same way every time. They look at your data, pick an evidence mode, and produce the action, the reasons and the unknowns. Every result is checked before you see it." },
@@ -21,6 +23,12 @@ const faq = [
   path="/product/" current="/product/">
 <main>
 <PageHead wide title="From the data you have to a clear next step." lede="Setup takes a few minutes. You do not need a website, a store or an ad account. Add more later and the guidance gets sharper." />
+
+<section class="section section-flush" style="padding-top:0;padding-bottom:24px">
+  <div class="wrap">
+    <div data-reveal><LayerCards ctaHref={CTA.href} ctaLabel={CTA.label} client:visible /></div>
+  </div>
+</section>
 
 <section class="section section-flush" style="padding-bottom:72px">
   <div class="wrap">
