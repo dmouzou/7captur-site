@@ -4,7 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
 import ArticleCarousel from "../components/ArticleCarousel";
-import FeatureRows from "../components/FeatureRows.astro";
+import LayerCards from "../components/LayerCards";
 import HeroCarousel from "../components/HeroCarousel";
 import Marquee from "../components/Marquee.astro";
 import Tabs from "../components/Tabs";
@@ -46,34 +46,35 @@ const faq = [
   </div>
 </header>
 
-<section class="section">
+<section class="section" id="how">
   <div class="wrap">
     <div class="section-head" data-reveal>
       <h2>From scattered numbers to one next step.</h2>
       <p class="lede">Three layers, one engine. It picks how far to go from the data in front of it, not from the plan you are on.</p>
     </div>
-    <div data-reveal style="margin-bottom:48px"><BeforeAfter client:visible /></div>
+    <div data-reveal style="margin-bottom:56px"><BeforeAfter client:visible /></div>
+    <div data-reveal><LayerCards ctaHref={CTA.href} ctaLabel={CTA.label} client:visible /></div>
   </div>
 </section>
 
-<section class="section band">
-  <div class="wrap">
-    <div class="section-head" data-reveal>
-      <h2>Recommendations first. No dashboard maze.</h2>
-      <p class="lede">Most tools hand you charts and leave the thinking to you. 7Captur leads with one clear next step, then helps you check how it went.</p>
-    </div>
-    <FeatureRows />
-    <p class="fine"><a href="/product/#review">See how the review loop works</a></p>
-  </div>
-</section>
-
-<section class="section" id="audiences">
+<section class="section band" id="audiences">
   <div class="wrap">
     <div class="section-head" data-reveal>
       <h2>Useful before your data is perfect.</h2>
       <p class="lede">Pick the way you sell. The engine is the same. The depth depends on the data you give it.</p>
     </div>
     <div data-reveal><Tabs client:visible /></div>
+  </div>
+</section>
+
+<section class="section" id="connections">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <h2>Bring your data in your own way.</h2>
+      <p class="lede">Type it in, import a CSV or Excel export from the platforms you already use, or connect a store or ad account. Whatever fits your day.</p>
+    </div>
+    <div data-reveal><Marquee /></div>
+    <p class="fine">Connected platforms are read-only. <a href="/security/">Read the security details</a>.</p>
   </div>
 </section>
 
@@ -100,16 +101,15 @@ const faq = [
   </div>
 </section>
 
-<section class="section band" id="connections">
-  <div class="wrap">
-    <div class="section-head" data-reveal>
-      <h2>Connect or Import your data. Your choice.</h2>
-      <p class="lede">Connect a store or ad account, import a CSV, or type it in. Whatever fits your day.</p>
-    </div>
-    <div data-reveal><Marquee /></div>
-    <p class="fine">Connected platforms are read-only. <a href="/security/">Read the security details</a>.</p>
-  </div>
-</section>
+
+
+
+
+
+
+
+
+
 
 <section class="section">
   <div class="wrap">

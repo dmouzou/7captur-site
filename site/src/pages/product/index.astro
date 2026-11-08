@@ -7,8 +7,6 @@ import IntegrationGrid from "../../components/IntegrationGrid.astro";
 import Faq from "../../components/Faq.astro";
 import Roadmap from "../../components/Roadmap";
 import Icon from "../../components/Icon.astro";
-import LayerCards from "../../components/LayerCards";
-import { CTA } from "../../data/site";
 
 const faq = [
   { q: "How is a recommendation decided?", a: "By fixed rules written by us and applied the same way every time. They look at your data, pick an evidence mode, and produce the action, the reasons and the unknowns. Every result is checked before you see it." },
@@ -24,19 +22,23 @@ const faq = [
 <main>
 <PageHead wide title="From the data you have to a clear next step." lede="Setup takes a few minutes. You do not need a website, a store or an ad account. Add more later and the guidance gets sharper." />
 
-<section class="section section-flush" style="padding-top:0;padding-bottom:24px">
-  <div class="wrap">
-    <div data-reveal><LayerCards ctaHref={CTA.href} ctaLabel={CTA.label} client:visible /></div>
-  </div>
-</section>
-
 <section class="section section-flush" style="padding-bottom:72px">
   <div class="wrap">
     <div class="section-head" data-reveal>
       <h2>Five steps. You set the pace.</h2>
-      <p class="lede">Tap a step to see what happens there. On a phone, swipe through them like cards.</p>
+      <p class="lede">Follow the trail from your first goal to the review, then around again. Tap a step to see the real screen.</p>
     </div>
     <Roadmap client:visible />
+  </div>
+</section>
+
+<section class="section" id="platforms" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">Connections and imports</p>
+    <h2>Bring in what you have. Connect where it exists.</h2>
+    <p class="lede">Import a CSV or Excel export from the platforms below, type records in, or connect a store or ad account. Connected platforms are read-only and use each platform's own login, and you can disconnect at any time.</p>
+    <IntegrationGrid />
+    <p class="fine">Need another platform? <a href="/contact/">Tell us which one</a>.</p>
   </div>
 </section>
 
@@ -56,17 +58,6 @@ const faq = [
       </table>
     </div>
     <p class="fine">Missing costs are treated as unknown, never as zero. Records in different currencies are not mixed.</p>
-  </div>
-</section>
-
-<section class="section" id="review" style="padding-top:0">
-  <div class="wrap">
-    <div class="section-head" data-reveal>
-      <h2>Decide. Review. Learn.</h2>
-      <p class="lede">Advice is only useful if you can check it later. Every recommendation comes with a date to look back, so advice never goes unchecked.</p>
-    </div>
-    <div data-reveal><LoopStory client:visible /></div>
-    <p class="fine">Starter shows review dates in the app. Growth adds a weekly summary that lists what is waiting for review. Recommendations are decision support. You decide, and you can disagree with any of them.</p>
   </div>
 </section>
 
@@ -113,15 +104,26 @@ const faq = [
   </div>
 </section>
 
-<section class="section" id="platforms" style="padding-top:0">
+<section class="section" id="review" style="padding-top:0">
   <div class="wrap">
-    <p class="kicker">Connections and imports</p>
-    <h2>Direct where it exists. Import or manual everywhere else.</h2>
-    <p class="lede">Connected platforms are read-only and use each platform's own login. You can disconnect at any time and keep working with imports and manual entry.</p>
-    <IntegrationGrid />
-    <p class="fine">Need another platform? <a href="/contact/">Tell us which one</a>.</p>
+    <div class="section-head" data-reveal>
+      <h2>Decide. Review. Learn.</h2>
+      <p class="lede">Advice is only useful if you can check it later. Every recommendation comes with a date to look back, so advice never goes unchecked.</p>
+    </div>
+    <div data-reveal><LoopStory client:visible /></div>
+    <p class="fine">Starter shows review dates in the app. Growth adds a weekly summary that lists what is waiting for review. Recommendations are decision support. You decide, and you can disagree with any of them.</p>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
 
 <section class="section" style="padding-top:0">
   <div class="wrap">

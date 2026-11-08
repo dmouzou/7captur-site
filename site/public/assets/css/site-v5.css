@@ -134,3 +134,71 @@ html.dark .shot .lt, html:not(.dark) .shot .dk { display: none; }
    drifted in from the fallen state instead of starting aligned. */
 .an-dot { transition: none; }
 .an-dot.fall { transition: transform .9s cubic-bezier(.5, 0, .8, .4), opacity .9s; }
+
+/* ---------- New brand logos ---------- */
+.brand-amazonads, .brand-linkedinads { border-radius: 7px; }
+html.dark .brand-bigcommerce { filter: invert(1); }
+.marquee li img.brand-bigcommerce, .marquee li img.brand-stripe, .marquee li img.brand-paypal, .marquee li img.brand-wordpress { width: 30px; height: 30px; }
+.plat-ic { min-width: 44px; }
+
+/* ---------- Five steps: a treasure map that goes full circle ---------- */
+.tm { display: grid; grid-template-columns: minmax(0, 430px) minmax(0, 1fr); gap: 56px; align-items: center; max-width: 1120px; margin-inline: auto; }
+.tm-map { width: 100%; }
+.tm-stage { position: relative; width: 100%; aspect-ratio: 1; }
+.tm-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.tm-paper { fill: var(--bg2); }
+.tm-edge { fill: none; stroke: var(--line-strong); stroke-width: 1.5; stroke-dasharray: 2 5; stroke-linecap: round; }
+.tm-trail { fill: none; stroke: var(--line-strong); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 2 9; }
+.tm-trail.seen { stroke: var(--accent); }
+.tm-chev { fill: none; stroke: var(--muted); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.tm-ring { fill: none; stroke: var(--line-strong); stroke-width: 1.5; }
+.tm-needle { fill: var(--line-strong); opacity: .7; }
+.tm-needle2 { opacity: .35; }
+.tm-compass text { fill: var(--muted); font-size: 12px; font-weight: 600; }
+.tm-pin { position: absolute; transform: translate(-50%, -50%); background: none; border: 0; padding: 0; cursor: pointer; color: var(--muted); font: inherit; }
+.tm-node { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 17px; background: var(--surface); border: 2px solid var(--line-strong); color: var(--ink); transition: transform .25s ease, border-color .25s, background .25s; }
+.tm-node svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; }
+.tm-pin.mark .tm-node { border-style: dashed; color: #c0392b; }
+.tm-pin.seen .tm-node { border-color: var(--accent); }
+.tm-pin.now .tm-node { transform: scale(1.18); background: var(--accent-fill); border-color: var(--accent-fill); color: var(--on-accent); }
+.tm-pin.mark.now .tm-node { color: var(--on-accent); }
+.tm-pin:hover .tm-node { transform: scale(1.1); }
+.tm-pin.now:hover .tm-node { transform: scale(1.18); }
+.tm-label { position: absolute; white-space: nowrap; font-size: 13.5px; font-weight: 600; }
+.tm-pin[data-side="top"] .tm-label { bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%); }
+.tm-pin[data-side="bottom"] .tm-label { top: calc(100% + 12px); left: 50%; transform: translateX(-50%); }
+.tm-pin[data-side="right"] .tm-label { left: calc(100% + 12px); top: 50%; transform: translateY(-50%); }
+.tm-pin[data-side="left"] .tm-label { right: calc(100% + 12px); top: 50%; transform: translateY(-50%); }
+.tm-pin.now .tm-label { color: var(--ink); }
+.tm-loop { text-align: center; font-size: 13px; color: var(--muted); margin: 14px 0 0; }
+.tm-detail { min-width: 0; }
+.tm-card { animation: card-in .4s ease both; }
+.tm-card h3 { font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -.025em; margin: 6px 0 10px; }
+.tm-card .rm-text { margin-inline: 0; }
+.tm-card .rm-see { justify-content: flex-start; margin: 16px 0 22px; }
+.tm-card .rm-count { text-align: left; }
+.tm-detail .rm-nav { margin-top: 20px; }
+.tm-shot { margin: 0; width: 100%; box-shadow: var(--shadow); }
+.tm-view { position: relative; }
+.tm-shot img { display: block; width: 100%; height: auto; }
+.tm-shot.crop .tm-view { aspect-ratio: 1457 / 640; overflow: hidden; }
+.tm-shot.crop img { position: absolute; left: -23.5%; width: 123.5%; height: auto; max-width: none; }
+.tm-shot.crop-top img { top: 0; }
+.tm-shot.crop-bottom img { bottom: 0; }
+html.dark .tm-shot .lt, html:not(.dark) .tm-shot .dk { display: none; }
+.tm-setup { padding: 22px 22px 26px; display: grid; gap: 16px; background: var(--surface); }
+.tm-setup > b { font-size: 17px; color: var(--ink); }
+.tm-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.tm-chips span { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 14px; color: var(--body); }
+.tm-chips span.on { background: var(--accent-fill); border-color: var(--accent-fill); color: var(--on-accent); font-weight: 600; }
+.tm-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.tm-fields label { display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.tm-fields label span { padding: 9px 12px; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--ink); font-size: 14px; background: var(--bg); }
+.tm-fields i { font-style: normal; }
+@media (max-width: 900px) {
+  .tm { grid-template-columns: 1fr; gap: 28px; }
+  .tm-map { max-width: 380px; margin-inline: auto; }
+  .tm-node { width: 38px; height: 38px; font-size: 15px; }
+  .tm-label { font-size: 12px; }
+  .tm-fields { grid-template-columns: 1fr; }
+}

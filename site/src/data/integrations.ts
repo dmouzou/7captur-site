@@ -6,13 +6,17 @@ export type IntegrationState = "direct" | "import" | "manual" | "planned";
 export interface Integration { name: string; what: string; state: IntegrationState; verified: boolean; logos: string[] }
 
 export const INTEGRATIONS: Integration[] = [
-  { name: "Shopify", what: "Orders and refunds, read-only", state: "direct", verified: false, logos: ["shopify"] },
-  { name: "Google Ads", what: "Campaign spend, clicks and impressions, read-only", state: "direct", verified: false, logos: ["googleads"] },
+  { name: "Shopify", what: "Orders and refunds, read-only. Order exports import today", state: "direct", verified: false, logos: ["shopify"] },
+  { name: "Google Ads", what: "Campaign spend, clicks and impressions, read-only. Reports import today", state: "direct", verified: false, logos: ["googleads"] },
   { name: "Meta Ads", what: "Spend and results from an Ads Manager CSV export", state: "import", verified: true, logos: ["meta"] },
   { name: "TikTok Ads", what: "Spend and results from a CSV export", state: "import", verified: true, logos: ["tiktok"] },
   { name: "Instagram, Facebook and TikTok posts", what: "Enter post metrics or import a file", state: "manual", verified: true, logos: ["instagram","facebook","tiktok"] },
   { name: "WhatsApp, DMs, phone and in-person", what: "Log enquiries and sales by hand", state: "manual", verified: true, logos: ["whatsapp"] },
-  { name: "WooCommerce", what: "Orders and refunds", state: "planned", verified: true, logos: ["woocommerce"] },
+  { name: "WooCommerce and WordPress stores", what: "Orders and refunds from an order export", state: "import", verified: true, logos: ["woocommerce","wordpress"] },
+  { name: "Amazon Ads", what: "Spend and results from a campaign report", state: "import", verified: true, logos: ["amazonads"] },
+  { name: "LinkedIn Ads", what: "Spend and results from a campaign export", state: "import", verified: true, logos: ["linkedinads"] },
+  { name: "BigCommerce", what: "Orders from an order export", state: "import", verified: true, logos: ["bigcommerce"] },
+  { name: "Stripe and PayPal", what: "Payments from a transaction export. Refunds, fees and payouts are left out", state: "import", verified: true, logos: ["stripe","paypal"] },
 ];
 
 export const stateLabel = (i: Integration): { text: string; cls: string } => {
@@ -22,4 +26,4 @@ export const stateLabel = (i: Integration): { text: string; cls: string } => {
   return { text: "Planned", cls: "badge-soon" };
 };
 
-export const LOGO_NAMES: Record<string, string> = { shopify: "Shopify", googleads: "Google Ads", meta: "Meta", tiktok: "TikTok", instagram: "Instagram", facebook: "Facebook", whatsapp: "WhatsApp", woocommerce: "WooCommerce" };
+export const LOGO_NAMES: Record<string, string> = { amazonads: "Amazon Ads", linkedinads: "LinkedIn Ads", bigcommerce: "BigCommerce", stripe: "Stripe", paypal: "PayPal", wordpress: "WordPress", shopify: "Shopify", googleads: "Google Ads", meta: "Meta", tiktok: "TikTok", instagram: "Instagram", facebook: "Facebook", whatsapp: "WhatsApp", woocommerce: "WooCommerce" };
