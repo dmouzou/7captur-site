@@ -7,6 +7,7 @@ import IntegrationGrid from "../../components/IntegrationGrid.astro";
 import Faq from "../../components/Faq.astro";
 import Roadmap from "../../components/Roadmap";
 import Icon from "../../components/Icon.astro";
+import CaptainStory from "../../components/CaptainStory";
 
 const faq = [
   { q: "How is a recommendation decided?", a: "By fixed rules written by us and applied the same way every time. They look at your data, pick an evidence mode, and produce the action, the reasons and the unknowns. Every result is checked before you see it." },
@@ -91,12 +92,13 @@ const faq = [
 <section class="section" id="follow-ups" style="padding-top:0">
   <div class="wrap">
     <div class="section-head" data-reveal>
-      <h2>Ask follow-up questions about any decision.</h2>
-      <p class="lede">Want to know why one option beat another, or what would change the answer? Ask. Follow-up questions are powered by AI.</p>
+      <h2>Meet Captain. Ask about any decision.</h2>
+      <p class="lede">Want to know why one option beat another, or what would change the answer? Ask Captain. Questions about your numbers are answered straight from them. Open questions are written by AI.</p>
     </div>
+    <div data-reveal style="margin-bottom:48px"><CaptainStory client:visible /></div>
     <div class="facts" data-reveal>
       <div class="fact"><h3>The engine decides</h3><p>The recommendation comes from 7Captur's decision engine, using fixed rules. Asking a question never changes it.</p></div>
-      <div class="fact"><h3>AI explains</h3><p>Follow-up answers are written by AI and can make mistakes. Check anything important against the numbers shown on the decision.</p></div>
+      <div class="fact"><h3>AI explains</h3><p>Open-ended answers are written by AI and can make mistakes. Check anything important against the numbers shown on the decision.</p></div>
       <div class="fact"><h3>Only the saved summary</h3><p>The AI sees the summary figures saved with the decision, not your individual orders, customers or notes.</p></div>
       <div class="fact"><h3>Separate credits</h3><p>Follow-ups use their own monthly credits, so they never use up your weekly recommendations.</p></div>
     </div>
