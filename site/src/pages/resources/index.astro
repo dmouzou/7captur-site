@@ -6,6 +6,7 @@ import vow from "../../fragments/vow.html?raw";
 import { ARTICLES } from "../../data/articles";
 const topics = [...new Set(ARTICLES.map((a) => a.topic))];
 const ld = [{ "@context": "https://schema.org", "@type": "CollectionPage", name: "7Captur Resources", url: "https://7captur.com/resources/", hasPart: ARTICLES.map((a) => ({ "@type": "Article", headline: a.title, url: `https://7captur.com/articles/${a.slug}/` })) }];
+import ArticleArt from "../../components/ArticleArt";
 ---
 <Layout title="Resources: Track Sales, Cost Per Enquiry and Break-Even ROAS | 7Captur" description="Plain-language guides for small sellers: track sales from social posts, WhatsApp and DMs, calculate cost per enquiry, and work out break-even ROAS." path="/resources/" current="/resources/" jsonld={ld}>
 <main>
@@ -26,7 +27,7 @@ const ld = [{ "@context": "https://schema.org", "@type": "CollectionPage", name:
       </aside>
       <div>
         <div class="article-grid" id="artGrid" style="margin-top:0">
-          {ARTICLES.map((a) => (<a href={`/articles/${a.slug}/`} class="article-card" data-topic={a.topic}><span class="tag-pill">{a.topic}</span><h3>{a.title}</h3><p>{a.description}</p><span class="fine">{a.minutes} min read</span></a>))}
+          {ARTICLES.map((a) => (<a href={`/articles/${a.slug}/`} class="article-card" data-topic={a.topic}><ArticleArt slug={a.slug} topic={a.topic} /><span class="tag-pill">{a.topic}</span><h3>{a.title}</h3><p>{a.description}</p><span class="fine">{a.minutes} min read</span></a>))}
         </div>
         <p class="fine" id="artEmpty" hidden>No guides match. Try another search or topic.</p>
       </div>

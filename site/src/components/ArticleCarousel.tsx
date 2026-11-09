@@ -1,3 +1,4 @@
+import ArticleArt from "./ArticleArt";
 import { useEffect, useRef, useState } from "react";
 
 interface Item { slug: string; topic: string; title: string; description: string }
@@ -30,6 +31,7 @@ export default function ArticleCarousel({ items }: { items: Item[] }) {
       <div className="res-track" ref={track} onScroll={update} tabIndex={0}>
         {items.map((a) => (
           <a key={a.slug} className="res" href={`/articles/${a.slug}/`}>
+            <ArticleArt slug={a.slug} topic={a.topic} />
             <span className="tag">{a.topic}</span>
             <h3>{a.title}</h3>
             <p>{a.description}</p>

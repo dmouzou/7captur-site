@@ -258,3 +258,70 @@ html.dark .tr-img .lt, html:not(.dark) .tr-img .dk { display: none; }
   .tr-tabs button { padding: 12px 14px 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .tr-img { transition: none; transform: none; } .tr-bar i.run { animation: none; width: 100%; } }
+
+/* ---------- Map only: centered, with tooltips ---------- */
+.tm.tm-solo { display: block; max-width: 620px; }
+.tm-solo .tm-pin { z-index: 1; }
+.tm-solo .tm-pin.hot { z-index: 5; }
+.tm-tip { position: absolute; z-index: 6; width: 250px; padding: 12px 14px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line-strong); box-shadow: var(--shadow-lg); color: var(--body); font-size: 13px; font-weight: 400; line-height: 1.5; text-align: left; white-space: normal; opacity: 0; visibility: hidden; transform: translateY(4px); transition: opacity .18s, transform .18s, visibility .18s; pointer-events: none; left: 50%; margin-left: -125px; top: calc(100% + 38px); }
+.tm-tip b { display: block; color: var(--ink); font-size: 14px; }
+.tm-tip em { display: block; font-style: normal; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+.tm-pin[data-side="top"] .tm-tip { top: auto; bottom: calc(100% + 38px); }
+.tm-pin.hot .tm-tip { opacity: 1; visibility: visible; transform: none; }
+@media (max-width: 640px) { .tm-tip { width: 210px; margin-left: -105px; } .tm-pin[data-side="right"] .tm-tip { margin-left: -150px; } .tm-pin[data-side="left"] .tm-tip { margin-left: -60px; } }
+
+/* ---------- Evidence: likes vs sales, then the ladder ---------- */
+.ev { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; max-width: 1060px; margin-inline: auto; align-items: stretch; }
+.ev-card { margin: 0; padding: 26px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-sm, none); }
+.ev-chart figcaption { display: grid; gap: 2px; margin-bottom: 14px; }
+.ev-chart figcaption b { font: 600 18px 'Inter', system-ui, sans-serif; color: var(--ink); letter-spacing: -.01em; }
+.ev-chart figcaption span { font-size: 12.5px; color: var(--muted); }
+.ev-chart svg { display: block; width: 100%; height: auto; }
+.ev-grid { stroke: var(--line); stroke-width: 1; }
+.ev-line { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.ev-likes { stroke: var(--accent); }
+.ev-sales { stroke: var(--muted); }
+.ev-chart.on .ev-line { animation: ev-draw 1.6s cubic-bezier(.3,.7,.2,1) forwards; }
+.ev-chart.on .ev-sales { animation-delay: .2s; }
+@keyframes ev-draw { to { stroke-dashoffset: 0; } }
+.ev-dot { opacity: 0; transition: opacity .3s 1.5s; }
+.ev-likes-dot { fill: var(--accent); } .ev-sales-dot { fill: var(--muted); }
+.ev-chart.on .ev-dot { opacity: 1; }
+.ev-legend { display: flex; gap: 18px; list-style: none; margin: 10px 0 0; padding: 0; font-size: 13px; color: var(--body); }
+.ev-legend i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; margin-right: 7px; vertical-align: middle; }
+.ev-legend .l { background: var(--accent); } .ev-legend .s { background: var(--muted); }
+.ev-chart p { margin: 14px 0 0; font-size: 14.5px; color: var(--body); }
+.ev-eyebrow { margin: 0 0 14px; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.ev-ladder ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ev-ladder li { border: 1px solid var(--line); border-radius: 12px; background: var(--bg2); transition: border-color .25s, background .25s; }
+.ev-ladder li.now { border-color: var(--accent-line); background: var(--accent-soft); }
+.ev-ladder li button { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 14px; background: none; border: 0; text-align: left; cursor: pointer; color: inherit; }
+.ev-step { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--surface); border: 1px solid var(--line-strong); font-size: 13px; font-weight: 600; color: var(--muted); flex: none; }
+.ev-ladder li.past .ev-step, .ev-ladder li.now .ev-step { background: var(--accent); border-color: var(--accent); color: #fff; }
+.ev-have { display: grid; gap: 1px; }
+.ev-have b { font-size: 15px; color: var(--ink); }
+.ev-have em { font-style: normal; font-size: 12.5px; color: var(--muted); }
+.ev-say { display: grid; grid-template-rows: 0fr 0fr; transition: grid-template-rows .3s ease; overflow: hidden; }
+.ev-say > p { min-height: 0; overflow: hidden; margin: 0; padding: 0 14px 0 52px; font-size: 14px; color: var(--body); }
+.ev-ladder li.now .ev-say { grid-template-rows: 1fr 1fr; }
+.ev-ladder li.now .ev-say > p { padding-bottom: 8px; }
+.ev-ladder li.now .ev-say > p:last-child { padding-bottom: 14px; }
+.ev-say p span { display: block; font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin-bottom: 1px; }
+.ev-say p.no span { color: #b4472f; }
+html.dark .ev-say p.no span { color: #e89a86; }
+.ev-more { text-align: center; margin-top: 28px; }
+@media (max-width: 820px) { .ev { grid-template-columns: 1fr; } .ev-card { padding: 20px; } }
+@media (prefers-reduced-motion: reduce) { .ev-line { stroke-dashoffset: 0; animation: none !important; } .ev-dot { opacity: 1; transition: none; } }
+
+/* ---------- Article illustrations ---------- */
+.aa { width: 100%; border-radius: 12px; background: var(--accent-soft); border: 1px solid var(--accent-line); overflow: hidden; }
+.aa svg { display: block; width: 100%; height: auto; aspect-ratio: 310 / 120; }
+.aa-a { fill: var(--accent); } .aa-s { fill: var(--surface); stroke: var(--line-strong); stroke-width: 1.5; }
+.aa-m { fill: var(--muted); opacity: .55; } .aa-l { fill: var(--line-strong); } .aa-bgfill { fill: var(--accent-soft); }
+.aa-stroke { stroke: var(--muted); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+.aa-thick { stroke: var(--accent); stroke-width: 3.5; }
+.aa-check { stroke: #fff; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.aa-ring { stroke: var(--accent); }
+.aa-t { fill: #fff; font-weight: 700; } .aa-big { fill: var(--ink); font-size: 34px; font-weight: 600; }
+.aa-cap { fill: var(--muted); font-size: 11px; }
+.res .aa, .article-card .aa { margin-bottom: 2px; }

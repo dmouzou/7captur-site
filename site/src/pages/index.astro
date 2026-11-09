@@ -12,7 +12,7 @@ import HeroWords from "../components/HeroWords.tsx";
 import BeforeAfter from "../components/BeforeAfter";
 import ProductTour from "../components/ProductTour";
 import Icon from "../components/Icon.astro";
-import { RecCard, ProvTable, EvidenceMeter, ImportPreview, Digest, HubMock } from "../components/Mockups";
+import EvidenceStory from "../components/EvidenceStory";
 import { CTA, BOOK } from "../data/site";
 
 const faq = [
@@ -88,16 +88,14 @@ const faq = [
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="evidence">
   <div class="wrap">
-    <div class="split" id="evidence" data-reveal>
-      <div>
-        <h3>Likes do not prove sales. We say so.</h3>
-        <p>7Captur matches its advice to the evidence you have, and tells you plainly what more data would unlock. Thin evidence gets a small test, not a confident guess.</p>
-        <a class="link" href="/product/">See the evidence modes</a>
-      </div>
-      <div class="stage"><EvidenceMeter client:visible /></div>
+    <div class="section-head" data-reveal>
+      <h2>Likes do not prove sales. We say so.</h2>
+      <p class="lede">7Captur matches its advice to the evidence you have, and tells you plainly what more data would unlock. Thin evidence gets a small test, not a confident guess.</p>
     </div>
+    <div data-reveal><EvidenceStory client:visible /></div>
+    <p class="ev-more"><a class="link" href="/product/">See the evidence modes</a></p>
   </div>
 </section>
 
