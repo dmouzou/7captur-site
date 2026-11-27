@@ -1,28 +1,24 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import AuditBand from "../../components/AuditBand.astro";
+import PageHead from "../../components/PageHead.astro";
+import CtaBand from "../../components/CtaBand.astro";
 import { siteConfig } from "../../config/siteConfig";
 const roles = [
   ["Shopify", "Staff account with Reports and Orders view-only", "No storefront, product or order changes"],
   ["Meta Business Manager", "Ad Account Analyst (view-only)", "No ad edits, no billing"],
   ["Google Ads", "Read-only user invite", "No ad edits, no billing"],
 ];
+const ledeHtml = 'Legal terms are in the <a href="/privacy-policy/">Privacy Policy</a> and <a href="/terms-of-service/">Terms of Service</a>.';
 ---
 <Layout title="Security and Data Handling: Read-Only Access | 7Captur" description="Native read-only roles, no third-party OAuth app installs, isolated client workspaces, no tracking cookies or data resale, and deletion within 48 hours on request." path="/security/" current="/security/">
 <main>
-  <header class="d-page-head">
-    <div class="d-wrap">
-      <span class="d-eyebrow">Security and data handling</span>
-      <h1>We can read your numbers. We cannot change anything.</h1>
-      <p class="d-lede">Legal terms are in the <a href="/privacy-policy/">Privacy Policy</a> and <a href="/terms-of-service/">Terms of Service</a>.</p>
-    </div>
-  </header>
+  <PageHead wide title="We can read your numbers. We cannot change anything." lede={ledeHtml} />
 
-  <section class="d-section d-tight" aria-labelledby="roles-h">
-    <div class="d-wrap">
-      <div class="d-head">
+  <section class="section" style="padding-top:0" aria-labelledby="roles-h">
+    <div class="wrap">
+      <div class="section-head">
         <h2 id="roles-h">Read-only native roles only</h2>
-        <p class="d-lede">7Captur does not request ad-edit, billing or storefront-write permissions, and does not require third-party OAuth app installs. You invite us using the roles your platforms already provide.</p>
+        <p class="lede">7Captur does not request ad-edit, billing or storefront-write permissions, and does not require third-party OAuth app installs. You invite us using the roles your platforms already provide.</p>
       </div>
       <div class="d-table-wrap" role="region" aria-label="Access roles" tabindex="0">
         <table class="d-matrix">
@@ -33,8 +29,8 @@ const roles = [
     </div>
   </section>
 
-  <section class="d-section d-alt" aria-label="Data handling">
-    <div class="d-wrap">
+  <section class="section band" aria-label="Data handling">
+    <div class="wrap">
       <div class="d-grid-3">
         <div class="d-box"><h2>Strict workspace isolation</h2><p>Each client's exports, COGS sheets and past memos live in an isolated logical workspace inside 7Captur's internal infrastructure on Firebase and Google Cloud, encrypted in transit and at rest.</p></div>
         <div class="d-box"><h2>No tracking cookies, no data resale</h2><p>No ad retargeting pixels and no cross-client benchmarking leaks. We do not sell client financial records or use them to train public models.</p></div>
@@ -44,6 +40,6 @@ const roles = [
     </div>
   </section>
 
-  <AuditBand />
+  <CtaBand />
 </main>
 </Layout>

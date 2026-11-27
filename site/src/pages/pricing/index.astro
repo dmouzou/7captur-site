@@ -1,7 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHead from "../../components/PageHead.astro";
 import Faq from "../../components/Faq.astro";
-import AuditBand from "../../components/AuditBand.astro";
+import CtaBand from "../../components/CtaBand.astro";
 import { PRICING, usd, prepaySaving, AUDIT_CTA } from "../../config/siteConfig";
 
 const { core, scale, overflowFrom, commitmentDays, prepayDiscountPct } = PRICING;
@@ -73,16 +74,10 @@ const faq = [
 ---
 <Layout title="Pricing: Flat Monthly Desk, Never % of Ad Spend | 7Captur" description={`Free 60-Day Ad Leak Audit, then ${core.name} at ${usd(core.monthly)}/mo or ${scale.name} at ${usd(scale.monthly)}/mo. ${commitmentDays}-day initial commitment, ${prepayDiscountPct}% off when prepaid. Never a percentage of spend.`} path="/pricing/" current="/pricing/">
 <main>
-  <header class="d-page-head">
-    <div class="d-wrap">
-      <span class="d-eyebrow">Pricing</span>
-      <h1>A flat monthly fee. Never a percentage of your ad spend.</h1>
-      <p class="d-lede">Both desks apply the same rigor. They differ in operating workload and in how much marketing budget control you need.</p>
-    </div>
-  </header>
+  <PageHead wide title="A flat monthly fee. Never a percentage of your ad spend." lede="Both desks apply the same rigor. They differ in operating workload and in how much marketing budget control you need." />
 
-  <section class="d-section d-tight" aria-label="Plans">
-    <div class="d-wrap">
+  <section class="section" style="padding-top:0" aria-label="Plans">
+    <div class="wrap">
       <div class="d-entry">
         <div>
           <span class="d-eyebrow">Start here</span>
@@ -90,7 +85,7 @@ const faq = [
           <p>One-time lookback with a 48-hour turnaround, for qualified e-commerce brands spending $20K a month or more on ads. A reconciliation of your past 60 days of spend, orders, COGS, fees and settled refunds, plus a 20-minute findings walkthrough.</p>
         </div>
         <p class="d-price">$0</p>
-        <a class="d-btn d-btn-primary" href={AUDIT_CTA.href}>Get the free audit</a>
+        <a class="btn btn-primary" href={AUDIT_CTA.href}>Get the free audit</a>
       </div>
 
       <div class="d-plans">
@@ -103,7 +98,7 @@ const faq = [
             <p class="d-prepay"><strong>3-month prepay: {usd(p.prepay)} up front</strong> ({prepayDiscountPct}% off, save {usd(prepaySaving(p))})</p>
             <p><strong>Built for:</strong> {p.fit}</p>
             <ul class="d-ticks">{p.scope.map((s) => <li><span>{s}</span></li>)}</ul>
-            <a class="d-btn d-btn-primary d-btn-block" href={AUDIT_CTA.href}>Start with the free audit</a>
+            <a class="btn btn-primary btn-block" href={AUDIT_CTA.href}>Start with the free audit</a>
           </article>
         ))}
       </div>
@@ -111,9 +106,9 @@ const faq = [
     </div>
   </section>
 
-  <section class="d-section d-alt" aria-labelledby="matrix-h">
-    <div class="d-wrap">
-      <div class="d-head"><span class="d-eyebrow">Operational boundaries</span><h2 id="matrix-h">Core Desk vs. Scale Desk</h2></div>
+  <section class="section band" aria-labelledby="matrix-h">
+    <div class="wrap">
+      <div class="section-head"><span class="d-eyebrow">Operational boundaries</span><h2 id="matrix-h">Core Desk vs. Scale Desk</h2></div>
       <div class="d-table-wrap" role="region" aria-label="Core and Scale comparison" tabindex="0">
         <table class="d-matrix">
           <thead><tr><th scope="col">Dimension</th><th scope="col">{core.name}<br /><span class="d-fine">{price(core)}</span></th><th scope="col">{scale.name}<br /><span class="d-fine">{price(scale)}</span></th></tr></thead>
@@ -123,21 +118,21 @@ const faq = [
     </div>
   </section>
 
-  <section class="d-section" aria-labelledby="walls-h">
-    <div class="d-wrap">
-      <div class="d-head"><span class="d-eyebrow">Both tiers</span><h2 id="walls-h">Six scope walls</h2></div>
+  <section class="section" aria-labelledby="walls-h">
+    <div class="wrap">
+      <div class="section-head"><span class="d-eyebrow">Both tiers</span><h2 id="walls-h">Six scope walls</h2></div>
       <ol class="d-grid-3">{walls.map((w, i) => <li class="d-box"><span class="d-num">{i + 1}</span><h3>{w.h}</h3><p>{w.p}</p></li>)}</ol>
       <div class="d-note"><p><strong>Automatic upgrade triggers:</strong> adding a 2nd store or currency, a 3rd ad channel, SKU-level margin tracking, or external media-buyer or agency alignment moves a Core workspace to Scale Desk on the next billing cycle.</p></div>
     </div>
   </section>
 
-  <section class="d-section d-alt" aria-labelledby="faq-h">
-    <div class="d-wrap">
-      <div class="d-head"><span class="d-eyebrow">Questions</span><h2 id="faq-h">Pricing, in detail</h2></div>
+  <section class="section band" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="section-head"><span class="d-eyebrow">Questions</span><h2 id="faq-h">Pricing, in detail</h2></div>
       <Faq items={faq} />
     </div>
   </section>
 
-  <AuditBand />
+  <CtaBand />
 </main>
 </Layout>

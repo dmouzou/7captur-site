@@ -1,8 +1,15 @@
 ---
-import { CTA, BOOK } from "../data/site";
-const { title, text, fine = "14-day free trial, no card needed. Nothing changes in your ad accounts.", label = CTA.label, href = CTA.href, second = false } = Astro.props;
+import { AUDIT_CTA } from "../config/siteConfig";
+const {
+  title = "Start with a free 60-Day Ad Leak Audit.",
+  text = "A one-time look back at your past 60 days of ad spend, delivered in 48 hours. No obligation to continue.",
+  fine = "One-time retrospective lookback, not a 60-day trial. Read-only access. Nothing changes in your ad accounts.",
+  label = "Book Free 60-Day Ad Leak Audit",
+  href = AUDIT_CTA.href,
+  second = false,
+} = Astro.props;
 ---
 <div class="cta"><div class="wrap"><div class="cta-card">
   <div><h2>{title}</h2><p>{text}</p></div>
-  <div><div class="cta-actions"><a class="btn btn-primary" href={href}>{label}</a>{second && <a class="btn btn-ghost" href={BOOK.href}>{BOOK.label}</a>}</div><p class="cta-fine">{fine}</p></div>
+  <div><div class="cta-actions"><a class="btn btn-primary" href={href}>{label}</a>{second && <a class="btn btn-ghost" href="/pricing/">See pricing</a>}</div><p class="cta-fine">{fine}</p></div>
 </div></div></div>

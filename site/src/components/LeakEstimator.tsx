@@ -93,7 +93,7 @@ export default function LeakEstimator() {
           </p>
         </div>
         <p className="d-fine">Illustrative estimate only, calculated from the numbers you enter. It does not measure your account and it is not a guarantee of savings.</p>
-        <a className="d-btn d-btn-primary d-btn-block" href={`/audit/?spend=${Math.round(values.spend)}`}>Audit My Actual Past 60 Days Free →</a>
+        <a className="btn btn-primary btn-block" href={`/audit/?spend=${Math.round(values.spend)}`}>Audit My Actual Past 60 Days Free →</a>
       </div>
     </div>
   );

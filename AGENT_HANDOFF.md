@@ -14,6 +14,14 @@
 - No em dashes in any copy, code comment or note.
 - Never publish internal delivery caps, analyst client loads or private rates.
 
+## Site structure and design rules (2026-11-27, restoration S1R). READ BEFORE TOUCHING ANY PAGE
+- The site is **multipage**. Never merge pages back into a long single-page homepage. The blueprint describes the homepage as seven vertical bands and its nav as anchors (`/#how-it-works`, `/#sample-memo`, `/#estimator`). Those were wrongly built as one scrolling page. They are now real routes: `/how-it-works/`, `/sample-memo/`, `/ad-budget-check/` (the Leak Estimator). Do not turn them back into anchors.
+- Page map: `/` (hero, sample memo, three problem points, three step teaser, links to deeper pages, audit CTA), `/how-it-works/`, `/sample-memo/`, `/ad-budget-check/`, `/audit/`, `/pricing/`, `/security/`, `/about/` (contains the contact block at `#contact`), `/resources/` plus `/articles/*`, `/privacy-policy/`, `/terms-of-service/`, `/contact/` (legacy, see S6).
+- **Design is the original site design.** Inter font, `site.css` + `site-v2` to `site-v5.css` tokens, original `Nav`, `Footer`, `PageHead` (brand orbs), `CtaBand`, `Faq`, `Reveal`, rounded cards, dark/light switcher, lime accent. The S1 "editorial desk" skin (`desk.css`, Inter Tight, IBM Plex Mono, `d-nav`, `d-footer`, `body.desk`) was removed on purpose. Do not bring it back. Do not add fonts.
+- New content blocks (sample memo, ledger, estimator, audit form, pricing cards, matrix, tables) live in `site/public/assets/css/blocks.css`. Their `d-*` classes map onto the original tokens, so theming follows `site.css`. Build new pages from the original classes (`wrap`, `section`, `band`, `section-head`, `lede`, `kicker`, `btn`, `btn-primary`, `btn-ghost`, `hero`, `hero-sub`, `hero-actions`, `cta`) plus the `d-*` blocks. Use `PageHead` for page headers and `CtaBand` for the closing call to action.
+- Navigation and footer links come only from `NAV` and `FOOTER_COLUMNS` in `siteConfig.ts`. No Log in or Sign up link in the top bar. The client portal link sits quietly in the footer bottom row.
+- `/product/` and `/platform/` redirect to `/how-it-works/`. The old `/ad-budget-check/` email tool (five questions for small sellers) was replaced by the Leak Estimator.
+
 ## Legacy Pages guard
 `legacy-pages-guard.md` makes GitHub's old branch-based Jekyll build fail on purpose, so it cannot overwrite the Astro deployment. Once Settings > Pages > Source is "GitHub Actions", that job stops running and the file can be deleted.
 
@@ -28,8 +36,9 @@
 | **S3** | `DONE` | Homepage body and interactive Ad Leak Estimator (`#estimator`) with query pass-through to `/audit/` |
 | **S4** | `DONE` | Free 60-Day Ad Leak Audit page (`/audit/`) with booking path, qualification form, access explainer, video slot, reviewer block |
 | **S5** | `DONE` | Pricing, Security and About pages |
-| **S6** | `TODO` | Resources pruning, article CTA refresh, redirects, ad budget check repurpose |
-| **S7** | `TODO` | Metadata, legal copy, sitemap/robots, contrast, mobile, link integrity, banned-copy sweep |
+| **S1R** | `DONE` | Restoration: original multipage design, fonts, nav and footer back; desk skin removed; homepage split into separate routes; content kept from the Site Blueprint |
+| **S6** | `TODO` | Resources pruning (remove self-serve, social-seller, reseller, local-service and DM/WhatsApp articles), article CTA refresh to `/audit/`, fix article links to `/product/` and old persona copy, rework or redirect `/contact/` to `/about/#contact`, rewrite `public/llms.txt`, legacy redirects (`/signup`, `/trial`, `/get-started`, `/demo`) |
+| **S7** | `TODO` | Metadata, privacy and terms copy (still describe the old self-serve product), sitemap/robots, contrast, mobile, link integrity, banned-copy sweep. Check every page in a real browser at 1280, 768 and 360 px in light and dark. S1R was verified by build, tests and HTML inspection only, with no browser screenshots |
 
 ---
 
@@ -70,3 +79,14 @@
 - **Notes:** the capacity row is intentionally absent from the public matrix. The scope wall says "This is not a CFO service" so the banned phrase never appears on the site. Prices come from `PRICING` in siteConfig.
 - **Verification:** typecheck, tests (10), build pass; screenshots in light, dark and 360 px, no horizontal overflow.
 - **Next:** resources, articles, redirects, ad budget check.
+
+### S1R: Restore multipage structure and original design
+- **Agent / Date (UTC):** Claude / 2026-11-27
+- **Why:** S1 replaced the site design with a new "desk" skin, and S2 and S3 piled the blueprint's seven homepage bands into one long page. Owner wanted the old multipage structure, design and fonts back with only the content updated.
+- **Restored from `f804f3b` (last commit before the handoff work):** `Layout.astro` (Inter, five original stylesheets), `Nav.astro`, `Footer.astro`, `Reveal.astro`, `Faq.astro`, `CtaBand.astro`. `PageHead.astro` kept, orbs changed to the e-commerce stack only (Shopify, Meta, Google Ads, WooCommerce, Stripe, PayPal).
+- **Added:** `public/assets/css/blocks.css` (replaces `desk.css`), pages `how-it-works`, `sample-memo`, and the Leak Estimator at `ad-budget-check`. Rebuilt `index`, `audit`, `pricing`, `security`, `about` on the original classes. Removed `AuditBand.astro`, `pages/product`, `desk.css`.
+- **Changed:** `siteConfig.ts` now holds `NAV` (How It Works, Sample Memo, Leak Estimator, Pricing, Resources, About) and `FOOTER_COLUMNS`. `Layout` JSON-LD describes the desk service. `astro.config.mjs` redirects `/product/` and `/platform/` to `/how-it-works/`. Sitemap priorities updated.
+- **Content unchanged:** all Site Blueprint copy, prices (`PRICING`), memo figures, estimator math, audit form and tests carried over as built in S2 to S5.
+- **Verification:** `tsc --noEmit` pass, `npm test` 10 pass, `astro build` pass (25 pages). Built HTML checked: original stylesheets load, only Inter loads, no `d-nav`/`d-footer` left, no broken internal links, no banned copy on the rebuilt pages. No browser was available, so no screenshots were taken.
+- **Known leftovers:** articles, `/contact/`, privacy, terms and `llms.txt` still carry old self-serve and trial wording (S6, S7). Placeholders still unset: `schedulingUrl`, `auditWalkthroughVideoUrl`, `founder.photo`, `founder.bio`, `founder.linkedin`.
+- **Next:** S6. Start at `site/src/pages/resources/index.astro` and `site/src/data/articles*.ts`.

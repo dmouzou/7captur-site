@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHead from "../../components/PageHead.astro";
 import AuditForm from "../../components/AuditForm.astro";
 import Reviewer from "../../components/Reviewer.astro";
 import { siteConfig, isSet } from "../../config/siteConfig";
@@ -17,29 +18,23 @@ const access = [
 ---
 <Layout title="Free 60-Day Ad Leak Audit in 48 Hours | 7Captur" description="A one-time retrospective lookback on your past 60 days of ad spend, settled refunds and declared COGS. 1-page audit in 48 hours and a 20-minute walkthrough. Read-only access." path="/audit/" current="/audit/">
 <main>
-  <header class="d-page-head">
-    <div class="d-wrap">
-      <span class="d-eyebrow">One-time retrospective lookback · past 60 days</span>
-      <h1>Get a Free 60-Day Ad Leak Audit in 48 Hours.</h1>
-      <p class="d-lede">We look back at what you already spent and show where margin leaked after refunds, product costs and fees.</p>
-    </div>
-  </header>
+  <PageHead wide title="Get a Free 60-Day Ad Leak Audit in 48 Hours." lede="We look back at what you already spent and show where margin leaked after refunds, product costs and fees." />
 
-  <section class="d-section d-tight" aria-labelledby="receive-h">
-    <div class="d-wrap">
+  <section class="section" style="padding-top:0" aria-labelledby="receive-h">
+    <div class="wrap">
       <h2 id="receive-h" class="d-sr">What you receive</h2>
       <ul class="d-cols">{receive.map((r) => <li><span class="d-num">{r.n}</span><h3>{r.h}</h3><p>{r.p}</p></li>)}</ul>
     </div>
   </section>
 
-  <section class="d-section d-alt" id="book">
-    <div class="d-wrap d-audit">
+  <section class="section band" id="book">
+    <div class="wrap d-audit">
       <div>
         {canBook && (
           <div class="d-panel">
             <h2>Book your 20-minute slot</h2>
             <p>Ready now? Pick a time for your kickoff and review call.</p>
-            <div class="d-actions" style="justify-content:flex-start;margin-top:20px"><a class="d-btn d-btn-primary" href={siteConfig.schedulingUrl} rel="noopener">Choose a time</a></div>
+            <div class="d-actions" style="justify-content:flex-start;margin-top:20px"><a class="btn btn-primary" href={siteConfig.schedulingUrl} rel="noopener">Choose a time</a></div>
           </div>
         )}
         <div class="d-panel">
@@ -69,9 +64,9 @@ const access = [
   </section>
 
   {isSet(siteConfig.auditWalkthroughVideoUrl) && (
-    <section class="d-section" aria-labelledby="video-h">
-      <div class="d-wrap d-narrow">
-        <div class="d-head"><h2 id="video-h">See an anonymized audit in 90 seconds</h2></div>
+    <section class="section" aria-labelledby="video-h">
+      <div class="wrap d-narrow">
+        <div class="section-head"><h2 id="video-h">See an anonymized audit in 90 seconds</h2></div>
         <iframe class="d-video" src={siteConfig.auditWalkthroughVideoUrl} title="Anonymized audit walkthrough" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
       </div>
     </section>

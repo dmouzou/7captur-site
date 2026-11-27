@@ -1,7 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHead from "../../components/PageHead.astro";
 import Reviewer from "../../components/Reviewer.astro";
-import AuditBand from "../../components/AuditBand.astro";
+import CtaBand from "../../components/CtaBand.astro";
 import { siteConfig } from "../../config/siteConfig";
 const principles = [
   { h: "Margin before ROAS", p: "A platform's ROAS counts revenue it attributes to itself. Refunds, product costs, shipping and fees decide whether that revenue was worth buying." },
@@ -11,15 +12,10 @@ const principles = [
 ---
 <Layout title="About: An Independent Ad Decision Desk | 7Captur" description="Why 7Captur grades evidence conservatively and works as an independent decision desk for e-commerce ad budgets, not an ad agency." path="/about/" current="/about/">
 <main>
-  <header class="d-page-head">
-    <div class="d-wrap">
-      <span class="d-eyebrow">About 7Captur</span>
-      <h1>Ad platforms grade their own work. We check it against your margin.</h1>
-    </div>
-  </header>
+  <PageHead wide title="Ad platforms grade their own work. We check it against your margin." />
 
-  <section class="d-section d-tight">
-    <div class="d-wrap">
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
       <div class="d-prose">
         <p>E-commerce marketing runs on numbers that tend to flatter. A platform reports a sale that a refund later erases. A campaign shows a healthy ROAS while the products it sells cost more to make, ship and process than the ad brought back.</p>
         <p>7Captur exists to give founders one honest read each week: what the money did after real costs, how strong the evidence is, and what to cut, hold or test next. You make the decision, and you or your media buyer make the change.</p>
@@ -27,23 +23,23 @@ const principles = [
     </div>
   </section>
 
-  <section class="d-section d-alt" aria-labelledby="principles-h">
-    <div class="d-wrap">
-      <div class="d-head"><h2 id="principles-h">How we operate</h2></div>
+  <section class="section band" aria-labelledby="principles-h">
+    <div class="wrap">
+      <div class="section-head"><h2 id="principles-h">How we operate</h2></div>
       <ul class="d-cols">{principles.map((p) => <li><h3>{p.h}</h3><p>{p.p}</p></li>)}</ul>
     </div>
   </section>
 
-  <section class="d-section" aria-labelledby="founder-h">
-    <div class="d-wrap">
-      <div class="d-head"><h2 id="founder-h">Who is accountable</h2></div>
+  <section class="section" aria-labelledby="founder-h">
+    <div class="wrap">
+      <div class="section-head"><h2 id="founder-h">Who is accountable</h2></div>
       <div class="d-founder d-panel"><Reviewer statement="A named person answers for the work. Questions about a memo, your data or the way a call was graded can go directly to the founder." /></div>
     </div>
   </section>
 
-  <section class="d-section d-alt" id="contact" aria-labelledby="contact-h">
-    <div class="d-wrap">
-      <div class="d-head"><h2 id="contact-h">Contact</h2></div>
+  <section class="section band" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <div class="section-head"><h2 id="contact-h">Contact</h2></div>
       <dl class="d-grid-3 d-contact">
         <div class="d-box"><dt>Book an audit</dt><dd><a href="/audit/">Free 60-Day Ad Leak Audit</a></dd></div>
         <div class="d-box"><dt>Direct email</dt><dd><a href={`mailto:${siteConfig.founder.email}`}>{siteConfig.founder.email}</a></dd></div>
@@ -52,6 +48,6 @@ const principles = [
     </div>
   </section>
 
-  <AuditBand />
+  <CtaBand />
 </main>
 </Layout>

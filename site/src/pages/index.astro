@@ -1,8 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import CtaBand from "../components/CtaBand.astro";
 import SampleMemo from "../components/SampleMemo.astro";
-import LeakEstimator from "../components/LeakEstimator.tsx";
-import AuditBand from "../components/AuditBand.astro";
 import { PRICING, usd } from "../config/siteConfig";
 
 const problems = [
@@ -12,14 +11,13 @@ const problems = [
 ];
 const steps = [
   { h: "2-minute read-only access", p: "Grant native Viewer or Analyst roles in Shopify, Meta, and Google Ads, plus your SKU COGS sheet. Zero OAuth app installs and zero ad-account write access." },
-  { h: "Engine hygiene plus human review", p: "Our internal 7Captur decision engine reconciles spend, orders, fees, and 30-day refund lag and flags missing data as unknown. A human analyst verifies every call." },
-  { h: "One Monday memo, zero dashboards", p: "Receive your 1-page decision memo by email or Slack every Monday morning. Optional read-only portal access is included if your CFO or media buyer wants the archive." },
+  { h: "Engine hygiene plus human review", p: "Our decision engine reconciles spend, orders, fees, and 30-day refund lag, and flags missing data as unknown. A human analyst verifies every call." },
+  { h: "One Monday memo, zero dashboards", p: "Your 1-page decision memo arrives by email or Slack every Monday morning. Optional read-only portal access is included." },
 ];
-const refusals = [
-  { h: "Never charge a % of ad spend", p: "The fee is flat, so we have no incentive to inflate your budgets." },
-  { h: "Never touch or edit your ad accounts", p: "Access is view-only. You or your media buyer make every change." },
-  { h: "Never fill missing COGS with zero", p: "An unknown cost stays unknown, and the memo says which products it affects." },
-  { h: "Never push scale when evidence is thin", p: "Thin or unsettled data gets a hold or a small test, with the reason written down." },
+const jumps = [
+  { h: "See how it works", p: "Access, reconciliation and delivery, step by step.", href: "/how-it-works/" },
+  { h: "Read the full sample memo", p: "Every section of a Monday memo, explained.", href: "/sample-memo/" },
+  { h: "Try the Leak Estimator", p: "Estimate what unprofitable campaigns could cost you each month.", href: "/ad-budget-check/" },
 ];
 ---
 <Layout
@@ -27,14 +25,14 @@ const refusals = [
   description="Every Monday, 7Captur reconciles Shopify, Meta and Google exports against COGS, shipping, fees and 30-day refunds, then delivers a 1-page, analyst-verified decision memo."
   path="/" current="/">
 <main>
-  <header class="d-hero">
-    <div class="d-wrap">
-      <span class="d-eyebrow">Weekly Profit &amp; Ad Decision Desk for E-commerce ($20K–$150K/mo ad spend)</span>
-      <h1>Platform ROAS lies. Get one honest weekly budget decision built on true margin.</h1>
-      <p class="d-lede">Every Monday morning, 7Captur reconciles your Shopify, Meta, and Google exports against real COGS, shipping, payment fees, and 30-day refunds. Then it delivers a 1-page, analyst-verified decision memo telling you exactly what to cut, hold, or test.</p>
-      <div class="d-actions">
-        <a class="d-btn d-btn-primary" href="/audit/">Book Free 60-Day Ad Leak Audit</a>
-        <a href="#sample-memo">Read a sample Monday Memo ↓</a>
+  <header class="hero">
+    <div class="wrap">
+      <p class="kicker">Weekly Profit &amp; Ad Decision Desk for e-commerce ($20K–$150K/mo ad spend)</p>
+      <h1 style="max-width:18ch">Platform ROAS lies. Get one honest weekly budget decision built on true margin.</h1>
+      <p class="hero-sub">Every Monday morning, 7Captur reconciles your Shopify, Meta, and Google exports against real COGS, shipping, payment fees, and 30-day refunds. Then it delivers a 1-page, analyst-verified decision memo telling you exactly what to cut, hold, or test.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/audit/">Book Free 60-Day Ad Leak Audit</a>
+        <a class="btn btn-ghost" href="/sample-memo/">Read a sample Monday Memo</a>
       </div>
       <ul class="d-trust">
         <li>48-hour lookback turnaround</li>
@@ -45,44 +43,31 @@ const refusals = [
     </div>
   </header>
 
-  <section class="d-memo-section" id="sample-memo" aria-label="Sample Monday memo">
-    <div class="d-wrap"><SampleMemo /></div>
+  <section class="d-memo-section" aria-label="Sample Monday memo">
+    <div class="wrap"><SampleMemo /></div>
   </section>
 
-  <section class="d-section d-alt" id="problem">
-    <div class="d-wrap">
-      <div class="d-head"><span class="d-eyebrow">The problem</span><h2>Why dashboards don't stop cash leaks</h2></div>
-      <ul class="d-cols">
-        {problems.map((x, i) => <li><span class="d-num">({"abc"[i]})</span><h3>{x.h}</h3><p>{x.p}</p></li>)}
-      </ul>
+  <section class="section band">
+    <div class="wrap">
+      <div class="section-head"><h2>Why dashboards don't stop cash leaks.</h2></div>
+      <ul class="d-cols">{problems.map((x, i) => <li><p class="d-num">({"abc"[i]})</p><h3>{x.h}</h3><p>{x.p}</p></li>)}</ul>
     </div>
   </section>
 
-  <section class="d-section" id="how-it-works">
-    <div class="d-wrap">
-      <div class="d-head"><span class="d-eyebrow">How it works</span><h2>Three steps from exports to a decision</h2></div>
-      <ol class="d-cols">
-        {steps.map((x, i) => <li><span class="d-num">Step {i + 1}</span><h3>{x.h}</h3><p>{x.p}</p></li>)}
-      </ol>
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><h2>Three steps from exports to a decision.</h2></div>
+      <ol class="d-cols">{steps.map((x, i) => <li><p class="d-num">Step {i + 1}</p><h3>{x.h}</h3><p>{x.p}</p></li>)}</ol>
     </div>
   </section>
 
-  <section class="d-section d-alt" id="estimator">
-    <div class="d-wrap">
-      <div class="d-head"><span class="d-eyebrow">Ad Leak Estimator</span><h2>How much could be leaking each month?</h2><p class="d-lede">Move the four inputs. The figures update in your browser and nothing is sent anywhere.</p></div>
-      <LeakEstimator client:load />
+  <section class="section band">
+    <div class="wrap">
+      <div class="section-head"><h2>Go a level deeper.</h2></div>
+      <ul class="d-cols">{jumps.map((j) => <li><h3>{j.h}</h3><p>{j.p}</p><p style="margin-top:14px"><a href={j.href}>Open →</a></p></li>)}</ul>
     </div>
   </section>
 
-  <section class="d-section" id="standard">
-    <div class="d-wrap">
-      <div class="d-head"><span class="d-eyebrow">The 7Captur standard</span><h2>What we refuse to do</h2></div>
-      <ul class="d-refusals">
-        {refusals.map((x) => <li><h3>{x.h}</h3><p>{x.p}</p></li>)}
-      </ul>
-    </div>
-  </section>
-
-  <AuditBand />
+  <CtaBand />
 </main>
 </Layout>

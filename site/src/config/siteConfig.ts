@@ -49,9 +49,9 @@ export const prepaySaving = (plan: { monthly: number; prepay: number }) => plan.
 export const AUDIT_CTA = { label: "Free 60-Day Audit", href: "/audit/" };
 
 export const NAV = [
-  { href: "/#how-it-works", label: "How It Works" },
-  { href: "/#sample-memo", label: "Sample Memo" },
-  { href: "/#estimator", label: "Leak Estimator" },
+  { href: "/how-it-works/", label: "How It Works" },
+  { href: "/sample-memo/", label: "Sample Memo" },
+  { href: "/ad-budget-check/", label: "Leak Estimator" },
   { href: "/pricing/", label: "Pricing" },
   { href: "/resources/", label: "Resources" },
   { href: "/about/", label: "About" },
@@ -61,8 +61,9 @@ export const FOOTER_COLUMNS = [
   {
     title: "Product",
     links: [
-      { href: "/#how-it-works", label: "How It Works" },
-      { href: "/#sample-memo", label: "Sample Memo" },
+      { href: "/how-it-works/", label: "How It Works" },
+      { href: "/sample-memo/", label: "Sample Memo" },
+      { href: "/ad-budget-check/", label: "Leak Estimator" },
       { href: "/pricing/", label: "Pricing" },
       { href: "/security/", label: "Security" },
     ],
@@ -73,6 +74,7 @@ export const FOOTER_COLUMNS = [
       { href: "/about/", label: "About" },
       { href: "/resources/", label: "Resources" },
       { href: "/audit/", label: "Free 60-Day Audit" },
+      { href: "/about/#contact", label: "Contact" },
     ],
   },
   {

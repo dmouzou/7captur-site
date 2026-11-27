@@ -1,0 +1,38 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHead from "../../components/PageHead.astro";
+import CtaBand from "../../components/CtaBand.astro";
+
+const steps = [
+  { h: "2-minute read-only access", p: "Grant native Viewer or Analyst roles in Shopify, Meta, and Google Ads, plus your SKU COGS sheet. Zero OAuth app installs and zero ad-account write access.", more: "You use the roles your platforms already provide, and you can revoke them in about 30 seconds." },
+  { h: "Engine hygiene plus human review", p: "Our internal 7Captur decision engine reconciles spend, orders, fees, and 30-day refund lag, and flags missing data as unknown. A human analyst verifies every call.", more: "Missing costs stay unknown. They are never filled with zero, and the memo names the products affected." },
+  { h: "One Monday memo, zero dashboards", p: "Receive your 1-page decision memo by email or Slack every Monday morning. Optional read-only portal access is included if your CFO or media buyer wants the archive.", more: "Each memo carries 1 to 3 calls: cut, hold or test, each with an evidence grade." },
+];
+const refusals = [
+  { h: "Never charge a % of ad spend", p: "The fee is flat, so we have no incentive to inflate your budgets." },
+  { h: "Never touch or edit your ad accounts", p: "Access is view-only. You or your media buyer make every change." },
+  { h: "Never fill missing COGS with zero", p: "An unknown cost stays unknown, and the memo says which products it affects." },
+  { h: "Never push scale when evidence is thin", p: "Thin or unsettled data gets a hold or a small test, with the reason written down." },
+];
+---
+<Layout title="How It Works: Read-Only Access to a Monday Decision Memo | 7Captur" description="Grant view-only access, let the 7Captur engine reconcile spend, orders, COGS, fees and 30-day refunds, and receive one analyst-verified decision memo every Monday." path="/how-it-works/" current="/how-it-works/">
+<main>
+  <PageHead wide title="From read-only access to one Monday decision." lede="No dashboards to learn and no spreadsheets to audit. You grant view-only access once, and the memo arrives every Monday." />
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <ol class="d-cols">{steps.map((x, i) => <li><p class="d-num">Step {i + 1}</p><h3>{x.h}</h3><p>{x.p}</p><p class="d-fine" style="margin-top:12px">{x.more}</p></li>)}</ol>
+      <p class="d-center" style="margin-top:32px"><a href="/sample-memo/">See what the memo looks like →</a></p>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="wrap">
+      <div class="section-head"><p class="kicker">The 7Captur standard</p><h2>What we refuse to do.</h2></div>
+      <ul class="d-grid-2" style="list-style:none;padding:0;max-width:900px;margin:0 auto">{refusals.map((x) => <li class="d-box"><h3>{x.h}</h3><p>{x.p}</p></li>)}</ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</main>
+</Layout>
