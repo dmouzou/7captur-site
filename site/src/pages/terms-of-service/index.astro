@@ -1,52 +1,58 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHead from "../../components/PageHead.astro";
+import { PRICING, usd } from "../../config/siteConfig";
 ---
-<Layout legacy
+<Layout
   title="Terms of Service | 7Captur"
-  description="The terms for using 7Captur: decision support, plans and billing, the free trial, your data, and liability."
+  description="The terms for using 7Captur: the free 60-day audit, the flat-fee desk plans, scope, your data, and liability."
   path="/terms-of-service/" current="/terms-of-service/">
 <main>
-<header class="page-head"><div class="wrap"><h1>Terms of Service</h1><p class="lede">The terms for using 7Captur, including plans, billing and what the service does and does not do.</p></div></header>
+<PageHead wide title="Terms of Service" lede="The terms for working with 7Captur, including the free audit, the flat-fee plans and what the service does and does not do." />
 <section class="section section-flush" style="padding-top:48px">
   <div class="wrap">
     <div class="legal-layout">
       <div class="legal-toc">
         <div class="legal-toc-label">On this page</div>
         <a href="#t-service">The service</a>
+        <a href="#t-audit">The free audit</a>
         <a href="#t-decision">Decision support only</a>
-        <a href="#t-plans">Plans and billing</a>
-        <a href="#t-bands">Free trial and annual billing</a>
+        <a href="#t-plans">Plans and fees</a>
+        <a href="#t-scope">What is not included</a>
         <a href="#t-data">Your data and exit</a>
         <a href="#t-use">Acceptable use</a>
         <a href="#t-liability">Limitation of liability</a>
         <a href="#t-third">Third-party availability</a>
       </div>
       <div class="legal-body">
-        <p class="legal-meta">Last updated: October 2026</p>
+        <p class="legal-meta">Last updated: November 2026</p>
 
         <h3 id="t-service">The service</h3>
-        <p>7Captur helps you understand your marketing results and decide what to do next. You enter, import or connect data, and we calculate figures and generate recommendations and weekly summaries from it.</p>
+        <p>7Captur is a weekly profit and ad decision desk for e-commerce brands. We reconcile your store and ad exports against your declared costs and settled refunds, and deliver a decision memo with an evidence grade and the unknowns we could not verify.</p>
+
+        <h3 id="t-audit">The free audit</h3>
+        <p>The 60-Day Ad Leak Audit is a one-time retrospective review of your last 60 days, delivered with a short walkthrough call. It is not a 60-day trial of an ongoing service, and there is no obligation to continue.</p>
 
         <h3 id="t-decision">Decision support only</h3>
-        <p>7Captur does not create, change, pause or delete anything in your ad accounts, store or social accounts. Recommendations are suggestions based on the data you provide. They are not guarantees of sales, savings or profit, and their quality depends on your data. You decide whether to act and you are responsible for your own decisions and their financial outcomes.</p>
+        <p>7Captur does not create, change, pause or delete anything in your ad accounts, store or other accounts. Memos are recommendations based on the data and costs you provide. They are not guarantees of sales, savings or profit, and their quality depends on your data. You decide whether to act, and you are responsible for your own decisions and their financial outcomes.</p>
 
-        <h3 id="t-plans">Plans and billing</h3>
-        <p>There is no free plan. New accounts get a 14-day free trial of Starter with no card needed. Paid plans are billed monthly or annually in US dollars through our payment provider, Paddle. Taxes are shown at checkout where they apply. You can upgrade, downgrade or cancel at any time. Upgrades take effect immediately and are charged pro rata. Downgrades change your allowance immediately, and the new price applies from your next billing date. On cancellation you keep your paid plan until the end of the period you paid for, then your account becomes read-only for 30 days with your data kept and exportable. If a payment fails we notify you and allow a grace period before paid features are limited. Your data is not deleted because of a failed payment. For refunds, contact us and we will review each request.</p>
+        <h3 id="t-plans">Plans and fees</h3>
+        <p>{PRICING.core.name} is {usd(PRICING.core.monthly)} per month and {PRICING.scale.name} is {usd(PRICING.scale.monthly)} per month. Fees are flat and never a percentage of your ad spend. Each plan has a {PRICING.commitmentDays}-day initial commitment billed monthly, then continues month to month. You can instead prepay the initial {PRICING.commitmentDays} days at {usd(PRICING.core.prepay)} ({PRICING.core.name}) or {usd(PRICING.scale.prepay)} ({PRICING.scale.name}), which is {PRICING.prepayDiscountPct}% off. Prices are in US dollars. We invoice you directly, and the due date and payment method are shown on each invoice. After the initial commitment you can cancel by giving notice. A client whose setup grows beyond the plan, for example a second store or currency, a third ad channel, SKU-level margin tracking or agency alignment, moves to the next plan from the next billing cycle.</p>
 
-        <h3 id="t-bands">Free trial and annual billing</h3>
-        <p>If you do not choose a plan when the 14-day trial ends, your account becomes read-only for 30 days. Your data is kept and you can export it. After that period we email you before deleting it. Annual plans save 20% compared with monthly billing and are charged once a year. Custom plans are priced by agreement.</p>
+        <h3 id="t-scope">What is not included</h3>
+        <p>We do not execute changes in ad accounts. We do not provide creative, copy or conversion consulting, or pixel, tag manager or conversion API engineering. We do not provide full accounting, bookkeeping, payroll, overhead, inventory procurement or tax advice, and this is not a CFO service. We do not build custom dashboards. Costs are accepted through our cost sheet template, and we do not extract data by hand from unformatted supplier documents.</p>
 
         <h3 id="t-data">Your data and exit</h3>
-        <p>You own your data. You can export it at any time and request deletion as described in the Privacy Policy. We may use aggregate or de-identified information to improve the service.</p>
+        <p>You own your data. You can remove our read-only access at any time, and you can request deletion as described in the Privacy Policy. We do not sell your data or use your financial records to train public models.</p>
 
         <h3 id="t-use">Acceptable use</h3>
-        <p>Use 7Captur lawfully and only with data you have the right to use. Do not attempt to bypass usage limits, access other accounts, or interfere with the service. We may suspend accounts that breach these terms or put the service or others at risk.</p>
+        <p>Work with us lawfully and only with data you have the right to share. Do not try to access other clients' information or interfere with the service. We may suspend access that breaches these terms or puts the service or others at risk.</p>
 
         <h3 id="t-liability">Limitation of liability</h3>
         <p>To the maximum extent permitted by law, 7Captur is not liable for indirect, incidental or consequential damages arising from your use of the service or from decisions you make based on it. Liability is limited to the amount you paid in the three months before the claim.</p>
 
         <h3 id="t-third">Third-party availability</h3>
-        <p>The service depends on third-party platforms and providers, including Shopify, Google, our payment provider and our other service providers. We are not responsible for interruptions caused by their rate limits, changes or outages. You can always continue with manual entry and file imports.</p>
+        <p>The service depends on data from third-party platforms and on our service providers. We are not responsible for delays caused by their outages, rate limits or changes. If data is unavailable or not yet settled, the memo says so rather than guessing.</p>
       </div>
     </div>
   </div>

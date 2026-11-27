@@ -379,7 +379,7 @@ export const ARTICLES: Article[] = [
     slug: "ad-performance-tracking",
     title: "Ad Performance Tracking: A Simple Checklist for Meta and Google Ads",
     seoTitle: "Ad Performance Tracking: A Simple Checklist for Meta and Google Ads",
-    description: "How to track ad performance without drowning in reports. A short checklist for Meta (Facebook and Instagram) and Google Ads: what to export, what to record and what to compare.",
+    description: "How to track ad performance without drowning in reports. A short checklist for Meta and Google Ads: what to export, what to record and what to compare.",
     topic: "Analytics",
     keywords: ["ad performance tracking", "Meta ads reporting", "Facebook ads reporting", "Google Ads reporting", "e-commerce ad reporting"],
     published: "2026-11-01", modified: M, minutes: 7,

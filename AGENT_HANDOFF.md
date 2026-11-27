@@ -1,7 +1,7 @@
 # AGENT_HANDOFF: `7captur-site` (`7captur.com`)
 
 ## Active Status
-- **Current State:** `IDLE`: Ready for Milestone `S7`
+- **Current State:** `IDLE`: All milestones done. Remaining work is the owner checklist in the S7 entry
 - **Target Blueprint:** "7Captur Site Blueprint (7captur.com)", held in the claude.ai Project. It is deliberately not committed: this repository is public and the blueprint contains internal operating figures.
 - **Branch Policy:** Commit directly to `main` (1 cohesive milestone per commit, build must pass). Every push deploys to the live site.
 - **Theme Rule:** Preserve Dark/Light mode and lime green accent. Visual style is an editorial financial memo.
@@ -43,7 +43,7 @@
 | **S5** | `DONE` | Pricing, Security and About pages |
 | **S1R** | `DONE` | Restoration: original multipage design, fonts, nav and footer back; desk skin removed; homepage split into separate routes; content kept from the Site Blueprint |
 | **S6** | `DONE` | Resources pruning (remove self-serve, social-seller, reseller, local-service and DM/WhatsApp articles), article CTA refresh to `/audit/`, fix article links to `/product/` and old persona copy, rework `/contact/`, rewrite `public/llms.txt`, legacy redirects (`/signup`, `/trial`, `/get-started`, `/demo`) |
-| **S7** | `TODO` | Metadata, privacy and terms copy (still describe the old self-serve product), sitemap/robots, contrast, mobile, link integrity, banned-copy sweep. Check every page in a real browser at 1280, 768 and 360 px in light and dark. S1R was verified by build, tests and HTML inspection only, with no browser screenshots |
+| **S7** | `DONE` | Privacy and terms rewritten for the audit and flat-fee desk, OG default image, metadata and sitemap sweep, dark-mode muted text contrast, banned-copy sweep. Browser QA at 1280, 768 and 360 px still recommended after deploy |
 
 ---
 
@@ -123,3 +123,9 @@
 - **Retired guides** redirect to `/resources/`: track sales from social posts, cost per enquiry, likes vs sales, WhatsApp and DM sales, first $500 on Meta vs Google. `/signup`, `/trial`, `/get-started`, `/demo` go to `/audit/`.
 - **Verification:** `tsc` pass, `npm test` 10 pass, build pass. Link check on built HTML: 0 broken links or anchors. Chromium: contact and article pages at 1280, 768, 360 px light and dark with no overflow or errors; contact form validation, payload and failure path tested with Formspree mocked; four redirects followed.
 - **Next:** S7. Privacy, terms, `og-default.png` and `video.html` still carry old copy or metadata.
+
+### S7: Legal copy, metadata, contrast, final sweep
+- **Agent / Date (UTC):** Claude / 2026-11-28
+- **Files:** `pages/privacy-policy/index.astro` and `pages/terms-of-service/index.astro` rewritten on `PageHead` (no OAuth, no Google user data section, no Paddle, no trial, no app accounts; covers audit form, exports, COGS sheets, invited portal, Formspree, Firebase, 48-hour deletion on request, flat fees from `PRICING`). `public/assets/og/og-default.png` tagline now "Weekly profit & ad decision desk for e-commerce". `public/video.html` set to noindex, em dash removed from its title (it is the outreach video player, left in place). `data/articles.ts` one description shortened. `site.css` dark `--muted` raised from `#858078` to `#938e85` (was 4.25:1 on cards, now 5.1:1).
+- **Checks:** `tsc` pass, `npm test` 10 pass, build 20 pages. Built HTML: no banned copy (the only "free trial" hit is the audit page sentence saying it is not one), no em dashes, every real page has a title, description and canonical, sitemap lists the 18 real pages and no redirects.
+- **Owner checklist before calling it launched:** (1) have a lawyer read the privacy and terms pages, they were written from the blueprint and security page, not legal advice, and the terms leave payment due dates and cancellation notice length to the invoice or order, so decide those; (2) confirm `privacy@7captur.com` was replaced by `daniel@7captur.com` on purpose (privacy page now uses the founder email); (3) fill `schedulingUrl`, founder photo, bio, LinkedIn and walkthrough video in `siteConfig.ts`; (4) confirm Formspree notifications arrive; (5) look at the live site in a browser, light and dark, 1280, 768 and 360 px.

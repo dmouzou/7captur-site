@@ -1,12 +1,15 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHead from "../../components/PageHead.astro";
+import { siteConfig } from "../../config/siteConfig";
+const email = siteConfig.founder.email;
 ---
-<Layout legacy
+<Layout
   title="Privacy Policy | 7Captur"
-  description="How 7Captur collects, uses, shares and deletes information, including Google user data."
+  description="How 7Captur collects, uses, shares and deletes the exports, cost sheets and contact details clients and prospects give us."
   path="/privacy-policy/" current="/privacy-policy/">
 <main>
-<header class="page-head"><div class="wrap"><h1>Privacy Policy</h1><p class="lede">How information is collected, used, shared and deleted. For technical detail on access and security, see Security and data.</p></div></header>
+<PageHead wide title="Privacy Policy" lede="How information is collected, used, shared and deleted. For how access works in practice, see the Security page." />
 <section class="section section-flush" style="padding-top:48px">
   <div class="wrap">
     <div class="legal-layout">
@@ -14,57 +17,54 @@ import Layout from "../../layouts/Layout.astro";
         <div class="legal-toc-label">On this page</div>
         <a href="#p-who">Who we are</a>
         <a href="#p-collect">What we collect</a>
+        <a href="#p-access">Access you grant</a>
         <a href="#p-use">How we use it</a>
         <a href="#p-ai">AI processing</a>
-        <a href="#p-google">Google user data</a>
         <a href="#p-share">Who we share it with</a>
         <a href="#p-retention">Retention and deletion</a>
         <a href="#p-rights">Your rights</a>
         <a href="#p-cookies">Cookies</a>
       </div>
       <div class="legal-body">
-        <p class="legal-meta">Last updated: October 2026</p>
+        <p class="legal-meta">Last updated: November 2026</p>
 
         <h3 id="p-who">Who we are</h3>
-        <p>7Captur provides marketing decision support. We are the data controller for the information described here. For privacy questions, contact <a href="mailto:privacy@7captur.com">privacy@7captur.com</a>.</p>
+        <p>7Captur runs a weekly profit and ad decision desk for e-commerce brands. We are the data controller for the information described here. For privacy questions, contact <a href={`mailto:${email}`}>{email}</a>.</p>
 
         <h3 id="p-collect">What we collect</h3>
         <ul>
-          <li><strong>Account:</strong> your name and email address, and your sign-in details handled by our authentication provider. If you sign in with Google or Apple, we receive your name and email address from that provider (Apple may give us a private relay address instead of your own). Signing in with Google is separate from connecting Google Ads.</li>
-          <li><strong>Business profile:</strong> business name and type, country, time zone, currency, objective, channels and products or services you choose to describe.</li>
-          <li><strong>Records you add:</strong> posts, promotions, enquiries, sales and costs that you type in, import from a file, or confirm after importing a CSV file. We ask you to avoid personal data about your customers.</li>
-          <li><strong>Connected data:</strong> if you connect a store or ad account, we read order totals, refunds and dates (store) and campaign spend, impressions and clicks (ads). We do not request customer names, emails or addresses.</li>
-          <li><strong>Usage and billing status:</strong> recommendation and import counts, and your plan and subscription status. Card details are handled by our payment provider and never reach us.</li>
-          <li><strong>Contact messages:</strong> what you send through the contact form.</li>
+          <li><strong>Audit and contact requests:</strong> name, work email, store URL, store platform, monthly ad spend range, active ad channels and any context you choose to add.</li>
+          <li><strong>Business exports:</strong> order, refund, shipping and fee data from your store, and campaign spend and performance data from your ad accounts, as exports or through the read-only access you grant. We do not need customer names, emails or addresses and ask you not to send them.</li>
+          <li><strong>Cost sheets:</strong> the SKU cost files you upload, and the payment fee and refund-window notes you provide.</li>
+          <li><strong>Client portal:</strong> for invited clients, your name, email address, sign-in details handled by our authentication provider, delivery preferences (email addresses, an optional Slack webhook URL, delivery day, time and time zone) and the memos and invoices shown to you.</li>
+          <li><strong>Billing records:</strong> invoice numbers, periods, amounts and payment status. We invoice directly, and we do not hold card numbers on this site.</li>
         </ul>
+
+        <h3 id="p-access">Access you grant</h3>
+        <p>We work through the native view-only roles your platforms provide: a Shopify staff account with reports and orders view access, an ad account analyst role in Meta Business Manager, and a read-only user in Google Ads. We do not ask you to install a third-party app, authorize an OAuth connection, change a pixel or give us billing or edit access. You can remove any role at any time, and our access ends when you do.</p>
 
         <h3 id="p-use">How we use it</h3>
         <ul>
-          <li>To provide the service: calculate figures, generate recommendations and weekly summaries, and send transactional email.</li>
-          <li>To run billing, prevent abuse, secure accounts and provide support.</li>
-          <li>To improve the accuracy and reliability of the service, using aggregate or de-identified information where practical.</li>
-          <li>We do not sell your data and we do not share it with third parties for their marketing.</li>
+          <li>To produce your audit and weekly decision memos, and to answer your questions about them.</li>
+          <li>To deliver memos by email, Slack or the client portal, to invoice you and to provide support.</li>
+          <li>To secure accounts, prevent abuse and keep the service reliable.</li>
+          <li>We do not sell your data, we do not share it for anyone's marketing, and we do not benchmark one client's records against another's.</li>
         </ul>
 
         <h3 id="p-ai">AI processing</h3>
-        <p>We use an AI service for three things: writing plain-language explanations of your recommendations, answering follow-up questions you ask about a saved decision, and, when you import a file, suggesting how its columns and campaign names match your records. Calculations and decisions are made by our own code, not by the AI, and you confirm any suggestion before anything is saved. For explanations and follow-up answers we send only the summary figures saved with that decision (totals, ratios, data checks and what is unknown), never your individual orders, customers or notes. For import suggestions we send column headers and campaign names, not the rows of your file. Follow-up answers are written by AI and can make mistakes. We record how much AI processing each question uses so we can run the service. Our AI provider processes this data on our behalf under terms that do not allow it to be used to train its models on your data.</p>
-
-        <h3 id="p-google">Google user data</h3>
-        <p>If you connect Google Ads, we request read-only access to your account to read campaign spend, impressions and clicks. We use this data only to show you your records and generate your recommendations. We do not use it for advertising and we do not transfer it to others except as needed to provide the service or as the law requires.</p>
-        <p>7Captur's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
-        <p>You can disconnect at any time in 7Captur, which revokes our access and deletes our stored token, or from your Google account permissions page.</p>
+        <p>Our own code reconciles your numbers and a human analyst verifies every call before it reaches you. We may use an AI service to help draft plain-language wording and to answer questions about a client's current report data. We do not use client financial records to train public models.</p>
 
         <h3 id="p-share">Who we share it with</h3>
-        <p>We use service providers to run 7Captur: cloud hosting and database (Google Cloud and Firebase), payments (Paddle), email delivery, and an AI service as described above. They process data only on our instructions. Shopify and Google provide the data you choose to connect. We may disclose information if the law requires it.</p>
+        <p>We use service providers to run 7Captur: cloud hosting, database and file storage (Google Cloud and Firebase), email delivery, form handling (Formspree), call scheduling, and an AI service as described above. They process data on our instructions. If you choose Slack delivery, memo summaries are posted to the webhook you provide. We may disclose information if the law requires it.</p>
 
         <h3 id="p-retention">Retention and deletion</h3>
-        <p>We keep your workspace data while your account is active. You can export it at any time from Settings. If you request account deletion, there is a 14-day waiting period during which you can cancel. After that your workspace, records, recommendations, reports and connections are permanently deleted, connection tokens are removed, and any paid subscription is stopped. Billing records are retained by our payment provider and by us as accounting and legal rules require. Contact form messages are kept for up to 12 months.</p>
+        <p>We keep your exports, cost sheets and memos while we work together. On request, we delete all stored exports and memos within 48 hours and confirm the deletion in writing. Invoice and payment records may be kept for as long as accounting and legal rules require.</p>
 
         <h3 id="p-rights">Your rights</h3>
-        <p>You can access, correct, export or delete the personal data we hold about you, and withdraw consent where we rely on it. Email <a href="mailto:privacy@7captur.com">privacy@7captur.com</a>. Most of this you can do yourself in the app under Settings.</p>
+        <p>You can ask to access, correct, export or delete the personal data we hold about you, and to withdraw consent where we rely on it. Email <a href={`mailto:${email}`}>{email}</a>.</p>
 
         <h3 id="p-cookies">Cookies</h3>
-        <p>This website uses no tracking cookies, third-party analytics scripts or advertising pixels. The app stores only what is needed to keep you signed in and remember your theme choice.</p>
+        <p>This website uses no tracking cookies, third-party analytics scripts or advertising pixels. Your browser stores only your light or dark theme choice, and your cookie notice choice.</p>
       </div>
     </div>
   </div>
