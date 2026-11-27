@@ -1,9 +1,80 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import head from "../../fragments/contact.head.html?raw";
-import main from "../../fragments/contact.main.html?raw";
-import scripts from "../../fragments/contact.scripts.html?raw";
+import { siteConfig, PRICING, AUDIT_CTA, usd } from "../../config/siteConfig";
+import { SPEND_BANDS } from "../../lib/estimator";
+const email = siteConfig.founder.email;
+const platforms = ["Shopify", "WooCommerce", "Other"];
 ---
-<Layout legacy head={head} current="/contact/" scripts={scripts}>
-  <Fragment set:html={main} />
+<Layout title="Contact: Ask About the Free Audit or the Desk | 7Captur" description="Ask about the free 60-Day Ad Leak Audit, the Core or Scale Desk, or read-only access. We reply within 1 business day." path="/contact/" current="/contact/">
+<main>
+
+<header class="page-head">
+  <div class="wrap">
+    <h1>Get in touch.</h1>
+    <p class="lede">Questions about the free audit, the Core or Scale Desk, or how read-only access works? Send a note, or email <a href={`mailto:${email}`}>{email}</a>.</p>
+  </div>
+</header>
+
+<section class="section section-flush" style="padding-bottom:96px">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="expect">
+        <div class="expect-item"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>Response time</b><span>We reply within 1 business day.</span></div>
+        <div class="expect-item"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 21l1.8-5A8 8 0 1 1 21 12z"/></svg></span><b>Good reasons to write</b><span>Working out whether Core or Scale fits your setup. Security or data questions before you grant access. Spending over $150K a month or running 4 or more stores, where bespoke scopes start at {usd(PRICING.overflowFrom)}/mo.</span></div>
+        <div class="expect-item"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/></svg></span><b>Ready for the audit?</b><span>The free 60-Day Ad Leak Audit is a one-time look back at your past 60 days, delivered in 48 hours. You can request it directly, with no message first.</span></div>
+      </div>
+      <p style="margin-top:24px"><a class="btn btn-primary" href={AUDIT_CTA.href}>Book Free 60-Day Ad Leak Audit</a></p>
+    </div>
+
+    <div class="panel">
+      <form id="contactForm" data-endpoint={siteConfig.formEndpoint} data-email={email} action={siteConfig.formEndpoint} method="post" novalidate>
+        <div class="form-grid">
+          <div class="field"><label for="f-name">Your name</label><input class="input" id="f-name" name="name" type="text" autocomplete="name" placeholder="Jane Smith" /></div>
+          <div class="field"><label for="f-email">Work email</label><input class="input" id="f-email" name="email" type="email" autocomplete="email" placeholder="jane@yourstore.com" /></div>
+          <div class="field"><label for="f-store">Store URL (optional)</label><input class="input" id="f-store" name="store" type="text" placeholder="yourstore.com" /></div>
+          <div class="field"><label for="f-platform">Store platform</label>
+            <select class="select" id="f-platform" name="platform"><option value="">Select your platform</option>{platforms.map((p) => <option>{p}</option>)}</select></div>
+          <div class="field wide"><label for="f-spend">Monthly ad spend</label>
+            <select class="select" id="f-spend" name="spend"><option value="">Select a range</option>{SPEND_BANDS.map((b) => <option>{b}</option>)}</select></div>
+          <div class="field wide"><label for="f-message">How can we help?</label><textarea class="textarea" id="f-message" name="message" placeholder="For example: we spend $60K a month across Meta and Google with a media buyer. Which desk fits?"></textarea></div>
+          <input class="hp" type="text" name="_gotcha" id="f-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="field wide"><div class="form-msg" id="formMsg" role="status" aria-live="polite"></div></div>
+          <div class="field wide"><button class="btn btn-primary" type="submit" id="formSubmitBtn">Send message</button></div>
+          <div class="field wide"><p class="fine" style="margin:0">We reply within 1 business day. Your message is used only to answer you. See the <a href="/privacy-policy/">privacy policy</a>.</p></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
 </Layout>
+
+<script is:inline>
+(function(){
+  var form = document.getElementById('contactForm'), msg = document.getElementById('formMsg'), btn = document.getElementById('formSubmitBtn');
+  if (!form) return;
+  var ENDPOINT = form.dataset.endpoint, MAIL = form.dataset.email;
+  function say(t, kind){ msg.textContent = t; msg.className = 'form-msg ' + (kind || ''); }
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var v = function(id){ return document.getElementById(id).value.trim(); };
+    var name = v('f-name'), email = v('f-email'), store = v('f-store'), platform = v('f-platform'), spend = v('f-spend'), message = v('f-message');
+    if (v('f-hp')) return;
+    if (!name || !email) { say('Enter your name and email address.', 'is-error'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { say('Enter a valid email address, like jane@yourstore.com.', 'is-error'); return; }
+    var FREE = ['gmail.com','googlemail.com','outlook.com','hotmail.com','live.com','msn.com','yahoo.com','yahoo.co.uk','ymail.com','icloud.com','me.com','mac.com','aol.com','proton.me','protonmail.com','gmx.com','gmx.net','mail.com','yandex.com','zoho.com','hey.com','fastmail.com','tutanota.com','tuta.io','qq.com','163.com','126.com','web.de'];
+    if (FREE.indexOf(email.split('@')[1].toLowerCase()) !== -1) { say('Please use your business email address, like jane@yourstore.com.', 'is-error'); return; }
+    if (!message) { say('Tell us how we can help.', 'is-error'); return; }
+    btn.disabled = true; btn.textContent = 'Sending';
+    say('');
+    try {
+      var res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, store: store, platform: platform, spend: spend, message: message, _subject: 'New message from ' + name + (store ? ' (' + store + ')' : '') }) });
+      if (res.ok) { form.reset(); say('Message sent. We reply within 1 business day.', 'is-ok'); }
+      else { say('The message was not sent. Try again, or email ' + MAIL + '.', 'is-error'); }
+    } catch (err) { say('The message was not sent. Check your connection, or email ' + MAIL + '.', 'is-error'); }
+    finally { btn.disabled = false; btn.textContent = 'Send message'; }
+  });
+})();
+</script>

@@ -1,35 +1,8 @@
 /** One small flat illustration per article. Pure SVG, themed by CSS classes (aa-*), so it works in light and dark. */
 const bar = (x: number, h: number, c = "aa-a", w = 18) => <rect key={x + c} x={x} y={100 - h} width={w} height={h} rx="4" className={c} />;
-const bubble = (x: number, y: number, w = 56, c = "aa-s") => (
-  <g key={`${x}${y}`}><rect x={x} y={y} width={w} height="26" rx="9" className={c} /><path d={`M${x + 10} ${y + 25} l-5 8 l13 -8z`} className={c} /><rect x={x + 9} y={y + 9} width={w - 22} height="3" rx="1.5" className="aa-l" /><rect x={x + 9} y={y + 15} width={(w - 22) * 0.6} height="3" rx="1.5" className="aa-l" /></g>
-);
 const coin = (cx: number, cy: number, r = 14) => <g key={`${cx}${cy}`}><circle cx={cx} cy={cy} r={r} className="aa-a" /><text x={cx} y={cy + r * 0.38} textAnchor="middle" className="aa-t" style={{ fontSize: r * 1.1 }}>$</text></g>;
-const heart = (x: number, y: number, s = 1) => <path key={`h${x}${y}`} transform={`translate(${x} ${y}) scale(${s})`} d="M0 -3 C-4 -12 -18 -8 -10 3 L0 13 L10 3 C18 -8 4 -12 0 -3z" className="aa-a" />;
 
 const SCENES: Record<string, JSX.Element> = {
-  "track-sales-from-social-media-posts": (<>
-    <rect x="22" y="22" width="78" height="82" rx="10" className="aa-s" /><rect x="30" y="30" width="62" height="38" rx="6" className="aa-l" />{heart(61, 52, 0.9)}
-    <rect x="30" y="76" width="44" height="5" rx="2.5" className="aa-m" /><rect x="30" y="86" width="30" height="5" rx="2.5" className="aa-m" />
-    <path d="M112 62 H176" className="aa-stroke" strokeDasharray="2 7" /><path d="M170 54 L180 62 L170 70" className="aa-stroke" fill="none" />
-    <rect x="194" y="26" width="76" height="78" rx="8" className="aa-s" /><rect x="204" y="38" width="40" height="5" rx="2.5" className="aa-m" /><rect x="204" y="50" width="56" height="4" rx="2" className="aa-l" /><rect x="204" y="60" width="56" height="4" rx="2" className="aa-l" />{coin(246, 88, 11)}
-  </>),
-  "cost-per-enquiry-how-to-calculate": (<>
-    {coin(52, 62, 26)}
-    <text x="100" y="72" className="aa-big">÷</text>
-    {bubble(128, 30, 52)}{bubble(188, 30, 52)}{bubble(128, 70, 52)}
-    <text x="262" y="72" className="aa-big">=</text>
-  </>),
-  "likes-vs-sales-engagement-metrics": (<>
-    {[18, 30, 46, 64, 84].map((h, i) => bar(30 + i * 26, h, "aa-a", 16))}
-    {[16, 15, 16, 15, 16].map((h, i) => bar(176 + i * 24, h, "aa-m", 14))}
-    <line x1="14" x2="296" y1="100" y2="100" className="aa-stroke" />{heart(80, 14, 0.7)}
-    <path d="M226 28 h30 l-3 22 h-24z" className="aa-s" /><path d="M233 28 v-5 a8 8 0 0 1 16 0 v5" className="aa-stroke" fill="none" />
-  </>),
-  "track-whatsapp-and-dm-sales": (<>
-    {bubble(30, 22, 92)}{bubble(150, 52, 92, "aa-a")}
-    <circle cx="258" cy="80" r="16" className="aa-a" /><path d="M250 80 l6 6 l11 -12" className="aa-check" fill="none" />
-    <rect x="30" y="86" width="60" height="5" rx="2.5" className="aa-m" /><rect x="30" y="96" width="38" height="5" rx="2.5" className="aa-l" />
-  </>),
   "roas-vs-profit-break-even-roas": (<>
     {bar(34, 30, "aa-m", 28)}{bar(78, 54, "aa-m", 28)}{bar(122, 92, "aa-a", 28)}{bar(166, 70, "aa-a", 28)}
     <line x1="20" x2="250" y1="42" y2="42" className="aa-stroke" strokeDasharray="5 5" /><text x="258" y="46" className="aa-cap">break-even</text>
@@ -61,14 +34,8 @@ const SCENES: Record<string, JSX.Element> = {
     <polyline points="22,92 62,80 100,86 142,58 186,64 232,34 276,28" className="aa-stroke aa-thick" fill="none" />
     <circle cx="232" cy="34" r="7" className="aa-a" /><line x1="22" x2="276" y1="48" y2="48" className="aa-stroke" strokeDasharray="4 6" /><rect x="214" y="12" width="36" height="14" rx="5" className="aa-s" />
   </>),
-  "meta-vs-google-ads-first-500": (<>
-    <line x1="155" x2="155" y1="40" y2="100" className="aa-stroke" /><line x1="70" x2="240" y1="40" y2="40" className="aa-stroke aa-thick" />
-    <rect x="42" y="56" width="52" height="40" rx="8" className="aa-a" /><rect x="216" y="56" width="52" height="40" rx="8" className="aa-m" />
-    <path d="M56 40 v16 M80 40 v16 M230 40 v16 M254 40 v16" className="aa-stroke" />{coin(155, 26, 12)}
-  </>),
 };
 const BY_TOPIC: Record<string, string> = {
-  "Attribution": "track-sales-from-social-media-posts", "Ads and Spend": "cost-per-enquiry-how-to-calculate", "Metrics": "likes-vs-sales-engagement-metrics",
   "Profit and ROAS": "true-roas-explained", "Budgeting": "advertising-budget-optimization", "Analytics": "ecommerce-analytics-metrics-that-matter",
 };
 

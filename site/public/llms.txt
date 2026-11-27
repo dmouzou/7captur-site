@@ -1,28 +1,33 @@
 # 7Captur
 
-> 7Captur turns a small business's marketing activity (social posts, messages, ads and sales) into clear, evidence-based next steps. Fixed rules decide the recommendation, and every result shows how strong its evidence is. 14-day free trial, no card needed. Works without a website.
+> 7Captur is a weekly profit and ad decision desk for e-commerce brands spending $20K to $150K a month on Meta and Google Ads. Every Monday it reconciles Shopify, Meta and Google exports against product costs, shipping, payment fees and 30-day refunds, and a human analyst verifies a one-page decision memo: what to cut, hold or test. Access is read-only. Fees are flat, never a percentage of ad spend.
+
+## Offer
+- Free 60-Day Ad Leak Audit: a one-time look back at the past 60 days, delivered in 48 hours with a 20-minute walkthrough. It is not a trial.
+- Core Desk: $2,500 a month, or $6,000 for a 3-month prepay
+- Scale Desk: $3,500 a month, or $8,400 for a 3-month prepay
+- 90-day initial commitment, then month-to-month. Bespoke scopes start at $5,000 a month.
+- 7Captur does not edit ad accounts, and is not an ad agency, accounting service or CFO service.
 
 ## Key pages
-- [Home](https://7captur.com/): what 7Captur does and who it is for
-- [Product](https://7captur.com/product/): how recommendations, evidence levels, AI follow-up questions on decisions, the decide-review-learn loop and connections work
-- [Pricing](https://7captur.com/pricing/): Starter, Growth and Custom plans, with a 14-day free trial; AI follow-up credits are 10 a month on Starter and 100 on Growth; Growth includes 15 recommendations a week, 3 business workspaces and 7 connected platforms per workspace, with weekly summaries and priority support
-- [Security](https://7captur.com/security/): data handling and access
-- [Free ad budget check](https://7captur.com/ad-budget-check/): five-question tool that emails a plain-language review of your ad budget
-- [Resources](https://7captur.com/resources/): guides for small sellers
+- [Home](https://7captur.com/): what the desk does and who it is for
+- [How It Works](https://7captur.com/how-it-works/): read-only access, reconciliation and the Monday memo
+- [Sample Memo](https://7captur.com/sample-memo/): an illustrative one-page memo, not a client account
+- [Leak Estimator](https://7captur.com/ad-budget-check/): illustrative estimate of monthly spend going to unprofitable campaigns
+- [Free Audit](https://7captur.com/audit/): request the 60-Day Ad Leak Audit
+- [Pricing](https://7captur.com/pricing/): Core Desk and Scale Desk scope and limits
+- [Security](https://7captur.com/security/): read-only access, isolation, deletion
+- [About](https://7captur.com/about/): operating principles and founder
+- [Resources](https://7captur.com/resources/): guides on ROAS, margin and budgets
 
 ## Guides
-- [How to Track Sales From Social Media Posts](https://7captur.com/articles/track-sales-from-social-media-posts/): Learn how to track which social media posts bring in sales, even when customers order by DM or WhatsApp. Four simple methods, a worked example and what to do with the results.
-- [Cost Per Enquiry: How to Calculate It and Why It Matters](https://7captur.com/articles/cost-per-enquiry-how-to-calculate/): Cost per enquiry is your ad spend divided by the messages, calls or leads it brought in. Learn the formula, how it differs from cost per click and cost per sale, and how to use it.
-- [Likes vs Sales: Which Social Media Metrics Actually Matter](https://7captur.com/articles/likes-vs-sales-engagement-metrics/): Likes, views and followers are easy to count but do not pay the bills. See which social media metrics predict sales, which are vanity, and how to track the ones that matter.
-- [How to Track WhatsApp and DM Sales From Ads and Posts](https://7captur.com/articles/track-whatsapp-and-dm-sales/): Customers who order by WhatsApp or DM are invisible to most analytics. Here is a simple way to tag, log and attribute those sales to the post or ad that started them.
 - [ROAS vs Profit: How to Calculate Break-Even ROAS](https://7captur.com/articles/roas-vs-profit-break-even-roas/): A good-looking ROAS can still lose money. Learn the break-even ROAS formula, why margin, returns and fees change the answer, and how to check whether your ads make a profit.
-- [Advertising Budget Optimization: A Practical Guide for Small Sellers](https://7captur.com/articles/advertising-budget-optimization/): Advertising budget optimization means putting each dollar where it returns the most profit. Learn a five-step process any small business can follow, with no special software.
-- [Ad Spend Management: How to Set, Split and Review Your Budget](https://7captur.com/articles/ad-spend-management/): Ad spend management is how you decide how much to spend, where, and when to change it. A simple routine for small businesses, with a monthly review checklist.
-- [E-commerce Analytics: The Few Numbers Worth Tracking](https://7captur.com/articles/ecommerce-analytics-metrics-that-matter/): E-commerce analytics can drown you in dashboards. These are the handful of metrics small stores should track, what each one means, and how often to check it.
-- [How to Allocate Your Advertising Budget Across Channels](https://7captur.com/articles/advertising-budget-allocation/): Not sure how to divide your ad budget between Meta, Google, TikTok and organic? A simple allocation method for small businesses, with an example split and review rules.
 - [True ROAS Explained: What It Is and How to Calculate It](https://7captur.com/articles/true-roas-explained/): True ROAS is return on ad spend after costs, returns and fees. Learn the formula, see a worked example, and understand why it differs from the ROAS your ad platform reports.
+- [Advertising Budget Optimization: A Practical Guide for E-commerce](https://7captur.com/articles/advertising-budget-optimization/): Advertising budget optimization means moving money to the campaigns that return the most margin. A five-step process for e-commerce brands running Meta and Google Ads.
+- [Ad Spend Management: How to Set, Split and Review Your Budget](https://7captur.com/articles/ad-spend-management/): Ad spend management is how you decide how much to spend, where, and when to change it. A routine for e-commerce brands, with a monthly review checklist.
+- [How to Allocate Your Advertising Budget Across Channels](https://7captur.com/articles/advertising-budget-allocation/): How to divide an e-commerce ad budget between Meta, Google and other channels, using cost per order against break-even, with an example split and review rules.
+- [E-commerce Analytics: The Few Numbers Worth Tracking](https://7captur.com/articles/ecommerce-analytics-metrics-that-matter/): E-commerce analytics can drown you in dashboards. These are the handful of metrics a store should track, what each one means, and how often to check it.
 - [Ad Performance Tracking: A Simple Checklist for Meta and Google Ads](https://7captur.com/articles/ad-performance-tracking/): How to track ad performance without drowning in reports. A short checklist for Meta (Facebook and Instagram) and Google Ads: what to export, what to record and what to compare.
-- [Meta Ads vs Google Ads: Where to Put Your First $500](https://7captur.com/articles/meta-vs-google-ads-first-500/): Choosing between Facebook and Instagram ads and Google Ads with a small budget? A plain comparison, a decision guide by business type, and how to test with $500.
 
 ## Contact
-- [Contact](https://7captur.com/contact/): replies within 24 hours
+- [Contact](https://7captur.com/contact/): daniel@7captur.com, replies within 1 business day

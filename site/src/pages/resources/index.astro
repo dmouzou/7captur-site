@@ -8,17 +8,17 @@ const topics = [...new Set(ARTICLES.map((a) => a.topic))];
 const ld = [{ "@context": "https://schema.org", "@type": "CollectionPage", name: "7Captur Resources", url: "https://7captur.com/resources/", hasPart: ARTICLES.map((a) => ({ "@type": "Article", headline: a.title, url: `https://7captur.com/articles/${a.slug}/` })) }];
 import ArticleArt from "../../components/ArticleArt";
 ---
-<Layout legacy title="Resources: Track Sales, Cost Per Enquiry and Break-Even ROAS | 7Captur" description="Plain-language guides for small sellers: track sales from social posts, WhatsApp and DMs, calculate cost per enquiry, and work out break-even ROAS." path="/resources/" current="/resources/" jsonld={ld}>
+<Layout legacy title="Resources: Break-Even ROAS, True Margin and Ad Budgets | 7Captur" description="Plain-language guides for e-commerce brands: break-even ROAS, true margin after COGS, fees and refunds, budget allocation and ad performance tracking." path="/resources/" current="/resources/" jsonld={ld}>
 <main>
   <header class="page-head is-wide">
     <div class="wrap">
       <span class="tag-pill">Resources</span>
-      <h1 style="max-width:22ch">Guides for measuring what your marketing really does.</h1>
-      <p class="lede">Short, practical answers on tracking sales, costs and profit. No jargon, no made-up statistics.</p>
+      <h1 style="max-width:22ch">Guides for measuring what your ad spend really keeps.</h1>
+      <p class="lede">Short, practical answers on ROAS, margin, refunds and budget discipline. No made-up statistics.</p>
     </div>
   </header>
   <div class="wrap duo"><Fragment set:html={insight} /><Fragment set:html={vow} /></div>
-  <div class="wrap" style="text-align:center;margin-bottom:24px"><a class="btn btn-ghost" href="/ad-budget-check/">Try the free ad budget check</a></div>
+  <div class="wrap" style="text-align:center;margin-bottom:24px"><a class="btn btn-ghost" href="/ad-budget-check/">Try the Leak Estimator</a></div>
   <section class="section" style="padding-top:8px">
     <div class="wrap art-layout">
       <aside class="art-side">
@@ -33,7 +33,7 @@ import ArticleArt from "../../components/ArticleArt";
       </div>
     </div>
   </section>
-  <CtaBand title="Put the numbers to work." text="Log your posts, enquiries and sales and get a clear next step." />
+  <CtaBand title="Put the numbers to work." text="The free 60-Day Ad Leak Audit shows where margin leaked across your past 60 days, delivered in 48 hours." />
 </main>
 <script is:inline>
 (function(){

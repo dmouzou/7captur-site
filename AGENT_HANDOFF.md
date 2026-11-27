@@ -1,7 +1,7 @@
 # AGENT_HANDOFF: `7captur-site` (`7captur.com`)
 
 ## Active Status
-- **Current State:** `IDLE`: Ready for Milestone `S6`. Visual layer restoration `V1` is complete.
+- **Current State:** `IDLE`: Ready for Milestone `S7`
 - **Target Blueprint:** "7Captur Site Blueprint (7captur.com)", held in the claude.ai Project. It is deliberately not committed: this repository is public and the blueprint contains internal operating figures.
 - **Branch Policy:** Commit directly to `main` (1 cohesive milestone per commit, build must pass). Every push deploys to the live site.
 - **Theme Rule:** Preserve Dark/Light mode and lime green accent. Visual style is an editorial financial memo.
@@ -16,7 +16,7 @@
 
 ## Site structure and design rules (2026-11-27, restoration S1R). READ BEFORE TOUCHING ANY PAGE
 - The site is **multipage**. Never merge pages back into a long single-page homepage. The blueprint describes the homepage as seven vertical bands and its nav as anchors (`/#how-it-works`, `/#sample-memo`, `/#estimator`). Those were wrongly built as one scrolling page. They are now real routes: `/how-it-works/`, `/sample-memo/`, `/ad-budget-check/` (the Leak Estimator). Do not turn them back into anchors.
-- Page map: `/` (hero, sample memo, three problem points, three step teaser, links to deeper pages, audit CTA), `/how-it-works/`, `/sample-memo/`, `/ad-budget-check/`, `/audit/`, `/pricing/`, `/security/`, `/about/` (contains the contact block at `#contact`), `/resources/` plus `/articles/*`, `/privacy-policy/`, `/terms-of-service/`, `/contact/` (legacy, see S6).
+- Page map: `/` (hero, sample memo, three problem points, three step teaser, links to deeper pages, audit CTA), `/how-it-works/`, `/sample-memo/`, `/ad-budget-check/`, `/audit/`, `/pricing/`, `/security/`, `/about/` (contains the contact block at `#contact`), `/resources/` plus `/articles/*`, `/privacy-policy/`, `/terms-of-service/`, `/contact/`.
 - **Design is the original site design.** Inter font, `site.css` + `site-v2` to `site-v5.css` tokens, original `Nav`, `Footer`, `PageHead` (brand orbs), `CtaBand`, `Faq`, `Reveal`, rounded cards, dark/light switcher, lime accent. The S1 "editorial desk" skin (`desk.css`, Inter Tight, IBM Plex Mono, `d-nav`, `d-footer`, `body.desk`) was removed on purpose. Do not bring it back. Do not add fonts.
 - New content blocks (sample memo, ledger, estimator, audit form, pricing cards, matrix, tables) live in `site/public/assets/css/blocks.css`. Their `d-*` classes map onto the original tokens, so theming follows `site.css`. Build new pages from the original classes (`wrap`, `section`, `band`, `section-head`, `lede`, `kicker`, `btn`, `btn-primary`, `btn-ghost`, `hero`, `hero-sub`, `hero-actions`, `cta`) plus the `d-*` blocks. Use `PageHead` for page headers and `CtaBand` for the closing call to action.
 - Navigation and footer links come only from `NAV` and `FOOTER_COLUMNS` in `siteConfig.ts`. No Log in or Sign up link in the top bar. The client portal link sits quietly in the footer bottom row.
@@ -42,7 +42,7 @@
 | **S4** | `DONE` | Free 60-Day Ad Leak Audit page (`/audit/`) with booking path, qualification form, access explainer, video slot, reviewer block |
 | **S5** | `DONE` | Pricing, Security and About pages |
 | **S1R** | `DONE` | Restoration: original multipage design, fonts, nav and footer back; desk skin removed; homepage split into separate routes; content kept from the Site Blueprint |
-| **S6** | `TODO` | Resources pruning (remove self-serve, social-seller, reseller, local-service and DM/WhatsApp articles), article CTA refresh to `/audit/`, fix article links to `/product/` and old persona copy, rework or redirect `/contact/` to `/about/#contact`, rewrite `public/llms.txt`, legacy redirects (`/signup`, `/trial`, `/get-started`, `/demo`) |
+| **S6** | `DONE` | Resources pruning (remove self-serve, social-seller, reseller, local-service and DM/WhatsApp articles), article CTA refresh to `/audit/`, fix article links to `/product/` and old persona copy, rework `/contact/`, rewrite `public/llms.txt`, legacy redirects (`/signup`, `/trial`, `/get-started`, `/demo`) |
 | **S7** | `TODO` | Metadata, privacy and terms copy (still describe the old self-serve product), sitemap/robots, contrast, mobile, link integrity, banned-copy sweep. Check every page in a real browser at 1280, 768 and 360 px in light and dark. S1R was verified by build, tests and HTML inspection only, with no browser screenshots |
 
 ---
@@ -115,3 +115,11 @@
 - **Verification:** `tsc --noEmit` pass, `npm test` 10 pass, `astro build` pass (25 pages). Built HTML checked: original stylesheets load, only Inter loads, no `d-nav`/`d-footer` left, no broken internal links, no banned copy on the rebuilt pages. No browser was available, so no screenshots were taken.
 - **Known leftovers:** articles, `/contact/`, privacy, terms and `llms.txt` still carry old self-serve and trial wording (S6, S7). Placeholders still unset: `schedulingUrl`, `auditWalkthroughVideoUrl`, `founder.photo`, `founder.bio`, `founder.linkedin`.
 - **Next:** S6. Start at `site/src/pages/resources/index.astro` and `site/src/data/articles*.ts`.
+
+### S6: Resources pruning, article CTAs, redirects, contact page
+- **Agent / Date (UTC):** Claude Code / 2026-11-27
+- **Files:** `data/articles.ts` rewritten with 7 e-commerce guides (`articles2.ts` removed), article template CTA and links, resources copy, `ArticleArt.tsx` trimmed, `pages/contact/index.astro` rebuilt (contact fragments removed), redirects in `astro.config.mjs`, `public/llms.txt`, feed description, OG image for the renamed guide, OG images of retired guides removed.
+- **Owner decision (2026-11-28):** rewrite the `/contact/` copy around the audit and desk (same URL and design). This replaces the earlier "leave /contact/ untouched" note.
+- **Retired guides** redirect to `/resources/`: track sales from social posts, cost per enquiry, likes vs sales, WhatsApp and DM sales, first $500 on Meta vs Google. `/signup`, `/trial`, `/get-started`, `/demo` go to `/audit/`.
+- **Verification:** `tsc` pass, `npm test` 10 pass, build pass. Link check on built HTML: 0 broken links or anchors. Chromium: contact and article pages at 1280, 768, 360 px light and dark with no overflow or errors; contact form validation, payload and failure path tested with Formspree mocked; four redirects followed.
+- **Next:** S7. Privacy, terms, `og-default.png` and `video.html` still carry old copy or metadata.
