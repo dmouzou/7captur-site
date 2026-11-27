@@ -34,13 +34,13 @@ export function Src({ k }: { k: keyof typeof SRC }) {
 
 export function RecCard({ move, why, unknown, next, tags, tag, steps = false }: { move: string; why: string; unknown: string; next: string; tags: string[]; tag?: string; steps?: boolean }) {
   return (
-    <Win title="Your next move" tag={tag}>
+    <Win title="This week's call" tag={tag}>
       <div className={steps ? "steps-in" : "loop"}>
         <p className="mk-move l1">{move}</p>
         <dl className="mk-dl">
           <dt className="l2">Why</dt><dd className="l2">{why}</dd>
           <dt className="l3">What we do not know</dt><dd className="l3">{unknown}</dd>
-          <dt className="l4">What to record next</dt><dd className="l4">{next}</dd>
+          <dt className="l4">What happens next</dt><dd className="l4">{next}</dd>
         </dl>
         <div className="mk-tags l5">{tags.map((t) => <span key={t}>{t}</span>)}</div>
       </div>

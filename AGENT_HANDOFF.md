@@ -54,7 +54,13 @@
 - **Files:** added `public/assets/css/motion.css`, `components/PricingPlans.tsx` (React island, Monthly vs 3-month prepay), `components/DeskCards.tsx` (Access, Reconcile, Memo cards that expand to a sheet with two animated illustrations each; adapted from `LayerCards`). Changed `layouts/Layout.astro` (motion.css link, pointer-light selectors), `pages/pricing/index.astro` (uses PricingPlans), `pages/index.astro` (three steps now DeskCards, reveal hooks, unused `steps` array removed).
 - **Notes:** all illustration figures are illustrative. No new fonts. No em dashes.
 - **Verification:** `tsc --noEmit` pass, `npm test` 10 pass, `astro build` pass (25 pages). Chromium: pricing toggle and the expanded Memo card checked in light mode at 1280 px, no page errors. Not checked: dark mode, 768 and 360 px, hover feel.
-- **Still to do in V1:** hero motion (rolling word or carousel), animated illustrations on `/how-it-works/`, `/sample-memo/` and `/about/`, `ProductTour` style walkthrough of the memo, expandable cards on the pricing scope walls, then browser QA at 1280, 768 and 360 px in light and dark.
+- **Still to do in V1:** animated illustrations on `/how-it-works/`, `/sample-memo/` and `/about/`, `ProductTour` style walkthrough of the memo, expandable cards on the pricing scope walls, then browser QA at 1280, 768 and 360 px in light and dark. Hero motion is done in part 2.
+
+### V1 (part 2): Hero motion, before/after, memo excerpt
+- **Agent / Date (UTC):** Claude / 2026-11-27
+- **Files:** `HeroWords.tsx` now takes a `words` prop. `HeroCarousel.tsx` rotates four Monday memo calls (CUT, HOLD, HOLD & TEST, UNKNOWN) through `RecCard`, whose window title is now "This week's call". `BeforeAfter.tsx` scraps and "after" card rewritten for the desk offer. `pages/index.astro`: hero is the original centered layout with the rolling word and carousel under it, then Before/After, then a short memo excerpt that links to `/sample-memo/` (the full memo no longer sits on the home page, owner decision), then problems, steps cards, links, audit CTA.
+- **Owner decisions this session:** home shows a short memo excerpt only. `/contact/` is left untouched, do not redirect it.
+- **Verification:** `tsc` pass, `npm test` pass, `astro build` pass (25 pages). No browser available in this session, so motion, dark mode and mobile are unchecked.
 
 ### S1: Audit, config, legacy cleanup, shell
 - **Agent / Date (UTC):** Claude Code / 2026-11-27

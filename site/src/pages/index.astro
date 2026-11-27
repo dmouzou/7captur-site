@@ -1,7 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CtaBand from "../components/CtaBand.astro";
-import SampleMemo from "../components/SampleMemo.astro";
+import HeroWords from "../components/HeroWords";
+import HeroCarousel from "../components/HeroCarousel";
+import BeforeAfter from "../components/BeforeAfter";
 import DeskCards from "../components/DeskCards";
 import { PRICING, usd } from "../config/siteConfig";
 
@@ -22,25 +24,44 @@ const jumps = [
   path="/" current="/">
 <main>
   <header class="hero">
-    <div class="wrap">
-      <p class="kicker">Weekly Profit &amp; Ad Decision Desk for e-commerce ($20K–$150K/mo ad spend)</p>
-      <h1 style="max-width:18ch">Platform ROAS lies. Get one honest weekly budget decision built on true margin.</h1>
-      <p class="hero-sub">Every Monday morning, 7Captur reconciles your Shopify, Meta, and Google exports against real COGS, shipping, payment fees, and 30-day refunds. Then it delivers a 1-page, analyst-verified decision memo telling you exactly what to cut, hold, or test.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="/audit/">Book Free 60-Day Ad Leak Audit</a>
-        <a class="btn btn-ghost" href="/sample-memo/">Read a sample Monday Memo</a>
+    <div class="wrap hero-grid is-product">
+      <div>
+        <p class="kicker">Weekly Profit &amp; Ad Decision Desk for e-commerce ($20K–$150K/mo ad spend)</p>
+        <h1><span class="h1-line">Platform ROAS lies.</span> <span class="h1-line h1-nowrap">Get one <HeroWords client:load words={["honest", "margin-true", "analyst-checked"]} /></span> <span class="h1-line">weekly budget decision.</span></h1>
+        <p class="hero-sub">Every Monday morning, 7Captur reconciles your Shopify, Meta, and Google exports against real COGS, shipping, payment fees, and 30-day refunds. Then it delivers a 1-page, analyst-verified decision memo telling you exactly what to cut, hold, or test.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/audit/">Book Free 60-Day Ad Leak Audit</a>
+          <a class="btn btn-ghost" href="/sample-memo/">Read a sample Monday Memo</a>
+        </div>
+        <ul class="d-trust">
+          <li>48-hour lookback turnaround</li>
+          <li>Read-only viewer access</li>
+          <li>Zero OAuth apps</li>
+          <li>Flat {usd(PRICING.core.monthly)} Core / {usd(PRICING.scale.monthly)} Scale, never % of spend</li>
+        </ul>
       </div>
-      <ul class="d-trust">
-        <li>48-hour lookback turnaround</li>
-        <li>Read-only viewer access</li>
-        <li>Zero OAuth apps</li>
-        <li>Flat {usd(PRICING.core.monthly)} Core / {usd(PRICING.scale.monthly)} Scale, never % of spend</li>
-      </ul>
+      <div class="hero-carousel"><HeroCarousel client:load /></div>
     </div>
   </header>
 
-  <section class="d-memo-section" aria-label="Sample Monday memo">
-    <div class="wrap"><SampleMemo /></div>
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head" data-reveal><h2>From scattered numbers to one honest call.</h2><p class="lede">Drag the handle to see the difference.</p></div>
+      <div data-reveal><BeforeAfter client:visible /></div>
+    </div>
+  </section>
+
+  <section class="section band" aria-label="Sample memo excerpt">
+    <div class="wrap d-narrow">
+      <article class="d-panel" data-reveal>
+        <p class="d-num">Sample anonymized memo · Trailing 30 days (settled) · Evidence grade: Moderate</p>
+        <h2 style="margin:10px 0 12px">Executive readout</h2>
+        <p>Ad platforms reported blended 3.1x ROAS on $42,800 spend. After reconciling declared SKU COGS, payment processing fees, shipping, and settled 30-day refunds, true net contribution was +$6,120, with two prospecting campaigns losing cash.</p>
+        <p><strong>This week's decision:</strong> reduce Meta Retargeting Catalogue by 40%. Do not scale Google PMax until the open refund window settles.</p>
+        <p class="d-fine">Illustrative figures. This is an anonymized sample, not a client account.</p>
+        <p style="margin-top:16px"><a class="btn btn-ghost" href="/sample-memo/">Read the full sample memo →</a></p>
+      </article>
+    </div>
   </section>
 
   <section class="section band">

@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 
-const WORDS = ["clear", "concise", "data-driven"];
+const DEFAULT_WORDS = ["clear", "concise", "data-driven"];
 
 /**
  * Rolling word in the hero headline. Words slide up one at a time inside a clipped slot whose width follows
  * the current word, so "decision" always sits right next to it. Pauses on hover and focus, and stays still
  * (showing "clear") for people who prefer reduced motion.
  */
-export default function HeroWords() {
+export default function HeroWords({ words: WORDS = DEFAULT_WORDS }: { words?: string[] }) {
   const [i, setI] = useState(0);
   const [snap, setSnap] = useState(false);
   const [paused, setPaused] = useState(false);
