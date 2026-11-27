@@ -14,7 +14,7 @@ const ld = [
 ];
 const related = a.related.map(bySlug);
 ---
-<Layout title={a.seoTitle} description={a.description} path={path} current="/resources/" jsonld={ld} ogImage={`/assets/og/${a.slug}.png`} ogType="article" published={a.published} modified={a.modified}>
+<Layout legacy title={a.seoTitle} description={a.description} path={path} current="/resources/" jsonld={ld} ogImage={`/assets/og/${a.slug}.png`} ogType="article" published={a.published} modified={a.modified}>
 <main>
   <header class="page-head is-wide" style="padding-bottom:8px">
     <div class="wrap">
@@ -33,7 +33,7 @@ const related = a.related.map(bySlug);
         {a.sections.map((s) => (<><h2 id={s.id}>{s.h}</h2><Fragment set:html={s.html} /></>))}
         <h2 id="faq">Frequently asked questions</h2>
         <Faq items={a.faq} />
-        <div class="article-cta-box"><h3>{a.cta.h}</h3><p>{a.cta.p}</p><a class="btn btn-primary" href="https://app.7captur.com/signup">Try for free</a></div>
+        <div class="article-cta-box"><h3>{a.cta.h}</h3><p>{a.cta.p}</p><a class="btn btn-primary" href="/audit/">Free 60-Day Audit</a></div>
         <h2>Keep reading</h2>
         <ul class="art-related">{related.map((r) => <li><a href={`/articles/${r.slug}/`}>{r.title}</a></li>)}<li><a href="/product/">How 7Captur works</a></li></ul>
       </div>

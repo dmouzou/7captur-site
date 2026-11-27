@@ -9,7 +9,7 @@ Where it shows up:
   either YouTube directly or straight to the playable video on the
   articles page, whichever applies.
 
-Both stay completely hidden until `assets/data/video.json` has a real
+Both stay completely hidden until `site/public/assets/data/video.json` has a real
 title in it.
 
 ## Two ways to supply the video
@@ -50,7 +50,7 @@ this path skips YouTube entirely:
 }
 ```
 
-1. Drop the video file into `assets/data/media/` (`.mp4` is the safest
+1. Drop the video file into `site/public/assets/data/media/` (`.mp4` is the safest
    format for browser playback; keep it reasonably compressed, GitHub
    Pages doesn't do any video processing for you).
 2. Point `filePath` at it.

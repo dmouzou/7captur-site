@@ -8,7 +8,7 @@ const topics = [...new Set(ARTICLES.map((a) => a.topic))];
 const ld = [{ "@context": "https://schema.org", "@type": "CollectionPage", name: "7Captur Resources", url: "https://7captur.com/resources/", hasPart: ARTICLES.map((a) => ({ "@type": "Article", headline: a.title, url: `https://7captur.com/articles/${a.slug}/` })) }];
 import ArticleArt from "../../components/ArticleArt";
 ---
-<Layout title="Resources: Track Sales, Cost Per Enquiry and Break-Even ROAS | 7Captur" description="Plain-language guides for small sellers: track sales from social posts, WhatsApp and DMs, calculate cost per enquiry, and work out break-even ROAS." path="/resources/" current="/resources/" jsonld={ld}>
+<Layout legacy title="Resources: Track Sales, Cost Per Enquiry and Break-Even ROAS | 7Captur" description="Plain-language guides for small sellers: track sales from social posts, WhatsApp and DMs, calculate cost per enquiry, and work out break-even ROAS." path="/resources/" current="/resources/" jsonld={ld}>
 <main>
   <header class="page-head is-wide">
     <div class="wrap">

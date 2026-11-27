@@ -7,7 +7,7 @@ just isn't the delivery mechanism for this specific file right now.
 
 ## The file
 
-`assets/data/insight.json`. Whatever is in it is what shows up in the
+`site/public/assets/data/insight.json`. Whatever is in it is what shows up in the
 "Today's Insight" card on the homepage and the articles page. Edit it
 directly in GitHub (Code tab, open the file, pencil icon, edit, commit to
 `main`) or edit it locally and push. Either way, GitHub Pages rebuilds
@@ -77,9 +77,9 @@ from. Simplest path:
 1. Download the image or PDF from your own LinkedIn post (three-dot menu
    on the post, or on an image, right-click → save; for documents, the
    post itself usually has a download option since you're the author).
-2. Drop it into `assets/data/media/` in the repo, named however you like
+2. Drop it into `site/public/assets/data/media/` in the repo, named however you like
    (`2026-07-15.pdf` is a fine convention, dated).
-3. Point `media.url` at it: `/assets/data/media/2026-07-15.pdf`.
+3. Point `media.url` at it: `site/public/assets/data/media/2026-07-15.pdf`.
 4. Commit. That's it, no separate hosting needed.
 
 ## Full example, start to finish

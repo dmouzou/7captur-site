@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://7captur.com/sitemap.xml

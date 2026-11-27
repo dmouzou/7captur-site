@@ -1,45 +1,48 @@
 ---
 import Logo from "./Logo.astro";
-import { CTA, LOGIN, NEWSLETTER } from "../data/site";
+import { siteConfig, FOOTER_COLUMNS } from "../config/siteConfig";
+const year = 2026;
 ---
-<footer class="footer">
-  <div class="wrap">
-    <div class="foot-news">
-      <div><h4>One short email a week</h4><p>A real marketing measurement lesson. No fluff, unsubscribe anytime.</p></div>
-      <form id="footNews" action={NEWSLETTER.action} method="post" target="_blank" novalidate>
-        <label for="footEmail" class="sr-only">Email address</label>
-        <input type="email" name="EMAIL" id="footEmail" placeholder="you@example.com" required autocomplete="email" />
-        <div class="nl-hp" aria-hidden="true"><input type="text" name={NEWSLETTER.honeypot} tabindex="-1" value="" /></div>
-        <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+<footer class="d-footer">
+  <div class="d-wrap">
+    <div class="d-foot-grid">
+      <div class="d-foot-brand">
+        <a href="/" class="d-logo"><Logo /><span>7Captur</span></a>
+        <p>{siteConfig.thesis}</p>
+      </div>
+      {FOOTER_COLUMNS.map((c) => (
+        <nav aria-label={c.title}>
+          <h2>{c.title}</h2>
+          <ul>{c.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+        </nav>
+      ))}
+    </div>
+    <div class="d-foot-news">
+      <p><strong>One short email a week.</strong> A practical note on ad spend and margin. Unsubscribe anytime.</p>
+      <form action={siteConfig.newsletter.action} method="post" target="_blank">
+        <label for="footEmail" class="d-sr">Email address</label>
+        <input type="email" name="EMAIL" id="footEmail" placeholder="you@yourstore.com" required autocomplete="email" />
+        <div class="d-hp" aria-hidden="true"><input type="text" name={siteConfig.newsletter.honeypot} tabindex="-1" value="" /></div>
+        <button type="submit" class="d-btn d-btn-ghost d-btn-sm">Subscribe</button>
       </form>
     </div>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="/" class="logo"><Logo />7Captur</a>
-        <p>Clear next steps for your marketing, based on the evidence you have.</p>
-        <a class="btn btn-primary btn-sm footer-cta" href={CTA.href}>{CTA.label}</a>
-      </div>
-      <div><h4>Product</h4><ul><li><a href="/product/">Product</a></li><li><a href="/pricing/">Pricing</a></li></ul></div>
-      <div><h4>Resources</h4><ul><li><a href="/resources/">Resources</a></li><li><a href="/ad-budget-check/">Free ad budget check</a></li><li><a href="/contact/">Contact</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="/about/">About</a></li><li><a href="/security/">Security</a></li><li><a href={LOGIN.href}>{LOGIN.label}</a></li></ul></div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 7Captur</span>
-      <span><a href="/privacy-policy/">Privacy policy</a><a href="/terms-of-service/">Terms of service</a><button type="button" class="linklike" id="cookieBtn" aria-controls="cookiePanel" aria-expanded="false">Cookie settings</button></span>
+    <div class="d-foot-bottom">
+      <span>© {year} 7Captur</span>
+      <button type="button" class="d-linklike" id="cookieBtn" aria-controls="cookiePanel" aria-expanded="false">Cookie settings</button>
+      <span class="d-foot-portal">Existing clients: <a href={siteConfig.clientPortalUrl} rel="nofollow">Client Portal Login →</a></span>
     </div>
   </div>
 </footer>
 
-<div class="cookie-panel" id="cookiePanel" role="dialog" aria-label="Cookie settings" hidden>
-  <h4>Cookies and storage</h4>
-  <p>7captur.com sets no tracking or advertising cookies. Your browser stores one preference, your light or dark theme, so the site remembers it. Text fonts load from Google Fonts. The app at app.7captur.com has its own settings.</p>
-  <p class="cookie-note">If we add analytics later, it will be optional and off until you choose.</p>
-  <button type="button" class="btn btn-primary btn-sm" id="cookieClose">Got it</button>
+<div class="d-cookie" id="cookiePanel" role="dialog" aria-label="Cookie settings" hidden>
+  <h2>Cookies and storage</h2>
+  <p>7captur.com sets no tracking or advertising cookies. Your browser stores one preference, your light or dark theme, so the site remembers it. Text fonts load from Google Fonts. The client portal has its own settings.</p>
+  <p>If we add analytics later, it will be optional and off until you choose.</p>
+  <button type="button" class="d-btn d-btn-primary d-btn-sm" id="cookieClose">Got it</button>
 </div>
 <script is:inline>
 (function(){
   var b=document.getElementById('cookieBtn'),p=document.getElementById('cookiePanel'),c=document.getElementById('cookieClose');
-  if(!b||!p) return;
   function set(o){p.hidden=!o;b.setAttribute('aria-expanded',String(o));if(o)c.focus();else b.focus();}
   b.addEventListener('click',function(){set(p.hidden)});
   c.addEventListener('click',function(){set(false)});

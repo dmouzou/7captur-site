@@ -1,7 +1,7 @@
 # AGENT_HANDOFF: `7captur-site` (`7captur.com`)
 
 ## Active Status
-- **Current State:** `IDLE`: Ready for Milestone `S1`
+- **Current State:** `IDLE`: Ready for Milestone `S2`
 - **Target Blueprint:** "7Captur Site Blueprint (7captur.com)", held in the claude.ai Project. It is deliberately not committed: this repository is public and the blueprint contains internal operating figures.
 - **Branch Policy:** Commit directly to `main` (1 cohesive milestone per commit, build must pass). Every push deploys to the live site.
 - **Theme Rule:** Preserve Dark/Light mode and lime green accent. Visual style is an editorial financial memo.
@@ -23,7 +23,7 @@
 
 | ID | Status | Milestone Scope |
 |---|---|---|
-| **S1** | `TODO` | Codebase audit, config centralization, legacy cleanup, unified header and footer, removal of self-serve signup and trial references from the shell |
+| **S1** | `DONE` | Codebase audit, config centralization, legacy cleanup, unified header and footer, removal of self-serve signup and trial references from the shell |
 | **S2** | `TODO` | Homepage hero and readable sample Monday memo |
 | **S3** | `TODO` | Homepage body and interactive Ad Leak Estimator (`#estimator`) with query pass-through to `/audit/` |
 | **S4** | `TODO` | Free 60-Day Ad Leak Audit page (`/audit/`) with booking path, qualification form, access explainer, video slot, reviewer block |
@@ -34,3 +34,10 @@
 ---
 
 ## Completed Work Log
+
+### S1: Audit, config, legacy cleanup, shell
+- **Agent / Date (UTC):** Claude Code / 2026-11-27
+- **Files:** added `site/src/config/siteConfig.ts`, `site/public/assets/css/desk.css`; rewrote `Nav.astro`, `Footer.astro`, `Layout.astro`; `data/site.ts` is now a transitional alias; removed `Reveal.astro` and the stale pre-Astro pages at repo root; moved `videos/` and `assets/data/media/` into `site/public/` (they were symlinks).
+- **Notes:** root `CNAME` kept on purpose. Unrebuilt pages pass `legacy` to Layout and load the old CSS. `/audit/` temporarily redirects to `/contact/` (remove in S4).
+- **Verification:** `tsc --noEmit` pass, `astro build` pass (23 pages). No lint script exists.
+- **Next:** rebuild the top of `site/src/pages/index.astro`.
