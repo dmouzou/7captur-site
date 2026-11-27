@@ -2,17 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import CtaBand from "../components/CtaBand.astro";
 import SampleMemo from "../components/SampleMemo.astro";
+import DeskCards from "../components/DeskCards";
 import { PRICING, usd } from "../config/siteConfig";
 
 const problems = [
   { h: "Platforms count revenue, not what you keep", p: "Ad platforms claim gross revenue before refunds, COGS, and shipping. A campaign can report a healthy ROAS and still lose cash on every order." },
   { h: "Missing costs quietly become zero", p: "Cheap trackers silently treat a missing cost input as zero. The products you know least about then look like your most profitable ones." },
   { h: "Monday has no spare four hours", p: "Founders do not have four hours every Monday to audit CSVs or argue with media-buyer screenshots." },
-];
-const steps = [
-  { h: "2-minute read-only access", p: "Grant native Viewer or Analyst roles in Shopify, Meta, and Google Ads, plus your SKU COGS sheet. Zero OAuth app installs and zero ad-account write access." },
-  { h: "Engine hygiene plus human review", p: "Our decision engine reconciles spend, orders, fees, and 30-day refund lag, and flags missing data as unknown. A human analyst verifies every call." },
-  { h: "One Monday memo, zero dashboards", p: "Your 1-page decision memo arrives by email or Slack every Monday morning. Optional read-only portal access is included." },
 ];
 const jumps = [
   { h: "See how it works", p: "Access, reconciliation and delivery, step by step.", href: "/how-it-works/" },
@@ -50,21 +46,21 @@ const jumps = [
   <section class="section band">
     <div class="wrap">
       <div class="section-head"><h2>Why dashboards don't stop cash leaks.</h2></div>
-      <ul class="d-cols">{problems.map((x, i) => <li><p class="d-num">({"abc"[i]})</p><h3>{x.h}</h3><p>{x.p}</p></li>)}</ul>
+      <ul class="d-cols" data-reveal>{problems.map((x, i) => <li><p class="d-num">({"abc"[i]})</p><h3>{x.h}</h3><p>{x.p}</p></li>)}</ul>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
-      <div class="section-head"><h2>Three steps from exports to a decision.</h2></div>
-      <ol class="d-cols">{steps.map((x, i) => <li><p class="d-num">Step {i + 1}</p><h3>{x.h}</h3><p>{x.p}</p></li>)}</ol>
+      <div class="section-head" data-reveal><h2>Three steps from exports to a decision.</h2><p class="lede">Open any card to see how it works.</p></div>
+      <div data-reveal><DeskCards client:visible ctaHref="/audit/" ctaLabel="Book Free 60-Day Ad Leak Audit" /></div>
     </div>
   </section>
 
   <section class="section band">
     <div class="wrap">
       <div class="section-head"><h2>Go a level deeper.</h2></div>
-      <ul class="d-cols">{jumps.map((j) => <li><h3>{j.h}</h3><p>{j.p}</p><p style="margin-top:14px"><a href={j.href}>Open →</a></p></li>)}</ul>
+      <ul class="d-cols" data-reveal>{jumps.map((j) => <li><h3>{j.h}</h3><p>{j.p}</p><p style="margin-top:14px"><a href={j.href}>Open →</a></p></li>)}</ul>
     </div>
   </section>
 

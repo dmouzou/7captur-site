@@ -1,0 +1,37 @@
+/* Motion layer for the desk blocks (d-*). Gives them the original site's feel:
+   pointer-follow light, spring lift on hover, press-down on click, staggered reveal, animated price swap.
+   Uses the --spring, --lit and --lit-on tokens already defined in site-v4.css. */
+.d-plan, .d-box, .d-cols > li, .d-entry, .d-memo, .d-panel, .d-topics > *, .d-grid-2 > *, .d-grid-3 > * {
+  background-image: radial-gradient(280px circle at var(--mx, 50%) var(--my, -40%), var(--lit), transparent 65%);
+  transition: transform .55s var(--spring), border-color .3s, box-shadow .3s;
+}
+.d-plan:hover, .d-box:hover, .d-cols > li:hover, .d-entry:hover, .d-memo:hover, .d-panel:hover { --lit: var(--lit-on); }
+.d-plan:hover, .d-box:hover, .d-cols > li:hover, .d-entry:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-line);
+  box-shadow: 0 18px 40px -22px var(--glow);
+}
+.d-plan:active, .d-box:active, .d-cols > li:active { transform: scale(.98); transition-duration: .12s; }
+
+/* Pricing billing toggle */
+.d-billing { margin-bottom: 28px; }
+.d-billing .bill-toggle { margin-bottom: 0; }
+.bill-toggle button { transition: transform .55s var(--spring), background .3s, color .3s; }
+.bill-toggle button:hover { transform: translateY(-1px); }
+.bill-toggle button:active { transform: scale(.95); transition-duration: .12s; }
+.pp-swap { display: inline-block; animation: rise .4s var(--spring) both; }
+.d-prepay { transition: background .3s, border-color .3s; }
+.d-prepay.is-on { border-color: var(--accent-line); background: var(--accent-soft); }
+
+/* Staggered entrance for grouped cards */
+.js-reveal [data-reveal].d-cols > li, .js-reveal [data-reveal].d-grid-3 > li { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s var(--spring); }
+.js-reveal [data-reveal].is-in.d-cols > li, .js-reveal [data-reveal].is-in.d-grid-3 > li { opacity: 1; transform: none; }
+.d-cols > li:nth-child(2), .d-grid-3 > li:nth-child(2) { transition-delay: .08s; }
+.d-cols > li:nth-child(3), .d-grid-3 > li:nth-child(3) { transition-delay: .16s; }
+.d-cols > li:nth-child(n+4), .d-grid-3 > li:nth-child(n+4) { transition-delay: .24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .d-plan:hover, .d-box:hover, .d-cols > li:hover, .d-entry:hover { transform: none; }
+  .pp-swap { animation: none; }
+  .js-reveal [data-reveal].d-cols > li, .js-reveal [data-reveal].d-grid-3 > li { opacity: 1; transform: none; transition: none; }
+}

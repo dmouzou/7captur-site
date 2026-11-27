@@ -1,7 +1,7 @@
 # AGENT_HANDOFF: `7captur-site` (`7captur.com`)
 
 ## Active Status
-- **Current State:** `IDLE`: Ready for Milestone `S6`
+- **Current State:** `IDLE`: Ready for Milestone `S6`. Visual layer restoration `V1` is partly done (see log). Finish V1 before S6.
 - **Target Blueprint:** "7Captur Site Blueprint (7captur.com)", held in the claude.ai Project. It is deliberately not committed: this repository is public and the blueprint contains internal operating figures.
 - **Branch Policy:** Commit directly to `main` (1 cohesive milestone per commit, build must pass). Every push deploys to the live site.
 - **Theme Rule:** Preserve Dark/Light mode and lime green accent. Visual style is an editorial financial memo.
@@ -21,6 +21,11 @@
 - New content blocks (sample memo, ledger, estimator, audit form, pricing cards, matrix, tables) live in `site/public/assets/css/blocks.css`. Their `d-*` classes map onto the original tokens, so theming follows `site.css`. Build new pages from the original classes (`wrap`, `section`, `band`, `section-head`, `lede`, `kicker`, `btn`, `btn-primary`, `btn-ghost`, `hero`, `hero-sub`, `hero-actions`, `cta`) plus the `d-*` blocks. Use `PageHead` for page headers and `CtaBand` for the closing call to action.
 - Navigation and footer links come only from `NAV` and `FOOTER_COLUMNS` in `siteConfig.ts`. No Log in or Sign up link in the top bar. The client portal link sits quietly in the footer bottom row.
 - `/product/` and `/platform/` redirect to `/how-it-works/`. The old `/ad-budget-check/` email tool (five questions for small sellers) was replaced by the Leak Estimator.
+
+## Visual layer (V1, 2026-11-27). Old feel on top of blueprint content
+- Owner decision: blueprint content and layout stay; old motion and interactivity are layered on top. Pricing toggle switches Monthly vs 3-month prepay (20% off).
+- `public/assets/css/motion.css` (loaded after `blocks.css`) gives `d-*` blocks the original spring lift, pointer light, press-down and staggered reveal. New block classes must be added to its selector list and to the pointer selector in `Layout.astro`.
+- Old interactive components still in `src/components` and reusable with blueprint copy: `HeroWords`, `HeroCarousel`, `BeforeAfter`, `ProductTour`, `Tabs`, `Stories`, `Roadmap`, `ArticleArt`. Their CSS (`lc-*`, `tour-*`, `tab-*`, `rm-*`) is still in `site-v3.css` to `site-v5.css`.
 
 ## Legacy Pages guard
 `legacy-pages-guard.md` makes GitHub's old branch-based Jekyll build fail on purpose, so it cannot overwrite the Astro deployment. Once Settings > Pages > Source is "GitHub Actions", that job stops running and the file can be deleted.
@@ -43,6 +48,13 @@
 ---
 
 ## Completed Work Log
+
+### V1 (part 1): Motion layer, pricing toggle, expandable cards
+- **Agent / Date (UTC):** Claude / 2026-11-27
+- **Files:** added `public/assets/css/motion.css`, `components/PricingPlans.tsx` (React island, Monthly vs 3-month prepay), `components/DeskCards.tsx` (Access, Reconcile, Memo cards that expand to a sheet with two animated illustrations each; adapted from `LayerCards`). Changed `layouts/Layout.astro` (motion.css link, pointer-light selectors), `pages/pricing/index.astro` (uses PricingPlans), `pages/index.astro` (three steps now DeskCards, reveal hooks, unused `steps` array removed).
+- **Notes:** all illustration figures are illustrative. No new fonts. No em dashes.
+- **Verification:** `tsc --noEmit` pass, `npm test` 10 pass, `astro build` pass (25 pages). Chromium: pricing toggle and the expanded Memo card checked in light mode at 1280 px, no page errors. Not checked: dark mode, 768 and 360 px, hover feel.
+- **Still to do in V1:** hero motion (rolling word or carousel), animated illustrations on `/how-it-works/`, `/sample-memo/` and `/about/`, `ProductTour` style walkthrough of the memo, expandable cards on the pricing scope walls, then browser QA at 1280, 768 and 360 px in light and dark.
 
 ### S1: Audit, config, legacy cleanup, shell
 - **Agent / Date (UTC):** Claude Code / 2026-11-27

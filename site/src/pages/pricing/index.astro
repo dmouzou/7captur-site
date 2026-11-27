@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import PageHead from "../../components/PageHead.astro";
 import Faq from "../../components/Faq.astro";
 import CtaBand from "../../components/CtaBand.astro";
+import PricingPlans from "../../components/PricingPlans";
 import { PRICING, usd, prepaySaving, AUDIT_CTA } from "../../config/siteConfig";
 
 const { core, scale, overflowFrom, commitmentDays, prepayDiscountPct } = PRICING;
@@ -88,20 +89,7 @@ const faq = [
         <a class="btn btn-primary" href={AUDIT_CTA.href}>Get the free audit</a>
       </div>
 
-      <div class="d-plans">
-        {plans.map((p) => (
-          <article class={`d-plan is-${p.id}`}>
-            <h2>{p.name}</h2>
-            <p class="d-plan-sub">{p.tag}</p>
-            <p class="d-price">{usd(p.monthly)}<small>/ month</small></p>
-            <p class="d-fine">Flat fee, never % of spend. {commitmentDays}-day initial commitment (billed monthly), then month-to-month.</p>
-            <p class="d-prepay"><strong>3-month prepay: {usd(p.prepay)} up front</strong> ({prepayDiscountPct}% off, save {usd(prepaySaving(p))})</p>
-            <p><strong>Built for:</strong> {p.fit}</p>
-            <ul class="d-ticks">{p.scope.map((s) => <li><span>{s}</span></li>)}</ul>
-            <a class="btn btn-primary btn-block" href={AUDIT_CTA.href}>Start with the free audit</a>
-          </article>
-        ))}
-      </div>
+      <PricingPlans client:load plans={plans} commitmentDays={commitmentDays} discountPct={prepayDiscountPct} href={AUDIT_CTA.href} />
       <p class="d-overflow">Spending over $150K/mo or running 4+ stores? Mention it on the audit call. Bespoke scopes start at {usd(overflowFrom)}/mo.</p>
     </div>
   </section>
