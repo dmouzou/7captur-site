@@ -1,141 +1,33 @@
 ---
-import { ARTICLES } from "../data/articles";
 import Layout from "../layouts/Layout.astro";
-import Faq from "../components/Faq.astro";
-import CtaBand from "../components/CtaBand.astro";
-import ArticleCarousel from "../components/ArticleCarousel";
-import LayerCards from "../components/LayerCards";
-import HeroCarousel from "../components/HeroCarousel";
-import Marquee from "../components/Marquee.astro";
-import Tabs from "../components/Tabs";
-import HeroWords from "../components/HeroWords.tsx";
-import BeforeAfter from "../components/BeforeAfter";
-import ProductTour from "../components/ProductTour";
-import Icon from "../components/Icon.astro";
-import EvidenceStory from "../components/EvidenceStory";
-import { CTA, BOOK } from "../data/site";
-
-const faq = [
-  { q: "Do I need a website or an ad account?", a: "No. You can start by typing in your posts, promotions, enquiries, sales and costs, or importing a CSV file. Connecting a store or ad account is optional." },
-  { q: "What does 7Captur actually tell me?", a: "One clear next step, why it is suggested, what the data cannot tell us, and what to record next. When the evidence is thin, it says so and suggests a small test instead of guessing." },
-  { q: "Will it change my ads or posts?", a: "No. 7Captur only reads data and gives you recommendations. You decide whether to act, and you make any change yourself in your own accounts." },
-  { q: "What if I do not know my costs?", a: "Missing costs are treated as unknown, never as zero. You still get guidance, but 7Captur will not claim profit or return after costs until you provide the costs it needs." },
-  { q: "Can I use it if customers order through DMs or WhatsApp?", a: "Yes. Log enquiries and sales by hand. Sales that cannot be tied to a post or promotion still count toward your business totals, and they are labelled as unknown source." },
-  { q: "Can I bring in Meta or Google ad data?", a: "Yes. Import an Ads Manager export, or connect Google Ads directly where available. Every number is labelled by where it came from: entered by you, imported, or connected." },
-  { q: "Which currencies are supported?", a: "Each business picks its own currency, and original amounts are kept. Records in a different currency are left out of comparisons, with a warning, rather than silently mixed." },
-  { q: "Is my data safe?", a: "We ask for the narrowest access that works, store connection credentials encrypted, and let you disconnect, export or delete at any time. See the <a href=\"/security/\">security page</a>." },
-];
+import SampleMemo from "../components/SampleMemo.astro";
+import { PRICING, usd } from "../config/siteConfig";
 ---
-<Layout legacy
-  title="7Captur | Grow your business with one clear decision"
-  description="Turn your marketing activity into clear, evidence-based next steps, from social posts and messages to paid ads and e-commerce sales. Start with the data you have."
+<Layout
+  title="7Captur | Weekly Profit and Ad Decision Desk for E-commerce"
+  description="Every Monday, 7Captur reconciles Shopify, Meta and Google exports against COGS, shipping, fees and 30-day refunds, then delivers a 1-page, analyst-verified decision memo."
   path="/" current="/">
 <main>
-
-<header class="hero">
-  <div class="wrap hero-grid is-product">
-    <div>
-      <h1><span class="h1-line">Grow your business</span> <span class="h1-line h1-nowrap">with one <HeroWords client:load /></span> <span class="h1-line">decision</span></h1>
-      <p class="hero-sub">Turn your marketing activity into clear, evidence-based next steps, from social posts and messages to paid ads and e-commerce sales. Start with the data you have. Add more as you grow.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href={CTA.href}>{CTA.label}</a>
-        <a class="btn btn-ghost" href={BOOK.href}>{BOOK.label}</a>
+  <header class="d-hero">
+    <div class="d-wrap">
+      <span class="d-eyebrow">Weekly Profit &amp; Ad Decision Desk for E-commerce ($20K–$150K/mo ad spend)</span>
+      <h1>Platform ROAS lies. Get one honest weekly budget decision built on true margin.</h1>
+      <p class="d-lede">Every Monday morning, 7Captur reconciles your Shopify, Meta, and Google exports against real COGS, shipping, payment fees, and 30-day refunds. Then it delivers a 1-page, analyst-verified decision memo telling you exactly what to cut, hold, or test.</p>
+      <div class="d-actions">
+        <a class="d-btn d-btn-primary" href="/audit/">Book Free 60-Day Ad Leak Audit</a>
+        <a href="#sample-memo">Read a sample Monday Memo ↓</a>
       </div>
+      <ul class="d-trust">
+        <li>48-hour lookback turnaround</li>
+        <li>Read-only viewer access</li>
+        <li>Zero OAuth apps</li>
+        <li>Flat {usd(PRICING.core.monthly)} Core / {usd(PRICING.scale.monthly)} Scale, never % of spend</li>
+      </ul>
     </div>
-    <div class="hero-carousel"><HeroCarousel client:load /></div>
-  </div>
-</header>
+  </header>
 
-<section class="section" id="how">
-  <div class="wrap">
-    <div class="section-head" data-reveal>
-      <h2>From scattered numbers to one next step.</h2>
-      <p class="lede">Three layers, one engine. It picks how far to go from the data in front of it, not from the plan you are on.</p>
-    </div>
-    <div data-reveal style="margin-bottom:56px"><BeforeAfter client:visible /></div>
-    <div data-reveal><LayerCards ctaHref={CTA.href} ctaLabel={CTA.label} client:visible /></div>
-  </div>
-</section>
-
-<section class="section band" id="audiences">
-  <div class="wrap">
-    <div class="section-head" data-reveal>
-      <h2>Useful before your data is perfect.</h2>
-      <p class="lede">Pick the way you sell. The engine is the same. The depth depends on the data you give it.</p>
-    </div>
-    <div data-reveal><Tabs client:visible /></div>
-  </div>
-</section>
-
-<section class="section" id="connections">
-  <div class="wrap">
-    <div class="section-head" data-reveal>
-      <h2>Bring your data in your own way.</h2>
-      <p class="lede">Type it in, import a CSV or Excel export from the platforms you already use, or connect a store or ad account. Whatever fits your day.</p>
-    </div>
-    <div data-reveal><Marquee /></div>
-    <p class="fine">Connected platforms are read-only. <a href="/security/">Read the security details</a>.</p>
-  </div>
-</section>
-
-<section class="section band" id="tour">
-  <div class="wrap">
-    <div class="section-head" data-reveal>
-      <h2>Take the tour.</h2>
-      <p class="lede">Three screens carry the work: bring data in, get one decision, review what happened. These are the real screens.</p>
-    </div>
-    <div data-reveal><ProductTour client:visible /></div>
-  </div>
-</section>
-
-<section class="section" id="evidence">
-  <div class="wrap">
-    <div class="section-head" data-reveal>
-      <h2>Likes do not prove sales. We say so.</h2>
-      <p class="lede">7Captur matches its advice to the evidence you have, and tells you plainly what more data would unlock. Thin evidence gets a small test, not a confident guess.</p>
-    </div>
-    <div data-reveal><EvidenceStory client:visible /></div>
-    <p class="ev-more"><a class="link" href="/product/">See the evidence modes</a></p>
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-<section class="section">
-  <div class="wrap">
-    <div class="section-head" data-reveal>
-      <h2>Read before you decide.</h2>
-      <p class="lede">Plain-language notes on measuring marketing without fooling yourself. Visit the resources page, or try our free ad budget check to see where your spend stands.</p>
-    </div>
-    <div data-reveal><ArticleCarousel client:visible items={ARTICLES.map((a) => ({ slug: a.slug, topic: a.topic, title: a.title, description: a.description }))} /></div>
-    <div class="res-cta" data-reveal>
-      <a class="btn btn-primary" href="/resources/">Go to the resources page</a>
-      <a class="btn btn-ghost" href="/ad-budget-check/">Try the free ad budget check</a>
-    </div>
-  </div>
-</section>
-
-<section class="section band">
-  <div class="wrap">
-    <div class="section-head" data-reveal>
-      <h2>What people ask first.</h2>
-    </div>
-    <Faq items={faq} />
-    <p class="fine">Something else? <a href="/contact/">Ask us directly</a>.</p>
-  </div>
-</section>
-
-
-<CtaBand title="Find out what your marketing is really doing." text="Start your free trial with the data you already have." second />
-
-
+  <section class="d-memo-section" id="sample-memo" aria-label="Sample Monday memo">
+    <div class="d-wrap"><SampleMemo /></div>
+  </section>
 </main>
 </Layout>

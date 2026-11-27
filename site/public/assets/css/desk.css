@@ -48,7 +48,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 body.desk { margin: 0; background: var(--d-bg); color: var(--d-body); font: 400 1.0625rem/1.65 var(--d-sans); -webkit-font-smoothing: antialiased; }
 .desk *, .desk *::before, .desk *::after,
 .d-nav *, .d-footer *, .d-cookie * { box-sizing: border-box; }
-.desk h1, .desk h2, .desk h3, .desk h4, .desk p, .desk ul, .desk ol, .desk figure, .desk dl, .desk dd { margin: 0; }
+:where(h1, h2, h3, h4, p, ul, ol, figure, dl, dd) { margin: 0; }
 .desk h1, .desk h2, .desk h3, .desk h4 { color: var(--d-ink); font-weight: 700; line-height: 1.15; letter-spacing: -.018em; text-wrap: balance; }
 .desk h1 { font-size: clamp(2.2rem, 5.2vw, 3.75rem); letter-spacing: -.032em; font-weight: 800; }
 .desk h2 { font-size: clamp(1.65rem, 3.2vw, 2.4rem); }
@@ -63,8 +63,8 @@ body.desk { margin: 0; background: var(--d-bg); color: var(--d-body); font: 400 
 
 .d-sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .d-hp { position: absolute; left: -9999px; }
-.d-skip { position: absolute; left: 16px; top: -60px; z-index: 400; background: var(--d-fill); color: var(--d-on-fill); padding: 10px 16px; font: 600 14px var(--d-sans); }
-.d-skip:focus { top: 10px; }
+.d-skip, .desk a.d-skip { position: absolute; left: 16px; top: -60px; z-index: 400; background: var(--d-fill); color: var(--d-on-fill); padding: 10px 16px; font: 600 14px var(--d-sans); }
+.d-skip:focus, .desk a.d-skip:focus { top: 10px; }
 .d-wrap { width: 100%; max-width: 1128px; margin: 0 auto; padding: 0 24px; }
 .d-narrow { max-width: 760px; }
 

@@ -1,0 +1,52 @@
+---
+import { SAMPLE_ROWS, CUT_SHARE, sampleTotals, money, signed } from "../lib/sampleMemo";
+const t = sampleTotals();
+const cut = SAMPLE_ROWS[1];
+---
+<article class="d-memo" aria-labelledby="memo-title">
+  <p class="d-memo-stamp"><span>Sample anonymized memo</span><span>Illustrative figures, not a client account</span></p>
+  <div class="d-memo-body">
+    <div class="d-memo-title"><h2 id="memo-title">7Captur Monday Decision Memo</h2></div>
+    <dl class="d-memo-meta">
+      <div><dt>Account</dt><dd>[Sample Anonymized Brand]</dd></div>
+      <div><dt>Window</dt><dd>Trailing 30 days (settled) vs. prior 30 days</dd></div>
+      <div><dt>Evidence grade</dt><dd><span class="d-grade">MODERATE</span></dd></div>
+    </dl>
+
+    <h3>Executive readout</h3>
+    <p>Ad platforms reported blended <strong>{t.roas.toFixed(1)}x ROAS</strong> on <strong>{money(t.spend)}</strong> spend. After reconciling declared SKU COGS, payment processing fees, shipping, and settled 30-day refunds, true net contribution was <strong class="d-pos">{signed(t.net)}</strong>, with the retargeting catalogue losing cash.</p>
+
+    <h3>Platform ROAS vs. true margin</h3>
+    <table class="d-ledger">
+      <thead>
+        <tr><th scope="col">Channel / campaign group</th><th scope="col" class="num">Spend</th><th scope="col" class="num">Platform ROAS</th><th scope="col" class="num">True net margin</th><th scope="col">7Captur call &amp; evidence</th></tr>
+      </thead>
+      <tbody>
+        {SAMPLE_ROWS.map((r) => (
+          <tr class={r.net < 0 ? "is-loss" : undefined}>
+            <th scope="row">{r.channel}</th>
+            <td class="num" data-label="Spend">{money(r.spend)}</td>
+            <td class="num" data-label="Platform ROAS">{r.roas.toFixed(1)}x</td>
+            <td class={`num ${r.net < 0 ? "d-neg" : "d-pos"}`} data-label="True net margin">{signed(r.net)}</td>
+            <td><span class="d-call">{r.call}</span><span class="d-call-note">{r.note}</span></td>
+          </tr>
+        ))}
+      </tbody>
+      <tfoot>
+        <tr>
+          <th scope="row">Blended</th>
+          <td class="num" data-label="Spend">{money(t.spend)}</td>
+          <td class="num" data-label="Platform ROAS">{t.roas.toFixed(1)}x</td>
+          <td class="num d-pos" data-label="True net margin">{signed(t.net)}</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="d-decision">
+      <h3>This week's decision</h3>
+      <p>Reduce Meta Retargeting Catalogue by {CUT_SHARE * 100}% ({money(cut.spend * CUT_SHARE)} less spend per 30 days) due to an 18.4% return rate on Bundle B. Do not scale Google PMax until the open refund window settles on next Monday's memo.</p>
+    </div>
+    <p class="d-unknown"><strong>Unknowns flagged:</strong> 3 new SKUs are missing COGS entries. They are excluded from scale calls rather than treated as $0 cost.</p>
+  </div>
+</article>

@@ -1,7 +1,7 @@
 # AGENT_HANDOFF: `7captur-site` (`7captur.com`)
 
 ## Active Status
-- **Current State:** `IDLE`: Ready for Milestone `S2`
+- **Current State:** `IDLE`: Ready for Milestone `S3`
 - **Target Blueprint:** "7Captur Site Blueprint (7captur.com)", held in the claude.ai Project. It is deliberately not committed: this repository is public and the blueprint contains internal operating figures.
 - **Branch Policy:** Commit directly to `main` (1 cohesive milestone per commit, build must pass). Every push deploys to the live site.
 - **Theme Rule:** Preserve Dark/Light mode and lime green accent. Visual style is an editorial financial memo.
@@ -24,7 +24,7 @@
 | ID | Status | Milestone Scope |
 |---|---|---|
 | **S1** | `DONE` | Codebase audit, config centralization, legacy cleanup, unified header and footer, removal of self-serve signup and trial references from the shell |
-| **S2** | `TODO` | Homepage hero and readable sample Monday memo |
+| **S2** | `DONE` | Homepage hero and readable sample Monday memo |
 | **S3** | `TODO` | Homepage body and interactive Ad Leak Estimator (`#estimator`) with query pass-through to `/audit/` |
 | **S4** | `TODO` | Free 60-Day Ad Leak Audit page (`/audit/`) with booking path, qualification form, access explainer, video slot, reviewer block |
 | **S5** | `TODO` | Pricing, Security and About pages |
@@ -41,3 +41,10 @@
 - **Notes:** root `CNAME` kept on purpose. Unrebuilt pages pass `legacy` to Layout and load the old CSS. `/audit/` temporarily redirects to `/contact/` (remove in S4).
 - **Verification:** `tsc --noEmit` pass, `astro build` pass (23 pages). No lint script exists.
 - **Next:** rebuild the top of `site/src/pages/index.astro`.
+
+### S2: Homepage hero and sample Monday memo
+- **Agent / Date (UTC):** Claude Code / 2026-11-27
+- **Files:** `pages/index.astro` rebuilt (top half); added `components/SampleMemo.astro`, `lib/sampleMemo.ts`, `tests/sampleMemo.test.mjs`.
+- **Notes:** the blueprint text said two prospecting campaigns lose cash, but its table has one losing row (retargeting). The memo follows the table. The cut is stated as $4,480 per 30 days (40% of $11,200) in place of "$1,120/wk". Em dashes replaced.
+- **Verification:** typecheck, tests (2), build pass; screenshots at 1280 and 390 px, no horizontal overflow.
+- **Next:** add homepage bands 3 to 7 below the memo, plus the estimator.
