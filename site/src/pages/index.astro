@@ -1,7 +1,26 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SampleMemo from "../components/SampleMemo.astro";
+import LeakEstimator from "../components/LeakEstimator.tsx";
+import AuditBand from "../components/AuditBand.astro";
 import { PRICING, usd } from "../config/siteConfig";
+
+const problems = [
+  { h: "Platforms count revenue, not what you keep", p: "Ad platforms claim gross revenue before refunds, COGS, and shipping. A campaign can report a healthy ROAS and still lose cash on every order." },
+  { h: "Missing costs quietly become zero", p: "Cheap trackers silently treat a missing cost input as zero. The products you know least about then look like your most profitable ones." },
+  { h: "Monday has no spare four hours", p: "Founders do not have four hours every Monday to audit CSVs or argue with media-buyer screenshots." },
+];
+const steps = [
+  { h: "2-minute read-only access", p: "Grant native Viewer or Analyst roles in Shopify, Meta, and Google Ads, plus your SKU COGS sheet. Zero OAuth app installs and zero ad-account write access." },
+  { h: "Engine hygiene plus human review", p: "Our internal 7Captur decision engine reconciles spend, orders, fees, and 30-day refund lag and flags missing data as unknown. A human analyst verifies every call." },
+  { h: "One Monday memo, zero dashboards", p: "Receive your 1-page decision memo by email or Slack every Monday morning. Optional read-only portal access is included if your CFO or media buyer wants the archive." },
+];
+const refusals = [
+  { h: "Never charge a % of ad spend", p: "The fee is flat, so we have no incentive to inflate your budgets." },
+  { h: "Never touch or edit your ad accounts", p: "Access is view-only. You or your media buyer make every change." },
+  { h: "Never fill missing COGS with zero", p: "An unknown cost stays unknown, and the memo says which products it affects." },
+  { h: "Never push scale when evidence is thin", p: "Thin or unsettled data gets a hold or a small test, with the reason written down." },
+];
 ---
 <Layout
   title="7Captur | Weekly Profit and Ad Decision Desk for E-commerce"
@@ -29,5 +48,41 @@ import { PRICING, usd } from "../config/siteConfig";
   <section class="d-memo-section" id="sample-memo" aria-label="Sample Monday memo">
     <div class="d-wrap"><SampleMemo /></div>
   </section>
+
+  <section class="d-section d-alt" id="problem">
+    <div class="d-wrap">
+      <div class="d-head"><span class="d-eyebrow">The problem</span><h2>Why dashboards don't stop cash leaks</h2></div>
+      <ul class="d-cols">
+        {problems.map((x, i) => <li><span class="d-num">({"abc"[i]})</span><h3>{x.h}</h3><p>{x.p}</p></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="d-section" id="how-it-works">
+    <div class="d-wrap">
+      <div class="d-head"><span class="d-eyebrow">How it works</span><h2>Three steps from exports to a decision</h2></div>
+      <ol class="d-cols">
+        {steps.map((x, i) => <li><span class="d-num">Step {i + 1}</span><h3>{x.h}</h3><p>{x.p}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="d-section d-alt" id="estimator">
+    <div class="d-wrap">
+      <div class="d-head"><span class="d-eyebrow">Ad Leak Estimator</span><h2>How much could be leaking each month?</h2><p class="d-lede">Move the four inputs. The figures update in your browser and nothing is sent anywhere.</p></div>
+      <LeakEstimator client:load />
+    </div>
+  </section>
+
+  <section class="d-section" id="standard">
+    <div class="d-wrap">
+      <div class="d-head"><span class="d-eyebrow">The 7Captur standard</span><h2>What we refuse to do</h2></div>
+      <ul class="d-refusals">
+        {refusals.map((x) => <li><h3>{x.h}</h3><p>{x.p}</p></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <AuditBand />
 </main>
 </Layout>

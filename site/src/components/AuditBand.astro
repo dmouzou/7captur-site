@@ -1,0 +1,15 @@
+---
+import { AUDIT_CTA } from "../config/siteConfig";
+const {
+  title = "Start with a free 60-Day Retrospective Ad Leak Audit.",
+  text = "A one-time look back at your past 60 days of ad spend, delivered in 48 hours. No obligation to continue.",
+} = Astro.props;
+---
+<section class="d-band" aria-label={AUDIT_CTA.label}>
+  <div class="d-wrap">
+    <span class="d-eyebrow">Zero-risk entry point</span>
+    <h2>{title}</h2>
+    <p>{text}</p>
+    <div class="d-actions"><a class="d-btn d-btn-primary" href={AUDIT_CTA.href}>Book Free 60-Day Ad Leak Audit</a></div>
+  </div>
+</section>
