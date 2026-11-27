@@ -20,7 +20,7 @@ interface Card {
 
 /* Illustrations. Figures are illustrative. */
 
-function AccessRoles() {
+export function AccessRoles() {
   const rows: [number, string, string][] = [
     [64, "Shopify", "Staff, Reports and Orders"],
     [160, "Meta Business Manager", "Ad Account Analyst"],
@@ -55,7 +55,7 @@ function AccessRoles() {
   );
 }
 
-function AccessNever() {
+export function AccessNever() {
   const rows = ["Ad-edit rights", "Billing access", "Storefront write access", "Third-party OAuth apps"];
   return (
     <svg viewBox="0 0 360 320" role="img" aria-label="Four permissions that are never requested" className="lc-svg">
@@ -76,7 +76,7 @@ function AccessNever() {
   );
 }
 
-function ReconcileBridge() {
+export function ReconcileBridge() {
   const rows: [string, number, boolean][] = [
     ["Platform revenue", 330, false],
     ["Product costs (COGS)", 92, true],
@@ -98,13 +98,13 @@ function ReconcileBridge() {
             <rect x="176" y="2" width={(w / 330) * 290} height="16" rx="8" className={minus ? "lc-chip lc-warn lc-grow" : "lc-accfill lc-grow"} style={{ animationDelay: `${n * 0.12}s` }} />
           </g>
         ))}
-        <text x="24" y="270" className="lc-t2">Illustrative bars. Your memo uses your real figures.</text>
+        <text x="24" y="273" className="lc-t2">Illustrative bars. Your memo uses your real figures.</text>
       </g>
     </svg>
   );
 }
 
-function ReconcileUnknown() {
+export function ReconcileUnknown() {
   const rows: [string, string, string, string][] = [
     ["SKU 114", "$9.40", "Counted", "lc-src-imp"],
     ["SKU 162", "$14.10", "Counted", "lc-src-imp"],
@@ -134,7 +134,7 @@ function ReconcileUnknown() {
   );
 }
 
-function MemoPage() {
+export function MemoPage() {
   return (
     <svg viewBox="0 0 560 320" role="img" aria-label="A one-page Monday memo with a cut call, a hold call, an evidence grade and what is not known" className="lc-svg">
       <g transform="translate(24 20)">
@@ -163,7 +163,7 @@ function MemoPage() {
   );
 }
 
-function MemoLoop() {
+export function MemoLoop() {
   const nodes: [string, number][] = [["Reconcile", -90], ["Memo", 30], ["Review", 150]];
   const R = 86, cx = 180, cy = 150;
   return (

@@ -225,3 +225,74 @@ a.d-card:hover { border-top-color: var(--d-fill); }
 .article-cta-box { margin-top: 2.5em !important; padding: 26px; border: 1px solid var(--accent-line); background: var(--d-tint); }
 .d-prose .article-cta-box h2 { margin: 0 0 8px !important; font-size: 1.25rem; }
 .article-cta-box p { margin-bottom: 18px !important; }
+
+/* ---------- How it works: step rows with illustrations ---------- */
+.d-steps { display: grid; gap: 24px; max-width: 1080px; margin: 0 auto; padding: 0; list-style: none; }
+.d-step { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 32px; align-items: center; padding: 28px; border-radius: 16px; border: 1px solid var(--d-rule); background: var(--d-surface); }
+.d-step:nth-child(even) .d-step-text { order: 2; }
+.d-step:nth-child(even) { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+.d-step h2 { font-size: 1.5rem; letter-spacing: -.02em; margin-bottom: 12px; }
+.d-step .d-fine { margin-top: 12px; }
+.d-step-art { margin: 0; padding: 14px; }
+.d-art-narrow { display: none; max-width: 400px; margin-inline: auto; }
+@media (max-width: 900px) { .d-step, .d-step:nth-child(even) { grid-template-columns: minmax(0, 1fr); } .d-step:nth-child(even) .d-step-text { order: 0; } }
+@media (max-width: 640px) { .d-step { padding: 20px 16px; } .d-step-art { padding: 6px; } .d-art-wide { display: none; } .d-art-narrow { display: block; } }
+
+/* ---------- About: illustrated principles ---------- */
+.d-principle-art { margin: 0 auto 18px; max-width: 360px; }
+
+/* Bars wait until their block scrolls into view */
+.js-reveal [data-reveal]:not(.is-in) .lc-grow { animation-play-state: paused; }
+
+/* ---------- Pricing: expandable scope walls ---------- */
+.d-walls { align-items: start; }
+.d-wall.d-box { padding: 0; }
+.d-wall summary { position: relative; display: block; padding: 22px 56px 22px 24px; cursor: pointer; list-style: none; border-radius: 16px; }
+.d-wall summary::-webkit-details-marker { display: none; }
+.d-wall summary::after { content: "+"; position: absolute; top: 18px; right: 18px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--d-rule); font-size: 18px; line-height: 1; color: var(--d-ink); transition: transform .45s var(--spring), background .3s; }
+.d-wall details[open] summary::after { transform: rotate(45deg); background: var(--accent-soft); border-color: var(--accent-line); }
+.d-wall summary:focus-visible { outline: 2px solid var(--d-accent); outline-offset: -2px; }
+.d-wall h3 { margin: 0; }
+.d-wall details > p { padding: 0 24px 22px; animation: rise .4s var(--spring) both; }
+
+/* ---------- Sample memo walkthrough ---------- */
+.mt-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 960px) { .mt-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .mt-tabs { grid-template-columns: 1fr; } }
+.mt-stage { display: grid; margin-top: 20px; padding: 28px 28px 18px; border-radius: 16px; border: 1px solid var(--d-rule); background: var(--d-surface); }
+.mt-panel { grid-area: 1 / 1; align-self: center; width: 100%; max-width: 640px; justify-self: center; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .45s ease, transform .55s var(--spring), visibility 0s .45s; }
+.mt-panel.on { opacity: 1; visibility: visible; transform: none; transition: opacity .45s ease, transform .55s var(--spring); }
+.mt-panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.mt-big { text-align: center; margin: 0 0 22px; }
+.mt-big .d-grade { font-size: 1.6rem; padding: 6px 20px; border-radius: 10px; }
+.mt-rows li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 12px 0; border-bottom: 1px solid var(--d-line); }
+.mt-rows b { color: var(--d-ink); }
+.mt-rows .mt-warn { color: var(--d-warn); }
+.mt-line { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 16px; font-size: .9rem; }
+.mt-line b { color: var(--d-ink); }
+.mt-track { height: 12px; margin: 6px 0; border-radius: 99px; background: var(--d-alt); overflow: hidden; }
+.mt-track i { display: block; height: 100%; border-radius: 99px; background: var(--accent-fill); transform-origin: left center; transform: scaleX(0); transition: transform .8s cubic-bezier(.2, .8, .2, 1); }
+.mt-track i.is-loss { background: var(--d-neg); }
+.mt-panel.on .mt-track i { transform: scaleX(1); }
+.mt-calls li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--d-line); }
+.mt-calls b { display: block; color: var(--d-ink); }
+.mt-calls div span { font-size: .85rem; color: var(--d-muted); }
+.mt-pill { justify-self: start; padding: 5px 12px; border-radius: 99px; border: 1px solid var(--accent-line); background: var(--accent-soft); color: var(--d-ink); font-size: .8rem; font-weight: 600; }
+.mt-pill.is-loss { border-color: var(--d-neg); background: var(--d-neg-tint); }
+.mt-note { margin-top: 18px; color: var(--d-ink); font-weight: 600; }
+.mt-stamp { grid-row: 2; margin-top: 22px; font-size: 12px; color: var(--d-muted); text-align: center; }
+@media (max-width: 520px) { .mt-stage { padding: 20px 16px 14px; } .mt-calls li { grid-template-columns: 1fr; gap: 6px; } }
+@media (prefers-reduced-motion: reduce) { .mt-panel, .mt-panel.on, .mt-track i { transition: none; transform: none; } .mt-track i { transform: scaleX(1); } .d-wall details > p { animation: none; } }
+
+/* ---------- Home hero on small screens ---------- */
+/* Off-screen carousel slides must not widen the page */
+.hero { overflow-x: clip; }
+/* The rolling word takes its own line on phones, so the headline height stays steady */
+@media (max-width: 560px) { .hero h1 .hero-words { display: block; margin-inline: auto; } }
+
+/* Wide card illustrations are unreadable on phones; the narrow one stays */
+@media (max-width: 560px) { .lc-scenes .lc-scene-a { display: none; } }
+
+/* Footer bottom links wrap cleanly on phones */
+.footer-bottom span:last-child { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
+.footer-bottom span:last-child a { margin-left: 0; }

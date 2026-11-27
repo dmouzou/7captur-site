@@ -1,7 +1,7 @@
 # AGENT_HANDOFF: `7captur-site` (`7captur.com`)
 
 ## Active Status
-- **Current State:** `IDLE`: Ready for Milestone `S6`. Visual layer restoration `V1` is partly done (see log). Finish V1 before S6.
+- **Current State:** `IDLE`: Ready for Milestone `S6`. Visual layer restoration `V1` is complete.
 - **Target Blueprint:** "7Captur Site Blueprint (7captur.com)", held in the claude.ai Project. It is deliberately not committed: this repository is public and the blueprint contains internal operating figures.
 - **Branch Policy:** Commit directly to `main` (1 cohesive milestone per commit, build must pass). Every push deploys to the live site.
 - **Theme Rule:** Preserve Dark/Light mode and lime green accent. Visual style is an editorial financial memo.
@@ -61,6 +61,13 @@
 - **Files:** `HeroWords.tsx` now takes a `words` prop. `HeroCarousel.tsx` rotates four Monday memo calls (CUT, HOLD, HOLD & TEST, UNKNOWN) through `RecCard`, whose window title is now "This week's call". `BeforeAfter.tsx` scraps and "after" card rewritten for the desk offer. `pages/index.astro`: hero is the original centered layout with the rolling word and carousel under it, then Before/After, then a short memo excerpt that links to `/sample-memo/` (the full memo no longer sits on the home page, owner decision), then problems, steps cards, links, audit CTA.
 - **Owner decisions this session:** home shows a short memo excerpt only. `/contact/` is left untouched, do not redirect it.
 - **Verification:** `tsc` pass, `npm test` pass, `astro build` pass (25 pages). No browser available in this session, so motion, dark mode and mobile are unchecked.
+
+### V1 (part 3): Illustrations, memo walkthrough, scope walls, browser QA
+- **Agent / Date (UTC):** Claude Code / 2026-11-27
+- **Files:** added `components/MemoTour.tsx` (four-part memo walkthrough, figures from `lib/sampleMemo.ts`), `components/Scenes.tsx` (About illustrations). Changed `pages/how-it-works` (step rows with the `DeskCards` illustrations, narrow variant on phones), `pages/about` (illustrated principles), `pages/sample-memo` (MemoTour replaces the static "How to read it" grid), `pages/pricing` (scope walls are `details` cards), `blocks.css`, `motion.css`, `Layout.astro`, `Icons.tsx`.
+- **Fixes:** home overflowed sideways below 1280 px (carousel slides); rolling word screen-reader text still read the old words; home memo excerpt said "two prospecting campaigns" while the table has one losing retargeting row; footer bottom links wrapped with a stray indent; wide card illustrations hidden on phones.
+- **Verification:** `tsc` pass, `npm test` 10 pass, `astro build` pass (25 pages). Chromium: 13 pages at 1280, 768 and 360 px in light and dark with no horizontal overflow, page errors or local 404s; 27 interaction checks pass (memo tabs and arrow keys, scope walls, pricing toggle, step card open and Escape, reduced motion). Screenshots were reviewed for a sample of those, not all. Not checked: Safari, Firefox, real touch devices, hover feel.
+- **Next:** S6.
 
 ### S1: Audit, config, legacy cleanup, shell
 - **Agent / Date (UTC):** Claude Code / 2026-11-27

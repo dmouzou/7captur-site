@@ -5,7 +5,7 @@ const DEFAULT_WORDS = ["clear", "concise", "data-driven"];
 /**
  * Rolling word in the hero headline. Words slide up one at a time inside a clipped slot whose width follows
  * the current word, so "decision" always sits right next to it. Pauses on hover and focus, and stays still
- * (showing "clear") for people who prefer reduced motion.
+ * (showing the first word) for people who prefer reduced motion.
  */
 export default function HeroWords({ words: WORDS = DEFAULT_WORDS }: { words?: string[] }) {
   const [i, setI] = useState(0);
@@ -56,7 +56,7 @@ export default function HeroWords({ words: WORDS = DEFAULT_WORDS }: { words?: st
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <span className="sr-only">clear, concise, data-driven</span>
+      <span className="sr-only">{WORDS[0]}</span>
       <span className="hero-words-track" aria-hidden="true" style={{ transform: `translateY(${-i * 1.2}em)`, transition: snap ? "none" : undefined }}>
         {list.map((word, n) => (
           <span key={n} className="hero-word"><span ref={(el) => { if (n < WORDS.length) refs.current[n] = el; }}>{word}</span></span>

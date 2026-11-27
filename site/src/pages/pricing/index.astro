@@ -109,7 +109,9 @@ const faq = [
   <section class="section" aria-labelledby="walls-h">
     <div class="wrap">
       <div class="section-head"><span class="d-eyebrow">Both tiers</span><h2 id="walls-h">Six scope walls</h2></div>
-      <ol class="d-grid-3">{walls.map((w, i) => <li class="d-box"><span class="d-num">{i + 1}</span><h3>{w.h}</h3><p>{w.p}</p></li>)}</ol>
+      <ol class="d-grid-3 d-walls">{walls.map((w, i) => (
+        <li class="d-box d-wall"><details><summary><span class="d-num">{i + 1}</span><h3>{w.h}</h3></summary><p>{w.p}</p></details></li>
+      ))}</ol>
       <div class="d-note"><p><strong>Automatic upgrade triggers:</strong> adding a 2nd store or currency, a 3rd ad channel, SKU-level margin tracking, or external media-buyer or agency alignment moves a Core workspace to Scale Desk on the next billing cycle.</p></div>
     </div>
   </section>

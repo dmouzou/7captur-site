@@ -1,13 +1,15 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import PageHead from "../../components/PageHead.astro";
+import { ReconcileUnknown } from "../../components/DeskCards";
+import { MarginSplit, Independent } from "../../components/Scenes";
 import Reviewer from "../../components/Reviewer.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import { siteConfig } from "../../config/siteConfig";
 const principles = [
-  { h: "Margin before ROAS", p: "A platform's ROAS counts revenue it attributes to itself. Refunds, product costs, shipping and fees decide whether that revenue was worth buying." },
-  { h: "Conservative grading beats hype", p: "Every call carries an evidence grade. When data is missing or refunds are unsettled, the memo says so and holds back." },
-  { h: "A decision desk, not an agency", p: "We do not sell media, creative or a share of your spend. We stay independent so the answer can be to spend less." },
+  { Art: MarginSplit, h: "Margin before ROAS", p: "A platform's ROAS counts revenue it attributes to itself. Refunds, product costs, shipping and fees decide whether that revenue was worth buying." },
+  { Art: ReconcileUnknown, h: "Conservative grading beats hype", p: "Every call carries an evidence grade. When data is missing or refunds are unsettled, the memo says so and holds back." },
+  { Art: Independent, h: "A decision desk, not an agency", p: "We do not sell media, creative or a share of your spend. We stay independent so the answer can be to spend less." },
 ];
 ---
 <Layout title="About: An Independent Ad Decision Desk | 7Captur" description="Why 7Captur grades evidence conservatively and works as an independent decision desk for e-commerce ad budgets, not an ad agency." path="/about/" current="/about/">
@@ -26,7 +28,7 @@ const principles = [
   <section class="section band" aria-labelledby="principles-h">
     <div class="wrap">
       <div class="section-head"><h2 id="principles-h">How we operate</h2></div>
-      <ul class="d-cols">{principles.map((p) => <li><h3>{p.h}</h3><p>{p.p}</p></li>)}</ul>
+      <ul class="d-cols d-principles" data-reveal>{principles.map(({ Art, h, p }) => <li><figure class="d-principle-art"><Art /></figure><h3>{h}</h3><p>{p}</p></li>)}</ul>
     </div>
   </section>
 

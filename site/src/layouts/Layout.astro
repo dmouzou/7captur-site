@@ -89,7 +89,7 @@ const graph = [...site, ...app, ...jsonld];
 // Condensed light: a soft highlight follows the pointer across glass surfaces.
 (function(){
   if(!window.matchMedia('(hover:hover)').matches) return;
-  var busy=false; var sel='.win,.layer,.res,.platform,.plan,.cap,.fact,.rm-panel,.pipe>li,.cta-card,.d-plan,.d-box,.d-cols>li,.d-entry,.d-memo,.d-panel';
+  var busy=false; var sel='.win,.layer,.res,.platform,.plan,.cap,.fact,.rm-panel,.pipe>li,.cta-card,.d-plan,.d-box,.d-cols>li,.d-entry,.d-memo,.d-panel,.d-step,.mt-stage';
   document.addEventListener('pointermove',function(e){
     var t=e.target.closest&&e.target.closest(sel); if(!t) return;
     if(busy) return; busy=true; var x=e.clientX; var y=e.clientY;

@@ -10,6 +10,7 @@ const P: Record<string, string> = {
   decide: "M5 19V9m0 0 4-4m-4 4h9a5 5 0 0 1 5 5v5M16 16l3 3 3-3",
   chart: "M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6",
   clock: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2",
+  unknown: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.5v.4M12 17h.01",
   coins: "M12 6c-4 0-7 1-7 2.5v7C5 17 8 18 12 18s7-1 7-2.5v-7C19 7 16 6 12 6zM5 8.5C5 10 8 11 12 11s7-1 7-2.5M5 12c0 1.5 3 2.5 7 2.5s7-1 7-2.5",
 };
 export type IconName = keyof typeof P;

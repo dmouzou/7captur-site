@@ -3,13 +3,8 @@ import Layout from "../../layouts/Layout.astro";
 import PageHead from "../../components/PageHead.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import SampleMemo from "../../components/SampleMemo.astro";
+import MemoTour from "../../components/MemoTour";
 
-const parts = [
-  { h: "Evidence grade", p: "A single badge for how far the data can be trusted this week. Unsettled refund windows or missing costs lower it." },
-  { h: "Platform ROAS vs. true margin", p: "Each campaign group shows what the platform reported next to what was left after COGS, fees, shipping and settled refunds." },
-  { h: "One call per row", p: "Cut, hold or test, with a confidence note. Thin evidence earns a hold or a small test, never a push to scale." },
-  { h: "Unknowns flagged", p: "Anything the desk could not verify is listed, and excluded from scale calls rather than treated as zero." },
-];
 ---
 <Layout title="Sample Monday Decision Memo: ROAS vs. True Margin | 7Captur" description="A readable one-page sample of the weekly memo: platform ROAS next to true net margin, an evidence grade, one decision and the unknowns flagged. Illustrative figures." path="/sample-memo/" current="/sample-memo/">
 <main>
@@ -21,8 +16,8 @@ const parts = [
 
   <section class="section band">
     <div class="wrap">
-      <div class="section-head"><h2>How to read it.</h2></div>
-      <ul class="d-grid-2" style="list-style:none;padding:0;max-width:900px;margin:0 auto">{parts.map((x) => <li class="d-box"><h3>{x.h}</h3><p>{x.p}</p></li>)}</ul>
+      <div class="section-head" data-reveal><h2>How to read it.</h2><p class="lede">Four parts, one page. Pick a part to see it.</p></div>
+      <div data-reveal><MemoTour client:visible /></div>
     </div>
   </section>
 

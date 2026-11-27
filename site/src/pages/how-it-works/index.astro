@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import PageHead from "../../components/PageHead.astro";
 import CtaBand from "../../components/CtaBand.astro";
+import { AccessRoles, AccessNever, ReconcileBridge, ReconcileUnknown, MemoPage, MemoLoop } from "../../components/DeskCards";
 
 const steps = [
   { h: "2-minute read-only access", p: "Grant native Viewer or Analyst roles in Shopify, Meta, and Google Ads, plus your SKU COGS sheet. Zero OAuth app installs and zero ad-account write access.", more: "You use the roles your platforms already provide, and you can revoke them in about 30 seconds." },
@@ -14,6 +15,11 @@ const refusals = [
   { h: "Never fill missing COGS with zero", p: "An unknown cost stays unknown, and the memo says which products it affects." },
   { h: "Never push scale when evidence is thin", p: "Thin or unsettled data gets a hold or a small test, with the reason written down." },
 ];
+const art = [
+  { Wide: AccessRoles, Narrow: AccessNever },
+  { Wide: ReconcileBridge, Narrow: ReconcileUnknown },
+  { Wide: MemoPage, Narrow: MemoLoop },
+];
 ---
 <Layout title="How It Works: Read-Only Access to a Monday Decision Memo | 7Captur" description="Grant view-only access, let the 7Captur engine reconcile spend, orders, COGS, fees and 30-day refunds, and receive one analyst-verified decision memo every Monday." path="/how-it-works/" current="/how-it-works/">
 <main>
@@ -21,7 +27,17 @@ const refusals = [
 
   <section class="section" style="padding-top:0">
     <div class="wrap">
-      <ol class="d-cols">{steps.map((x, i) => <li><p class="d-num">Step {i + 1}</p><h3>{x.h}</h3><p>{x.p}</p><p class="d-fine" style="margin-top:12px">{x.more}</p></li>)}</ol>
+      <ol class="d-steps">
+        {steps.map((x, i) => {
+          const { Wide, Narrow } = art[i];
+          return (
+            <li class="d-step" data-reveal>
+              <div class="d-step-text"><p class="d-num">Step {i + 1}</p><h2>{x.h}</h2><p>{x.p}</p><p class="d-fine">{x.more}</p></div>
+              <figure class="lc-scene d-step-art"><div class="d-art-wide"><Wide /></div><div class="d-art-narrow"><Narrow /></div></figure>
+            </li>
+          );
+        })}
+      </ol>
       <p class="d-center" style="margin-top:32px"><a href="/sample-memo/">See what the memo looks like →</a></p>
     </div>
   </section>
