@@ -1,0 +1,84 @@
+---
+import { siteConfig } from "../config/siteConfig";
+import { SPEND_BANDS } from "../lib/estimator";
+const platforms = ["Shopify", "WooCommerce", "Other"];
+const channels = ["Meta", "Google", "TikTok", "Other"];
+---
+<form id="auditForm" data-email={siteConfig.founder.email} class="d-form" action={siteConfig.formEndpoint} method="post">
+  <div class="d-field"><label for="a-name">Full name</label><input class="d-input" id="a-name" name="name" autocomplete="name" required /></div>
+  <div class="d-field"><label for="a-email">Work email</label><input class="d-input" id="a-email" name="email" type="email" autocomplete="email" required /></div>
+  <div class="d-field"><label for="a-store">Store URL</label><input class="d-input" id="a-store" name="store_url" inputmode="url" autocomplete="url" placeholder="yourstore.com" required /></div>
+  <div class="d-field"><label for="a-platform">Store platform</label>
+    <select class="d-input" id="a-platform" name="platform" required><option value="">Select a platform</option>{platforms.map((p) => <option>{p}</option>)}</select></div>
+  <div class="d-field wide"><label for="a-spend">Monthly ad spend</label>
+    <select class="d-input" id="a-spend" name="spend" required><option value="">Select a range</option>{SPEND_BANDS.map((b) => <option>{b}</option>)}</select></div>
+  <fieldset class="d-field wide" id="a-channels"><legend>Active ad channels</legend>
+    <div class="d-checks">{channels.map((c) => <label><input type="checkbox" name="channels" value={c} /> {c}</label>)}</div></fieldset>
+  <div class="d-field wide"><label for="a-context">Anything else we should know? (optional)</label><textarea class="d-input" id="a-context" name="context"></textarea></div>
+  <input type="hidden" name="estimator_spend" id="a-estimator" value="" />
+  <input type="hidden" name="_subject" value="60-Day Ad Leak Audit request" />
+  <input class="d-hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <p class="d-msg wide" id="auditMsg" role="alert"></p>
+  <div class="wide"><button class="d-btn d-btn-primary d-btn-block" type="submit">Request my free audit</button></div>
+  <p class="d-fine wide">Your details are used to respond to this request. See the <a href="/privacy-policy/">privacy policy</a>.</p>
+</form>
+<div class="d-done" id="auditDone" tabindex="-1" hidden>
+  <h3>Request received.</h3>
+  <p>We will email you within 1 business day to arrange read-only access and your 20-minute walkthrough. Your audit is delivered within 48 hours.</p>
+</div>
+
+<script>
+  import { validateAudit } from "../lib/auditForm";
+  import { spendFromQuery, spendBand } from "../lib/estimator";
+
+  const form = document.getElementById("auditForm") as HTMLFormElement;
+  const done = document.getElementById("auditDone")!;
+  const msg = document.getElementById("auditMsg")!;
+  const button = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+  const channels = form.querySelector<HTMLElement>("#a-channels .d-checks")!;
+  form.noValidate = true;
+
+  const spend = spendFromQuery(location.search);
+  if (spend !== null) {
+    (form.elements.namedItem("spend") as HTMLSelectElement).value = spendBand(spend);
+    (form.elements.namedItem("estimator_spend") as HTMLInputElement).value = String(spend);
+  }
+
+  const say = (text: string, error = false) => { msg.textContent = text; msg.classList.toggle("is-error", error); };
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const text = (k: string) => String(data.get(k) ?? "");
+    const errors = validateAudit({
+      name: text("name"), email: text("email"), store_url: text("store_url"), platform: text("platform"),
+      spend: text("spend"), channels: data.getAll("channels").map(String),
+    });
+    form.querySelectorAll("[aria-invalid]").forEach((el) => el.removeAttribute("aria-invalid"));
+    channels.classList.toggle("is-invalid", !!errors.channels);
+    const bad = Object.keys(errors) as (keyof typeof errors)[];
+    if (bad.length) {
+      bad.filter((k) => k !== "channels").forEach((k) => (form.elements.namedItem(k) as HTMLElement).setAttribute("aria-invalid", "true"));
+      say(errors[bad[0]]!, true);
+      (bad[0] === "channels" ? channels.querySelector("input")! : (form.elements.namedItem(bad[0]) as HTMLElement)).focus();
+      return;
+    }
+    // One comma-separated value reads better in the notification email than repeated fields.
+    data.set("channels", data.getAll("channels").join(", "));
+    button.disabled = true;
+    button.textContent = "Sending";
+    say("");
+    try {
+      const res = await fetch(form.action, { method: "POST", headers: { Accept: "application/json" }, body: data });
+      if (!res.ok) throw new Error(String(res.status));
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    } catch {
+      say(`Your request was not sent. Try again, or email ${form.dataset.email}.`, true);
+    } finally {
+      button.disabled = false;
+      button.textContent = "Request my free audit";
+    }
+  });
+</script>

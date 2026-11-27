@@ -1,7 +1,7 @@
 # AGENT_HANDOFF: `7captur-site` (`7captur.com`)
 
 ## Active Status
-- **Current State:** `IDLE`: Ready for Milestone `S4`
+- **Current State:** `IDLE`: Ready for Milestone `S5`
 - **Target Blueprint:** "7Captur Site Blueprint (7captur.com)", held in the claude.ai Project. It is deliberately not committed: this repository is public and the blueprint contains internal operating figures.
 - **Branch Policy:** Commit directly to `main` (1 cohesive milestone per commit, build must pass). Every push deploys to the live site.
 - **Theme Rule:** Preserve Dark/Light mode and lime green accent. Visual style is an editorial financial memo.
@@ -26,7 +26,7 @@
 | **S1** | `DONE` | Codebase audit, config centralization, legacy cleanup, unified header and footer, removal of self-serve signup and trial references from the shell |
 | **S2** | `DONE` | Homepage hero and readable sample Monday memo |
 | **S3** | `DONE` | Homepage body and interactive Ad Leak Estimator (`#estimator`) with query pass-through to `/audit/` |
-| **S4** | `TODO` | Free 60-Day Ad Leak Audit page (`/audit/`) with booking path, qualification form, access explainer, video slot, reviewer block |
+| **S4** | `DONE` | Free 60-Day Ad Leak Audit page (`/audit/`) with booking path, qualification form, access explainer, video slot, reviewer block |
 | **S5** | `TODO` | Pricing, Security and About pages |
 | **S6** | `TODO` | Resources pruning, article CTA refresh, redirects, ad budget check repurpose |
 | **S7** | `TODO` | Metadata, legal copy, sitemap/robots, contrast, mobile, link integrity, banned-copy sweep |
@@ -55,3 +55,11 @@
 - **Notes:** four controls (drag and waste are separate sliders). At the default inputs estimated true contribution is negative (−$1,600). That follows from the blueprint formula and defaults.
 - **Verification:** typecheck, tests (7), build pass; typed input, clamping and `?spend=` link checked in Chromium.
 - **Next:** `pages/audit/index.astro`. Remove the temporary `/audit/` redirect in `astro.config.mjs`. Use `spendFromQuery` and `spendBand` from `lib/estimator.ts`.
+
+### S4: Free 60-Day Ad Leak Audit page
+- **Agent / Date (UTC):** Claude Code / 2026-11-27
+- **Files:** added `pages/audit/index.astro`, `components/AuditForm.astro`, `components/Reviewer.astro`, `lib/auditForm.ts`, `tests/auditForm.test.mjs`; removed the temporary `/audit/` redirect.
+- **Notes:** form posts to Formspree (`siteConfig.formEndpoint`) and also works without JavaScript. Work email required (free mail providers rejected, as the old contact form did). Booking button and video render only when their config values are set.
+- **Pending placeholders:** `schedulingUrl`, `auditWalkthroughVideoUrl`, `founder.photo`, `founder.bio`, `founder.linkedin`. Confirm in Formspree that notifications reach the founder email.
+- **Verification:** typecheck, tests (10), build pass; prefill, validation, failure and success states checked in Chromium with Formspree mocked.
+- **Next:** pricing, security, about. Prices come from `PRICING` in siteConfig.

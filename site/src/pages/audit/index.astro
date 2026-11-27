@@ -1,0 +1,80 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AuditForm from "../../components/AuditForm.astro";
+import Reviewer from "../../components/Reviewer.astro";
+import { siteConfig, isSet } from "../../config/siteConfig";
+const canBook = isSet(siteConfig.schedulingUrl);
+const receive = [
+  { n: "Report", h: "A 1-page Profit & Margin Audit", p: "Your last 60 days of ad spend, settled refunds, and declared COGS, reconciled on one page." },
+  { n: "Walkthrough", h: "A focused 20-minute call", p: "We review the findings together, including what the data cannot yet show." },
+  { n: "Terms", h: "Zero obligation to continue", p: "This is a one-time look back at your past 60 days. It is not a 60-day free trial of an ongoing service." },
+];
+const access = [
+  { p: "Shopify", t: "Staff account with Reports and Orders view-only." },
+  { p: "Meta Business Manager", t: "Ad Account Analyst (view-only)." },
+  { p: "Google Ads", t: "Read-only user invite." },
+];
+---
+<Layout title="Free 60-Day Ad Leak Audit in 48 Hours | 7Captur" description="A one-time retrospective lookback on your past 60 days of ad spend, settled refunds and declared COGS. 1-page audit in 48 hours and a 20-minute walkthrough. Read-only access." path="/audit/" current="/audit/">
+<main>
+  <header class="d-page-head">
+    <div class="d-wrap">
+      <span class="d-eyebrow">One-time retrospective lookback · past 60 days</span>
+      <h1>Get a Free 60-Day Ad Leak Audit in 48 Hours.</h1>
+      <p class="d-lede">We look back at what you already spent and show where margin leaked after refunds, product costs and fees.</p>
+    </div>
+  </header>
+
+  <section class="d-section d-tight" aria-labelledby="receive-h">
+    <div class="d-wrap">
+      <h2 id="receive-h" class="d-sr">What you receive</h2>
+      <ul class="d-cols">{receive.map((r) => <li><span class="d-num">{r.n}</span><h3>{r.h}</h3><p>{r.p}</p></li>)}</ul>
+    </div>
+  </section>
+
+  <section class="d-section d-alt" id="book">
+    <div class="d-wrap d-audit">
+      <div>
+        {canBook && (
+          <div class="d-panel">
+            <h2>Book your 20-minute slot</h2>
+            <p>Ready now? Pick a time for your kickoff and review call.</p>
+            <div class="d-actions" style="justify-content:flex-start;margin-top:20px"><a class="d-btn d-btn-primary" href={siteConfig.schedulingUrl} rel="noopener">Choose a time</a></div>
+          </div>
+        )}
+        <div class="d-panel">
+          <h2>{canBook ? "Prefer to submit details first?" : "Request your audit"}</h2>
+          <p class="d-fine">Takes about two minutes. Built for brands spending $20K a month or more on ads.</p>
+          <AuditForm />
+        </div>
+      </div>
+
+      <aside aria-labelledby="access-h">
+        <div class="d-panel">
+          <h2 id="access-h">Read-only access, in 2 minutes</h2>
+          <ol class="d-ticks">{access.map((a) => <li><span><strong>{a.p}:</strong> {a.t}</span></li>)}</ol>
+          <p style="margin-top:16px">You also share your SKU cost (COGS) sheet.</p>
+          <ul class="d-ticks d-crosses">
+            <li><span>No third-party OAuth app permissions</span></li>
+            <li><span>No pixel changes</span></li>
+            <li><span>No billing access</span></li>
+          </ul>
+          <p class="d-fine" style="margin-top:16px">You can revoke access at any time. <a href="/security/">How we handle your data</a>.</p>
+        </div>
+        <div class="d-panel">
+          <Reviewer heading="Who reviews your audit" statement="Every 60-day audit is personally verified before it is delivered. Questions about your data or the findings go straight to the founder." />
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {isSet(siteConfig.auditWalkthroughVideoUrl) && (
+    <section class="d-section" aria-labelledby="video-h">
+      <div class="d-wrap d-narrow">
+        <div class="d-head"><h2 id="video-h">See an anonymized audit in 90 seconds</h2></div>
+        <iframe class="d-video" src={siteConfig.auditWalkthroughVideoUrl} title="Anonymized audit walkthrough" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+      </div>
+    </section>
+  )}
+</main>
+</Layout>
