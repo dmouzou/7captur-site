@@ -1,81 +1,143 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import PageHead from "../../components/PageHead.astro";
 import Faq from "../../components/Faq.astro";
-import CtaBand from "../../components/CtaBand.astro";
-import PricingCards from "../../components/PricingCards.tsx";
-import plans from "../../data/plans.json";
-import { CTA } from "../../data/site";
+import AuditBand from "../../components/AuditBand.astro";
+import { PRICING, usd, prepaySaving, AUDIT_CTA } from "../../config/siteConfig";
 
-const S = plans.plans.starter, G = plans.plans.growth;
-const dur = (d: number) => (d < 365 ? `${Math.round(d / 30)} month${Math.round(d / 30) === 1 ? "" : "s"}` : `${Math.round(d / 365)} year${Math.round(d / 365) === 1 ? "" : "s"}`);
-const yes = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Yes"><path d="m5 12.5 4.5 4.5L19 7"/></svg>';
+const { core, scale, overflowFrom, commitmentDays, prepayDiscountPct } = PRICING;
+const price = (p: typeof core) => `${usd(p.monthly)}/mo · ${usd(p.prepay)} / 3-mo prepay`;
+
+const plans = [
+  {
+    ...core, id: "core", tag: "Data & decision hygiene",
+    fit: "$20K–$60K/mo ad spend, single store",
+    scope: [
+      "1 store, 1 currency, up to 2 ad channels",
+      "Blended or category-level COGS, updated monthly",
+      "1-page Monday Decision Memo with 1–3 Hold, Cut or Test actions",
+      "Email or Client Portal async Q&A, 1 business day response",
+      "1 monthly 20-minute call, founder to desk",
+      "Optional read-only Client Portal archive",
+    ],
+  },
+  {
+    ...scale, id: "scale", tag: "Dedicated Marketing Financial Analyst",
+    fit: "$60K–$150K/mo ad spend, multi-store brands, or teams with a media buyer or agency",
+    scope: [
+      "Everything in Core Desk, led by a Dedicated Marketing Financial Analyst focused strictly on marketing budgets",
+      "Monthly spend caps and pacing, and hard break-even MER/ROAS ceilings for your media buyer",
+      "Pre-launch promo and discount break-even tests",
+      "SKU-level and bundle contribution margin, and 30-day refund cash-lag exposure",
+      "Up to 3 stores, multi-currency consolidation, up to 5 ad channels",
+      "Consolidated memo plus per-store and per-channel appendix",
+      "Dedicated shared Slack channel, same-day response",
+      "Bi-weekly 25-minute budget alignment calls, agency or media buyer welcome",
+      "Optional Q4 or promo mid-week checkpoint",
+    ],
+  },
+];
+
+// Public matrix only. Internal delivery capacity is never published.
+const matrix: [string, string, string][] = [
+  ["Dedicated analyst role", "Ops / Data Hygiene Analyst (reconciles weekly margin and flags leaks)", "Dedicated Marketing Financial Analyst (variable marketing economics and budget control)"],
+  ["Marketing budget guardrails", "Weekly Hold / Cut / Test calls from reconciled margin", "Monthly spend caps and pacing, break-even MER/ROAS targets for media buyers, pre-launch promo margin math and 30-day refund cash-lag exposure"],
+  ["Storefronts", "1 store (Shopify or WooCommerce)", "Up to 3 stores (for example US, UK and EU regional stores)"],
+  ["Reporting currencies", "1 currency (foreign records flagged and excluded)", "Multi-currency, consolidated into 1 base currency"],
+  ["Ad channels", "Up to 2 channels (for example Meta and Google Ads)", "Up to 5 channels (Meta, Google, TikTok, Pinterest, Bing)"],
+  ["COGS and margin depth", "Blended or category-level COGS, updated monthly", "SKU-level COGS with bundle and kit mapping, updated bi-weekly"],
+  ["Weekly deliverable", "1-page Monday Decision Memo (1–3 actions)", "1-page consolidated memo, Marketing Budget Guardrails block and per-store or channel appendix"],
+  ["Live calls", "1 call a month (20 minutes max, scheduled, recorded)", "2 calls a month (bi-weekly, 25 minutes max, media buyer or agency welcome)"],
+  ["Async Q&A channel", "Email or Client Portal comments (1 business day response)", "Dedicated shared Slack channel (same business day response)"],
+  ["Async question limit", "Clarification on the Monday memo only (no mid-week ad-hoc pulls)", "Memo clarification plus 1 pre-launch promo or budget-shift break-even check per week"],
+  ["Agency and media buyer alignment", "Not included (founder-to-desk communication only)", "Included. The analyst sets objective MER/ROAS ceilings and joins bi-weekly calls. Creative and execution stay with your buyer."],
+  ["Data refresh", "Weekly snapshot only (Monday morning cutoff)", "Weekly snapshot, plus 1 mid-week Q4 or promo checkpoint on request"],
+];
+
+const walls = [
+  { h: "No ad-account execution", p: "We never create, edit, pause or budget a campaign." },
+  { h: "No creative, copy or CRO consulting", p: "Your team or agency owns what the ads and pages say." },
+  { h: "No pixel, GTM or CAPI engineering", p: "Tracking setup and fixes are outside both tiers." },
+  { h: "No accounting or full P&L", p: "No bookkeeping, payroll, fixed overhead, inventory procurement or tax advice. The Scale analyst covers variable marketing economics only. This is not a CFO service." },
+  { h: "No custom dashboard builds", p: "No bespoke Looker or Tableau work. The deliverable is the memo." },
+  { h: "No manual PDF data entry", p: "Product costs come in through our 3-column CSV template, not unformatted supplier PDFs." },
+];
+
 const faq = [
-  { q: "Is there a free plan?", a: "No. Every new account gets a 14-day free trial of Starter, with no card needed. When the trial ends, pick a plan to keep going." },
-  { q: "What happens when my trial ends?", a: "If you do not pick a plan, your account becomes read-only for 30 days. Your data is kept and you can export it at any time. After that, we email you before deleting it." },
-  { q: "What does a higher plan change?", a: `More room: ${G.recommendations.weekly / S.recommendations.weekly}x the weekly recommendations, 10x the imports and AI follow-up credits, longer history, more connected platforms per workspace and ${G.maxBusinesses} business workspaces instead of ${S.maxBusinesses}, plus the weekly summary and priority support on Growth. The recommendation engine is the same on every plan. What you can conclude depends on your evidence, not your plan.` },
-  { q: "What counts as a connected platform?", a: `A direct, read-only connection to an e-commerce platform (such as Shopify, WooCommerce or Amazon) or an ad account (Google, Meta or TikTok Ads). E-commerce platforms and ad accounts share one pool, and the limit applies to each business workspace separately, because each workspace is its own business. On Growth you can connect up to ${G.maxConnections} in every workspace, for example a different Google Ads account in each of your ${G.maxBusinesses} workspaces. Typing in data or importing a file does not use a connection.` },
-  { q: "What is a business workspace?", a: `A separate space for one business, with its own records, recommendations, connections and weekly summary. Your plan sets how many you can have: ${S.maxBusinesses} on Starter and ${G.maxBusinesses} on Growth. They sit under one account and one subscription, and they share the weekly recommendations, imports and AI follow-up credits of your plan.` },
-  { q: "What are AI follow-up credits?", a: "Each saved decision lets you ask follow-up questions, such as why one option was chosen over another. One question uses one credit. Starter has 10 credits a month and Growth has 100, with a cap on how many questions one decision can take. Follow-up credits are separate from your weekly recommendations, so asking never uses up a recommendation. Answers are written by AI and can make mistakes. The recommendation itself comes from 7Captur's decision engine and does not change." },
-  { q: "What counts as an import?", a: "Any CSV file you bring into the app. Typing records in by hand does not count. Your import allowance resets every month." },
-  { q: "How does annual billing work?", a: "Annual saves 20%. You pay once a year, and the price shown is the monthly equivalent. Starter is $468 a year and Growth is $1,908 a year. Monthly billing is available at $49 and $199." },
-  { q: "When do weekly limits reset?", a: "Every Monday in your business time zone. Viewing, rereading and exporting recommendations you already have never uses your allowance, and a recommendation that fails to generate is not counted." },
-  { q: "What happens if I upgrade or downgrade?", a: "Upgrades take effect straight away and are charged pro rata. Downgrades change your allowance immediately and the new price applies from your next billing date. Nothing is deleted. If a lower plan allows fewer connections, you choose which stay active." },
-  { q: "What happens if a payment fails?", a: "We tell you and give you a grace period to fix it. After that, paid-only features are limited. Your history and records are kept." },
-  { q: "What happens if I cancel?", a: "You keep your plan until the end of the period you paid for, then your account becomes read-only for 30 days. Your data stays exportable." },
-  { q: "Which currency am I charged in, and are taxes included?", a: "Prices are in US dollars. Taxes are shown at checkout where they apply. Each business workspace can still work in its own currency inside the app." },
-  { q: "What is Custom?", a: "A plan built around you: more platforms and workspaces, tailored inputs, agreed workflows, priority support and a monthly strategy call. Pricing is agreed with you. <a href=\"/contact/\">Talk to us</a>." },
+  { q: `Why a ${commitmentDays}-day initial commitment?`, a: "Refund windows take 30 days to settle, and COGS cleanup needs 3–4 weeks of clean cycles before long-term margin trends stabilize." },
+  { q: `How does the ${prepayDiscountPct}% 3-month prepay work?`, a: `You pay your initial ${commitmentDays}-day commitment up front: ${usd(core.prepay)} for ${core.name} (saving ${usd(prepaySaving(core))} against ${usd(core.monthly * 3)}) or ${usd(scale.prepay)} for ${scale.name} (saving ${usd(prepaySaving(scale))} against ${usd(scale.monthly * 3)}).` },
+  { q: `We already have a media buyer or agency. Does ${scale.name} conflict with them?`, a: "No. The Dedicated Marketing Financial Analyst sits on the finance side of the table, setting monthly spend caps, break-even MER/ROAS ceilings and promo margin rules. Your media buyer keeps creative and execution." },
+  { q: "Do you run our ads, or do our bookkeeping and taxes?", a: "Neither. We never edit ad accounts, and we only model variable marketing economics: ad spend, COGS, fees, shipping and 30-day refunds. Never payroll or tax filings." },
+  { q: "Do I have to upload CSVs or learn another dashboard?", a: "No. We pull exports through read-only viewer access and deliver the finished memo every Monday. You share your product cost sheet, and update it when costs change." },
+  { q: `What happens after ${commitmentDays} days?`, a: "The service moves automatically to flexible month-to-month, with simple cancellation notice." },
 ];
 ---
-<Layout legacy
-  title="Pricing | 7Captur"
-  description="Try 7Captur free for 14 days, no card needed. Starter from $39 a month billed annually, Growth from $159. Custom plans on request."
-  path="/pricing/" current="/pricing/">
+<Layout title="Pricing: Flat Monthly Desk, Never % of Ad Spend | 7Captur" description={`Free 60-Day Ad Leak Audit, then ${core.name} at ${usd(core.monthly)}/mo or ${scale.name} at ${usd(scale.monthly)}/mo. ${commitmentDays}-day initial commitment, ${prepayDiscountPct}% off when prepaid. Never a percentage of spend.`} path="/pricing/" current="/pricing/">
 <main>
-<PageHead title="Simple plans. Pick your room." lede="Every plan uses the same recommendation engine. Plans differ in capacity, connected platforms and support, not in how well we reason." />
-
-<section class="section section-flush" style="padding-bottom:40px">
-  <div class="wrap">
-    <PricingCards client:load signupUrl={CTA.href} />
-    <p class="disclaimer">Prices are in US dollars. Annual plans are billed once a year. Taxes are shown at checkout where they apply. You can upgrade, downgrade or cancel any time. Recommendations are decision support, not a guarantee of sales, savings or profit.</p>
-  </div>
-</section>
-
-<section class="section" style="padding-top:40px">
-  <div class="wrap">
-    <p class="kicker">Compare</p>
-    <h2>What each plan includes.</h2>
-    <div class="table-wrap cmp" tabindex="0" role="region" aria-label="Plan comparison">
-      <table>
-        <thead><tr><th>Feature</th><th>Starter</th><th>Growth</th><th>Custom</th></tr></thead>
-        <tbody>
-          <tr><td>Same recommendation engine</td><td class="yes" set:html={yes}></td><td class="yes" set:html={yes}></td><td class="yes" set:html={yes}></td></tr>
-          <tr><td>Manual entry and CSV import</td><td class="yes" set:html={yes}></td><td class="yes" set:html={yes}></td><td class="yes" set:html={yes}></td></tr>
-          <tr><td>Weekly summary with decision reviews</td><td>No</td><td class="yes" set:html={yes}></td><td class="yes" set:html={yes}></td></tr>
-          <tr><td>Recommendations a week, shared by all workspaces</td><td>{S.recommendations.weekly}</td><td>{G.recommendations.weekly} ({G.recommendations.weekly / S.recommendations.weekly}x Starter)</td><td>Agreed</td></tr>
-          <tr><td>AI follow-up credits a month</td><td>{S.aiFollowUps}</td><td>{G.aiFollowUps} (10x Starter)</td><td>Agreed</td></tr>
-          <tr><td>Imports a month</td><td>{S.importsPerMonth}</td><td>{G.importsPerMonth} (10x Starter)</td><td>Agreed</td></tr>
-          <tr><td>History</td><td>{dur(S.historyDays)}</td><td>{dur(G.historyDays)}</td><td>Agreed</td></tr>
-          <tr><td>Connected platforms per business workspace</td><td>{S.maxConnections}</td><td>{G.maxConnections}</td><td>Agreed</td></tr>
-          <tr><td>Business workspaces</td><td>{S.maxBusinesses}</td><td>{G.maxBusinesses}</td><td>Agreed</td></tr>
-          <tr><td>Priority support</td><td>No</td><td class="yes" set:html={yes}></td><td class="yes" set:html={yes}></td></tr>
-          <tr><td>Monthly strategy call</td><td>No</td><td>No</td><td class="yes" set:html={yes}></td></tr>
-          <tr><td>Price a month, billed annually</td><td>${S.priceAnnualMonthly}</td><td>${G.priceAnnualMonthly}</td><td>On request</td></tr>
-          <tr><td>Price a month, billed monthly</td><td>${S.priceMonthly}</td><td>${G.priceMonthly}</td><td>On request</td></tr>
-        </tbody>
-      </table>
+  <header class="d-page-head">
+    <div class="d-wrap">
+      <span class="d-eyebrow">Pricing</span>
+      <h1>A flat monthly fee. Never a percentage of your ad spend.</h1>
+      <p class="d-lede">Both desks apply the same rigor. They differ in operating workload and in how much marketing budget control you need.</p>
     </div>
-  </div>
-</section>
+  </header>
 
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <p class="kicker">Questions</p>
-    <h2>Pricing, in detail.</h2>
-    <Faq items={faq} />
-  </div>
-</section>
+  <section class="d-section d-tight" aria-label="Plans">
+    <div class="d-wrap">
+      <div class="d-entry">
+        <div>
+          <span class="d-eyebrow">Start here</span>
+          <h2>60-Day Ad Leak Audit</h2>
+          <p>One-time lookback with a 48-hour turnaround, for qualified e-commerce brands spending $20K a month or more on ads. A reconciliation of your past 60 days of spend, orders, COGS, fees and settled refunds, plus a 20-minute findings walkthrough.</p>
+        </div>
+        <p class="d-price">$0</p>
+        <a class="d-btn d-btn-primary" href={AUDIT_CTA.href}>Get the free audit</a>
+      </div>
 
-<CtaBand title="Start your 14-day trial." text="Add what you have today. Pick a plan only if it helps." />
+      <div class="d-plans">
+        {plans.map((p) => (
+          <article class={`d-plan is-${p.id}`}>
+            <h2>{p.name}</h2>
+            <p class="d-plan-sub">{p.tag}</p>
+            <p class="d-price">{usd(p.monthly)}<small>/ month</small></p>
+            <p class="d-fine">Flat fee, never % of spend. {commitmentDays}-day initial commitment (billed monthly), then month-to-month.</p>
+            <p class="d-prepay"><strong>3-month prepay: {usd(p.prepay)} up front</strong> ({prepayDiscountPct}% off, save {usd(prepaySaving(p))})</p>
+            <p><strong>Built for:</strong> {p.fit}</p>
+            <ul class="d-ticks">{p.scope.map((s) => <li><span>{s}</span></li>)}</ul>
+            <a class="d-btn d-btn-primary d-btn-block" href={AUDIT_CTA.href}>Start with the free audit</a>
+          </article>
+        ))}
+      </div>
+      <p class="d-overflow">Spending over $150K/mo or running 4+ stores? Mention it on the audit call. Bespoke scopes start at {usd(overflowFrom)}/mo.</p>
+    </div>
+  </section>
+
+  <section class="d-section d-alt" aria-labelledby="matrix-h">
+    <div class="d-wrap">
+      <div class="d-head"><span class="d-eyebrow">Operational boundaries</span><h2 id="matrix-h">Core Desk vs. Scale Desk</h2></div>
+      <div class="d-table-wrap" role="region" aria-label="Core and Scale comparison" tabindex="0">
+        <table class="d-matrix">
+          <thead><tr><th scope="col">Dimension</th><th scope="col">{core.name}<br /><span class="d-fine">{price(core)}</span></th><th scope="col">{scale.name}<br /><span class="d-fine">{price(scale)}</span></th></tr></thead>
+          <tbody>{matrix.map(([d, c, s]) => <tr><th scope="row">{d}</th><td data-label={core.name}>{c}</td><td data-label={scale.name}>{s}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="d-section" aria-labelledby="walls-h">
+    <div class="d-wrap">
+      <div class="d-head"><span class="d-eyebrow">Both tiers</span><h2 id="walls-h">Six scope walls</h2></div>
+      <ol class="d-grid-3">{walls.map((w, i) => <li class="d-box"><span class="d-num">{i + 1}</span><h3>{w.h}</h3><p>{w.p}</p></li>)}</ol>
+      <div class="d-note"><p><strong>Automatic upgrade triggers:</strong> adding a 2nd store or currency, a 3rd ad channel, SKU-level margin tracking, or external media-buyer or agency alignment moves a Core workspace to Scale Desk on the next billing cycle.</p></div>
+    </div>
+  </section>
+
+  <section class="d-section d-alt" aria-labelledby="faq-h">
+    <div class="d-wrap">
+      <div class="d-head"><span class="d-eyebrow">Questions</span><h2 id="faq-h">Pricing, in detail</h2></div>
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <AuditBand />
 </main>
 </Layout>

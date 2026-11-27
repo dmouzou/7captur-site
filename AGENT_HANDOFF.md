@@ -1,7 +1,7 @@
 # AGENT_HANDOFF: `7captur-site` (`7captur.com`)
 
 ## Active Status
-- **Current State:** `IDLE`: Ready for Milestone `S5`
+- **Current State:** `IDLE`: Ready for Milestone `S6`
 - **Target Blueprint:** "7Captur Site Blueprint (7captur.com)", held in the claude.ai Project. It is deliberately not committed: this repository is public and the blueprint contains internal operating figures.
 - **Branch Policy:** Commit directly to `main` (1 cohesive milestone per commit, build must pass). Every push deploys to the live site.
 - **Theme Rule:** Preserve Dark/Light mode and lime green accent. Visual style is an editorial financial memo.
@@ -27,7 +27,7 @@
 | **S2** | `DONE` | Homepage hero and readable sample Monday memo |
 | **S3** | `DONE` | Homepage body and interactive Ad Leak Estimator (`#estimator`) with query pass-through to `/audit/` |
 | **S4** | `DONE` | Free 60-Day Ad Leak Audit page (`/audit/`) with booking path, qualification form, access explainer, video slot, reviewer block |
-| **S5** | `TODO` | Pricing, Security and About pages |
+| **S5** | `DONE` | Pricing, Security and About pages |
 | **S6** | `TODO` | Resources pruning, article CTA refresh, redirects, ad budget check repurpose |
 | **S7** | `TODO` | Metadata, legal copy, sitemap/robots, contrast, mobile, link integrity, banned-copy sweep |
 
@@ -63,3 +63,10 @@
 - **Pending placeholders:** `schedulingUrl`, `auditWalkthroughVideoUrl`, `founder.photo`, `founder.bio`, `founder.linkedin`. Confirm in Formspree that notifications reach the founder email.
 - **Verification:** typecheck, tests (10), build pass; prefill, validation, failure and success states checked in Chromium with Formspree mocked.
 - **Next:** pricing, security, about. Prices come from `PRICING` in siteConfig.
+
+### S5: Pricing, Security and About
+- **Agent / Date (UTC):** Claude Code / 2026-11-27
+- **Files:** rewrote `pages/pricing`, `pages/security`, `pages/about`, `components/Faq.astro`; removed `PricingCards.tsx` and `data/plans.json`.
+- **Notes:** the capacity row is intentionally absent from the public matrix. The scope wall says "This is not a CFO service" so the banned phrase never appears on the site. Prices come from `PRICING` in siteConfig.
+- **Verification:** typecheck, tests (10), build pass; screenshots in light, dark and 360 px, no horizontal overflow.
+- **Next:** resources, articles, redirects, ad budget check.

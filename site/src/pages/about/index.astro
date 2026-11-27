@@ -1,37 +1,57 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import PageHead from "../../components/PageHead.astro";
-import CtaBand from "../../components/CtaBand.astro";
+import Reviewer from "../../components/Reviewer.astro";
+import AuditBand from "../../components/AuditBand.astro";
+import { siteConfig } from "../../config/siteConfig";
+const principles = [
+  { h: "Margin before ROAS", p: "A platform's ROAS counts revenue it attributes to itself. Refunds, product costs, shipping and fees decide whether that revenue was worth buying." },
+  { h: "Conservative grading beats hype", p: "Every call carries an evidence grade. When data is missing or refunds are unsettled, the memo says so and holds back." },
+  { h: "A decision desk, not an agency", p: "We do not sell media, creative or a share of your spend. We stay independent so the answer can be to spend less." },
+];
 ---
-<Layout legacy
-  title="About | 7Captur"
-  description="7Captur helps people who market a product or service understand what is working and decide what to do next, without pretending to know what the data cannot prove."
-  path="/about/" current="/about/">
+<Layout title="About: An Independent Ad Decision Desk | 7Captur" description="Why 7Captur grades evidence conservatively and works as an independent decision desk for e-commerce ad budgets, not an ad agency." path="/about/" current="/about/">
 <main>
-<PageHead wide title="Clear next steps, without pretending to know more than the data shows." lede="7Captur is a small, focused team building decision support for people who market a product or service." />
-
-<section class="section section-flush" style="padding-bottom:72px">
-  <div class="wrap">
-    <div class="prose prose-center">
-      <p>Most marketing tools show you numbers. Few help you decide what to do next, and fewer still are honest about what the numbers cannot prove. A post with thousands of likes may have sold nothing. A platform may report a sale that a refund later erases.</p>
-      <p>7Captur starts from the data you actually have, whether that is a list of posts in a notebook or a connected store and ad account. It gives one clear next step, explains why, says what it does not know, and tells you what to record next.</p>
-      <p>You make the decision. 7Captur does not change your ads, budgets or posts.</p>
+  <header class="d-page-head">
+    <div class="d-wrap">
+      <span class="d-eyebrow">About 7Captur</span>
+      <h1>Ad platforms grade their own work. We check it against your margin.</h1>
     </div>
-  </div>
-</section>
+  </header>
 
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <p class="kicker">Principles</p>
-    <h2>The rules that do not change with account size.</h2>
-    <div class="principles">
-      <div class="principle"><h3>Evidence first</h3><p>We match our advice to your evidence and label where every number came from.</p></div>
-      <div class="principle"><h3>Honest about unknowns</h3><p>Missing data is called missing, never guessed as zero. We never promise results.</p></div>
-      <div class="principle"><h3>Your control</h3><p>You decide whether to act. You can export or delete your data at any time. See the <a href="/security/">security page</a>.</p></div>
+  <section class="d-section d-tight">
+    <div class="d-wrap">
+      <div class="d-prose">
+        <p>E-commerce marketing runs on numbers that tend to flatter. A platform reports a sale that a refund later erases. A campaign shows a healthy ROAS while the products it sells cost more to make, ship and process than the ad brought back.</p>
+        <p>7Captur exists to give founders one honest read each week: what the money did after real costs, how strong the evidence is, and what to cut, hold or test next. You make the decision, and you or your media buyer make the change.</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<CtaBand title="See what your data says." text="Start your free trial with whatever you have today." />
+  <section class="d-section d-alt" aria-labelledby="principles-h">
+    <div class="d-wrap">
+      <div class="d-head"><h2 id="principles-h">How we operate</h2></div>
+      <ul class="d-cols">{principles.map((p) => <li><h3>{p.h}</h3><p>{p.p}</p></li>)}</ul>
+    </div>
+  </section>
+
+  <section class="d-section" aria-labelledby="founder-h">
+    <div class="d-wrap">
+      <div class="d-head"><h2 id="founder-h">Who is accountable</h2></div>
+      <div class="d-founder d-panel"><Reviewer statement="A named person answers for the work. Questions about a memo, your data or the way a call was graded can go directly to the founder." /></div>
+    </div>
+  </section>
+
+  <section class="d-section d-alt" id="contact" aria-labelledby="contact-h">
+    <div class="d-wrap">
+      <div class="d-head"><h2 id="contact-h">Contact</h2></div>
+      <dl class="d-grid-3 d-contact">
+        <div class="d-box"><dt>Book an audit</dt><dd><a href="/audit/">Free 60-Day Ad Leak Audit</a></dd></div>
+        <div class="d-box"><dt>Direct email</dt><dd><a href={`mailto:${siteConfig.founder.email}`}>{siteConfig.founder.email}</a></dd></div>
+        <div class="d-box"><dt>Response time</dt><dd>Within 1 business day</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <AuditBand />
 </main>
 </Layout>

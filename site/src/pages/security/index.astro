@@ -1,63 +1,49 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import PageHead from "../../components/PageHead.astro";
-import CtaBand from "../../components/CtaBand.astro";
-import { INTEGRATIONS, stateLabel } from "../../data/integrations";
-const direct = INTEGRATIONS.filter((i) => i.state === "direct");
+import AuditBand from "../../components/AuditBand.astro";
+import { siteConfig } from "../../config/siteConfig";
+const roles = [
+  ["Shopify", "Staff account with Reports and Orders view-only", "No storefront, product or order changes"],
+  ["Meta Business Manager", "Ad Account Analyst (view-only)", "No ad edits, no billing"],
+  ["Google Ads", "Read-only user invite", "No ad edits, no billing"],
+];
 ---
-<Layout legacy
-  title="Security and data | 7Captur"
-  description="Read-only connections, encrypted credentials, no changes to your ad accounts, and the ability to export or delete your data at any time."
-  path="/security/" current="/security/">
+<Layout title="Security and Data Handling: Read-Only Access | 7Captur" description="Native read-only roles, no third-party OAuth app installs, isolated client workspaces, no tracking cookies or data resale, and deletion within 48 hours on request." path="/security/" current="/security/">
 <main>
-<PageHead wide title="Your data stays yours. Access stays narrow." lede={'7Captur reads data and gives recommendations. It does not change your ads, budgets, store or posts. Legal terms are in the <a href="/privacy-policy/">Privacy Policy</a> and <a href="/terms-of-service/">Terms of Service</a>.'} />
-
-<section class="section section-flush" style="padding-bottom:72px">
-  <div class="wrap">
-    <p class="kicker">Connections and permissions</p>
-    <h2>What each connected platform can do.</h2>
-    <p class="lede">Each connection is authorized through the platform's own login and can be revoked from our Connections page or from the platform's settings at any time. There is no scraping and no shared logins.</p>
-    <div class="table-wrap" style="margin-top:24px" tabindex="0" role="region" aria-label="Connected platforms and permissions">
-      <table>
-        <thead><tr><th>Connection</th><th>What we read</th><th>Access</th><th>Status</th></tr></thead>
-        <tbody>
-          {direct.map((i) => { const s = stateLabel(i); return <tr><td>{i.name}</td><td>{i.what.replace(", read-only", "")}</td><td>Read-only</td><td><span class={`badge ${s.cls}`}>{s.text}</span></td></tr>; })}
-          <tr><td>Meta Ads, TikTok Ads</td><td>Nothing directly. You upload an export file.</td><td>None</td><td><span class="badge badge-live">Import supported</span></td></tr>
-        </tbody>
-      </table>
+  <header class="d-page-head">
+    <div class="d-wrap">
+      <span class="d-eyebrow">Security and data handling</span>
+      <h1>We can read your numbers. We cannot change anything.</h1>
+      <p class="d-lede">Legal terms are in the <a href="/privacy-policy/">Privacy Policy</a> and <a href="/terms-of-service/">Terms of Service</a>.</p>
     </div>
-    <p class="fine">7Captur does not create, edit, pause or delete anything in your ad or store accounts. Approving or dismissing a recommendation only records your choice in 7Captur.</p>
-  </div>
-</section>
+  </header>
 
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <p class="kicker">Handling</p>
-    <h2>How your data is handled.</h2>
-    <div class="facts">
-      <div class="fact"><h3>In transit and at rest</h3><p>Connections use TLS. Data is encrypted at rest by our cloud provider.</p></div>
-      <div class="fact"><h3>Credentials</h3><p>Connection tokens are encrypted on the server and never sent to your browser, shown in the interface or written to logs.</p></div>
-      <div class="fact"><h3>Separate workspaces</h3><p>Every account's data is isolated. The rules that enforce this run on the server, not in your browser.</p></div>
-      <div class="fact"><h3>Minimal personal data</h3><p>We do not ask for customer names, emails or addresses. Store connections read order totals and refunds, not customer details.</p></div>
-      <div class="fact"><h3>Service providers</h3><p>A small number of providers process data for us, such as hosting and payments. The privacy policy lists them and what each one receives.</p></div>
-      <div class="fact"><h3>Support access</h3><p>Our team cannot sign in as you. Support views are limited, logged, and never show your credentials or payment details.</p></div>
+  <section class="d-section d-tight" aria-labelledby="roles-h">
+    <div class="d-wrap">
+      <div class="d-head">
+        <h2 id="roles-h">Read-only native roles only</h2>
+        <p class="d-lede">7Captur does not request ad-edit, billing or storefront-write permissions, and does not require third-party OAuth app installs. You invite us using the roles your platforms already provide.</p>
+      </div>
+      <div class="d-table-wrap" role="region" aria-label="Access roles" tabindex="0">
+        <table class="d-matrix">
+          <thead><tr><th scope="col">Platform</th><th scope="col">What you grant</th><th scope="col">What is excluded</th></tr></thead>
+          <tbody>{roles.map(([p, g, x]) => <tr><th scope="row">{p}</th><td data-label="What you grant">{g}</td><td data-label="What is excluded">{x}</td></tr>)}</tbody>
+        </table>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <p class="kicker">Control</p>
-    <h2>Export, disconnect and delete.</h2>
-    <div class="facts">
-      <div class="fact"><h3>Export</h3><p>Download your records and recommendations as CSV or JSON at any time from Settings.</p></div>
-      <div class="fact"><h3>Disconnect</h3><p>Disconnecting stops syncing and deletes our stored access token. Data already synced stays, labelled as connected data, until you delete it.</p></div>
-      <div class="fact"><h3>Delete your account</h3><p>Request deletion from Settings. There is a 14-day waiting period you can cancel. After that your workspace, records and connections are permanently deleted and any paid subscription is stopped. Billing records are kept by our payment provider as the law requires.</p></div>
-      <div class="fact"><h3>Payments</h3><p>Payments are handled by our payment provider. We never see or store your card details.</p></div>
+  <section class="d-section d-alt" aria-label="Data handling">
+    <div class="d-wrap">
+      <div class="d-grid-3">
+        <div class="d-box"><h2>Strict workspace isolation</h2><p>Each client's exports, COGS sheets and past memos live in an isolated logical workspace inside 7Captur's internal infrastructure on Firebase and Google Cloud, encrypted in transit and at rest.</p></div>
+        <div class="d-box"><h2>No tracking cookies, no data resale</h2><p>No ad retargeting pixels and no cross-client benchmarking leaks. We do not sell client financial records or use them to train public models.</p></div>
+        <div class="d-box"><h2>Clean offboarding and deletion</h2><p>You can revoke our read-only roles in about 30 seconds, at any time. On request we delete all stored exports and memos within 48 hours and confirm the deletion in writing.</p></div>
+      </div>
+      <p class="d-center d-fine" style="margin-top:28px">Questions about access or data? Email <a href={`mailto:${siteConfig.founder.email}`}>{siteConfig.founder.email}</a>.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<CtaBand title="Questions about access or data handling?" text="Ask before you connect anything. We reply as soon as we can." fine="" label="Contact us" href="/contact/" />
+  <AuditBand />
 </main>
 </Layout>
