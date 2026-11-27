@@ -12,6 +12,11 @@ export const siteConfig = {
   // 90-second walkthrough embed URL. The video slot on /audit/ is not rendered while unset.
   auditWalkthroughVideoUrl: "[AUDIT_WALKTHROUGH_VIDEO_URL]",
 
+  // Default contact address for the whole site. Privacy requests use privacyEmail.
+  contactEmail: "hello@7captur.com",
+  privacyEmail: "privacy@7captur.com",
+
+  // The founder address is shown only inside the founder details on /about/.
   founder: {
     name: "Daniel Mouzou",
     role: "Founder, 7Captur",

@@ -10,7 +10,7 @@ const { head = "", current = "", scripts = "", title = "", description = "", pat
 const url = `https://7captur.com${path}`;
 const ogImage = ogImg ? `https://7captur.com${ogImg}` : "https://7captur.com/assets/og/og-default.png";
 const site = [
-  { "@context": "https://schema.org", "@type": "Organization", "@id": "https://7captur.com/#org", name: "7Captur", url: "https://7captur.com/", logo: "https://7captur.com/favicon-dark.png", email: siteConfig.founder.email },
+  { "@context": "https://schema.org", "@type": "Organization", "@id": "https://7captur.com/#org", name: "7Captur", url: "https://7captur.com/", logo: "https://7captur.com/favicon-dark.png", email: siteConfig.contactEmail },
   { "@context": "https://schema.org", "@type": "WebSite", "@id": "https://7captur.com/#website", url: "https://7captur.com/", name: "7Captur", inLanguage: "en", publisher: { "@id": "https://7captur.com/#org" } },
 ];
 const offer = (name: string, price: number, page: string) => ({ "@type": "Offer", name, price: String(price), priceCurrency: "USD", url: `${siteConfig.url}${page}` });

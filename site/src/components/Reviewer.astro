@@ -1,8 +1,9 @@
 ---
 // Founder identity block. Photo, bio and LinkedIn appear only once set in siteConfig.
 import { siteConfig, isSet } from "../config/siteConfig";
-const { statement, heading } = Astro.props;
+const { statement, heading, showFounderEmail = false } = Astro.props;
 const f = siteConfig.founder;
+const mail = showFounderEmail ? f.email : siteConfig.contactEmail;
 const initials = f.name.split(" ").map((w: string) => w[0]).join("").slice(0, 2);
 ---
 <div class="d-reviewer">
@@ -15,6 +16,6 @@ const initials = f.name.split(" ").map((w: string) => w[0]).join("").slice(0, 2)
     <p class="d-fine">{f.role}</p>
     {isSet(f.bio) && <p>{f.bio}</p>}
     {statement && <p>{statement}</p>}
-    <p><a href={`mailto:${f.email}`}>{f.email}</a>{isSet(f.linkedin) && <> · <a href={f.linkedin} rel="noopener">LinkedIn</a></>}</p>
+    <p><a href={`mailto:${mail}`}>{mail}</a>{isSet(f.linkedin) && <> · <a href={f.linkedin} rel="noopener">LinkedIn</a></>}</p>
   </div>
 </div>

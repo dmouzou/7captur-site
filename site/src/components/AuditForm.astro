@@ -4,7 +4,7 @@ import { SPEND_BANDS } from "../lib/estimator";
 const platforms = ["Shopify", "WooCommerce", "Other"];
 const channels = ["Meta", "Google", "TikTok", "Other"];
 ---
-<form id="auditForm" data-email={siteConfig.founder.email} class="d-form" action={siteConfig.formEndpoint} method="post">
+<form id="auditForm" data-email={siteConfig.contactEmail} class="d-form" action={siteConfig.formEndpoint} method="post">
   <div class="d-field"><label for="a-name">Full name</label><input class="d-input" id="a-name" name="name" autocomplete="name" required /></div>
   <div class="d-field"><label for="a-email">Work email</label><input class="d-input" id="a-email" name="email" type="email" autocomplete="email" required /></div>
   <div class="d-field"><label for="a-store">Store URL</label><input class="d-input" id="a-store" name="store_url" inputmode="url" autocomplete="url" placeholder="yourstore.com" required /></div>
